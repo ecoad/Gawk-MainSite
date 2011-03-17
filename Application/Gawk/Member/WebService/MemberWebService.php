@@ -1,19 +1,28 @@
 <?php
 class MemberWebService {
+
+	const SERVICE_NAME_SPACE = "Member";
+
+	const SERVICE_LOGIN = "Login";
+	const SERVICE_LOGOUT = "Logout";
+	const SERVICE_GET_LOGGED_IN_MEMBER = "GetLoggedInMember";
+	const SERVICE_REGISTER_MEMBER = "RegisterMember";
+	const SERVICE_SEND_MEMBER_PANEL_ACTION = "SendMemberPanelAction";
+
 	/**
 	 * @var Application
 	 */
-	protected $application = null;
+	protected $application;
 
 	/**
 	 * @var MemberAuthentication
 	 */
-	protected $memberAuthentication = null;
+	protected $memberAuthentication;
 
 	/**
 	 * @var MemberControl
 	 */
-	protected $memberControl = null;
+	protected $memberControl;
 
 	public function __construct() {
 		$this->application = CoreFactory::getApplication();
@@ -27,31 +36,31 @@ class MemberWebService {
 		$response->errors = array();
 
 		switch ($method) {
-			case "Login":
+			case self::SERVICE_LOGIN:
 				if ($member = $this->memberAuthentication->login($postData)) {
 					$response->member = $member->toObject(true);
 					$response->success = true;
 				}
 				break;
-			case "Logout":
+			case self::SERVICE_LOGOUT:
 				$postData["Token"] = $this->application->defaultValue($postData["Token"], "");
 				$response->success = $this->memberAuthentication->logoutToken($postData["Token"]);
 				break;
-			case "GetLoggedInMember":
-				$getData["Token"] = $this->application->defaultValue($getData, "");
+			case self::SERVICE_GET_LOGGED_IN_MEMBER:
+				$getData["Token"] = $this->application->defaultValue($getData["Token"], "");
 				if ($memberDataEntity = $this->memberAuthentication->getLoggedInMember($getData["Token"])) {
 					$response->success = true;
 					$response->member = $memberDataEntity->toObject();
 				}
 				break;
-			case "RegisterMember":
+			case self::SERVICE_REGISTER_MEMBER:
 				$member = Factory::getMember(json_decode(stripslashes($postData["MemberData"])));
 				if ($memberDataEntity = $this->memberControl->registerMember($member)) {
 					$response->member = $memberDataEntity->toObject(true);
 					$response->success = true;
 				}
 				break;
-			case "SendMemberPanelAction":
+			case self::SERVICE_SEND_MEMBER_PANEL_ACTION:
 				throw new Exception("Needs reimplementing");
 				/*
 				switch ($postData["MemberAction"]) {

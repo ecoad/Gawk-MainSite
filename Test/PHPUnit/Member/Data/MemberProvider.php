@@ -48,7 +48,7 @@ class MemberProvider {
 
 	public static function deleteTemporaryMembers() {
 		$memberControl = Factory::getMemberControl();
-		$sql = "DELETE FROM \"Member\" WHERE \"EmailAddress\" LIKE 'test-site-registered-%';";
+		$sql = "DELETE FROM \"Member\" WHERE \"EmailAddress\" LIKE 'test-site-%';";
 		$memberControl->runQuery($sql);
 	}
 }

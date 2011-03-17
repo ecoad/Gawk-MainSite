@@ -56,6 +56,7 @@ class WallControl extends DataControl {
 		$filter = $this->getVideoFilter();
 		$filter->addOrder("DateCreated", true);
 		$filter->addConditional($videoControl->table, "WallSecureId", $wallSecureId);
+		$filter->addLimit($this->application->registry->get("Wall/DefaultLength"));
 		$videoControl->setFilter($filter);
 		$videos = array();
 		while ($videoDataEntity = $videoControl->getPage($currentPage, $pageLength)) {
@@ -67,12 +68,12 @@ class WallControl extends DataControl {
 
 	/**
 	 * Get main wall
-	 *
+	 * @param integer $timePeriodDays
 	 * @param integer $currentPage
 	 * @param integer $pageLength
 	 * @return array Videos
 	 */
-	public function getVideosByMainWall($currentPage = 1, $pageLength = -1) {
+	public function getVideosByMainWall($timePeriodDays = 1, $currentPage = 1, $pageLength = -1) {
 		if ($pageLength == -1) {
 			$pageLength = $this->application->registry->get("Wall/DefaultLength");
 		}
@@ -80,13 +81,23 @@ class WallControl extends DataControl {
 		$videoControl = Factory::getVideoControl();
 		$filter = $this->getVideoFilter();
 		$filter->addConditional($videoControl->table, "Rating", 2, ">=");
-		$filter->addConditional($videoControl->table, "DateCreated", date("Y-m-d H:i:s", time() - SECONDS_IN_DAY), ">=");
+//		if ($timePeriodDays !== -1) {
+//			$dateTimeSince = date("Y-m-d H:i:s", time() - (SECONDS_IN_DAY * $timePeriodDays));
+//			$filter->addConditional($videoControl->table, "DateCreated", $dateTimeSince, ">=");
+//		}
+
 		$filter->addOrder("Rating", true);
+		$filter->addLimit($this->application->registry->get("Wall/DefaultLength"));
+
 		$videoControl->setFilter($filter);
 		$videos = array();
 		while ($videoDataEntity = $videoControl->getPage($currentPage, $pageLength)) {
 			$videos[] = $videoDataEntity->toObject();
 		}
+
+//		if (($timePeriodDays !== -1) && (count($videos) < $this->application->registry->get("Wall/DefaultLength"))) {
+//			$this->getVideosByMainWall(-1);
+//		}
 
 		return $videos;
 	}

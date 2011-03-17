@@ -51,20 +51,17 @@ class MemberAuthenticationTest extends PHPUnit_Framework_TestCase {
 
 	public function testLoginSiteRegisteredMemberSuccess() {
 		$loginData = array(
-			"Action" => "Member.Login",
 			"EmailAddress" => $this->testSiteRegisteredMember->emailAddress,
 			"Password" => $this->testSiteRegisteredMember->originalPassword);
 
-		$apiResponse = $this->memberWebService->handleRequest("Login", $loginData, null);
+		$apiResponse = $this->memberWebService->handleRequest(MemberWebService::SERVICE_LOGIN, $loginData, null);
 		$this->assertTrue($apiResponse->success);
 		$this->assertTrue($apiResponse->member->alias == $this->testSiteRegisteredMember->alias);
 		$this->assertTrue($apiResponse->member->token != "");
 
-		$apiData = array(
-			"Action" => "Member.GetLoggedInMember",
-			"Token" => $apiResponse->member->token);
+		$apiData = array("Token" => $apiResponse->member->token);
 
-		$apiResponse = $this->memberWebService->handleRequest("GetLoggedInMember", $apiData, null);
+		$apiResponse = $this->memberWebService->handleRequest(MemberWebService::SERVICE_GET_LOGGED_IN_MEMBER, $apiData, null);
 
 		$this->assertTrue($apiResponse->success);
 		$this->assertTrue($apiResponse->member->alias == $this->testSiteRegisteredMember->alias);
@@ -72,21 +69,19 @@ class MemberAuthenticationTest extends PHPUnit_Framework_TestCase {
 
 	public function testLoginSiteRegisteredMemberFailure() {
 		$loginData = array(
-			"Action" => "Member.Login",
 			"EmailAddress" => "false@clock.co.uk",
 			"Password" => $this->testSiteRegisteredMember->password);
 
-		$apiResponse = $this->memberWebService->handleRequest("Login", $loginData, null);
+		$apiResponse = $this->memberWebService->handleRequest(MemberWebService::SERVICE_LOGIN, $loginData, null);
 
 		$this->assertFalse($apiResponse->success);
 		$this->assertTrue(count($apiResponse->errors) == 1);
 
 		$loginData = array(
-			"Action" => "Member.Login",
 			"EmailAddress" => $this->testSiteRegisteredMember->emailAddress,
 			"Password" => "falsefalse");
 
-		$apiResponse = $this->memberWebService->handleRequest("Login", $loginData, null);
+		$apiResponse = $this->memberWebService->handleRequest(MemberWebService::SERVICE_LOGIN, $loginData, null);
 
 		$this->assertFalse($apiResponse->success);
 		$this->assertTrue(count($apiResponse->errors) == 1);
@@ -94,23 +89,20 @@ class MemberAuthenticationTest extends PHPUnit_Framework_TestCase {
 
 	public function testLoginFacebookRegisteredMemberSuccess() {
 		$loginData = array(
-			"Action" => "Member.Login",
 			"FacebookId" => $this->testFacebookRegisteredMember->facebookId,
 			"PublicKey" => $this->publicKey,
 			"Signature" => hash("sha256", $this->testFacebookRegisteredMember->facebookId . $this->privateKey));
 
-		$apiResponse = $this->memberWebService->handleRequest("Login", $loginData, null);
+		$apiResponse = $this->memberWebService->handleRequest(MemberWebService::SERVICE_LOGIN, $loginData, null);
 
 		$this->assertTrue($apiResponse->success);
 		$this->assertTrue($apiResponse->member->alias == $this->testFacebookRegisteredMember->alias);
 	}
 
 	public function testLoginFacebookRegisteredMemberFailure() {
-		$loginData = array(
-			"Action" => "Member.Login",
-			"FacebookId" => 123);
+		$loginData = array("FacebookId" => 123);
 
-		$apiResponse = $this->memberWebService->handleRequest("Login", $loginData, null);
+		$apiResponse = $this->memberWebService->handleRequest(MemberWebService::SERVICE_LOGIN, $loginData, null);
 
 		$this->assertFalse($apiResponse->success);
 		$this->assertTrue(count($apiResponse->errors) > 0);
@@ -121,7 +113,7 @@ class MemberAuthenticationTest extends PHPUnit_Framework_TestCase {
 
 		//Logout
 		$apiData = array("Token" => $token);
-		$apiResponse = $this->memberWebService->handleRequest("Logout", $apiData, null);
+		$apiResponse = $this->memberWebService->handleRequest(MemberWebService::SERVICE_LOGOUT, $apiData, null);
 		$this->assertFalse($apiResponse->success);
 	}
 
@@ -130,7 +122,7 @@ class MemberAuthenticationTest extends PHPUnit_Framework_TestCase {
 		$loginData = array("EmailAddress" => $this->testSiteRegisteredMember->emailAddress,
 			"Password" => $this->testSiteRegisteredMember->originalPassword);
 
-		$apiResponse = $this->memberWebService->handleRequest("Login", $loginData, null);
+		$apiResponse = $this->memberWebService->handleRequest(MemberWebService::SERVICE_LOGIN, $loginData, null);
 		$this->assertTrue($apiResponse->success);
 		$this->assertTrue($apiResponse->member->alias == $this->testSiteRegisteredMember->alias);
 		$token = $apiResponse->member->token;
@@ -138,18 +130,18 @@ class MemberAuthenticationTest extends PHPUnit_Framework_TestCase {
 
 		//Logout
 		$apiData = array("Token" => $token);
-		$apiResponse = $this->memberWebService->handleRequest("Logout", $apiData, null);
+		$apiResponse = $this->memberWebService->handleRequest(MemberWebService::SERVICE_LOGOUT, $apiData, null);
 
 		$this->assertTrue($apiResponse->success);
 
 		//Get logged in member
 		$apiData = array("Token" => $token);
-		$apiResponse = $this->memberWebService->handleRequest("GetLoggedInMember", $apiData, null);
+		$apiResponse = $this->memberWebService->handleRequest(MemberWebService::SERVICE_GET_LOGGED_IN_MEMBER, $apiData, null);
 		$this->assertFalse($apiResponse->success);
 
 		//Logout
 		$apiData = array("Token" => $token);
-		$apiResponse = $this->memberWebService->handleRequest("Logout", $apiData, null);
+		$apiResponse = $this->memberWebService->handleRequest(MemberWebService::SERVICE_LOGOUT, $apiData, null);
 		$this->assertFalse($apiResponse->success);
 	}
 

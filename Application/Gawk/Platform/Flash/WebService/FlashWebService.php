@@ -20,13 +20,19 @@ class FlashWebService {
 
 		switch($method) {
 			case self::SERVICE_INIT_APPLICATION:
-				$videos = $wallControl->getMainWallVideos();
-				if (is_array($videos)) {
-					$response->success = true;
-					$response->videos = $videos;
-					$response->mediaServerLocation = $this->application->registry->get("Site/Address");
-					$response->binaryLocation = $this->application->registry->get("Site/Address") . "resource/binary/";
+				$wallControl = Factory::getWallControl();
+				if (isset($_GET["WallSecureId"]) && ($_GET["WallSecureId"] != "")) {
+					$response->videos = $wallControl->getVideosByWallSecureId($_GET["WallSecureId"]);
+				} else {
+					$response->videos = $wallControl->getVideosByMainWall();
 				}
+
+				if (is_array($response->videos)) {
+					$response->success = true;
+				}
+
+				$response->mediaServerLocation = $this->application->registry->get("Site/Address");
+				$response->binaryLocation = $this->application->registry->get("Site/Address") . "/resource/binary/";
 				break;
 		}
 

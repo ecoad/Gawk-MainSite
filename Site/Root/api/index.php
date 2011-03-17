@@ -11,30 +11,31 @@ if (!isset($_REQUEST["Action"])) {
 }
 $method = explode(".", $_REQUEST["Action"]);
 
-$memberWebservice = Factory::getMemberWebService();
-$memberWallBookmarkWebservice = Factory::getMemberWallBookmarkWebService();
-$memberFriendWebservice = Factory::getMemberFriendWebService();
-$wallWebservice = Factory::getWallWebService();
-$videoWebservice = Factory::getVideoWebService();
+$memberWebService = Factory::getMemberWebService();
+$memberWallBookmarkWebService = Factory::getMemberWallBookmarkWebService();
+$memberFriendWebService = Factory::getMemberFriendWebService();
+$wallWebService = Factory::getWallWebService();
+$videoWebService = Factory::getVideoWebService();
+$flashWebService = Factory::getFlashWebService();
 
 switch ($method[0]) {
 	case "Member":
-		$response = $memberWebservice->handleRequest($method[1], $_POST, $_GET);
+		$response = $memberWebService->handleRequest($method[1], $_POST, $_GET);
 		break;
 	case "MemberFriend":
-		$response = $memberFriendWebservice->handleRequest($method[1], $_POST, $_GET);
+		$response = $memberFriendWebService->handleRequest($method[1], $_POST, $_GET);
 		break;
 	case MemberWallBookmarkWebService::SERVICE_NAME_SPACE: //MemberWallBookmark
-		$response = $memberWallBookmarkWebservice->handleRequest($method[1], $_POST, $_GET);
+		$response = $memberWallBookmarkWebService->handleRequest($method[1], $_POST, $_GET);
 		break;
 	case WallWebService::SERVICE_NAME_SPACE: //Wall
-		$response = $wallWebservice->handleRequest($method[1], $_POST, $_GET);
+		$response = $wallWebService->handleRequest($method[1], $_POST, $_GET);
 		break;
 	case "Video":
-		$response = $videoWebservice->handleRequest($method[1], $_POST, $_GET, $_FILES);
+		$response = $videoWebService->handleRequest($method[1], $_POST, $_GET, $_FILES);
 		break;
-	case "Flash":
-		$response = $flashWebservice->handleRequest($method[1], $_POST, $_GET);
+	case FlashWebService::SERVICE_NAME_SPACE:
+		$response = $flashWebService->handleRequest($method[1], $_POST, $_GET);
 		break;
 	default:
 		$response->errors[] = "Unknown method: " . $_REQUEST["Action"];
