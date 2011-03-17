@@ -1,0 +1,116 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+/**
+ * IE6 & 7 Specific Styles
+ */
+
+/**
+ * javascript workarounds
+ */
+
+body {
+	behavior: url("/resource/javascript/browser/internet-explorer/css-hover/csshover.htc");
+}
+
+body .png {
+	behavior: url("/resource/javascript/browser/internet-explorer/png-fix/iepngfix.htc");
+}
+
+
+/**
+ * Invalid CSS
+ * Place all W3C invalid Internet explorer CSS styles within this part of the document - organise by css document name.
+ */
+
+/* Structure */
+
+/* Global */
+
+#comments .comment {
+	_height: 60px;
+	_zoom: 1;
+}
+
+#main-content .multipage-controls .page_length {
+	*margin: 2px 0px -2px 6px;
+	_margin: 2px 0px -2px 6px;
+}
+
+/* Forms */
+
+fieldset {
+	_display: inline; /* sorts out ie6 'jumping' issue */
+}
+
+label.checkbox input {
+	*margin: 1px 0px 0px 191px;
+	_margin: 1px 0px 0px 194px;
+}
+
+form span.note {
+	*margin: 4px 0px 0px 195px;
+	_margin: 4px 0px 0px 198px;
+}
+
+form .image-preview {
+	_margin: 0px 0px 20px 198px;
+}
+
+form fieldset .controls {
+	_margin-left: 198px;
+}
+
+/* Icons */
+
+#main-content .download {
+	*padding: 5px 10px 8px 0px;
+	_padding: 13px 10px 8px 0px;
+}
+
+.download a {
+	_padding: 3px 0px 0px 62px !important;
+}
+
+.download span {
+	_margin: 0px 0px 0px 0px;
+}
+
+/* Fancybox Styles and Filters */
+
+* html #fancybox-overlay {	/* IE6 */
+	position: absolute;
+	width: 100%;
+}
+
+* html #fancybox-loading {	/* IE6 */
+	position: absolute;
+	margin-top: 0;
+}
+
+#fancybox-left:hover, #fancybox-right:hover {
+	visibility: visible;    /* IE6 */
+}
+
+#fancybox-loading.fancybox-ie div	{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_loading.png", sizingMethod="scale"); }
+.fancybox-ie #fancybox-close		{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_close.png", sizingMethod="scale"); }
+
+.fancybox-ie #fancybox-title-over	{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_title_over.png", sizingMethod="scale"); zoom: 1; }
+.fancybox-ie #fancybox-title-left	{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_title_left.png", sizingMethod="scale"); }
+.fancybox-ie #fancybox-title-main	{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_title_main.png", sizingMethod="scale"); }
+.fancybox-ie #fancybox-title-right	{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_title_right.png", sizingMethod="scale"); }
+
+.fancybox-ie #fancybox-left-ico		{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_nav_left.png", sizingMethod="scale"); }
+.fancybox-ie #fancybox-right-ico	{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_nav_right.png", sizingMethod="scale"); }
+
+.fancybox-ie .fancy-bg { background: transparent !important; }
+
+.fancybox-ie #fancy-bg-n	{ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_shadow_n.png", sizingMethod="scale"); }
+.fancybox-ie #fancy-bg-ne	{ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_shadow_ne.png", sizingMethod="scale"); }
+.fancybox-ie #fancy-bg-e	{ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_shadow_e.png", sizingMethod="scale"); }
+.fancybox-ie #fancy-bg-se	{ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_shadow_se.png", sizingMethod="scale"); }
+.fancybox-ie #fancy-bg-s	{ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_shadow_s.png", sizingMethod="scale"); }
+.fancybox-ie #fancy-bg-sw	{ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_shadow_sw.png", sizingMethod="scale"); }
+.fancybox-ie #fancy-bg-w	{ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_shadow_w.png", sizingMethod="scale"); }
+.fancybox-ie #fancy-bg-nw	{ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/resource/image/fancybox/fancy_shadow_nw.png", sizingMethod="scale"); }

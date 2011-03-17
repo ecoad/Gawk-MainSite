@@ -1,0 +1,25 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+/**
+ * Three Column Layout (No Utility) Styles 
+ */
+ 
+#main-content {
+	width: 940px;
+	padding: 0px 0px 0px 0px;
+	margin-right: 0px;
+}
+ 
+.column {
+	float: left;
+	width: 240px;
+	padding: 30px 30px 30px 30px;
+	background-color: #F2F2F2;
+}
+ 
+.primary,
+.secondary {
+	margin-right: 20px;
+}

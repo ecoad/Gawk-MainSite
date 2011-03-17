@@ -1,0 +1,26 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+/**
+ * Two Column Layout (Including Utility) Styles
+ */
+
+#main-content,
+#utility {
+	background-color: #F2F2F2;
+}
+
+/* Article */
+
+#main-content #article h1 {
+	font-size: 24px;
+	height: auto;
+	text-indent: 0px;
+	margin-bottom: 20px;
+}
+
+#article img {
+	float: left;
+	margin: 0px 30px 10px 0px;
+}

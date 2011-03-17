@@ -1,0 +1,53 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+/**
+ * List Layout (Including Utility) Styles
+ */
+
+#main-content {
+	width: 720px;
+	padding: 0px 0px 0px 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+#main-content h1 {
+	text-indent: -9999em;
+	height: 0px;
+	margin-bottom: 0px;
+}
+
+#utility {
+	width: 160px;
+	background-color: #F2F2F2;
+}
+
+/* Main Page Items */
+
+.blog-entry,
+.list-entry {
+	float: left;
+	width: 700px;
+	margin-bottom: 20px;
+	background-color: #F2F2F2;
+}
+
+.blog-entry img,
+.list-entry img {
+	float: left;
+	margin-right: 20px;
+}
+
+.blog-entry h4,
+.list-entry h4 {
+	margin-top: 15px;
+}
+
+.blog-entry h4,
+.blog-entry p,
+.list-entry h4,
+.list-entry p {
+	padding: 0px 15px 0px 15px;
+}

@@ -1,0 +1,1 @@
+ALTER TABLE "Member" RENAME "FbId" TO "FacebookId";

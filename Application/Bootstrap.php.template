@@ -1,0 +1,85 @@
+<?php
+/**
+ * Atrox Application Startup
+ * @description Setup the application Enviroment and application level globals
+ * @author Paul Serby paul.serby@clock.co.uk
+ * @date 2010-06-24
+ */
+
+/**
+ *
+ *
+ * WARNING: Make sure that changes you want to commit are made in the .template version of this file.
+ *
+ *
+ */
+
+require_once("Atrox/Core/CoreFactory.php");
+require_once("Atrox/Base/BaseFactory.php");
+require_once("Gawk/Factory.php");
+require "Facebook/Facebook.php";
+
+// Application object is the root of basic Website functions.
+$application = &CoreFactory::getApplication();
+
+// Only show debuging errors if PHP is setup to display_errors
+if (ini_get("display_errors")) {
+	$application->setDebug(true);
+}
+
+$application->storePage();
+
+$application->setConnectionString(
+	"host=@DatabaseHost@ port=@DatabasePort@ dbname=@DatabaseName@ user=WebUser password=test");
+
+$htmlControl = CoreFactory::getHtmlControl();
+$applicationPageComponents = Factory::getApplicationPageComponents();
+
+$application->registry->set("Name", "@ProjectName@");
+$application->registry->set("Title", "@ProjectName@");
+$application->registry->set("Description", "The Gawk Wall");
+$application->registry->set("DefaultWall", "gaw1");
+$application->registry->set("TwitterAccount", "gawkwall");
+
+$application->registry->set("ListSize", 8);
+
+$application->registry->set("Path", "@ProjectPath@");
+$application->registry->set("Log/Path", "@LogPath@/");
+
+// Where the error logs will go when the site is not in debug mode
+$application->registry->set("Binary/Path", "@DataPath@/Binary");
+$application->registry->set("Binary/Path/Web", "/resource/binary/");
+$application->registry->set("Cache/WebPages/Path", "@CachePath@/Content");
+$application->registry->set("Cache/Resource/Path", "@CachePath@/Resource");
+$application->registry->set("Cache/Binary/Path", "@CachePath@/Binary");
+$application->registry->set("Cache/Binary/Path/Web", "/resource/cache/binary/");
+
+$application->registry->set("Site/ErrorPage", "@ProjectPath@/Site/Root/error/500.html");
+
+$application->securityControl->logOnPage = "/account/log-on.php";
+$application->securityControl->logOffPage = "/account/log-on.php";
+$application->securityControl->noAccessPage = "/account/no-access.php";
+
+$application->registry->set("Site/HasSsl", false);
+
+$application->registry->set("Site/Address", "http://@SiteDomain@");
+$application->registry->set("MediaServer/Address", "rtmp://@SiteDomain@");
+$application->registry->set("Site/Domain", "@SiteDomain@");
+$application->registry->set("Site/CommonDomain", "gawkwall.com");
+$application->registry->set("Site/Api", $application->registry->get("Site/Address") . "/api/");
+$application->registry->set("EmailAddress/Support", "@EmailSupport@");
+$application->registry->set("EmailAddress/Developer", "@EmailDeveloper@");
+
+$application->registry->set("App/Secret", "6ab391b22ca448c48ae80a3ff4d119c2506b718784e6bca055ad6827a19ddace");
+
+$application->registry->set("Facebook/AppId", "@FacebookAppId@");
+$application->registry->set("Facebook/Secret", "@FacebookSecret@");
+
+$application->registry->set("Wall/DefaultLength", 30);
+
+if (!isset($_SESSION["Style"])) {
+	$_SESSION["Style"] = "default";
+}
+
+$application->databaseControl->connect();
+$application->securityControl->setup();

@@ -1,0 +1,1 @@
+ALTER TABLE "Video" ADD COLUMN "IpAddress" text;

@@ -1,0 +1,66 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+/**
+ * Gallery Layout (Including Utility) Styles
+ */
+
+#main-content {
+	width: 720px;
+	padding: 0px 0px 0px 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+#utility {
+	width: 160px;
+	background-color: #F2F2F2;
+}
+
+/* Headline Item */
+
+#headline {
+	float: left;
+	width: 700px;
+	margin-bottom: 20px;
+	background-color: #F2F2F2;
+}
+
+#headline img {
+	float: left;
+	margin-right: 20px;
+}
+
+#headline h3 {
+	margin-top: 15px;
+}
+
+#headline h3,
+#headline p {
+	padding: 0px 15px 0px 15px;
+}
+
+/* Collection of Items */
+
+.collection {
+	float: left;
+	clear: both;
+	width: 680px;
+	padding: 20px 0px 0px 20px;
+	margin: 0px 0px 20px 0px;
+	background-color: #F2F2F2;
+}
+
+.collection .image-link {
+	float: left;
+	width: 206px;
+	height: 116px;
+	margin: 0px 20px 20px 0px;
+}
+
+.collection .image-link:hover {
+	-moz-box-shadow: 0px 0px 5px #999999;
+	-webkit-box-shadow: 0px 0px 5px #999999;
+	box-shadow: 0px 0px 5px #999999;
+}

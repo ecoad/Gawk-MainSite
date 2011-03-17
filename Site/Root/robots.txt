@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin
+Disallow: /resource
+Disallow: /account
+Disallow: /forum
+Disallow: /_test
+Disallow: /api

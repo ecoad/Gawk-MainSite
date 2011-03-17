@@ -1,0 +1,28 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+/**
+ * Three Column Layout For Hero (Including Utility) Styles 
+ */
+ 
+#main-content {
+	width: 620px;
+	padding: 0px 0px 0px 0px;
+}
+
+#utility {
+	width: 240px;
+	background-color: #F2F2F2;
+}
+ 
+.column {
+	float: left;
+	width: 240px;
+	padding: 30px 30px 30px 30px;
+	background-color: #F2F2F2;
+}
+ 
+.primary {
+	margin-right: 20px;
+}

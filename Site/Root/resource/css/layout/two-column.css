@@ -1,0 +1,24 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+/**
+ * Two Column Layout (No Utility) Styles 
+ */
+ 
+#main-content {
+	width: 940px;
+	padding: 0px 0px 0px 0px;
+	margin-right: 0px;
+}
+ 
+.column {
+	float: left;
+	width: 400px;
+	padding: 30px 30px 30px 30px;
+	background-color: #F2F2F2;
+}
+ 
+.primary {
+	margin-right: 20px;
+}

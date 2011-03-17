@@ -1,0 +1,132 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+/**
+ * Social Media
+ */
+
+#share {
+	clear: both;
+	position: relative;
+	padding: 14px 0px 0px 0px;
+	margin: 14px 0px 0px 0px;
+	border-top: 2px dotted #D0D1D2;
+}
+
+#share h4,
+#share p,
+#share a,
+.box-content #share h4,
+.box-content #share p,
+.box-content #share a {
+	font-size: 12px;
+	color: #696969;
+}
+
+#share h4,
+.box-content #share h4 {
+	float: left;
+	display: inline;
+	font-style: italic;
+	font-weight: normal;
+	margin: 2px 10px 0px 0px;
+}
+
+#share p {
+	font-style: italic;
+	position: absolute;
+	top: 12px;
+	right: 0px;
+	margin-bottom: 0px;
+	text-align: right;
+}
+
+#social-media,
+#fancybox-inner #social-media,
+.box-container #social-media {
+	height: 16px;
+	list-style: none;
+	margin: 0px 0px 7px 0px;
+}
+
+#fancybox-inner #social-media,
+.box-container #social-media {
+	height: 16px;
+}
+
+#social-media li,
+#social-media li,
+#social-media li {
+	float: left;
+	height: 16px;
+	width: 16px;
+	margin-top: -1px;
+	margin-right: 6px;
+	list-style: none;
+}
+
+#social-media a {
+	width: 16px;
+	height: 16px;
+	margin-top: 2px;
+	display: block;
+	outline: none;
+	text-indent: -9999px;
+	background-image: url("/resource/image/icon/social-network-sprite.gif?v=@VERSION-NUMBER@");
+	background-repeat: no-repeat;
+}
+
+#social-media li#twitter a {
+	background-position: 0px 0px;
+}
+
+#social-media li#twitter a:hover {
+	background-position: 0px -16px;
+}
+
+#social-media li#facebook-like {
+	width: 48px;
+}
+
+#social-media li#facebook a {
+	background-position: -16px 0px;
+}
+
+#social-media li#facebook a:hover {
+	background-position: -16px -16px;
+}
+
+#social-media li#digg a {
+	background-position: -32px 0px;
+}
+
+#social-media li#digg a:hover {
+	background-position: -32px -16px;
+}
+
+#social-media li#delicious a {
+	background-position: -48px 0px;
+}
+
+#social-media li#delicious a:hover {
+	background-position: -48px -16px;
+}
+
+#social-media li#contact a {
+	background-position: -4800px -16px;
+	text-indent: 0px !important;
+}
+
+#social-media li#contact {
+	width: 48px;
+}
+
+#social-media li#thanks a {
+	background-position: -4800px -16px;
+	text-indent: 0px !important;
+}
+
+#social-media li#thanks {
+	width: 248px;
+}

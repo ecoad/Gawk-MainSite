@@ -1,0 +1,1 @@
+ALTER TABLE "MemberFriend" ADD COLUMN "FriendFbId" text;

@@ -1,0 +1,73 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+/**
+ * Landscape Beancan Layout (Including Utility) Styles
+ */
+
+#main-content {
+	width: 720px;
+	padding: 0px 0px 0px 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+#utility {
+	width: 160px;
+	background-color: #F2F2F2;
+}
+
+/* Headline Item */
+
+#headline {
+	float: left;
+	width: 700px;
+	margin-bottom: 20px;
+	background-color: #F2F2F2;
+}
+
+#headline img {
+	float: left;
+	margin-right: 20px;
+}
+
+#headline h4 {
+	margin-top: 15px;
+}
+
+#headline h4,
+#headline p {
+	padding: 0px 15px 0px 15px;
+}
+
+/* Beancan Items */
+
+.beancan {
+	float: left;
+	cursor: default;
+	width: 340px;
+	margin: 0px 20px 20px 0px;
+	background-color: #F2F2F2;
+	min-height: 225px;
+}
+
+.beancan h4 {
+	margin-top: 10px;
+}
+
+.beancan h4,
+.beancan p {
+	padding: 0px 15px 0px 15px;
+}
+
+.beancan:hover {
+	-moz-box-shadow: 0px 0px 5px #999999;
+	-webkit-box-shadow: 0px 0px 5px #999999;
+	box-shadow: 0px 0px 5px #999999;
+}
+
+.beancan img {
+	float: left;
+	margin: 0px 15px 15px 0px;
+}

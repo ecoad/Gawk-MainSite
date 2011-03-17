@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<!-- Version 0.4.3 -->
+<project name="Gawk" default="" basedir=".">
+
+	<property file="${project.basedir}/build.properties" />
+
+	<import file="${project.basedir}/build.common.xml"/>
+
+	<tstamp>
+		<format property="date" pattern="%d %b %Y" />
+		<format property="time" pattern="%R %Z" />
+		<format property="buildtime" pattern="%a, %d %b %Y, %H:%M" />
+		<format property="timestamp" pattern="%Y-%m-%d.%H%M%S" />
+	</tstamp>
+
+	<fileset dir="${site.path}" id="site-php">
+		<include name="**/*.php" />
+	</fileset>
+
+	<fileset dir="${application.path}" id="application-php">
+		<include name="**/*.php" />
+		<exclude name="Atrox/**/" />
+	</fileset>
+
+	<fileset dir="${test.path}" id="test-php">
+		<include name="**/*.php" />
+	</fileset>
+
+	<!-- Map used when replacing tokens in the setup target -->
+	<filterchain id="config-tokens">
+		<replacetokens>
+			<token key="ProjectName" value="${phing.project.name}" />
+			<token key="ProjectPath" value="${install.path}" />
+			<token key="CachePath" value="${cache.path}" />
+			<token key="LogPath" value="${log.path}" />
+			<token key="DataPath" value="${data.path}" />
+			<token key="IpAddress" value="${install.ipAddress}" />
+			<token key="IpPort" value="${install.ipPort}" />
+			<token key="SiteDomain" value="${site.domain}" />
+			<token key="EmailDeveloper" value="${email.developer}" />
+			<token key="EmailSupport" value="${email.support}" />
+			<token key="DatabaseHost" value="${database.host}" />
+			<token key="DatabasePort" value="${database.port}" />
+			<token key="DatabaseName" value="${database.name}" />
+			<token key="MemcacheServer" value="${memcache.server}" />
+			<token key="IncludeServerAlias" value="${config.serveralias}" />
+			<token key="FacebookAppId" value="${facebook.appId}" />
+			<token key="FacebookSecret" value="${facebook.secret}" />
+		</replacetokens>
+	</filterchain>
+
+	<target name="clean" depends="rootCheck, cleanDocumentPath" description="Delete files created by build processes">
+		<echo>Delete files created by build processes</echo>
+		<delete file="${vhost.path}" />
+		<delete file="${bootstrap.path}" />
+		<delete file="${development.cache.path}" />
+		<delete file="${development.log.path}" />
+	</target>
+
+	<target name="cleanDocumentPath">
+		<delete dir="${document.path}" includeemptydirs="true" verbose="false"
+			failonerror="true" />
+	</target>
+
+	<target name="test">
+	</target>
+
+	<target name="document" depends="rootCheck, cleanDocumentPath"
+		description="Builds the documentation for this project">
+		<mkdir dir="${document.path}" />
+
+		<phpdoc title="${phing.project.name} API Documentation"
+			destdir="${document.path}" parseprivate="true" quiet="true"
+			output="HTML:frames:DOM/earthli">
+			<fileset refid="application-php" />
+		</phpdoc>
+	</target>
+
+	<target name="checkStandards" description="Check all of the code meets the coding standards"
+		depends="checkApplicationStandards, checkSiteStandards, checkTestStandards">
+	</target>
+
+	<target name="checkApplicationStandards">
+		<phpcodesniffer standard="/var/application/Clock/CodeSniffer/Clock"
+			format="report" file="${application.path}" ignorePatterns="Atrox"
+			allowedFileExtensions="php" haltonerror="true" />
+	</target>
+
+	<target name="checkSiteStandards">
+		<phpcodesniffer standard="/var/application/Clock/CodeSniffer/Clock"
+			format="report" file="${site.path}" ignorePatterns="Atrox"
+			allowedFileExtensions="php" haltonerror="true" />
+	</target>
+
+	<target name="checkTestStandards">
+		<phpcodesniffer standard="/var/application/Clock/CodeSniffer/Clock"
+			format="summary" file="${test.path}" ignorePatterns="Atrox"
+			allowedFileExtensions="php" haltonerror="true" />
+	</target>
+
+	<target name="validate" description="Check all of the code syntax is valid"
+		depends="validateApplication, validateSite, validateTest">
+	</target>
+
+	<target name="validateSite">
+		<phplint>
+			<fileset refid="site-php" />
+		</phplint>
+	</target>
+
+	<target name="validateApplication">
+		<phplint>
+			<fileset refid="application-php" />
+		</phplint>
+	</target>
+
+	<target name="validateTest">
+		<phplint>
+			<fileset refid="test-php" />
+		</phplint>
+	</target>
+
+	<target name="setupConfig" depends="environmentCheck">
+		<property name="install.path" value="${${environment}.install.path}" />
+		<property name="install.ipAddress" value="${${environment}.install.ipAddress}" />
+		<property name="install.ipPort" value="${${environment}.install.ipPort}" />
+		<property name="cache.path" value="${${environment}.cache.path}" />
+		<property name="log.path" value="${${environment}.log.path}" />
+		<property name="data.path" value="${${environment}.data.path}" />
+		<property name="site.domain" value="${${environment}.site.domain}" />
+		<property name="site.path" value="${site.path}" />
+		<property name="email.support" value="${${environment}.email.support}" />
+		<property name="email.developer" value="${${environment}.email.developer}" />
+		<property name="database.host" value="${${environment}.database.host}" />
+		<property name="database.port" value="${${environment}.database.port}" />
+		<property name="database.name" value="${${environment}.database.name}" />
+
+		<property name="memcache.server" value="${${environment}.memcache.server}" />
+		<property name="config.serveralias" value="${${environment}.config.serveralias}" />
+
+		<!-- Custom Folder Creation -->
+		<exec command="sudo -u www-data sh -c 'umask 002; mkdir -p ${log.path}/Error'" checkreturn="true" />
+		<exec command="sudo -u www-data sh -c 'umask 002; mkdir -p ${cache.path}/Content'" checkreturn="true" />
+		<exec command="sudo -u www-data sh -c 'umask 002; mkdir -p ${cache.path}/Binary'" checkreturn="true" />
+		<exec command="sudo -u www-data sh -c 'umask 002; mkdir -p ${cache.path}/Resource'" checkreturn="true" />
+		<exec command="sudo -u www-data sh -c 'umask 002; mkdir -p ${data.path}/UnversionedResource'" checkreturn="true" />
+		<exec command="sudo -u www-data sh -c 'umask 002; mkdir -p ${data.path}/Binary'" checkreturn="true" />
+
+		<phingcall target="setupCore" />
+	</target>
+
+	<target name="deployConfig" depends="environmentCheck">
+		<phingcall target="deployCore">
+			<property name="install.path" value="${${environment}.install.path}" />
+			<property name="install.host" value="${${environment}.install.host}" />
+			<property name="install.port" value="${${environment}.install.port}" />
+			<property name="install.user" value="${${environment}.install.user}" />
+			<property name="site.address" value="http://${${environment}.site.domain}" />
+		</phingcall>
+	</target>
+</project>

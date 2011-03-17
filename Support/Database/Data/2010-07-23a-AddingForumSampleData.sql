@@ -1,0 +1,1 @@
+INSERT INTO "Forum"("Name", "Description", "NumThreads", "NumPosts", "LastPostId", "LastPostDate")VALUES ('Test Forum', 'This is a test forum', 0, 0, null, null);

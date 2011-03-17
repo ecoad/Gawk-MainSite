@@ -1,0 +1,7 @@
+{
+	"version": "@VERSION@",
+	"revision": "@REVISION@",
+	"date": "@DATE@ @TIME@",
+	"deployedBy": "@DEPLOYEDBY@",
+	"environment": "@ENVIRONMENT@"
+}

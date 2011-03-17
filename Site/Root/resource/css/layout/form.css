@@ -1,0 +1,309 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+/**
+ * Form Styles
+ */
+
+form {
+}
+
+fieldset {
+}
+
+fieldset legend {
+}
+
+
+/**
+ * Sorts label tags to simulate tabular structure
+ */
+
+form label,
+form .label {
+	float: left;
+	clear: both;
+	width: 100%;
+	margin: 6px 0px 6px 0px;
+	position: relative;
+}
+
+form label strong,
+form .label strong {
+	display: block;
+	padding-right: 20px;
+	float: left;
+	font-weight: normal;
+	text-align: right;
+	line-height: 1.9em;
+	width: 150px;
+	position: relative;
+}
+
+
+/**
+ * Form Elements
+ */
+
+/* .button */
+
+.button {
+	font-style: italic;
+	cursor: pointer;
+	padding: 5px 8px 5px 8px;
+	border: 1px solid #666666;
+  width: auto; /* prevents ie6/7 from adding too much left and right padding */
+  overflow: visible; /* prevents ie6/7 from adding too much left and right padding */
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+	background-color: #F2F2F2;
+}
+
+.button:hover {
+	color: #FFFFFF;
+	background-color: #333333;
+}
+
+/* .textbox, select */
+
+.textbox, select {
+	border: 1px solid #CCCCCC;
+	background-color: #FFFFFF !important; /* sorts out iIE6/7 google toolbar overwriting the background colour issue  */
+}
+
+.textbox {
+	padding: 6px 6px 6px 6px;
+}
+
+select {
+	padding: 5px 6px 5px 6px;
+}
+
+.textbox:hover, select:hover {
+	border: 1px solid #666666;
+	background-color: #CCCCCC !important; /* sorts out iIE6/7 google toolbar overwriting the background colour issue  */
+}
+
+.textbox:focus, select:focus {
+	border: 1px solid #666666;
+	background-color: #EAEAEA !important; /* sorts out iIE6/7 google toolbar overwriting the background colour issue  */
+}
+
+/* .textbox widths */
+
+form .default {
+	width: auto;
+}
+
+form .narrow {
+	width: 50px;
+}
+
+form .small {
+	width: 140px;
+}
+
+form .medium {
+	width: 260px;
+}
+
+form .wide {
+	width: 488px;
+}
+
+form .max {
+	width: 98%;
+}
+
+/* .textbox heights */
+
+form .very-short {
+	height: 50px;
+}
+
+form .short {
+	height: 100px;
+}
+
+form .tall {
+	height: 150px;
+}
+
+form .very-tall {
+	height: 250px;
+}
+
+form .extra-tall {
+	height: 350px;
+}
+
+/* label.checkbox */
+
+label.checkbox {
+	margin-top: 6px;
+	margin-bottom: 10px;
+}
+
+label.checkbox strong {
+	position: absolute;
+	text-align: left;
+	margin: 0px 0px 0px 192px;
+	width: 330px;
+}
+
+label.checkbox input {
+	margin: 5px 0px 0px 170px;
+}
+
+/* Additional form content styling */
+
+.required span {
+	font-weight: bold;
+	padding: 0px 0px 0px 3px;
+	color: #FF0000;
+}
+
+.note {
+	font-weight: normal;
+	font-size: 11px;
+	display: block;
+	margin: 4px 0px 0px 170px;
+	line-height: 1.3em;
+}
+
+.side-note {
+	margin: 0px 0px 0px 3px;
+}
+
+.note .success,
+.note .fail,
+.side-note .success,
+.side-note .fail {
+	padding: 2px 5px 2px 5px;
+	color: #FFFFFF;
+}
+
+.note .success,
+.side-note .success {
+	background-color: #66CC33;
+}
+
+.note .fail,
+.side-note .fail {
+	background-color: #FF0000;
+}
+
+form p,
+form h3 {
+	clear: both;
+}
+
+/* .image-preview */
+
+.image-preview {
+	background-color: #FFFFFF;
+	margin: 0px 0px 20px 195px;
+}
+
+/* p.download / icon */
+
+.download {
+	margin: 0px 0px 0px 193px;
+}
+
+/* .controls */
+
+.controls {
+	clear: both;
+	padding: 10px 0px 10px 0px;
+}
+
+.controls {
+	clear: both;
+	margin-left: 170px;
+}
+
+
+/**
+ * .form-errors
+ */
+
+.form-errors {
+	background-color: #FFC0C0;
+	padding: 20px 20px 20px 20px;
+	margin: 0px 0px 40px 0px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.form-errors h2 {
+	color: #FF0000;
+}
+
+/**
+ * Contact Styles
+ */
+
+.contact #main-content {
+	width: 500px;
+}
+
+.contact #utility {
+	width: 300px;
+}
+
+/* Bot Prevention */
+
+#bot-prevent {
+	float: left;
+	width: 100%;
+	clear: both;
+	border-top: 1px solid #CCCCCC;
+	padding: 20px 0px 0px 0px;
+	margin: 15px 0px 0px 0px;
+}
+
+#bot-prevent h3,
+#bot-prevent p {
+	padding-left: 170px;
+}
+
+/**
+ * Account Relevant Styles
+ */
+
+.account fieldset {
+	border: 1px solid #CCCCCC;
+	margin: 10px;
+	padding: 20px 20px 20px 20px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	-moz-box-shadow: 0px 0px 5px #CDCDCD;
+	-webkit-box-shadow: 0px 0px 5px #999999;
+	box-shadow: 0px 0px 5px #999999;
+}
+
+.log-on #main-content,
+.password-request #main-content {
+	width: 880px;
+	margin: 0px 0px 20px 0px;
+}
+
+.log-on form,
+.password-request form {
+	width: 650px;
+	margin: 0px auto 0px auto;
+}

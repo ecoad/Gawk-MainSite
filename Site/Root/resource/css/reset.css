@@ -1,0 +1,90 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+/**
+ * Default Styles
+ */
+
+body {
+	font-family: Georgia, Times, Times New Roman, serif;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+}
+
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-size: 100%;
+	font-weight: normal;
+}
+
+p, li, td, th, textarea, input, select, option, label, .label, dt, dd, address {
+	font-family: Georgia, Times, Times New Roman, serif;
+	font-size: 13px;
+}
+
+h3, h4, h5 {
+	font-size: 15px;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+
+fieldset, img {
+	border: 0px;
+}
+
+img {
+	vertical-align: bottom;
+}
+
+address, caption, cite, code, dfn, th, var {
+	font-style: normal;
+	font-weight: normal;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+li {
+	margin-bottom: 0px;
+}
+
+a {
+	text-decoration: underline;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+caption, th {
+ text-align: left;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+	content: "";
+}
+
+blockquote, q {
+	quotes: "" "";
+}
+
+abbr, acronym {
+	border: 0px;
+}
+
+legend {
+	display: none;
+}
+
+hr {
+	display: none;
+}

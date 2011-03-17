@@ -1,0 +1,40 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+/**
+ * internet-explorer.css
+ */
+
+/**
+ * javascript workarounds
+ */
+body {
+	behavior: url("/resource/javascript/browser/internet-explorer/css-hover/csshover.htc");
+}
+* html .png {
+	position: relative;
+	behavior: expression((this.runtimeStyle.behavior="none")&&(this.pngSet?this.pngSet=true:(this.nodeName == "IMG" && this.src.toLowerCase().indexOf('.png')>-1?(this.runtimeStyle.backgroundImage = "none",
+		this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.src + "', sizingMethod='image')",
+		this.src = "/resource/javascript/browser/internet-explorer/png-behavior/transparent.gif?v=@VERSION-NUMBER@"):(this.origBg = this.origBg? this.origBg :this.currentStyle.backgroundImage.toString().replace('url("','').replace('")',''),
+		this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.origBg + "', sizingMethod='scale')",
+		this.runtimeStyle.backgroundImage = "none")),this.pngSet=true)
+	);
+}
+
+
+/**
+ * Invalid CSS
+ * Place all W3C invalid Internet explorer CSS styles within this part of the document - organise by css document name.
+ */
+
+/* general.css */
+
+
+/* form.css */
+
+
+/* icon.css */
+
+
+/* rumble.css */

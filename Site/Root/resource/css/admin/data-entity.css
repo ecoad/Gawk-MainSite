@@ -1,0 +1,135 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+/**
+ * data-entity.css
+ */
+
+table.data-entity {
+	width: 100%;
+	background-color: #FFFFFF;
+	margin-bottom: 10px;
+}
+table.data-entity tr {
+}
+table.data-entity th {
+	border: 1px solid #9e9e9e;
+	background-color: #d5d5d5;
+	background-image: url("/resource/image/admin/table-header.gif?v=@VERSION-NUMBER@");
+}
+table.data-entity th.selector {
+	padding: 3px 5px 2px 5px;
+}
+table.data-entity th a {
+	padding: 5px 5px 5px 5px;
+	background-image: url("/resource/image/admin/table-header.gif?v=@VERSION-NUMBER@");
+	display: block;
+	_background: none !important; /* disables background image arrows for IE6 because of table jump bug */
+}
+table.data-entity th a:hover {
+	background-position: 0px -120px;
+	text-decoration: none !important;
+}
+table.data-entity td {
+	padding: 3px 5px 3px 5px;
+	*padding: 0px 5px 0px 5px;
+	_padding: 0px 5px 0px 5px;
+}
+table.data-entity td {
+	border: 1px solid #9e9e9e;
+}
+
+
+/* sortstate */
+table.data-entity th a.sortstate0 {
+	background-position: right 0px;
+}
+table.data-entity th a.sortstate0:hover {
+	background-position: right -120px;
+}
+table.data-entity th a.sortstate1 {
+	background-position: right -40px;
+}
+table.data-entity th a.sortstate1:hover {
+	background-position: right -160px;
+}
+table.data-entity th a.sortstate2 {
+	background-position: right -80px;
+}
+table.data-entity th a.sortstate2:hover {
+	background-position: right -200px;
+}
+
+
+
+/* table columns */
+table.data-entity .selector,
+table.data-entity .button {
+	text-align: center;
+	width: 20px;
+}
+table.data-entity .price,
+table.data-entity .total,
+table.data-entity .grand-total,
+table.data-entity .extra-cost {
+	text-align: right;
+}
+table.data-entity .first-name {
+}
+table.data-entity .last-name {
+}
+table.data-entity .full-name {
+}
+table.data-entity .date {
+}
+table.data-entity .date-time {
+}
+table.data-entity .phone {
+}
+table.data-entity .email {
+}
+/* table columns - .thumbnail */
+table.data-entity .thumbnail {
+	width: 50px;
+	text-align: center;
+	padding: 1px 1px 1px 1px;
+}
+table.data-entity .thumbnail img {
+	*margin: 0px 0px -3px 0px;
+	_margin: 0px 0px -3px 0px;
+}
+/* table columns - .button */
+table.data-entity .button {
+}
+table.data-entity .button a {
+}
+table.data-entity .button a:hover {
+}
+
+
+/* tags in tables */
+table.data-entity .tags {
+	margin-top: 4px;
+}
+
+/**
+ * definition list
+ */
+dl {
+	margin-bottom: 20px;
+	overflow: auto;
+}
+dt {
+	width: 200px;
+	float: left;
+	clear: both;
+	margin: 0px 0px 6px 5px;
+	padding: 0px 0px 0px 0px;
+}
+dd {
+	float: left;
+	width: 590px;
+	margin: 0px 0px 6px 0px;
+	padding: 0px 0px 0px 0px;
+}

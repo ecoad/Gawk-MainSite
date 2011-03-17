@@ -1,0 +1,3 @@
+ALTER TABLE "Member" ADD CONSTRAINT "Member_SecureId_unique" UNIQUE ("SecureId"); 
+ALTER TABLE "MemberFriend" ADD CONSTRAINT "MemberFriend_MemberSecureId_fkey" FOREIGN KEY ("MemberSecureId") REFERENCES "Member" ("SecureId") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE "MemberFriend" ADD CONSTRAINT "MemberFriend_FriendSecureId_fkey" FOREIGN KEY ("FriendSecureId") REFERENCES "Member" ("SecureId") ON UPDATE CASCADE ON DELETE CASCADE;

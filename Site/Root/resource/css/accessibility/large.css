@@ -1,0 +1,23 @@
+/**
+ * Accessibility - large.css
+ */
+body {
+}
+p, li, td, th, dd, dt, textarea, input, select, option, label {
+	font-size: 16px !important;
+	line-height: 1.5em !important;
+}
+h1 {
+}
+h2 {
+	font-size: 26px !important;
+}
+h3 {
+	font-size: 23px !important;
+}
+h4 {
+	font-size: 20px !important;
+}
+h5, h6, h7 {
+	font-size: 17px !important;
+}

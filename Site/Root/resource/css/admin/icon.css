@@ -1,0 +1,100 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+/**
+ * Icons
+ */
+p.download {
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding: 0px 0px 0px 0px;
+	height: 46px;
+}
+p.download a {
+	padding: 3px 0px 22px 52px;
+	_padding: 3px 0px 0px 52px;
+	margin: 0px 0px 0px 0px;
+	display: block;
+	position: relative;
+}
+p.download a em {
+	text-decoration: none;
+	font-size: 10px;
+	margin-left: 3px;
+}
+p.download span {
+	display: block;
+	color: #b6c3db;
+	padding: 0px 0px 0px 52px;
+	margin: -23px 0px 0px 0px;
+	_margin: 0px 0px 0px 0px;
+}
+
+/* icon graphics */
+p.download-pdf {
+	background-image: url("/resource/image/admin/icon/icon-pdf.gif?v=@VERSION-NUMBER@");
+}
+p.download-ai {
+	background-image: url("/resource/image/admin/icon/icon-ai.gif?v=@VERSION-NUMBER@");
+}
+p.download-doc {
+	background-image: url("/resource/image/admin/icon/icon-doc.gif?v=@VERSION-NUMBER@");
+}
+p.download-gif {
+	background-image: url("/resource/image/admin/icon/icon-gif.gif?v=@VERSION-NUMBER@");
+}
+p.download-html {
+	background-image: url("/resource/image/admin/icon/icon-html.gif?v=@VERSION-NUMBER@");
+}
+p.download-jpg {
+	background-image: url("/resource/image/admin/icon/icon-jpg.gif?v=@VERSION-NUMBER@");
+}
+p.download-mov {
+	background-image: url("/resource/image/admin/icon/icon-mov.gif?v=@VERSION-NUMBER@");
+}
+p.download-mp3 {
+	background-image: url("/resource/image/admin/icon/icon-mp3.gif?v=@VERSION-NUMBER@");
+}
+p.download-mpeg {
+	background-image: url("/resource/image/admin/icon/icon-mpeg.gif?v=@VERSION-NUMBER@");
+}
+p.download-png {
+	background-image: url("/resource/image/admin/icon/icon-png.gif?v=@VERSION-NUMBER@");
+}
+p.download-ppt {
+	background-image: url("/resource/image/admin/icon/icon-ppt.gif?v=@VERSION-NUMBER@");
+}
+p.download-psd {
+	background-image: url("/resource/image/admin/icon/icon-psd.gif?v=@VERSION-NUMBER@");
+}
+p.download-rar {
+	background-image: url("/resource/image/admin/icon/icon-rar.gif?v=@VERSION-NUMBER@");
+}
+p.download-tiff {
+	background-image: url("/resource/image/admin/icon/icon-tiff.gif?v=@VERSION-NUMBER@");
+}
+p.download-txt {
+	background-image: url("/resource/image/admin/icon/icon-txt.gif?v=@VERSION-NUMBER@");
+}
+p.download-wav {
+	background-image: url("/resource/image/admin/icon/icon-wav.gif?v=@VERSION-NUMBER@");
+}
+p.download-wma {
+	background-image: url("/resource/image/admin/icon/icon-wma.gif?v=@VERSION-NUMBER@");
+}
+p.download-wmv {
+	background-image: url("/resource/image/admin/icon/icon-wmv.gif?v=@VERSION-NUMBER@");
+}
+p.download-xls {
+	background-image: url("/resource/image/admin/icon/icon-xls.gif?v=@VERSION-NUMBER@");
+}
+p.download-zip {
+	background-image: url("/resource/image/admin/icon/icon-zip.gif?v=@VERSION-NUMBER@");
+}
+p.download-csv {
+	background-image: url("/resource/image/admin/icon/icon-csv.gif?v=@VERSION-NUMBER@");
+}
+p.download-default {
+	background-image: url("/resource/image/admin/icon/icon-default.gif?v=@VERSION-NUMBER@");
+}
