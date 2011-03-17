@@ -33,7 +33,6 @@ $application->setConnectionString(
 	"host=@DatabaseHost@ port=@DatabasePort@ dbname=@DatabaseName@ user=WebUser password=test");
 
 $htmlControl = CoreFactory::getHtmlControl();
-$applicationPageComponents = Factory::getApplicationPageComponents();
 
 $application->registry->set("Name", "@ProjectName@");
 $application->registry->set("Title", "@ProjectName@");
