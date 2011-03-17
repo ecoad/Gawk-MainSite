@@ -2,35 +2,11 @@
 class Factory {
 
 	/**
-	 * @return ApplicationPageComponents
-	 */
-	static function getApplicationPageComponents() {
-		require_once("ApplicationPageComponents.php");
-		return new ApplicationPageComponents();
-	}
-
-	/**
-	 * @return CustomArticleControl
-	 */
-	static function getArticleControl($type = null) {
-		require_once("Article.php");
-		return new CustomArticleControl($type);
-	}
-
-	/**
 	 * @return StaticContentControl
 	 */
 	static function getStaticContentControl() {
-		require_once("StaticContent/StaticContentControl.php");
+		require_once "StaticContent/StaticContentControl.php";
 		return new StaticContentControl();
-	}
-
-/**
-	 * @var CroppedImageControl
-	 */
-	static function getCroppedImageControl() {
-		require_once("CroppedImage.php");
-		return new CroppedImageControl();
 	}
 
 	/**
@@ -74,45 +50,6 @@ class Factory {
 	}
 
 	/**
-	 * @return Facebook
-	 */
-	static function getFacebookContentSharing() {
-		require_once("ContentSharing.php");
-		return new FacebookShare();
-	}
-
-	/**
-	 * @return Twitter
-	 */
-	static function getTwitterContentSharing() {
-		require_once("ContentSharing.php");
-		return new Twitter();
-	}
-
-	/**
-	 * @return Email
-	 */
-	static function getEmailContentSharing() {
-		require_once("ContentSharing.php");
-		return new Email();
-	}
-
-	/**
-	 * @return Digg
-	 */
-	static function getDiggContentSharing() {
-		require_once("ContentSharing.php");
-		return new Digg();
-	}
-
-	/**
-	 * @return Delicious
-	 */
-	static function getDeliciousContentSharing() {
-		require_once("ContentSharing.php");
-		return new Delicious();
-	}
-	/**
 	 * @return MemberRatingControl
 	 */
 	static function getMemberRatingControl() {
@@ -126,14 +63,6 @@ class Factory {
 	static function getMemberRatingWebService() {
 		require_once("Member/Rating/WebService/MemberRatingWebService.php");
 		return new MemberRatingWebService();
-	}
-
-	/**
-	 * @return ErrorLogControl
-	 */
-	static function getErrorLogControl() {
-		require_once "ErrorLog/ErrorLogControl.php";
-		return new ErrorLogControl();
 	}
 
 	/**
@@ -227,14 +156,6 @@ class Factory {
 	public static function getMemberAuthentication() {
 		require_once "Gawk/Member/MemberAuthentication.php";
 		return new MemberAuthentication();
-	}
-
-	/**
-	 * @return MessageAuthentication
-	 */
-	public static function getMessageAuthentication() {
-		require_once "Gawk/MessageAuthentication/MessageAuthentication.php";
-		return new MessageAuthentication();
 	}
 
 	/**
