@@ -14,6 +14,10 @@ Thumbs.db
 
 .svn/
 
+# Atrox Projects
+/Application/Bootstrap.php
+/Config/Apache/vhost.conf
+
 # OsX
 .DS_Store
 Icon?
