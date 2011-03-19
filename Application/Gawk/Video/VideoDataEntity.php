@@ -15,6 +15,14 @@ class VideoDataEntity extends DataEntity {
 			}
 			$array[lcfirst($k)] = $v;
 		}
-		return Factory::getVideo((object)$array);
+		$memberControl = Factory::getMemberControl();
+
+		$video = Factory::getVideo((object)$array);
+		$memberDataEntity = $memberControl->getMemberDataEntityBySecureId($video->secureId);
+		if ($memberDataEntity) {
+			$video->member = $memberDataEntity->toObject();
+		}
+
+		return $video;
 	}
 }

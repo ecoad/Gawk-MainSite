@@ -1,9 +1,15 @@
 <?php
+require_once "Gawk/Member/Member.php";
+
 class Video {
 	public $secureId = "";
 	public $filename = "";
-	public $memberSecureId = "";
 	public $wallSecureId = "";
+	public $memberSecureId = "";
+	/**
+	 * @var Member
+	 */
+	public $member = null;
 	public $hash = "";
 	public $uploadSource = "";
 	public $approved = false;
@@ -11,6 +17,7 @@ class Video {
 	public $dateCreated = "";
 
 	public function __construct($videoData = null) {
+		$this->member = new Member();
 		if ($videoData) {
 			$this->mapData($videoData);
 		}
