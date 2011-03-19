@@ -66,6 +66,9 @@ class CustomMemberControl extends MemberControl {
 
 		$this->fieldMeta["Token"] = new FieldMeta(
 			"Token", "", FM_TYPE_STRING, null, FM_STORE_NEVER, true);
+
+		$this->fieldMeta["ProfileVideoSecureId"] = new FieldMeta(
+			"Token", "", FM_TYPE_STRING, null, FM_STORE_NEVER, true);
 	}
 
 	/**
@@ -88,6 +91,20 @@ class CustomMemberControl extends MemberControl {
 		}
 	}
 
+	/**
+	 * @param MemberDataEntity $memberDataEntity
+	 * @param string $videoSecureId
+	 * @return MemberDataEntity $memberDataEntity
+	 */
+	public function setProfileVideoGawk(MemberDataEntity $memberDataEntity, $videoSecureId) {
+		$videoControl = Factory::getVideoControl();
+		if ($videoDataEntity = $videoControl->itemByField($videoSecureId, "SecureId")) {
+			$memberDataEntity->set("ProfileVideoDataEntity", $videoDataEntity->get("SecureId"));
+			if ($this->updateField($memberDataEntity, "ProfileVideoSecureId", $memberDataEntity->get("ProfileVideoSecureId"))) {
+				return $memberDataEntity;
+			}
+		}
+	}
 
 	public function getMemberDataEntityByEmailAddressPassword($emailAddress, $password) {
 		$this->reset();

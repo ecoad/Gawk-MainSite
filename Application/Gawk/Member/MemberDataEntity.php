@@ -1,3 +1,4 @@
+
 <?php
 require_once "Application/Atrox/Base/Member/Member.php";
 class CustomMemberDataEntity extends MemberDataEntity {
@@ -20,7 +21,14 @@ class CustomMemberDataEntity extends MemberDataEntity {
 			unset($array["Password"]);
 		}
 
-		return Factory::getMember((object)$array);
+		$member = Factory::getMember((object)$array);
+		if ($member->profileVideoSecureId != "") {
+			$videoControl = Factory::getVideoControl();
+			if ($videoDataEntity = $videoControl->itemByField($member->profileVideoSecureId, "SecureId")) {
+				$member->profileVideoLocation = $videoDataEntity->get("Filename");
+			}
+		}
+		return $member;
 	}
 
 	/**

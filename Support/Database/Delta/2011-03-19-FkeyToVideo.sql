@@ -1,0 +1,1 @@
+ALTER TABLE "Video" ADD CONSTRAINT "Video_MemberSecureId_fkey" FOREIGN KEY ("MemberSecureId") REFERENCES "Member" ("SecureId") ON UPDATE CASCADE ON DELETE CASCADE;

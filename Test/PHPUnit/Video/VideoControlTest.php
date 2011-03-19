@@ -66,11 +66,11 @@ class VideoControlTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue($apiResponse->success);
 		$this->assertTrue(count($apiResponse->errors) == 0);
 
-		$memberControl = Factory::getMemberControl();
-		$memberDataEntity = $memberControl->getMemberDataEntityBySecureId($video->memberSecureId);
-		if ($memberDataEntity) {
-			$apiResponse->video->member = $memberDataEntity->toObject();
-		}
+//		$memberControl = Factory::getMemberControl();
+//		$memberDataEntity = $memberControl->getMemberDataEntityBySecureId($video->memberSecureId);
+//		if ($memberDataEntity) {
+//			$apiResponse->video->member = $memberDataEntity->toObject();
+//		}
 
 		$video = Factory::getVideo($apiResponse->video);
 		$this->assertTrue($video->member->secureId == $this->member->secureId);

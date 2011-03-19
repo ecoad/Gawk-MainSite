@@ -1,0 +1,1 @@
+ALTER TABLE "Member" ADD COLUMN "ProfileVideoSecureId" text;

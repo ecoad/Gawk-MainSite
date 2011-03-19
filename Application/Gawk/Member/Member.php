@@ -10,6 +10,8 @@ class Member {
 	public $emailAddress = "";
 	public $token = "";
 	public $secureId = "";
+	public $profileVideoSecureId = "";
+	public $profileVideoLocation = "";
 
 	public function __construct($memberData = null) {
 		if ($memberData) {

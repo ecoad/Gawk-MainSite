@@ -18,7 +18,7 @@ class VideoDataEntity extends DataEntity {
 		$memberControl = Factory::getMemberControl();
 
 		$video = Factory::getVideo((object)$array);
-		$memberDataEntity = $memberControl->getMemberDataEntityBySecureId($video->secureId);
+		$memberDataEntity = $memberControl->getMemberDataEntityBySecureId($video->memberSecureId);
 		if ($memberDataEntity) {
 			$video->member = $memberDataEntity->toObject();
 		}
