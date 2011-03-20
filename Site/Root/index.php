@@ -1,9 +1,9 @@
 <?php
 require_once("Application/Bootstrap.php");
 
-$wallControl = Factory::getWallControl();
 $facebook = Factory::getFacebook($application);
-if (!$wall = $wallControl->getWallByScriptName($_SERVER["SCRIPT_NAME"])) {
+$wallControl = Factory::getWallControl();
+if (!$wall = $wallControl->getWallByRequestUrl($_SERVER["REQUEST_URI"])) {
 	include "Site/Root/error/404.php";
 }
 
@@ -46,7 +46,7 @@ $layout->start("JavaScript");
 $(document).ready(function() {
 	var gawk = new Gawk({
 		apiLocation: "<?php echo $application->registry->get("Site/Address"); ?>/api/",
-		currentWallId: "<?php echo $wall->get("SecureId"); ?>",
+		currentWallId: "<?php echo $wall->secureId; ?>",
 		fbAppId: "<?php echo $facebook->getAppId(); ?>",
 		fbSession: <?php echo json_encode($facebook->getSession()); ?>
 	});
