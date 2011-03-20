@@ -34,10 +34,10 @@ $application->setConnectionString(
 
 $htmlControl = CoreFactory::getHtmlControl();
 
-$application->registry->set("Name", "@ProjectName@");
-$application->registry->set("Title", "@ProjectName@");
+$application->registry->set("Name", "Gawk Wall");
+$application->registry->set("Title", "Gawk Wall");
 $application->registry->set("Description", "The Gawk Wall");
-$application->registry->set("DefaultWall", "gaw1");
+$application->registry->set("DefaultWall", "main");
 $application->registry->set("TwitterAccount", "gawkwall");
 
 $application->registry->set("ListSize", 8);
