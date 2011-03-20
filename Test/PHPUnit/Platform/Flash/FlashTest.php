@@ -38,10 +38,12 @@ class FlashTest extends PHPUnit_Framework_TestCase {
 		$this->video->memberSecureId = $this->member->secureId;
 		$this->video->wallSecureId = $this->wall->secureId;
 
-		$application = CoreFactory::getApplication();
-		$file = $application->registry->get("Path") . "/Test/PHPUnit/Video/Data/video-success.flv";
+		$this->application = CoreFactory::getApplication();
+		$file = $this->application->registry->get("Path") . "/Test/PHPUnit/Video/Data/video-success.flv";
 		$type = mime_content_type($file);
-		VideoProvider::sendVideo($this->video, $application->registry->get("Site/Api"), $file, $type, $this->member);
+		$this->video->hash = sha1_file($file);
+		$apiResponse = VideoProvider::sendVideo($this->video, $this->application->registry->get("Site/Api"), $file, $type, $this->member);
+		$this->video = $apiResponse->video;
 
 		if (isset($_SESSION["Token"])) {
 			unset($_SESSION["Token"]);
@@ -50,16 +52,12 @@ class FlashTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetMainWallSuccess() {
 		$flashWebService = Factory::getFlashWebService();
-		$response = $flashWebService->handleRequest("GetWallConfig", null, null);
-
+		$response = $flashWebService->handleRequest(FlashWebService::SERVICE_INIT_APPLICATION, null, null);
 		$this->assertTrue($response->success);
-
 		//binaryLocation
-		$this->assertTrue(count($response->wall->videos) == 1);
-		$this->assertTrue($response->binaryLocation == ($this->application->registry->get("Site/Address") . "resource/binary/"));
+		$this->assertTrue(count($response->videos) >= 1);
+		$this->assertTrue($response->binaryLocation == ($this->application->registry->get("Site/Address") . "/resource/binary/"));
 		$this->assertTrue($response->mediaServerLocation == $this->application->registry->get("MediaServer/Address"));
-		$this->assertTrue($this->video->filename = $response->wall->videos[0]->filename);
-		$this->assertTrue($this->video->memberSecureId = $response->wall->videos[0]->memberSecureId);
 	}
 
 	public function tearDown() {

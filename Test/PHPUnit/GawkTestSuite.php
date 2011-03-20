@@ -21,7 +21,7 @@ class GawkTestSuite extends PHPUnit_Framework_TestSuite {
 		$suite->addTestSuite("VideoTestSuite");
 		$suite->addTestSuite("MemberWallBookmarkTestSuite");
 		$suite->addTestSuite("MemberRatingTestSuite");
-		//$suite->addTestSuite("FlashTest");
+		$suite->addTestSuite("FlashTest");
 		return $suite;
 	}
 }
