@@ -161,18 +161,51 @@ class WallControl extends DataControl {
 		return true;
 	}
 
+	/**
+	 * @param string $wallSecureId
+	 * @return WallDataEntity Wall
+	 */
 	public function getWallWithSecureId($wallSecureId) {
 		return $this->itemByField($wallSecureId, "SecureId");
 	}
 
-	public function makeNew() {
-		$wall = parent::makeNew();
-		$wall->set("SecureId", uniqid("wall-"));
+	public function getWallByRequestUrl($requestUrl) {
+		$wallUrl = str_replace("/", "", $requestUrl);
+		if ($wallUrl == "") {
+			return $this->getMainWall();
+		}
 
-		return $wall;
+		if ($wallDataEntity = $this->itemByField($wallUrl, "Url")) {
+			return $wallDataEntity->toObject();
+		}
 	}
 
+	/**
+	 * @see Application/Atrox/Core/Data/DataControl::makeNew()
+	 * @return WallDataEntity
+	 */
+	public function makeNew() {
+		$wallDataEntity = parent::makeNew();
+		$wallDataEntity->set("SecureId", uniqid("wall-"));
+
+		return $wallDataEntity;
+	}
+
+	/**
+	 * @see Application/Atrox/Core/Data/DataControl::getDataEntity()
+	 * @return WallDataEntity
+	 */
 	public function getDataEntity() {
 		return new WallDataEntity($this);
+	}
+
+	/**
+	 * @return Wall
+	 */
+	public function getMainWall() {
+		$wall = Factory::getWall();
+		$wall->description = "This is the main wall";
+		$wall->url = "";
+		return $wall;
 	}
 }

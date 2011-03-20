@@ -39,6 +39,41 @@ class WallControlTest extends PHPUnit_Framework_TestCase {
 		$_SERVER["REMOTE_ADDR"] = "10.0.0.1";
 	}
 
+	public function testGetWallWithRequestUrl() {
+		$wall = WallProvider::getTestWall();
+		$wall->memberSecureId = $this->member->secureId;
+
+		$apiData = array(
+			"Token" => $this->member->token,
+			"WallData" => json_encode($wall)
+		);
+
+		$apiResponse = $this->wallWebService->handleRequest("Save", $apiData, null);
+
+		if (!$apiResponse->success) {
+			var_dump($apiResponse);
+		}
+
+		$wall = $apiResponse->wall;
+
+		$this->assertTrue($apiResponse->success);
+
+		$wallControl = Factory::getWallControl();
+		$loadedWall = $wallControl->getWallByRequestUrl("/" . $wall->url);
+
+		$this->assertTrue($wall->secureId === $loadedWall->secureId);
+
+		$wallControl = Factory::getWallControl();
+		$loadedWall = $wallControl->getWallByRequestUrl("/bad123");
+
+		$this->assertNull($loadedWall);
+
+		$wallControl = Factory::getWallControl();
+		$loadedWall = $wallControl->getWallByRequestUrl("/");
+
+		$this->assertTrue($loadedWall->url === $wallControl->getMainWall()->url);
+	}
+
 	public function testSavingWallSuccess() {
 		$wall = WallProvider::getTestWall();
 		$wall->memberSecureId = $this->member->secureId;
