@@ -1,6 +1,11 @@
 <?php
 class VideoWebService {
 
+	const SERVICE_NAME_SPACE = "Video";
+	const SERVICE_SAVE = "Save";
+	const SERVICE_SAVE_MEDIA_SERVER_UPLOAD = "SaveMediaServerUpload";
+
+
 	/**
 	 * @var Application
 	 */
@@ -24,7 +29,7 @@ class VideoWebService {
 
 		if ($memberDataEntity = TokenCheck::validateToken($postData["Token"], true)) {
 			switch ($method) {
-				case "Save":
+				case self::SERVICE_SAVE:
 					$video = Factory::getVideo(json_decode(stripslashes($postData["Video"])));
 					if ($videoDataEntity = $videoControl->saveVideo($video, $filesData)) {
 						$response->success = true;

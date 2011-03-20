@@ -22,7 +22,7 @@ class VideoControl extends DataControl {
 			"Secure ID", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, false);
 
 		$this->fieldMeta["WallSecureId"] = new FieldMeta(
-			"Wall Secure ID", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, false);
+			"Wall Secure ID", "main", FM_TYPE_STRING, null, FM_STORE_ALWAYS, false);
 
 		$this->fieldMeta["MemberSecureId"] = new FieldMeta(
 			"Member Secure ID", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, false);
@@ -34,7 +34,7 @@ class VideoControl extends DataControl {
 			"DateCreated", "", FM_TYPE_DATE, null, FM_STORE_NEVER, false);
 
 		$this->fieldMeta["Approved"] = new FieldMeta(
-			"Approved", "", FM_TYPE_BOOLEAN, null, FM_STORE_ALWAYS, false);
+			"Approved", "t", FM_TYPE_BOOLEAN, null, FM_STORE_ALWAYS, false);
 
 		$this->fieldMeta["Banned"] = new FieldMeta(
 			"Banned", "", FM_TYPE_BOOLEAN, null, FM_STORE_ALWAYS, true);
@@ -52,14 +52,17 @@ class VideoControl extends DataControl {
 			"Hash", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, false);
 	}
 
-	public function saveVideo(Video $video, array $filesData) {
+	public function saveVideo(Video $video, array $filesData = null) {
 		$wallControl = Factory::getWallControl();
-		if (!$wall = $wallControl->itemByField($video->wallSecureId, "SecureId")) {
+
+		$wallId = $video->wallSecureId ? $video->wallSecureId : "main";
+
+		if (!$wall = $wallControl->itemByField($wallId, "SecureId")) {
 			$this->errorControl->addError("Wall not found: {$video->wallSecureId}");
 			return false;
 		}
 
-		if ($video->uploadSource === self::SOURCE_FLASH) {
+		if ($video->uploadSource == self::SOURCE_FLASH) {
 		} else {
 			$videoFileUpload = Factory::getVideoFileUpload();
 			if (!$fileName = $videoFileUpload->saveFile($this, $filesData, $video->uploadSource)) {

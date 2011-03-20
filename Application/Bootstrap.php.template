@@ -62,7 +62,7 @@ $application->securityControl->noAccessPage = "/account/no-access.php";
 $application->registry->set("Site/HasSsl", false);
 
 $application->registry->set("Site/Address", "http://@SiteDomain@");
-$application->registry->set("MediaServer/Address", "rtmp://@SiteDomain@");
+$application->registry->set("MediaServer/Address", "rtmp://@SiteDomain@/Gawk");
 $application->registry->set("Site/Domain", "@SiteDomain@");
 $application->registry->set("Site/CommonDomain", "gawkwall.com");
 $application->registry->set("Site/Api", $application->registry->get("Site/Address") . "/api/");
