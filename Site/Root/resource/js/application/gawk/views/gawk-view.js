@@ -31,7 +31,7 @@ function GawkView(config) {
 		element.show();
 		gawkFlashVars = {
 			apiLocation: window.location.host + config.getApiLocation(),
-			wallId: config.getCurrentWallId(),
+			wallSecureId: config.getWallSecureId(),
 			loggedIn: loggedIn
 		};
 

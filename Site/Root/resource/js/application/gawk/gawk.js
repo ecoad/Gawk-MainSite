@@ -17,8 +17,11 @@ function Gawk(configData) {
 		navigationWidget = new NavigationWidget();
 
 		$(document).trigger("Gawk.Model.Init");
+	}
+
+	function showCurrentView() {
 		$(document).trigger("Gawk.UI.AllHide");
-		$(document).trigger("Gawk.UI.NewWallShow");
+		$(document).trigger("Gawk.UI." + config.initView + "Show");
 	}
 
 	function onLoginShow(event, type) {
