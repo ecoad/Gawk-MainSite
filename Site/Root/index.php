@@ -16,7 +16,9 @@ $layout->start("Main");
 // The main page content goes here.
 ?>
 	<div id="gawk-framework">
-		<div id="gawk-view" style="display: none;"></div>
+		<div id="gawk-view" style="display: none;">
+<?php include "Site/Template/Default/Gawk/GawkView.php"; ?>
+		</div>
 		<div id="wall-view" style="display: none;">
 <?php include "Site/Template/Default/Gawk/WallView.php"; ?>
 		</div>
@@ -45,6 +47,7 @@ $layout->start("JavaScript");
 //<![CDATA[
 $(document).ready(function() {
 	var gawk = new Gawk({
+		initView: "Gawk",
 		apiLocation: "<?php echo $application->registry->get("Site/Address"); ?>/api/",
 		currentWallId: "<?php echo $wall->secureId; ?>",
 		fbAppId: "<?php echo $facebook->getAppId(); ?>",
