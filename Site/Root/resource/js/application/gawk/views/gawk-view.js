@@ -4,10 +4,15 @@ function GawkView(config) {
 	var swfObjectId = "gawk-swf";
 	var gawkFlashContainerElement = $("<div>").attr("id", "Gawk");
 	var loggedIn = false;
+	var wall = {};
 	element.append(gawkFlashContainerElement);
 
 	function init() {
 		$(document).bind("Gawk.Model.Init", onModelInit);
+	}
+
+	function setupView() {
+		element.find("h3").html(wall.name);
 	}
 
 	function onModelInit() {
@@ -49,7 +54,12 @@ function GawkView(config) {
 		document.getElementById(swfObjectId).logOutFromExternal();
 	}
 
-	function onShowView() {
+	function onShowView(event, loadedWall) {
+		if (loadedWall) {
+			wall = loadedWall;
+		}
+
+		setupView();
 		element.show();
 	}
 

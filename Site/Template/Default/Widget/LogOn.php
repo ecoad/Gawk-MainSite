@@ -1,6 +1,5 @@
 <div style="width: 230px; float:right;" id="login-widget">
 	<div id="fb-root"></div> <!-- TODO: Move this -->
-	<div class="information">Loading&hellip;</div>
 	<div class="logged-in" style="display:none;">
 		<img class="profile-image" style="float: left; height: 50px; width: 50px; display: none;">
 		<p>Name: <span class="name"></span></p>

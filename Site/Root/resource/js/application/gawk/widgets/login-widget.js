@@ -3,7 +3,6 @@ function LoginWidget() {
 
 	var element = $("#login-widget");
 
-	var informationElement = element.find(".information");
 	var loggedInElement = element.find(".logged-in");
 	var loggedOutElement = element.find(".logged-out");
 
@@ -46,19 +45,18 @@ function LoginWidget() {
 	}
 
 	function showLoggedIn(response) {
-
 		if (response.success) {
 			var profileImage = loggedInElement.find(".profile-image");
-			profileImage.attr("src", "https://graph.facebook.com/" + response.member.fbId + "/picture");
+			profileImage.attr("src", "https://graph.facebook.com/" + response.member.facebookId + "/picture");
 			profileImage.show();
+
+			var profileName = loggedInElement.find(".name");
+			profileName.html(response.member.alias);
+
+			loggedInElement.show();
+			loggedOutElement.hide();
 		}
 
-		var profileName = loggedInElement.find(".name");
-		profileName.html(response.member.name);
-
-		loggedInElement.show();
-		loggedOutElement.hide();
-		informationElement.hide();
 	}
 
 	function onLoggedOut() {
@@ -68,7 +66,6 @@ function LoginWidget() {
 	function showLoggedOff() {
 		loggedOutElement.show();
 		loggedInElement.hide();
-		informationElement.hide();
 	}
 
 	assignEventListeners();

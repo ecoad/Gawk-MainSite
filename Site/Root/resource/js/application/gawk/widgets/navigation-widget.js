@@ -3,7 +3,7 @@ function NavigationWidget() {
 
 	var element = $("#navigation-widget");
 	var newGawkElement = element.find(".new-gawk");
-	var newWallElement = element.find(".new-wall");
+	var newWallElement = element.find(".wall-select");
 	var yoursElement = element.find(".yours");
 
 	init();
@@ -18,18 +18,19 @@ function NavigationWidget() {
 
 	function assignEventListeners() {
 		newGawkElement.click(onNewGawkClick);
-		newWallElement.click(onNewWallClick);
+		newWallElement.click(onWallSelectClick);
 		yoursElement.click(onYoursClick);
 	}
 
 	function onNewGawkClick() {
+
 		$(document).trigger("Gawk.UI.AllHide");
 		$(document).trigger("Gawk.UI.GawkShow");
 	}
 
-	function onNewWallClick() {
+	function onWallSelectClick() {
 		$(document).trigger("Gawk.UI.AllHide");
-		$(document).trigger("Gawk.UI.NewWallShow");
+		$(document).trigger("Gawk.UI.WallSelectShow");
 	}
 
 	function onYoursClick() {

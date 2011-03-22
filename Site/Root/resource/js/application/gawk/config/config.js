@@ -20,4 +20,8 @@ function Config(configData) {
 	Config.prototype.getFacebookSession = function() {
 		return fbSession;
 	};
+
+	Config.prototype.getInitView = function() {
+		return initView;
+	};
 }

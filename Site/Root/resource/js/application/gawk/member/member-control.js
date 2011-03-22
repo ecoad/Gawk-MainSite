@@ -61,7 +61,7 @@ function MemberControl (config) {
 	}
 
 	function getLoggedInMember() {
-		$.post(config.getApiLocation(), {Action: "Member.GetLoggedInMember"}, onLoginResponse, "json");
+		$.get(config.getApiLocation(), {Action: "Member.GetLoggedInMember"}, onLoginResponse, "json");
 	}
 
 	function onLoginResponse(response) {
@@ -85,11 +85,7 @@ function MemberControl (config) {
 		$.post(config.getApiLocation(), {Action: "Member.UpdateProfile", Member: $.toJSON(getSkinnyMember())});
 	}
 
-	function getSkinnyMember() {
-		var skinnyMember = jQuery.extend({}, member);
-		delete skinnyMember.friends;
-		delete skinnyMember.wallBookmarks;
-
-		return skinnyMember;
-	}
+	this.getMember = function() {
+		return member;
+	};
 }
