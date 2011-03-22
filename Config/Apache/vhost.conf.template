@@ -6,7 +6,14 @@
 	DocumentRoot @ProjectPath@/Site/Root
 
 	AliasMatch ^/resource/binary(.*) @DataPath@/Binary$1
-	AliasMatch ^/w(.*) @ProjectPath@/Site/Root/index.php
+	AliasMatch ^/favicon.ico @ProjectPath@/Site/Root/favicon.ico
+	AliasMatch ^/robots.txt @ProjectPath@/Site/Root/robots.txt
+	AliasMatch ^/deploy-info.json @ProjectPath@/Site/Root/deploy-info.json
+	AliasMatch ^/admin(.*) @ProjectPath@/Site/Root/admin$1
+	AliasMatch ^/api(.*) @ProjectPath@/Site/Root/api$1
+	AliasMatch ^/error(.*) @ProjectPath@/Site/Root/error$1
+	AliasMatch ^/resource(.*) @ProjectPath@/Site/Root/resource$1
+	AliasMatch ^/(.*) @ProjectPath@/Site/Root/index.php
 
 	php_admin_value include_path ".:@ProjectPath@:@ProjectPath@/Application:@ProjectPath@/Site/Root:/usr/share/php"
 	
