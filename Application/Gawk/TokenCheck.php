@@ -14,7 +14,7 @@ class TokenCheck {
 		$errorControl = CoreFactory::getErrorControl();
 
 		if (!$token) {
-			$errorControl->addError("Token not provided", "InvalidToken");
+			$errorControl->addError("Could not log in without token", "InvalidToken");
 			return false;
 		}
 
