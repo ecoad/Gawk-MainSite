@@ -1,6 +1,7 @@
 <?php
 class Wall {
 	public $secureId = "";
+	public $name = "";
 	public $memberSecureId = "";
 	public $url = "";
 	public $description = "";

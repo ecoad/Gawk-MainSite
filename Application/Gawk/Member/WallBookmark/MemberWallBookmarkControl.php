@@ -26,21 +26,24 @@ class MemberWallBookmarkControl extends DataControl {
 	/**
 	 * Get Wall Bookmarks
 	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param integer $limit
 	 */
-	public function getWallBookmarks(CustomMemberDataEntity $memberDataEntity) {
+	public function getWallBookmarks(CustomMemberDataEntity $memberDataEntity, $limit = 10) {
 		$filter = CoreFactory::getFilter();
 		$filter->addConditional($this->table, "MemberSecureId", $memberDataEntity->get("SecureId"));
 		$filter->addOrder("DateCreated", true);
+		$filter->addLimit($limit);
 		$this->setFilter($filter);
 	}
 
 	/**
 	 * Get Wall Bookmarks as array
 	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param integer $limit
 	 * @return array Wall bookmarks
 	 */
-	public function getWallBookmarksArray(CustomMemberDataEntity $memberDataEntity) {
-		$this->getWallBookmarks($memberDataEntity);
+	public function getWallBookmarksArray(CustomMemberDataEntity $memberDataEntity, $limit = 10) {
+		$this->getWallBookmarks($memberDataEntity, $limit);
 		$walls = array();
 
 		$wallControl = Factory::getWallControl();
@@ -132,6 +135,78 @@ class MemberWallBookmarkControl extends DataControl {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Return recent wall activity for a given member
+	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @return stdClass Activity
+	 */
+	public function getRecentWallActivity(CustomMemberDataEntity $memberDataEntity) {
+		$activity = new stdClass();
+		$activity->bookmarks = $this->getWallBookmarksArray($memberDataEntity);
+		$activity->recentWallParticipation = $this->getRecentWallParticipation($memberDataEntity);
+		$activity->wallsCreatedByMember = $this->getWallsCreatedByMember($memberDataEntity);
+
+		return $activity;
+	}
+
+	/**
+	 * Get recent walls created by Member
+	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param integer $limit
+	 * @return array Walls member has created
+	 */
+	public function getWallsCreatedByMember(CustomMemberDataEntity $memberDataEntity, $limit = 10) {
+		$recentWalls = array();
+
+		$wallControl = Factory::getWallControl();
+
+		$filter = CoreFactory::getFilter();
+		$filter->addConditional($wallControl->table, "MemberSecureId", $memberDataEntity->get("SecureId"));
+		$filter->addOrder("DateCreated", true);
+		$filter->addLimit($limit);
+
+		$wallControl->setFilter($filter);
+
+		while ($wallDataEntity = $wallControl->getNext()) {
+			$recentWalls[] = $wallDataEntity->toObject();
+		}
+
+		return $recentWalls;
+	}
+
+
+	/**
+	 * Get recent participation
+	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param integer $limit
+	 * @return array Walls member has featured on recently
+	 */
+	public function getRecentWallParticipation(CustomMemberDataEntity $memberDataEntity, $limit = 10) {
+		//TODO: Finish
+
+		$recentActivity = array();
+		$sql = <<<SQL
+SELECT DISTINCT "Video"."WallSecureId"
+	FROM "Video"
+	WHERE "MemberSecureId" = '{$memberDataEntity->get("SecureId")}' AND
+		"Approved" = 't'
+		GROUP BY "WallSecureId"
+		LIMIT {$limit};
+SQL;
+		$videoControl = Factory::getVideoControl();
+		$videoControl->runQuery($sql);
+
+		$wallControl = Factory::getWallControl();
+
+		while ($videoDataEntity = $videoControl->getNext()) {
+			if ($wallDataEntity = $wallControl->itemByField($videoDataEntity->get("WallSecureId"), "SecureId")) {
+				$recentActivity[] = $wallDataEntity->toObject();
+			}
+		}
+
+		return $recentActivity;
 	}
 
 	/**

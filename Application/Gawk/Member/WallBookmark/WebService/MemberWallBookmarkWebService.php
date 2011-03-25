@@ -7,6 +7,8 @@ class MemberWallBookmarkWebService {
 	const SERVICE_ADD_WALL_BOOKMARK = "AddWallBookmark";
 	const SERVICE_REMOVE_WALL_BOOKMARK = "RemoveWallBookmark";
 	const SERVICE_IS_BOOKMARKED = "IsWallBookmarked";
+	const SERVICE_GET_RECENT_WALL_ACTIVITY = "GetRecentWallActivity";
+
 	/**
 	 * @var Application
 	 */
@@ -50,6 +52,13 @@ class MemberWallBookmarkWebService {
 					break;
 				case self::SERVICE_IS_BOOKMARKED:
 					$response->success = $this->memberWallBookmarkControl->isWallBookmarked($memberDataEntity, $getData["WallSecureId"]);
+					break;
+				case self::SERVICE_GET_RECENT_WALL_ACTIVITY:
+					$recentActivity = $this->memberWallBookmarkControl->getRecentWallActivity($memberDataEntity);
+					if (is_object($recentActivity)) {
+						$response->success = true;
+						$response->recentActivity = $recentActivity;
+					}
 					break;
 				default;
 					$this->application->errorControl->getErrors("Member method \"$method\" unknown");

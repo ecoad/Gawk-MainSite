@@ -89,7 +89,10 @@ class WallControlTest extends PHPUnit_Framework_TestCase {
 			var_dump($apiResponse);
 		}
 
+
 		$this->assertTrue($apiResponse->success);
+
+		$this->assertTrue($wall->name == $apiResponse->wall->name);
 	}
 
 	public function testSavingWallNoMemberFailure() {

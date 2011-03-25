@@ -115,6 +115,26 @@ class MemberWallBookmarkControlTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue(count($apiResponse->errors) == 0);
 	}
 
+	public function testGetMemberRecentWallActivitySuccess() {
+		$apiResponse = MemberWallBookmarkProvider::saveWallBookmark($this->member, $this->wall);
+
+		$this->assertTrue($apiResponse->success);
+		$this->assertTrue(count($apiResponse->errors) == 0);
+
+		$getData = array("Token" => $this->member->token);
+
+		$memberWallBookmarkWebService = Factory::getMemberWallBookmarkWebService();
+		$apiResponse = $memberWallBookmarkWebService->handleRequest(
+			MemberWallBookmarkWebService::SERVICE_GET_RECENT_WALL_ACTIVITY, null, $getData);
+
+		$this->assertTrue($apiResponse->success);
+		$this->assertObjectHasAttribute("recentActivity", $apiResponse);
+		$this->assertType("array", $apiResponse->recentActivity->bookmarks);
+		$this->assertTrue(count($apiResponse->recentActivity->bookmarks) == 1);
+		$this->assertType("array", $apiResponse->recentActivity->recentWallParticipation);
+		$this->assertType("array", $apiResponse->recentActivity->wallsCreatedByMember);
+	}
+
 	public function tearDown() {
 		MemberProvider::deleteTemporaryMembers();
 		MemberWallBookmarkProvider::deleteTemporaryMemberWallBookmarks($this->memberSecureIds);

@@ -19,6 +19,9 @@ class WallControl extends DataControl {
 		$this->fieldMeta["Url"] = new FieldMeta(
 			"URL", "", FM_TYPE_STRING, 100, FM_STORE_ALWAYS, false);
 
+		$this->fieldMeta["Name"] = new FieldMeta(
+			"Name", "", FM_TYPE_STRING, 100, FM_STORE_ALWAYS, true);
+
 		$this->fieldMeta["Description"] = new FieldMeta(
 			"Description", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, true);
 

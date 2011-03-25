@@ -1,0 +1,1 @@
+ALTER TABLE "Wall" ADD COLUMN "Name" text;

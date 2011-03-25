@@ -8,6 +8,7 @@ class WallProvider {
 	public static function getTestWall() {
 		$wall = Factory::getWall();
 		$wall->url = uniqid(self::$testUrlPrefix);
+		$wall->name = "Test Wall " . uniqid();
 		$wall->publicGawk = true;
 		$wall->publicView = true;
 		return $wall;
