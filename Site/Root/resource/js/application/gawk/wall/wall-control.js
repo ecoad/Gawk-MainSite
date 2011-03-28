@@ -1,5 +1,5 @@
 function WallControl (config, memberControl) {
-	var global = this, wall = {}, memberControl;
+	var global = this, wall = config.getWall();
 
 	init();
 

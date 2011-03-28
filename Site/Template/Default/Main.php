@@ -5,7 +5,6 @@ $application = CoreFactory::getApplication();
 <html lang="en" xmlns:fb="http://www.facebook.com/2008/fbml">
 	<head>
 		<title><?php echo $this->get("Title"); ?></title>
-		<meta name="author" content="Elliot Coad" />
 		<meta name="imagetoolbar" content="no" />
 		<meta name="description" content="<?php echo $application->registry->get("Description"); ?>" />
 		<meta name="keywords" content="" />
@@ -98,7 +97,14 @@ include "Site/Template/Default/Widget/Footer.php";
 
 		</div>
 		<script type="text/javascript" src="/resource/js/jquery/jquery.js?v=@VERSION-NUMBER@"></script>
-		<script type="text/javascript">
+	<script type="text/javascript" src="/resource/js/jquery/jquery.json-2.2.js?v=@VERSION-NUMBER@"></script>
+	<script type="text/javascript" src="/resource/js/application/gawk/config/config.js?v=@VERSION-NUMBER@"></script>
+	<script type="text/javascript" src="/resource/js/application/gawk/widgets/login-widget.js?v=@VERSION-NUMBER@"></script>
+	<script type="text/javascript" src="/resource/js/application/gawk/member/member-control.js?v=@VERSION-NUMBER@"></script>
+	<script type="text/javascript" src="/resource/js/application/gawk/gawk.js?v=@VERSION-NUMBER@"></script>
+	<script type="text/javascript" src="/resource/js/swfobject/swfobject.js?v=@VERSION-NUMBER@"></script>
+	<script type="text/javascript" src="/resource/js/jquery/jquery.placeholder.js"></script>
+	<script type="text/javascript">
 //<![CDATA[
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-20124921-1']);

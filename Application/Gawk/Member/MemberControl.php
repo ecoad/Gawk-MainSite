@@ -177,6 +177,20 @@ class CustomMemberControl extends MemberControl {
 		return $memberDataEntity;
 	}
 
+	/**
+	 * Get Member by request URL
+	 * @param string $requestUrl
+	 * @return Member
+	 */
+	public function getMemberByRequestUrl($requestUrl) {
+		$alias = substr($requestUrl, 3);
+		if (!$memberDataEntity = $this->itemByField($alias, "Alias")) {
+			return false;
+		}
+
+		return $memberDataEntity->toObject();
+	}
+
 	public function afterInsert(DataEntity $dataEntity) {
 	}
 

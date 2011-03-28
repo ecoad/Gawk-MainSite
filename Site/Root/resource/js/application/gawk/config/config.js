@@ -1,16 +1,28 @@
 function Config(configData) {
 	var	apiLocation = configData.apiLocation,
-	wallSecureId = configData.currentWallSecureId,
+	wall = null, member = null,
 	initView = configData.initView,
 	fbAppId = configData.fbAppId,
 	fbSession = configData.fbSession;
+
+	try {
+		wall = $.parseJSON(configData.currentWall);
+	} catch (e) {}
+
+	try {
+		member = $.parseJSON(configData.member);
+	} catch (e) {}
 
 	Config.prototype.getApiLocation = function() {
 		return apiLocation;
 	};
 
-	Config.prototype.getWallSecureId = function() {
-		return wallSecureId;
+	Config.prototype.getWall = function() {
+		return wall;
+	};
+
+	Config.prototype.getMember = function() {
+		return member;
 	};
 
 	Config.prototype.getFacebookAppId = function() {

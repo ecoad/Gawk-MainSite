@@ -30,7 +30,6 @@ function YoursView() {
 
 		$(document).bind("Gawk.UI.AllHide", onHideView);
 		$(document).bind("Gawk.UI.YoursShow", onShowView);
-		console.debug("john");
 	}
 
 	function updateView() {

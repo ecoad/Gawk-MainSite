@@ -2,23 +2,61 @@ function Gawk(configData) {
 	var global = this;
 	var config = new Config(configData);
 
-	var gawkView, wallSelectView, wallEditView, yoursView, loginView, loginWidget, navigationWidget, memberControl;
+	var gawkView, wallSelectView, wallEditView, yoursView, loginView, loginWidget, navigationWidget, memberControl,
+		memberRecentWallsControl;
 
 	function init() {
-		memberControl  = new MemberControl(config);
-		wallControl = new WallControl(config, memberControl);
-
-		gawkView = new GawkView(config);
-		wallSelectView = new WallSelectView();
-		wallEditView = new WallEditView();
-		yoursView = new YoursView();
-		loginView = new LoginView();
-
-		loginWidget = new LoginWidget();
-		navigationWidget = new NavigationWidget();
+		initModels();
+		initControllers();
 
 		$(document).trigger("Gawk.Model.Init");
 		showCurrentView();
+	}
+
+	function initModels() {
+		memberControl  = new MemberControl(config);
+		try {
+			memberRecentWallsControl  = new MemberRecentWallsControl(config);
+		} catch (e) {}
+
+		try {
+			memberFriendControl = new MemberFriendControl(config);
+		} catch (e) {}
+
+		try {
+			wallControl = new WallControl(config, memberControl);
+		} catch (e) {}
+	}
+
+	function initControllers() {
+		loginWidget = new LoginWidget();
+		try {
+			navigationWidget = new NavigationWidget();
+		} catch (e) {}
+
+		try {
+			gawkView = new GawkView(config);
+		} catch (e) {}
+
+		try {
+			wallSelectView = new WallSelectView();
+		} catch (e) {}
+
+		try {
+			wallEditView = new WallEditView();
+		} catch (e) {}
+
+		try {
+			yoursView = new YoursView();
+		} catch (e) {}
+
+		try {
+			loginView = new LoginView();
+		} catch (e) {}
+
+		try {
+			publicProfileView = new PublicProfileView(config);
+		} catch (e) {}
 	}
 
 	function showCurrentView() {

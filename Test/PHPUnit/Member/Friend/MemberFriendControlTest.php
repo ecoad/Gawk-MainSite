@@ -47,6 +47,24 @@ class MemberFriendControlTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue(count($apiResponse->memberFriends) == 1);
 	}
 
+	public function testMemberHasFriendIdSuccess() {
+		$apiResponse = MemberFriendProvider::saveMemberFriend($this->memberA, $this->memberB);
+
+		$this->assertTrue($apiResponse->success);
+		$this->assertTrue(count($apiResponse->errors) == 0);
+
+		$apiData = array(
+			"Token" => $this->memberA->token
+		);
+
+		$memberWebService = Factory::getMemberWebService();
+		$apiResponse = $memberWebService->handleRequest(MemberWebService::SERVICE_GET_LOGGED_IN_MEMBER, null, $apiData);
+
+		$this->assertTrue($apiResponse->success);
+		$this->assertType("array", $apiResponse->member->friends);
+		$this->assertTrue(count($apiResponse->member->friends) == 1);
+	}
+
 	public function testAddFriendSuccess() {
 		$apiResponse = MemberFriendProvider::saveMemberFriend($this->memberA, $this->memberB);
 

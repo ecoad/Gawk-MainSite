@@ -76,28 +76,28 @@ class MemberFriendControl extends DataControl {
 //	}
 
 	/**
-	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param Member $member
 	 */
-	public function getFriends(CustomMemberDataEntity $memberDataEntity) {
+	public function getFriends(Member $member) {
 		$filter = CoreFactory::getFilter();
-		$filter->addConditional($this->table, "MemberSecureId", $memberDataEntity->get("SecureId"));
+		$filter->addConditional($this->table, "MemberSecureId", $member->secureId);
 		$filter->addOrder("DateCreated", true);
 
 		$this->setFilter($filter);
 	}
 
 	/**
-	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param Member $member
 	 * @return array Friends
 	 */
-	public function getFriendsArray(CustomMemberDataEntity $memberDataEntity) {
-		$this->getFriends($memberDataEntity);
+	public function getFriendsArray(Member $member) {
+		$this->getFriends($member);
 		$friends = array();
 
 		$memberControl = Factory::getMemberControl();
 		while ($memberFriendDataEntity = $this->getNext()) {
-			if ($memberDataEntity = $memberControl->getMemberDataEntityBySecureId($memberFriendDataEntity->get("FriendSecureId"))) {
-				$friends[] = $memberDataEntity->toObject();
+			if ($memberFriendDataEntity = $memberControl->getMemberDataEntityBySecureId($memberFriendDataEntity->get("FriendSecureId"))) {
+				$friends[$memberFriendDataEntity->get("SecureId")] = $memberFriendDataEntity->toObject();
 			}
 		}
 

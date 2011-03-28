@@ -2,25 +2,19 @@
 	<div class="select-walls" style="float: left; width: 400px; min-height: 200px; padding: 10px;">
 		<h1>Select a Wall</h1>
 		<p>Take a look at some of the walls that you've bookmarked and appeared on</p>
-		<div class="bookmarked" style="float: left; width: 100px; min-height: 200px; padding: 10px;">
+		<div class="bookmarks" style="float: left; width: 100px; min-height: 200px; padding: 10px;">
 			<h2>Bookmarks</h2>
 			<ul>
-				<li>Wall 1</li>
-				<li>Wall 2</li>
 			</ul>
 		</div>
 		<div class="recent-walls" style="float: left; width: 100px; min-height: 200px; padding: 10px;">
 			<h2>Recent</h2>
 			<ul>
-				<li>Wall 1</li>
-				<li>Wall 2</li>
 			</ul>
 		</div>
-		<div class="your-walls" style="float: left; width: 100px; min-height: 200px; padding: 10px;">
+		<div class="your-walls" style="float: left; width: 100px; 	min-height: 200px; padding: 10px;">
 			<h2>Your Walls</h2>
 			<ul>
-				<li>Wall 1</li>
-				<li>Wall 2</li>
 			</ul>
 		</div>
 	</div>

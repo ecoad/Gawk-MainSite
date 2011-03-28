@@ -6,7 +6,7 @@ class CustomMemberDataEntity extends MemberDataEntity {
 	/**
 	 * @return Member
 	 **/
-	function toObject($includePassword = false) {
+	function toObject($includePassword = false, $includeFriends = false) {
 		$array = array();
 		foreach ($this->data as $k => $v) {
 			switch($this->control->fieldMeta[$k]->type) {
@@ -28,6 +28,13 @@ class CustomMemberDataEntity extends MemberDataEntity {
 				$member->profileVideoLocation = $videoDataEntity->get("Filename");
 			}
 		}
+
+		if ($includeFriends) {
+			$memberFriendControl = Factory::getMemberFriendControl();
+			$friends = $memberFriendControl->getFriendsArray($member);
+			$member->friends = $friends;
+		}
+
 		return $member;
 	}
 

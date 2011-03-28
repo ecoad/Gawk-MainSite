@@ -29,7 +29,7 @@ class MemberFriendWebService {
 		if ($memberDataEntity = TokenCheck::validateToken($postData["Token"], true)) {
 			switch ($method) {
 				case "GetFriends":
-					$memberFriends = $this->memberFriendControl->getFriendsArray($memberDataEntity);
+					$memberFriends = $this->memberFriendControl->getFriendsArray($memberDataEntity->toObject());
 					if (is_array($memberFriends)) {
 						$response->memberFriends = $memberFriends;
 						$response->success = true;

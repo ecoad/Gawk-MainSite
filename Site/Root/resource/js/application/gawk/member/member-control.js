@@ -69,6 +69,7 @@ function MemberControl (config) {
 			member = response.member;
 			loggedIn = true;
 			$(document).trigger("Gawk.Member.LoggedIn", [response]);
+			$(document).trigger("Gawk.Model.GetRecentWallActivity");
 		} else {
 			$(document).trigger("Gawk.Member.LoggedOut");
 		}
