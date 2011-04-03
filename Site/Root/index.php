@@ -39,15 +39,13 @@ $layout->start("JavaScript");
 	<script type="text/javascript" src="/resource/js/application/gawk/member/member-recent-walls-control.js?v=@VERSION-NUMBER@"></script>
 	<script type="text/javascript" src="/resource/js/application/gawk/views/login-view.js?v=@VERSION-NUMBER@"></script>
 	<script type="text/javascript" src="/resource/js/application/gawk/views/wall-select-view.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/widgets/navigation-widget.js?v=@VERSION-NUMBER@"></script>
 	<script type="text/javascript" src="/resource/js/application/gawk/views/wall-edit-view.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/views/yours-view.js?v=@VERSION-NUMBER@"></script>
 	<script type="text/javascript" src="/resource/js/application/gawk/views/gawk-view.js?v=@VERSION-NUMBER@"></script>
 	<script type="text/javascript">
 //<![CDATA[
 $(document).ready(function() {
 	var gawk = new Gawk({
-		initView: "Gawk",
+		initView: "<?php echo $_SERVER["REQUEST_URI"] == "/wall/" ? "WallSelect" : "Gawk" ; ?>",
 		apiLocation: "<?php echo $application->registry->get("Site/Address"); ?>/api/",
 		currentWall: "<?php echo addslashes(json_encode($wall)); ?>",
 		fbAppId: "<?php echo $facebook->getAppId(); ?>",

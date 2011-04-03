@@ -31,7 +31,7 @@ function GawkView(config) {
 		$(document).bind("Gawk.Model.GetWallResponse", onGetWallResponse);
 		$(document).bind("Gawk.Model.GetRecentWallActivityResponse", onRecentWallActivityResponse);
 
-		$("#view-utility .record").bind("click", function () {
+		$("#record-gawk").bind("click", function () {
 			document.getElementById(swfObjectId).recordNewFromExternal();
 		});
 	}
@@ -39,9 +39,8 @@ function GawkView(config) {
 	function addView() {
 		element.show();
 		gawkFlashVars = {
-			apiLocation: window.location.host + config.getApiLocation(),
-			wallSecureId: config.getWall().secureId,
-			loggedIn: loggedIn
+			apiLocation: config.getApiLocation(),
+			wallId: config.getWall().secureId
 		};
 
 		swfobject.embedSWF("/resource/flash/Gawk.swf?v=@VERSION-NUMBER@", gawkFlashContainerElement.attr("id"), "1050", "655", "9.0.0", false,
@@ -60,7 +59,7 @@ function GawkView(config) {
 		select.html("");
 
 		var currentOption = $("<option>").attr("value", wall.url).html(wall.name);
-		select.append(mainOption);
+		select.append(currentOption);
 
 		var mainOptionGroup = $("<optgroup>").attr("label", "Main");
 		select.append(mainOptionGroup);
@@ -71,8 +70,9 @@ function GawkView(config) {
 		var friendsOption = $("<option>").attr("value", "/friends").html("Friends");
 		mainOptionGroup.append(friendsOption);
 
+		select.append(mainOptionGroup);
+
 		var myWallsOptionGroup = $("<optgroup>").attr("label", "My Walls");
-		select.append(myWallsOptionGroup);
 
 		if (recentActivity.wallsCreatedByMember.length > 0) {
 			$(recentActivity.wallsCreatedByMember).each(function(index, value) {
@@ -80,26 +80,26 @@ function GawkView(config) {
 				myWallsOptionGroup.append(wallOption);
 			});
 		}
-
+		select.append(myWallsOptionGroup);
 
 		if (recentActivity.bookmarks.length > 0) {
 			var bookmarksOptionGroup = $("<optgroup>").attr("label", "Bookmarks");
-			select.append(bookmarksOptionGroup);
 
 			$(recentActivity.bookmarks).each(function(index, value) {
 				var option = $("<option>").attr("value", value.url).html(value.name);
 				bookmarksOptionGroup.append(option);
 			});
+			select.append(bookmarksOptionGroup);
 		}
 
 		if (recentActivity.recentWallParticipation.length > 0) {
 			var recentOptionGroup = $("<optgroup>").attr("label", "Walls I'm On");
-			select.append(recentOptionGroup);
 
 			$(recentActivity.recentWallParticipation).each(function(index, value) {
 				var option = $("<option>").attr("value", value.url).html(value.name);
 				recentOptionGroup.append(option);
 			});
+			select.append(recentOptionGroup);
 		}
 	}
 

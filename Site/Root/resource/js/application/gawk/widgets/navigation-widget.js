@@ -22,19 +22,21 @@ function NavigationWidget() {
 		yoursElement.click(onYoursClick);
 	}
 
-	function onNewGawkClick() {
-
+	function onNewGawkClick(event) {
+		event.preventDefault();
 		$(document).trigger("Gawk.UI.AllHide");
 		$(document).trigger("Gawk.UI.GawkShow");
 	}
 
-	function onWallSelectClick() {
+	function onWallSelectClick(event) {
+		event.preventDefault();
 		$(document).trigger("Gawk.UI.AllHide");
 		$(document).trigger("Gawk.UI.WallSelectShow");
 	}
 
-	function onYoursClick() {
+	function onYoursClick(event) {
+		event.preventDefault();
 		$(document).trigger("Gawk.UI.AllHide");
-		$(document).trigger("Gawk.UI.YoursShow");
+		$(document).trigger("Gawk.UI.PublicProfileShow");
 	}
 }

@@ -55,4 +55,11 @@ class CustomMemberDataEntity extends MemberDataEntity {
 		$this->control->fieldMeta["EmailAddress"]->allowNull = false;
 		$this->control->fieldMeta["Password"]->allowNull = false;
 	}
+
+	/**
+	 * @return string URL
+	 */
+	public function getUrl() {
+		return "/u/" . $this->get("Alias");
+	}
 }

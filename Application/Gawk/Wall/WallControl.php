@@ -83,7 +83,7 @@ class WallControl extends DataControl {
 
 		$videoControl = Factory::getVideoControl();
 		$filter = $this->getVideoFilter();
-		$filter->addConditional($videoControl->table, "Rating", 2, ">=");
+		$filter->addConditional($videoControl->table, "Rating", $this->application->registry->get("Wall/MainWallMinimumRating"), ">=");
 //		if ($timePeriodDays !== -1) {
 //			$dateTimeSince = date("Y-m-d H:i:s", time() - (SECONDS_IN_DAY * $timePeriodDays));
 //			$filter->addConditional($videoControl->table, "DateCreated", $dateTimeSince, ">=");
@@ -111,7 +111,7 @@ class WallControl extends DataControl {
 		}
 		$videoControl = Factory::getVideoControl();
 
-		$filter->addConditional($videoControl->table, "Approved", "t");
+		//$filter->addConditional($videoControl->table, "Approved", "t");
 		$filter->addConditional($videoControl->table, "Rating", -2, ">=");
 
 		return $filter;
@@ -174,8 +174,11 @@ class WallControl extends DataControl {
 
 	public function getWallByRequestUrl($requestUrl) {
 		$wallUrl = str_replace("/", "", $requestUrl);
-		if ($wallUrl == "") {
-			return $this->getMainWall();
+		switch ($wallUrl) {
+			case "":
+			case "wall":
+				return $this->getMainWall();
+				break;
 		}
 
 		if ($wallDataEntity = $this->itemByField($wallUrl, "Url")) {
@@ -208,7 +211,8 @@ class WallControl extends DataControl {
 	public function getMainWall() {
 		$wall = Factory::getWall();
 		$wall->description = "This is the main wall";
-		$wall->url = "";
+		$wall->url = "/";
+		$wall->name = "Main";
 		return $wall;
 	}
 }

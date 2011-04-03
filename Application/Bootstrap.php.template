@@ -75,6 +75,7 @@ $application->registry->set("Facebook/AppId", "@FacebookAppId@");
 $application->registry->set("Facebook/Secret", "@FacebookSecret@");
 
 $application->registry->set("Wall/DefaultLength", 30);
+$application->registry->set("Wall/MainWallMinimumRating", 0);
 
 if (!isset($_SESSION["Style"])) {
 	$_SESSION["Style"] = "default";

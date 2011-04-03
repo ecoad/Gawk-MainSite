@@ -1,6 +1,8 @@
 function MemberRecentWallsControl (config) {
 
-	var global = this, recentActivity;
+	var global = this,
+		recentActivity = null,
+		loading = false;
 
 	init();
 
@@ -17,7 +19,12 @@ function MemberRecentWallsControl (config) {
 	}
 
 	function onGetRecentWallActivityRequest() {
+		if (loading) {
+			return false;
+		}
+
 		if (!recentActivity) {
+			loading = true;
 			$.get(config.getApiLocation(), {Action: "MemberWallBookmark.GetRecentWallActivity"}, onRecentWallActivityResponse, "json");
 		} else {
 			onRecentWallActivityResponse(recentActivity);
@@ -26,6 +33,7 @@ function MemberRecentWallsControl (config) {
 
 	function onRecentWallActivityResponse(response) {
 		recentActivity = response;
+		loading = false;
 		$(document).trigger("Gawk.Model.GetRecentWallActivityResponse", [recentActivity]);
 	}
 }
