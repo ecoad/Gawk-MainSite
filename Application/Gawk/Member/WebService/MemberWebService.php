@@ -48,7 +48,7 @@ class MemberWebService {
 				break;
 			case self::SERVICE_GET_LOGGED_IN_MEMBER:
 				$getData["Token"] = $this->application->defaultValue($getData["Token"], "");
-				if ($memberDataEntity = $this->memberAuthentication->getLoggedInMember($getData["Token"])) {
+				if ($memberDataEntity = $this->memberAuthentication->getLoggedInMemberDataEntity($getData["Token"])) {
 					$response->success = true;
 					$response->member = $memberDataEntity->toObject(false, true);
 				}

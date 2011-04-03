@@ -1,6 +1,6 @@
 <?php
 !isset($memberAuthentication) ? $memberAuthentication = Factory::getMemberAuthentication() : null;
-if ($memberDataEntity = $memberAuthentication->getLoggedInMember()) {
+if ($memberDataEntity = $memberAuthentication->getLoggedInMemberDataEntity()) {
 	$profileUrl = $memberDataEntity->getUrl();
 } else {
 	$profileUrl = "/member/login/";

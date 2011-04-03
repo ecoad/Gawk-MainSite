@@ -169,7 +169,7 @@ class MemberAuthentication {
 	 * @param string Token
 	 * @return CustomMemberDataEntity
 	 */
-	public function getLoggedInMember($token = null) {
+	public function getLoggedInMemberDataEntity($token = null) {
 		if ($memberDataEntity = TokenCheck::validateToken($token, true)) {
 			return $memberDataEntity;
 		}
