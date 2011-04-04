@@ -2,7 +2,7 @@ function Gawk(configData) {
 	var global = this;
 	var config = new Config(configData);
 
-	var gawkView, wallSelectView, wallEditView, yoursView, loginView, loginWidget, navigationWidget, memberControl,
+	var gawkView, wallSelectView, wallEditView, publicProfileView, profileEditView, loginView, loginWidget, navigationWidget, memberControl,
 		memberRecentWallsControl;
 
 	function init() {
@@ -51,6 +51,10 @@ function Gawk(configData) {
 		} catch (e) {}
 
 		try {
+			profileEditView = new ProfileEditView(config);
+		} catch (e) {}
+
+		try {
 			loginView = new LoginView();
 		} catch (e) {}
 
@@ -62,6 +66,7 @@ function Gawk(configData) {
 	function showCurrentView() {
 		$(document).trigger("Gawk.UI.AllHide");
 		$(document).trigger("Gawk.UI." + config.getInitView() + "Show");
+		console.debug("Gawk.UI." + config.getInitView() + "Show");
 	}
 
 	function onLoginShow(event, type) {

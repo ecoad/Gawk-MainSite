@@ -47,3 +47,4 @@ $layout->start("JavaScript");
 </script>
 <?php
 $layout->render();
+exit;

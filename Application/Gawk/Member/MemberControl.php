@@ -183,7 +183,8 @@ class CustomMemberControl extends MemberControl {
 	 * @return Member
 	 */
 	public function getMemberByRequestUrl($requestUrl) {
-		$alias = substr($requestUrl, 3);
+		$requestPieces = explode("/", trim($requestUrl));
+		$alias = $requestPieces[2];
 		if (!$memberDataEntity = $this->itemByField($alias, "Alias")) {
 			return false;
 		}

@@ -14,6 +14,7 @@
 	AliasMatch ^/error(.*) @ProjectPath@/Site/Root/error$1
 	AliasMatch ^/resource(.*) @ProjectPath@/Site/Root/resource$1
 	AliasMatch ^/u/(.*)/gawk/(.*) @ProjectPath@/Site/Root/gawk/index.php
+	AliasMatch ^/u/(.*)/edit @ProjectPath@/Site/Root/member/edit.php
 	AliasMatch ^/u/(.*) @ProjectPath@/Site/Root/member/view.php
 	AliasMatch ^/(.*) @ProjectPath@/Site/Root/index.php
 
