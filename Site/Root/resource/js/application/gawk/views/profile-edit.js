@@ -4,7 +4,7 @@ function ProfileEditView(config) {
 	element = $("#profile-edit-view");
 
 	function init() {
-		$(document).bind("Gawk.Model.Init", onModelInit);
+		$(document).bind("GawkModel.Init", onModelInit);
 	}
 
 	function onModelInit() {
@@ -15,8 +15,8 @@ function ProfileEditView(config) {
 		$(document).bind("Gawk.Member.LoggedIn", onLoggedIn);
 		$(document).bind("Gawk.Member.LoggedOut", onLoggedOut);
 
-		$(document).bind("Gawk.UI.AllHide", onHideView);
-		$(document).bind("Gawk.UI.ProfileEditShow", onShowView);
+		$(document).bind("GawkUI.AllHide", onHideView);
+		$(document).bind("GawkUI.ProfileEditShow", onShowView);
 	}
 
 	function showLoggedInControls() {

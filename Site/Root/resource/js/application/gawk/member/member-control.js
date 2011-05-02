@@ -10,7 +10,7 @@ function MemberControl (config) {
 	init();
 
 	function init() {
-		$(document).bind("Gawk.Model.Init", onModelInit);
+		$(document).bind("GawkModel.Init", onModelInit);
 	}
 
 	function onModelInit() {
@@ -21,8 +21,8 @@ function MemberControl (config) {
 	}
 
 	function addEventListeners() {
-		$(document).bind("Gawk.UI.LogoutRequest", logOut);
-		$(document).bind("Gawk.UI.ProfileUpdate", onProfileUpdate);
+		$(document).bind("GawkUI.LogoutRequest", logOut);
+		$(document).bind("GawkUI.ProfileUpdate", onProfileUpdate);
 	}
 
 	function initFacebook() {
@@ -69,7 +69,7 @@ function MemberControl (config) {
 			member = response.member;
 			loggedIn = true;
 			$(document).trigger("Gawk.Member.LoggedIn", [response]);
-			$(document).trigger("Gawk.Model.GetRecentWallActivity");
+			$(document).trigger("GawkModel.GetRecentWallActivity");
 		} else {
 			$(document).trigger("Gawk.Member.LoggedOut");
 		}

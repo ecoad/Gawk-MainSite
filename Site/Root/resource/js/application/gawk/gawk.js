@@ -9,7 +9,7 @@ function Gawk(configData) {
 		initModels();
 		initControllers();
 
-		$(document).trigger("Gawk.Model.Init");
+		$(document).trigger("GawkModel.Init");
 		showCurrentView();
 	}
 
@@ -65,13 +65,13 @@ function Gawk(configData) {
 	}
 
 	function showCurrentView() {
-		$(document).trigger("Gawk.UI.AllHide");
-		$(document).trigger("Gawk.UI." + config.getInitView() + "Show");
+		$(document).trigger("GawkUI.AllHide");
+		$(document).trigger("GawkUI." + config.getInitView() + "Show");
 	}
 
 	function onLoginShow(event, type) {
 		//TODO reimplement
-		$(document).trigger("Gawk.UI." + type + "Request");
+		$(document).trigger("GawkUI." + type + "Request");
 	}
 
 	init();

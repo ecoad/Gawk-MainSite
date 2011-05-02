@@ -7,7 +7,7 @@ function GawkView(config) {
 	element.append(gawkFlashContainerElement);
 
 	function init() {
-		$(document).bind("Gawk.Model.Init", onModelInit);
+		$(document).bind("GawkModel.Init", onModelInit);
 	}
 
 	function setupView() {
@@ -25,10 +25,10 @@ function GawkView(config) {
 		$(document).bind("Gawk.Member.LoggedIn", onLoggedIn);
 		$(document).bind("Gawk.Member.LoggedOut", onLoggedOut);
 
-		$(document).bind("Gawk.UI.AllHide", onHideView);
-		$(document).bind("Gawk.UI.GawkShow", onShowView);
-		$(document).bind("Gawk.Model.GetWallResponse", onGetWallResponse);
-		$(document).bind("Gawk.Model.GetRecentWallActivityResponse", onRecentWallActivityResponse);
+		$(document).bind("GawkUI.AllHide", onHideView);
+		$(document).bind("GawkUI.GawkShow", onShowView);
+		$(document).bind("GawkModel.GetWallResponse", onGetWallResponse);
+		$(document).bind("GawkModel.GetRecentWallActivityResponse", onRecentWallActivityResponse);
 
 		element.find(".record").bind("click", function () {
 			document.getElementById(swfObjectId).recordNewFromExternal();

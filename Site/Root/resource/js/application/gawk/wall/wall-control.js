@@ -4,7 +4,7 @@ function WallControl (config, memberControl) {
 	init();
 
 	function init() {
-		$(document).bind("Gawk.Model.Init", onModelInit);
+		$(document).bind("GawkModel.Init", onModelInit);
 	}
 
 	function onModelInit() {
@@ -12,7 +12,7 @@ function WallControl (config, memberControl) {
 	}
 
 	function addEventListeners() {
-		$(document).bind("Gawk.Model.SaveWall", onSaveWallRequest);
+		$(document).bind("GawkModel.SaveWall", onSaveWallRequest);
 	}
 
 	function onSaveWallRequest(event, wall) {
@@ -22,6 +22,6 @@ function WallControl (config, memberControl) {
 	}
 
 	function onSaveWallResponse(response) {
-		$(document).trigger("Gawk.Model.SaveWallResponse", [response]);
+		$(document).trigger("GawkModel.SaveWallResponse", [response]);
 	}
 }

@@ -26,21 +26,21 @@ function LoginWidget() {
 	function onSiteLoginClick(event) {
 		event.preventDefault;
 
-		$(document).trigger("Gawk.UI.HideAll");
-		$(document).trigger("Gawk.UI.LoginShow", ["Login"]);
+		$(document).trigger("GawkUI.HideAll");
+		$(document).trigger("GawkUI.LoginShow", ["Login"]);
 	}
 
 	function onSiteRegisterClick(event) {
 		event.preventDefault;
 
-		$(document).trigger("Gawk.UI.HideAll");
-		$(document).trigger("Gawk.UI.LoginShow", ["Register"]);
+		$(document).trigger("GawkUI.HideAll");
+		$(document).trigger("GawkUI.LoginShow", ["Register"]);
 	}
 
 	function onLogOutClick(event) {
 		event.preventDefault;
 
-		$(document).trigger("Gawk.UI.LogoutRequest");
+		$(document).trigger("GawkUI.LogoutRequest");
 	}
 
 	function onLoggedIn(event, response) {

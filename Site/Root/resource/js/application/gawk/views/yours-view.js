@@ -13,7 +13,7 @@ function YoursView() {
 	var gawksFavouritePublicSelect = profileElement.find("select[name=GawksFavouritePublic]");
 
 	function init() {
-		$(document).bind("Gawk.Model.Init", onModelInit);
+		$(document).bind("GawkModel.Init", onModelInit);
 	}
 
 	function onModelInit() {
@@ -28,8 +28,8 @@ function YoursView() {
 		$(document).bind("Gawk.Member.LoggedIn", onLoggedIn);
 		$(document).bind("Gawk.Member.LoggedOut", onLoggedOut);
 
-		$(document).bind("Gawk.UI.AllHide", onHideView);
-		$(document).bind("Gawk.UI.YoursShow", onShowView);
+		$(document).bind("GawkUI.AllHide", onHideView);
+		$(document).bind("GawkUI.YoursShow", onShowView);
 	}
 
 	function updateView() {
@@ -74,8 +74,8 @@ function YoursView() {
 	}
 
 	function onLoginClick() {
-		$(document).trigger("Gawk.UI.HideAll");
-		$(document).trigger("Gawk.UI.LoginShow", ["Login"]);
+		$(document).trigger("GawkUI.HideAll");
+		$(document).trigger("GawkUI.LoginShow", ["Login"]);
 	}
 
 	function onLoggedIn(event, response) {
@@ -94,7 +94,7 @@ function YoursView() {
 	function onProfileSettingsChange() {
 		member.privacy.gawksPublic = gawksPublicSelect.attr("selectedIndex");
 		member.privacy.gawksFavouritePublic = gawksFavouritePublicSelect.attr("selectedIndex");
-		$(document).trigger("Gawk.UI.ProfileUpdate");
+		$(document).trigger("GawkUI.ProfileUpdate");
 	}
 
 	function onShowView() {

@@ -9,7 +9,7 @@ function NavigationWidget() {
 	init();
 
 	function init() {
-		$(document).bind("Gawk.Model.Init", onModelInit);
+		$(document).bind("GawkModel.Init", onModelInit);
 	}
 
 	function onModelInit() {
@@ -20,32 +20,31 @@ function NavigationWidget() {
 		newGawkElement.click(onNewGawkClick);
 		newWallElement.click(onWallSelectClick);
 		yoursElement.click(onYoursClick);
-		console.debug("hi");
 
-		$(document).bind("Gawk.UI.GawkShow", onViewChangeUpdateNavigation);
-		$(document).bind("Gawk.UI.PublicProfileShow", onViewChangeUpdateNavigation);
-		$(document).bind("Gawk.UI.ProfileEditShow", onViewChangeUpdateNavigation);
-		$(document).bind("Gawk.UI.LoginShow", onViewChangeUpdateNavigation);
-		$(document).bind("Gawk.UI.YoursShow", onViewChangeUpdateNavigation);
-		$(document).bind("Gawk.UI.WallEditShow", onViewChangeUpdateNavigation);
+		$(document).bind("GawkUI.GawkShow", onViewChangeUpdateNavigation);
+		$(document).bind("GawkUI.PublicProfileShow", onViewChangeUpdateNavigation);
+		$(document).bind("GawkUI.ProfileEditShow", onViewChangeUpdateNavigation);
+		$(document).bind("GawkUI.LoginShow", onViewChangeUpdateNavigation);
+		$(document).bind("GawkUI.YoursShow", onViewChangeUpdateNavigation);
+		$(document).bind("GawkUI.WallEditShow", onViewChangeUpdateNavigation);
 	}
 
 	function onNewGawkClick(event) {
 		event.preventDefault();
-		$(document).trigger("Gawk.UI.AllHide");
-		$(document).trigger("Gawk.UI.GawkShow");
+		$(document).trigger("GawkUI.AllHide");
+		$(document).trigger("GawkUI.GawkShow");
 	}
 
 	function onWallSelectClick(event) {
 		event.preventDefault();
-		$(document).trigger("Gawk.UI.AllHide");
-		$(document).trigger("Gawk.UI.WallSelectShow");
+		$(document).trigger("GawkUI.AllHide");
+		$(document).trigger("GawkUI.WallSelectShow");
 	}
 
 	function onYoursClick(event) {
 		event.preventDefault();
-		$(document).trigger("Gawk.UI.AllHide");
-		$(document).trigger("Gawk.UI.PublicProfileShow");
+		$(document).trigger("GawkUI.AllHide");
+		$(document).trigger("GawkUI.PublicProfileShow");
 	}
 
 	function onViewChangeUpdateNavigation(event) {
