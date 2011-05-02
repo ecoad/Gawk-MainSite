@@ -1,5 +1,5 @@
-<div class="record-gawk" style="float:left; padding: 5px; padding-left: 15px; width: 100px;">
-	<a href="#" id="record-gawk">RECORD GAWK</a>
+<div class="record-gawk" style="float:left; width: 113px;">
+	<a href="#" class="record">RECORD GAWK</a>
 </div>
 <div class="wall-information" style="float:left; display: none;">
 	<h3>Main Wall</h3>
@@ -9,7 +9,7 @@
 	<form class="select-wall" method="get" action="" onchange="window.location = $('select[name=SelectWall]').val();">
 		<fieldset>
 			<label>
-				<strong>Select Wall</strong><br />
+				<strong>Select Wall</strong>
 				<select name="SelectWall">
 					<option value="/">Main</option>
 					<optgroup label="Main">

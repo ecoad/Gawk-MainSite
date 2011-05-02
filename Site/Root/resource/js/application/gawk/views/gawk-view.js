@@ -1,5 +1,4 @@
 function GawkView(config) {
-	var config = config;
 	var element = $("#gawk-view");
 	var swfObjectId = "gawk-swf";
 	var gawkFlashContainerElement = $("<div>").attr("id", "Gawk");
@@ -31,7 +30,7 @@ function GawkView(config) {
 		$(document).bind("Gawk.Model.GetWallResponse", onGetWallResponse);
 		$(document).bind("Gawk.Model.GetRecentWallActivityResponse", onRecentWallActivityResponse);
 
-		$("#record-gawk").bind("click", function () {
+		element.find(".record").bind("click", function () {
 			document.getElementById(swfObjectId).recordNewFromExternal();
 		});
 	}

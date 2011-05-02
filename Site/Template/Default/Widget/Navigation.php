@@ -7,9 +7,20 @@ if ($memberDataEntity = $memberAuthentication->getLoggedInMemberDataEntity()) {
 }
 ?>
 <ul id="navigation-widget">
-  <li><a class="new-gawk" href="/">Gawk</a></li>
-  <li><a class="wall-select" href="/wall/">Wall</a></li>
-  <li><a class="yours" href="<?php echo $profileUrl; ?>">Profile</a></li>
+	<li>
+		<a class="new-gawk" href="/">
+			<span>Gawk</span>
+		</a>
+	</li>
+	<li>
+		<a class="wall-select" href="/wall/">
+			<span>Create Wall</span>
+		</a>
+	</li>
+	<li>
+		<a class="yours" href="<?php echo $profileUrl; ?>">
+			<span>Profile</span>
+		</a>
+	</li>
 </ul>
-<a href="#"><img width="170" style="float:left;" src="http://nekodot.jp/appstore.gif" /></a>
 <hr />

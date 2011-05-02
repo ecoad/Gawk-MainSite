@@ -1,9 +1,12 @@
 function LoginWidget() {
 	var global = this;
 
-	var element = $("#login-widget");
+	var element = $(".login-widget");
+	(element.length == 0) ? alert("#login-widget not found") : "";
 
 	var loggedInElement = element.find(".logged-in");
+	(loggedInElement.length == 0) ? alert(".logged-in not found") : "";
+
 	var loggedOutElement = element.find(".logged-out");
 
 	var siteLoginLink = element.find(".site-login");
@@ -46,12 +49,9 @@ function LoginWidget() {
 
 	function showLoggedIn(response) {
 		if (response.success) {
-			var profileImage = loggedInElement.find(".profile-image");
-			profileImage.attr("src", "https://graph.facebook.com/" + response.member.facebookId + "/picture");
-			profileImage.show();
-
 			var profileName = loggedInElement.find(".name");
 			profileName.html(response.member.alias);
+			profileName.attr("href", "/u/" + response.member.alias);
 
 			loggedInElement.show();
 			loggedOutElement.hide();

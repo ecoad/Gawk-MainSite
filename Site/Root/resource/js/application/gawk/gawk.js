@@ -32,6 +32,7 @@ function Gawk(configData) {
 		loginWidget = new LoginWidget();
 		try {
 			navigationWidget = new NavigationWidget();
+			console.debug("nav");
 		} catch (e) {}
 
 		try {
@@ -66,7 +67,6 @@ function Gawk(configData) {
 	function showCurrentView() {
 		$(document).trigger("Gawk.UI.AllHide");
 		$(document).trigger("Gawk.UI." + config.getInitView() + "Show");
-		console.debug("Gawk.UI." + config.getInitView() + "Show");
 	}
 
 	function onLoginShow(event, type) {

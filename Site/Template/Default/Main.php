@@ -12,6 +12,7 @@ $application = CoreFactory::getApplication();
 
 		<link rel="shortcut icon" href="/favicon.ico?v=@VERSION-NUMBER@" />
 <?php
+/*
 $cssAggregator = CoreFactory::getCssAggregator(
 	$application->registry->get("Path") . "/Site/Root",
 	$application->registry->get("Cache/Resource/Path"),
@@ -43,10 +44,11 @@ if ($_SESSION["Style"] == "large") {
 ?>
 <?php
 echo $cssAggregator->output();
+*/
 ?>
 		<link rel="stylesheet" type="text/css" href="/resource/css/layout/social-media.css?v=@VERSION-NUMBER@" media="all" />
   	<link rel="stylesheet" type="text/css" href="/resource/css/reset.css?v=@VERSION-NUMBER@" media="all" />
-  	<link rel="stylesheet" type="text/css" href="/resource/css/global.css?v=@VERSION-NUMBER@" media="all" />
+  	<link rel="stylesheet" type="text/css" href="/resource/css/gawk.css?v=@VERSION-NUMBER@" media="all" />
 		<!--[if lt IE 7]>
 			<script src="/resource/js/browser/internet-explorer/DD_roundies/DD_roundies.js?v=@VERSION-NUMBER@" type="text/javascript"></script>
 		<![endif]-->
@@ -64,21 +66,13 @@ echo $cssAggregator->output();
 <?php
 include "Site/Template/Default/Widget/Header.php";
 ?>
-					<div id="navigation">
+				</div>
+				<div id="main-content">
+					<div class="navigation">
 <?php
 include "Site/Template/Default/Widget/Navigation.php";
 ?>
 					</div>
-
-					<div id="log-on">
-<?php
-include "Site/Template/Default/Widget/LogOn.php";
-?>
-					</div>
-				</div>
-
-
-				<div id="main-content">
 <?php echo $this->get("Main"); ?>
 				</div>
 
@@ -100,6 +94,7 @@ include "Site/Template/Default/Widget/Footer.php";
 	<script type="text/javascript" src="/resource/js/jquery/jquery.json-2.2.js?v=@VERSION-NUMBER@"></script>
 	<script type="text/javascript" src="/resource/js/application/gawk/config/config.js?v=@VERSION-NUMBER@"></script>
 	<script type="text/javascript" src="/resource/js/application/gawk/widgets/login-widget.js?v=@VERSION-NUMBER@"></script>
+	<script type="text/javascript" src="/resource/js/application/gawk/widgets/navigation-widget.js?v=@VERSION-NUMBER@"></script>
 	<script type="text/javascript" src="/resource/js/application/gawk/member/member-control.js?v=@VERSION-NUMBER@"></script>
 	<script type="text/javascript" src="/resource/js/application/gawk/gawk.js?v=@VERSION-NUMBER@"></script>
 	<script type="text/javascript" src="/resource/js/swfobject/swfobject.js?v=@VERSION-NUMBER@"></script>

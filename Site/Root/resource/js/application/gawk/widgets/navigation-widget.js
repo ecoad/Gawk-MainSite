@@ -20,6 +20,14 @@ function NavigationWidget() {
 		newGawkElement.click(onNewGawkClick);
 		newWallElement.click(onWallSelectClick);
 		yoursElement.click(onYoursClick);
+		console.debug("hi");
+
+		$(document).bind("Gawk.UI.GawkShow", onViewChangeUpdateNavigation);
+		$(document).bind("Gawk.UI.PublicProfileShow", onViewChangeUpdateNavigation);
+		$(document).bind("Gawk.UI.ProfileEditShow", onViewChangeUpdateNavigation);
+		$(document).bind("Gawk.UI.LoginShow", onViewChangeUpdateNavigation);
+		$(document).bind("Gawk.UI.YoursShow", onViewChangeUpdateNavigation);
+		$(document).bind("Gawk.UI.WallEditShow", onViewChangeUpdateNavigation);
 	}
 
 	function onNewGawkClick(event) {
@@ -38,5 +46,9 @@ function NavigationWidget() {
 		event.preventDefault();
 		$(document).trigger("Gawk.UI.AllHide");
 		$(document).trigger("Gawk.UI.PublicProfileShow");
+	}
+
+	function onViewChangeUpdateNavigation(event) {
+		console.debug(event);
 	}
 }

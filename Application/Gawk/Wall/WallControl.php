@@ -210,9 +210,12 @@ class WallControl extends DataControl {
 	 */
 	public function getMainWall() {
 		$wall = Factory::getWall();
-		$wall->description = "This is the main wall";
+		$wall->description = <<<DESCR
+This is the main wall, where highly rated Gawks appear from other walls. <a href="/wall/">Visit another<a/> wall or
+<a href="/wall/">create</a> your own.
+DESCR;
 		$wall->url = "/";
-		$wall->name = "Main";
+		$wall->name = "Main Wall";
 		return $wall;
 	}
 }
