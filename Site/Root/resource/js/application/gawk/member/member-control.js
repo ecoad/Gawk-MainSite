@@ -10,7 +10,7 @@ function MemberControl (config) {
 	init();
 
 	function init() {
-		$(document).bind("GawkModel.Init", onModelInit);
+		$(document).bind("GawkModelInit", onModelInit);
 	}
 
 	function onModelInit() {
@@ -21,8 +21,8 @@ function MemberControl (config) {
 	}
 
 	function addEventListeners() {
-		$(document).bind("GawkUI.LogoutRequest", logOut);
-		$(document).bind("GawkUI.ProfileUpdate", onProfileUpdate);
+		$(document).bind("GawkUILogoutRequest", logOut);
+		$(document).bind("GawkUIProfileUpdate", onProfileUpdate);
 	}
 
 	function initFacebook() {
@@ -49,9 +49,13 @@ function MemberControl (config) {
 	}
 
 	function logInFacebookRegisteredMember(facebookId) {
-		$.post(config.getApiLocation(), {Action: "Member.Login", FacebookId: facebookId}, onLoginResponse, "json");
+		$.post(config.getApiLocation(), {
+			Action: "Member.Login",
+			FacebookId: facebookId
+		}, onLoginResponse, "json");
 	}
 
+	/*
 	function logInSiteRegisteredMember(emailAddress, password) {
 		$.post(config.getApiLocation(), {
 				Action: "Member.Login",
@@ -59,6 +63,7 @@ function MemberControl (config) {
 				Password: password
 			}, onLoginResponse, "json");
 	}
+	*/
 
 	function getLoggedInMember() {
 		$.get(config.getApiLocation(), {Action: "Member.GetLoggedInMember"}, onLoginResponse, "json");
@@ -68,18 +73,24 @@ function MemberControl (config) {
 		if (response.success) {
 			member = response.member;
 			loggedIn = true;
-			$(document).trigger("Gawk.Member.LoggedIn", [response]);
-			$(document).trigger("GawkModel.GetRecentWallActivity");
+			$(document).trigger("GawkMemberLoggedIn", [response]);
+			$(document).trigger("GawkModelGetRecentWallActivity");
 		} else {
-			$(document).trigger("Gawk.Member.LoggedOut");
+			$(document).trigger("GawkMemberLoggedOut");
 		}
 	}
 
 	function logOut() {
-		$.getJSON(config.getApiLocation(), {Action: "Member.LogOut"});
-		FB.logout(function () {
-			$(document).trigger("Gawk.Member.LoggedOut");
+		$.getJSON(config.getApiLocation(), {Action: "Member.Logout"}, function () {
+			window.location.reload();
 		});
+
+		/*
+		FB.logout(function () {
+			//$(document).trigger("GawkMemberLoggedOut");
+
+		});
+		*/
 	}
 
 	function onProfileUpdate() {

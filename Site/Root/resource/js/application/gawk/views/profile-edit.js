@@ -4,7 +4,7 @@ function ProfileEditView(config) {
 	element = $("#profile-edit-view");
 
 	function init() {
-		$(document).bind("GawkModel.Init", onModelInit);
+		$(document).bind("GawkModelInit", onModelInit);
 	}
 
 	function onModelInit() {
@@ -12,11 +12,11 @@ function ProfileEditView(config) {
 	}
 
 	function assignEventListeners() {
-		$(document).bind("Gawk.Member.LoggedIn", onLoggedIn);
-		$(document).bind("Gawk.Member.LoggedOut", onLoggedOut);
+		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
+		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
 
-		$(document).bind("GawkUI.AllHide", onHideView);
-		$(document).bind("GawkUI.ProfileEditShow", onShowView);
+		$(document).bind("GawkUIAllHide", onHideView);
+		$(document).bind("GawkUIProfileEditShow", onShowView);
 	}
 
 	function showLoggedInControls() {

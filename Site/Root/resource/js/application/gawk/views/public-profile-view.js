@@ -7,7 +7,7 @@ function PublicProfileView(config) {
 		friendLink = $(element.find("a.logged-in"));
 
 	function init() {
-		$(document).bind("GawkModel.Init", onModelInit);
+		$(document).bind("GawkModelInit", onModelInit);
 	}
 
 	function onModelInit() {
@@ -15,11 +15,11 @@ function PublicProfileView(config) {
 	}
 
 	function assignEventListeners() {
-		$(document).bind("Gawk.Member.LoggedIn", onLoggedIn);
-		$(document).bind("Gawk.Member.LoggedOut", onLoggedOut);
+		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
+		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
 
-		$(document).bind("GawkUI.AllHide", onHideView);
-		$(document).bind("GawkUI.PublicProfileShow", onShowView);
+		$(document).bind("GawkUIAllHide", onHideView);
+		$(document).bind("GawkUIPublicProfileShow", onShowView);
 	}
 
 	function showLoggedInControls() {
@@ -51,7 +51,7 @@ function PublicProfileView(config) {
 	function onBefriendClick(event) {
 		event.preventDefault();
 
-		$(document).trigger("GawkModel.AddFriend", [viewMember.secureId]);
+		$(document).trigger("GawkModelAddFriend", [viewMember.secureId]);
 		setFriendLink(true);
 
 	}
@@ -59,7 +59,7 @@ function PublicProfileView(config) {
 	function onUnfriendClick(event) {
 		event.preventDefault();
 
-		$(document).trigger("GawkModel.RemoveFriend", [viewMember.secureId]);
+		$(document).trigger("GawkModelRemoveFriend", [viewMember.secureId]);
 		setFriendLink(false);
 	}
 

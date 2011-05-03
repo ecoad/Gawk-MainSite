@@ -2,7 +2,7 @@ function MemberFriendControl (config) {
 	var global = this;
 
 	function init() {
-		$(document).bind("GawkModel.Init", onModelInit);
+		$(document).bind("GawkModelInit", onModelInit);
 	}
 
 	function onModelInit() {
@@ -10,8 +10,8 @@ function MemberFriendControl (config) {
 	}
 
 	function addEventListeners() {
-		$(document).bind("GawkModel.AddFriend", onAddFriendRequest);
-		$(document).bind("GawkModel.RemoveFriend", onRemoveFriendRequest);
+		$(document).bind("GawkModelAddFriend", onAddFriendRequest);
+		$(document).bind("GawkModelRemoveFriend", onRemoveFriendRequest);
 	}
 
 	function onAddFriendRequest(event, friendSecureId) {
@@ -22,7 +22,7 @@ function MemberFriendControl (config) {
 	}
 
 	function onAddFriendResponse(response) {
-		$(document).trigger("GawkModel.RemoveFriendResponse", [response]);
+		$(document).trigger("GawkModelRemoveFriendResponse", [response]);
 	}
 
 	function onRemoveFriendRequest(event, friendSecureId) {
@@ -33,7 +33,7 @@ function MemberFriendControl (config) {
 	}
 
 	function onRemoveFriendResponse(response) {
-		$(document).trigger("GawkModel.RemoveFriendResponse", [response]);
+		$(document).trigger("GawkModelRemoveFriendResponse", [response]);
 	}
 
 	init();

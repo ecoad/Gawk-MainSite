@@ -14,7 +14,7 @@
 					Hello <a class="name" href="#"></a> | <a class="logout" href="#">logout</a>
 				</div>
 				<div class="logged-out" style="display:none;">
-					<fb:login-button></fb:login-button> or <a class="site-login" href="#" title="Click here to log on">Login</a> / <a class="site-register" href="#" title="Click here to register">Register</a>
+					login or register <fb:login-button></fb:login-button>
 				</div>
 			</div>
 			<div class="share">

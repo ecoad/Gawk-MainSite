@@ -9,7 +9,7 @@ function Gawk(configData) {
 		initModels();
 		initControllers();
 
-		$(document).trigger("GawkModel.Init");
+		$(document).trigger("GawkModelInit");
 		showCurrentView();
 	}
 
@@ -32,7 +32,6 @@ function Gawk(configData) {
 		loginWidget = new LoginWidget();
 		try {
 			navigationWidget = new NavigationWidget();
-			console.debug("nav");
 		} catch (e) {}
 
 		try {
@@ -61,17 +60,17 @@ function Gawk(configData) {
 
 		try {
 			publicProfileView = new PublicProfileView(config);
-		} catch (e) {}
+		} catch (e) { }
 	}
 
 	function showCurrentView() {
-		$(document).trigger("GawkUI.AllHide");
-		$(document).trigger("GawkUI." + config.getInitView() + "Show");
+		$(document).trigger("GawkUIAllHide");
+		$(document).trigger("GawkUI" + config.getInitView() + "Show");
 	}
 
 	function onLoginShow(event, type) {
 		//TODO reimplement
-		$(document).trigger("GawkUI." + type + "Request");
+		$(document).trigger("GawkUI" + type + "Request");
 	}
 
 	init();

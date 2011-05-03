@@ -5,11 +5,13 @@ function NavigationWidget() {
 	var newGawkElement = element.find(".new-gawk");
 	var newWallElement = element.find(".wall-select");
 	var yoursElement = element.find(".yours");
+	var viewEventNames = ["GawkUIGawkShow", "GawkUIPublicProfileShow", "GawkUIProfileEditShow", "GawkUILoginShow",
+		"GawkUIYoursShow", "GawkUIWallEditShow", "GawkUIWallSelectShow"];
 
 	init();
 
 	function init() {
-		$(document).bind("GawkModel.Init", onModelInit);
+		$(document).bind("GawkModelInit", onModelInit);
 	}
 
 	function onModelInit() {
@@ -17,37 +19,29 @@ function NavigationWidget() {
 	}
 
 	function assignEventListeners() {
-		newGawkElement.click(onNewGawkClick);
-		newWallElement.click(onWallSelectClick);
-		yoursElement.click(onYoursClick);
-
-		$(document).bind("GawkUI.GawkShow", onViewChangeUpdateNavigation);
-		$(document).bind("GawkUI.PublicProfileShow", onViewChangeUpdateNavigation);
-		$(document).bind("GawkUI.ProfileEditShow", onViewChangeUpdateNavigation);
-		$(document).bind("GawkUI.LoginShow", onViewChangeUpdateNavigation);
-		$(document).bind("GawkUI.YoursShow", onViewChangeUpdateNavigation);
-		$(document).bind("GawkUI.WallEditShow", onViewChangeUpdateNavigation);
-	}
-
-	function onNewGawkClick(event) {
-		event.preventDefault();
-		$(document).trigger("GawkUI.AllHide");
-		$(document).trigger("GawkUI.GawkShow");
-	}
-
-	function onWallSelectClick(event) {
-		event.preventDefault();
-		$(document).trigger("GawkUI.AllHide");
-		$(document).trigger("GawkUI.WallSelectShow");
-	}
-
-	function onYoursClick(event) {
-		event.preventDefault();
-		$(document).trigger("GawkUI.AllHide");
-		$(document).trigger("GawkUI.PublicProfileShow");
+		$(viewEventNames).each(function(index, eventName) {
+			$(document).bind(eventName, onViewChangeUpdateNavigation);
+		});
 	}
 
 	function onViewChangeUpdateNavigation(event) {
-		console.debug(event);
+		console.debug(event.type);
+		$(".navigation-item").removeClass("selected");
+
+		switch (event.type) {
+			case "GawkUIGawkShow":
+				newGawkElement.addClass("selected");
+				break;
+			case "GawkUIPublicProfileShow":
+			case "GawkUIProfileEditShow":
+			case "GawkUILoginShow":
+			case "GawkUIYoursShow":
+				yoursElement.addClass("selected");
+				break;
+			case "GawkUIWallEditShow":
+			case "GawkUIWallSelectShow":
+				newWallElement.addClass("selected");
+				break;
+		}
 	}
 }

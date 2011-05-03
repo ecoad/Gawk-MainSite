@@ -6,9 +6,6 @@ $application->doNotStorePage();
 $response = new stdClass();
 $response->success = false;
 $response->errors = array();
-if (!isset($_REQUEST["Action"])) {
-	var_dump($_REQUEST); exit;
-}
 $method = explode(".", $_REQUEST["Action"]);
 
 $memberWebService = Factory::getMemberWebService();

@@ -2,15 +2,15 @@ function LoginView() {
 	var global = this;
 
 	var element = $("#login-view");
-	var siteLoginView = element.find(".site-login-view");
-	var siteRegisterView = element.find(".site-register-view");
+//	var siteLoginView = element.find(".site-login-view");
+//	var siteRegisterView = element.find(".site-register-view");
 
 	function assignEventListeners() {
-		$(document).bind("GawkUI.LoginClick", onShowLoginClick);
-		$(document).bind("GawkUI.RegisterClick", onShowRegisterClick);
+		$(document).bind("GawkUILoginClick", onShowLoginClick);
+		$(document).bind("GawkUIRegisterClick", onShowRegisterClick);
 
-		$(document).bind("GawkUI.AllHide", onHideView);
-		$(document).bind("GawkUI.LoginShow", onShowView);
+		$(document).bind("GawkUIAllHide", onHideView);
+		$(document).bind("GawkUILoginShow", onShowView);
 
 		element.find(".register").click(onRegisterClick);
 	}
@@ -26,8 +26,8 @@ function LoginView() {
 	}
 
 	function onRegisterClick() {
-		$(document).trigger("GawkUI.HideAll");
-		$(document).trigger("GawkUI.LoginShow", ["Register"]);
+		$(document).trigger("GawkUIHideAll");
+		$(document).trigger("GawkUILoginShow", ["Register"]);
 	}
 
 	function onShowView() {

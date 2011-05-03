@@ -16,8 +16,8 @@ function WallEditView() {
 	}
 
 	function assignEventListeners() {
-		$(document).bind("GawkUI.AllHide", onHideView);
-		$(document).bind("GawkUI.WallEditShow", onShowView);
+		$(document).bind("GawkUIAllHide", onHideView);
+		$(document).bind("GawkUIWallEditShow", onShowView);
 
 		element.find("form").submit(onFormSubmit);
 	}
@@ -29,9 +29,9 @@ function WallEditView() {
 				description: descriptionInput.val(),
 				url: urlFriendlyInput.val()
 		};
-		$(document).trigger("GawkModel.SaveWall", [wall]);
-		$(document).unbind("GawkModel.SaveWallResponse", onSaveWallResponse);
-		$(document).bind("GawkModel.SaveWallResponse", onSaveWallResponse);
+		$(document).trigger("GawkModelSaveWall", [wall]);
+		$(document).unbind("GawkModelSaveWallResponse", onSaveWallResponse);
+		$(document).bind("GawkModelSaveWallResponse", onSaveWallResponse);
 	}
 
 	function onSaveWallResponse(event, response) {

@@ -8,17 +8,17 @@ if ($memberDataEntity = $memberAuthentication->getLoggedInMemberDataEntity()) {
 ?>
 <ul id="navigation-widget">
 	<li>
-		<a class="new-gawk" href="/">
+		<a class="new-gawk navigation-item" href="/">
 			<span>Gawk</span>
 		</a>
 	</li>
 	<li>
-		<a class="wall-select" href="/wall/">
+		<a class="wall-select navigation-item" href="/wall/">
 			<span>Create Wall</span>
 		</a>
 	</li>
 	<li>
-		<a class="yours" href="<?php echo $profileUrl; ?>">
+		<a class="yours navigation-item" href="<?php echo $profileUrl; ?>">
 			<span>Profile</span>
 		</a>
 	</li>

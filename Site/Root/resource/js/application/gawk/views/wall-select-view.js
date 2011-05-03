@@ -13,18 +13,18 @@ function WallSelectView() {
 	}
 
 	function assignEventListeners() {
-		$(document).bind("GawkUI.AllHide", onHideView);
-		$(document).bind("GawkUI.WallSelectShow", onShowView);
-		$(document).bind("GawkModel.GetRecentWallActivityResponse", onRecentWallActivityResponse);
-		$(document).bind("Gawk.Member.LoggedIn", onLoggedIn);
-		$(document).bind("Gawk.Member.LoggedOut", onLoggedOut);
+		$(document).bind("GawkUIAllHide", onHideView);
+		$(document).bind("GawkUIWallSelectShow", onShowView);
+		$(document).bind("GawkModelGetRecentWallActivityResponse", onRecentWallActivityResponse);
+		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
+		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
 
 		element.find("form").submit(onFormSubmit);
 	}
 
 	function onFormSubmit(event) {
-		$(document).trigger("GawkUI.AllHide");
-		$(document).trigger("GawkUI.WallEditShow", [newWallUrlFriendlyName.val()]);
+		$(document).trigger("GawkUIAllHide");
+		$(document).trigger("GawkUIWallEditShow", [newWallUrlFriendlyName.val()]);
 		event.preventDefault();
 	}
 
@@ -55,7 +55,7 @@ function WallSelectView() {
 	}
 
 	function loadRecentWallActivity() {
-		$(document).trigger("GawkModel.GetRecentWallActivity");
+		$(document).trigger("GawkModelGetRecentWallActivity");
 	}
 
 	function onRecentWallActivityResponse(event, response) {

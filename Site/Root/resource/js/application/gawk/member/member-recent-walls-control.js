@@ -7,7 +7,7 @@ function MemberRecentWallsControl (config) {
 	init();
 
 	function init() {
-		$(document).bind("GawkModel.Init", onModelInit);
+		$(document).bind("GawkModelInit", onModelInit);
 	}
 
 	function onModelInit() {
@@ -15,7 +15,7 @@ function MemberRecentWallsControl (config) {
 	}
 
 	function addEventListeners() {
-		$(document).bind("GawkModel.GetRecentWallActivity", onGetRecentWallActivityRequest);
+		$(document).bind("GawkModelGetRecentWallActivity", onGetRecentWallActivityRequest);
 	}
 
 	function onGetRecentWallActivityRequest() {
@@ -34,6 +34,6 @@ function MemberRecentWallsControl (config) {
 	function onRecentWallActivityResponse(response) {
 		recentActivity = response;
 		loading = false;
-		$(document).trigger("GawkModel.GetRecentWallActivityResponse", [recentActivity]);
+		$(document).trigger("GawkModelGetRecentWallActivityResponse", [recentActivity]);
 	}
 }
