@@ -166,7 +166,7 @@ body {
 #gawk-view a.record:active { background-position: 0 -62px; }
 
 #gawk-view #gawk-swf {
-	padding-top: 10px;
+	margin-top: 10px;
 }
 
 #gawk-view .wall-information h3 {
@@ -195,6 +195,10 @@ body {
  */
 div.overlay {
 	margin: 50px; color: #000;
+}
+div.overlay h3 {
+	font-size: 20px;
+	padding-bottom: 20px;
 }
 
 #login-overlay {

@@ -29,10 +29,15 @@ function GawkView(config) {
 		$(document).bind("GawkUIGawkShow", onShowView);
 		$(document).bind("GawkModelGetWallResponse", onGetWallResponse);
 		$(document).bind("GawkModelGetRecentWallActivityResponse", onRecentWallActivityResponse);
+		$(document).bind("GawkMainWallDenyOverlayShow", onGawkMainWallDenyOverlay);
 
 		element.find(".record").bind("click", function () {
 			if (loggedIn) {
-				document.getElementById(swfObjectId).recordNewFromExternal();
+				if (wall.url == "/") {
+					$(document).trigger("GawkMainWallDenyOverlayShow");
+				} else {
+					document.getElementById(swfObjectId).recordNewFromExternal();
+				}
 			} else {
 				$(document).trigger("GawkUILoginOverlayShow");
 			}
@@ -127,6 +132,10 @@ function GawkView(config) {
 
 	function onHideView() {
 		element.hide();
+	}
+
+	function onGawkMainWallDenyOverlay() {
+		$.box.show({content: $("#gawk-main-wall-overlay")});
 	}
 
 	init();
