@@ -17,13 +17,13 @@ class WallControl extends DataControl {
 			"Secure ID", "", FM_TYPE_STRING, 50, FM_STORE_ALWAYS, false);
 
 		$this->fieldMeta["Url"] = new FieldMeta(
-			"URL", "", FM_TYPE_STRING, 100, FM_STORE_ALWAYS, false);
+			"URL", "", FM_TYPE_STRING, 100, FM_STORE_ALWAYS, false, FM_OPTIONS_UNIQUE);
 
 		$this->fieldMeta["Name"] = new FieldMeta(
-			"Name", "", FM_TYPE_STRING, 100, FM_STORE_ALWAYS, true);
+			"Name", "", FM_TYPE_STRING, 100, FM_STORE_ALWAYS, false);
 
 		$this->fieldMeta["Description"] = new FieldMeta(
-			"Description", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, true);
+			"Description", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, false);
 
 		$this->fieldMeta["DateCreated"] = new FieldMeta(
 			"DateCreated", "", FM_TYPE_DATE, null, FM_STORE_NEVER, false);
@@ -157,8 +157,8 @@ class WallControl extends DataControl {
 
 	public function validateUrl($url) {
 		//TODO: Allow hyphens and underscores
-		if (!ctype_alnum($url)) {
-			$this->errorControl->addError("Invalid URL", "InvalidUrl");
+		if (!preg_match('/^[\da-z-]+$/', $url)) {
+			$this->errorControl->addError("'Url' must be only lowercase a-z, 0-9 and hyphens", "InvalidUrl");
 			return false;
 		}
 		return true;
