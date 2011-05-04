@@ -188,3 +188,15 @@ body {
 	padding: 5px; 
 	margin-left: 5px;
 }
+
+
+/**
+ * Overlays
+ */
+div.overlay {
+	margin: 50px; color: #000;
+}
+
+#login-overlay {
+	font-size: 18px;
+}

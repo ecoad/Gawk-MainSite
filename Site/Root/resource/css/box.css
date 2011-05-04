@@ -1,0 +1,96 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+
+/**
+ * Styles for The Box overlay
+ **/
+
+.box-overlay {
+	background: #000000;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+	z-index: 11;
+}
+
+.box-container {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	z-index: 12;
+	margin: 20px 20px 20px 20px;
+}
+
+.box-element {
+	position: absolute;
+	background-color: #FFFFFF;
+	padding: 10px;
+	border: 5px solid #000000;
+	-moz-box-shadow: 0px 0px 10px #333333;
+	-webkit-box-shadow: 0px 0px 10px #333333;
+	box-shadow: 0px 0px 10px #333333;
+}
+
+.box-close-button {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	display: block;
+	padding: 3px 5px 8px 10px;
+	font-size: 12px;
+	color: #FFFFFF;
+	background-color: #000000;
+	cursor: pointer;
+	z-index: 1103;
+	text-transform: Capitalize;
+	font-style: italic;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.box-close-button:hover {
+	text-decoration: underline;
+}
+
+.box-container .controls .previous {
+	float: left;
+}
+
+.box-container .controls .next,
+.box-container .controls .submit {
+	float: right;
+	margin-right: 0px;
+}
+
+.box-container .controls .next,
+.box-container .controls .previous,
+.box-container .controls .submit {
+	margin-bottom: 14px;
+}
+
+.box-content p {
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+.box-container ul li {
+	line-height: 2em;
+}
+
+#back-to-form {
+	background-position: -156px -312px;
+	width: 50px;
+	height: 11px;
+}
+
+#back-to-form:hover {
+	background-position: -156px -324px;
+}

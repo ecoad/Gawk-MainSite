@@ -31,7 +31,11 @@ function GawkView(config) {
 		$(document).bind("GawkModelGetRecentWallActivityResponse", onRecentWallActivityResponse);
 
 		element.find(".record").bind("click", function () {
-			document.getElementById(swfObjectId).recordNewFromExternal();
+			if (loggedIn) {
+				document.getElementById(swfObjectId).recordNewFromExternal();
+			} else {
+				$(document).trigger("GawkUILoginOverlayShow");
+			}
 		});
 	}
 

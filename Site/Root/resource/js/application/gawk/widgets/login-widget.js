@@ -17,6 +17,7 @@ function LoginWidget() {
 	function assignEventListeners() {
 		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
 		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
+		$(document).bind("GawkUILoginOverlayShow", onLoginOverlayShow);
 
 //		siteLoginLink.click(onSiteLoginClick);
 //		siteRegisterLink.click(onSiteRegisterClick);
@@ -69,6 +70,10 @@ function LoginWidget() {
 		loggedOutElement.show();
 		loggedInElement.hide();
 	}
+
+	function onLoginOverlayShow() {
+		$.box.show({content: $("#login-overlay")});
+	};
 
 	assignEventListeners();
 }

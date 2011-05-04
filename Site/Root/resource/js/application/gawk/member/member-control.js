@@ -52,7 +52,9 @@ function MemberControl (config) {
 		$.post(config.getApiLocation(), {
 			Action: "Member.Login",
 			FacebookId: facebookId
-		}, onLoginResponse, "json");
+		}, function() {
+			window.location.reload();
+		}, "json");
 	}
 
 	/*
@@ -82,15 +84,11 @@ function MemberControl (config) {
 
 	function logOut() {
 		$.getJSON(config.getApiLocation(), {Action: "Member.Logout"}, function () {
-			window.location.reload();
+			FB.logout(function () {
+				window.location.reload();
+			});
 		});
 
-		/*
-		FB.logout(function () {
-			//$(document).trigger("GawkMemberLoggedOut");
-
-		});
-		*/
 	}
 
 	function onProfileUpdate() {

@@ -1,5 +1,7 @@
 function NavigationWidget() {
 	var global = this;
+	var loggedIn = false;
+	var member;
 
 	var element = $("#navigation-widget");
 	var newGawkElement = element.find(".new-gawk");
@@ -19,13 +21,29 @@ function NavigationWidget() {
 	}
 
 	function assignEventListeners() {
+		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
+		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
+
 		$(viewEventNames).each(function(index, eventName) {
 			$(document).bind(eventName, onViewChangeUpdateNavigation);
+		});
+
+		newWallElement.click(function(event) {
+			if (!loggedIn) {
+				$(document).trigger("GawkUILoginOverlayShow");
+				event.preventDefault();
+			}
+		});
+
+		yoursElement.click(function(event) {
+			if (!loggedIn) {
+				$(document).trigger("GawkUILoginOverlayShow");
+				event.preventDefault();
+			}
 		});
 	}
 
 	function onViewChangeUpdateNavigation(event) {
-		console.debug(event.type);
 		$(".navigation-item").removeClass("selected");
 
 		switch (event.type) {
@@ -43,5 +61,16 @@ function NavigationWidget() {
 				newWallElement.addClass("selected");
 				break;
 		}
+	}
+
+	function onLoggedIn(event, logInResponse) {
+		loggedIn = true;
+		member = logInResponse.member;
+
+		yoursElement.attr("href", "/u/" + member.alias);
+	}
+
+	function onLoggedOut() {
+		loggedIn = false;
 	}
 }

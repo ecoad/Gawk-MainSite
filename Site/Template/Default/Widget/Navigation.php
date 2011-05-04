@@ -1,11 +1,3 @@
-<?php
-!isset($memberAuthentication) ? $memberAuthentication = Factory::getMemberAuthentication() : null;
-if ($memberDataEntity = $memberAuthentication->getLoggedInMemberDataEntity()) {
-	$profileUrl = $memberDataEntity->getUrl();
-} else {
-	$profileUrl = "/member/login/";
-}
-?>
 <ul id="navigation-widget">
 	<li>
 		<a class="new-gawk navigation-item" href="/">
@@ -18,7 +10,7 @@ if ($memberDataEntity = $memberAuthentication->getLoggedInMemberDataEntity()) {
 		</a>
 	</li>
 	<li>
-		<a class="yours navigation-item" href="<?php echo $profileUrl; ?>">
+		<a class="yours navigation-item" href="#">
 			<span>Profile</span>
 		</a>
 	</li>

@@ -47,6 +47,7 @@ echo $cssAggregator->output();
 */
 ?>
 		<link rel="stylesheet" type="text/css" href="/resource/css/layout/social-media.css?v=@VERSION-NUMBER@" media="all" />
+		<link rel="stylesheet" type="text/css" href="/resource/css/box.css?v=@VERSION-NUMBER@" media="all" />
   	<link rel="stylesheet" type="text/css" href="/resource/css/reset.css?v=@VERSION-NUMBER@" media="all" />
   	<link rel="stylesheet" type="text/css" href="/resource/css/gawk.css?v=@VERSION-NUMBER@" media="all" />
 		<!--[if lt IE 7]>
@@ -90,16 +91,22 @@ include "Site/Template/Default/Widget/Footer.php";
 			</div>
 
 		</div>
+		<div style="display: none;">
+			<div class="overlay" id="login-overlay">
+				Login with your Facebook details to continue: <fb:login-button></fb:login-button>
+			</div>
+		</div>
 		<script type="text/javascript" src="/resource/js/jquery/jquery.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/jquery/jquery.json-2.2.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/config/config.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/widgets/login-widget.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/widgets/navigation-widget.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/member/member-control.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/gawk.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/swfobject/swfobject.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/jquery/jquery.placeholder.js"></script>
-	<script type="text/javascript">
+		<script type="text/javascript" src="/resource/js/jquery/jquery.json-2.2.js?v=@VERSION-NUMBER@"></script>
+		<script type="text/javascript" src="/resource/js/application/gawk/config/config.js?v=@VERSION-NUMBER@"></script>
+		<script type="text/javascript" src="/resource/js/application/gawk/widgets/login-widget.js?v=@VERSION-NUMBER@"></script>
+		<script type="text/javascript" src="/resource/js/application/gawk/widgets/navigation-widget.js?v=@VERSION-NUMBER@"></script>
+		<script type="text/javascript" src="/resource/js/application/gawk/member/member-control.js?v=@VERSION-NUMBER@"></script>
+		<script type="text/javascript" src="/resource/js/application/gawk/gawk.js?v=@VERSION-NUMBER@"></script>
+		<script type="text/javascript" src="/resource/js/swfobject/swfobject.js?v=@VERSION-NUMBER@"></script>
+		<script type="text/javascript" src="/resource/js/jquery/jquery.placeholder.js?v=@VERSION-NUMBER@"></script>
+		<script type="text/javascript" src="/resource/js/jquery/jquery.box.js?v=@VERSION-NUMBER@"></script>
+		<script type="text/javascript">
 //<![CDATA[
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-20124921-1']);
