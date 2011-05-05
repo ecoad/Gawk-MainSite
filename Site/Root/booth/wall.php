@@ -10,9 +10,6 @@ $layout->start("Main");
 // The main page content goes here.
 ?>
 <div>
-	<h1>Booth Up</h1>
-	<p>Description</p>
-
 	<div id="gawk-container"></div>
 </div>
 <?php
@@ -30,8 +27,8 @@ $(document).ready(function() {
 		var params = {};
 		params.allowscriptaccess = "always";
 
-		swfobject.embedSWF("/resource/flash/GawkBooth.swf?v=@VERSION-NUMBER@", "gawk-container",
-			"550", "400", "9.0.0", false, gawkFlashVars, params, {id: "gawk-swf"});
+		swfobject.embedSWF("/resource/flash/GawkFlash.swf?v=@VERSION-NUMBER@", "gawk-container",
+			"1050", "655", "9.0.0", false, gawkFlashVars, params, {id: "gawk-swf"});
 });
 //]]>
 	</script>
