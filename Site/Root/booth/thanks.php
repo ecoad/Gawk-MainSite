@@ -18,7 +18,7 @@ $layout->start("JavaScript");
 ?>
 	<script type="text/javascript">
 //<![CDATA[
-setTimeout(function(){window.location = "/booth/welcome.php"; }, 5000);
+setTimeout(function(){window.location = "/booth/welcome.php"; }, 20000);
 //]]>
 	</script>
 <?php
