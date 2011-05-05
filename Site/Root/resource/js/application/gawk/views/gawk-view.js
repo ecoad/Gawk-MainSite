@@ -69,7 +69,7 @@ function GawkView(config) {
 		var currentOption = $("<option>").attr("value", wall.url).html(wall.name);
 		select.append(currentOption);
 
-		var mainOptionGroup = $("<optgroup>").attr("label", "Main");
+		var mainOptionGroup = $("<optgroup>").attr("label", "main");
 		select.append(mainOptionGroup);
 
 		var mainOption = $("<option>").attr("value", "/").html("Main");
@@ -80,7 +80,7 @@ function GawkView(config) {
 
 		select.append(mainOptionGroup);
 
-		var myWallsOptionGroup = $("<optgroup>").attr("label", "My Walls");
+		var myWallsOptionGroup = $("<optgroup>").attr("label", "my walls");
 
 		if (recentActivity.wallsCreatedByMember.length > 0) {
 			$(recentActivity.wallsCreatedByMember).each(function(index, value) {
@@ -91,7 +91,7 @@ function GawkView(config) {
 		select.append(myWallsOptionGroup);
 
 		if (recentActivity.bookmarks.length > 0) {
-			var bookmarksOptionGroup = $("<optgroup>").attr("label", "Bookmarks");
+			var bookmarksOptionGroup = $("<optgroup>").attr("label", "bookmarks");
 
 			$(recentActivity.bookmarks).each(function(index, value) {
 				var option = $("<option>").attr("value", value.url).html(value.name);
@@ -101,7 +101,7 @@ function GawkView(config) {
 		}
 
 		if (recentActivity.recentWallParticipation.length > 0) {
-			var recentOptionGroup = $("<optgroup>").attr("label", "Walls I'm On");
+			var recentOptionGroup = $("<optgroup>").attr("label", "walls i'm on");
 
 			$(recentActivity.recentWallParticipation).each(function(index, value) {
 				var option = $("<option>").attr("value", value.url).html(value.name);

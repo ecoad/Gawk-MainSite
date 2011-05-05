@@ -77,19 +77,12 @@ include "Site/Template/Default/Widget/Navigation.php";
 <?php echo $this->get("Main"); ?>
 				</div>
 
-			</div>
-
-			<div id="utility">
-<?php echo $this->get("Utility"); ?>
-				<hr />
-			</div>
-
-			<div id="footer">
+				<div id="footer">
 <?php
 include "Site/Template/Default/Widget/Footer.php";
 ?>
+				</div>
 			</div>
-
 		</div>
 		<div style="display: none;">
 			<div class="overlay" id="login-overlay">
@@ -100,6 +93,10 @@ include "Site/Template/Default/Widget/Footer.php";
 				<h3>you can't gawk on this wall</h3>
 				<p>the main wall is a collection of the best and latest gawks from other walls</p>
 				<p>gawk on <a href="/wall/">another wall</a> or <a href="/wall/">create one</a>
+			</div>
+			<div class="overlay" id="logging-in-overlay">
+				<h3>logging in&hellip;</h3>
+				<p>please wait a moment while we log you in</p>
 			</div>
 		</div>
 		<script type="text/javascript" src="/resource/js/jquery/jquery.js?v=@VERSION-NUMBER@"></script>

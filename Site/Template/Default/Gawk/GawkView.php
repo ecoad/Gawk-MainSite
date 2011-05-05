@@ -9,7 +9,7 @@
 	<form class="select-wall" method="get" action="" onchange="window.location = $('select[name=SelectWall]').val();">
 		<fieldset>
 			<label>
-				<strong>Select Wall</strong>
+				<strong>select wall</strong>
 				<select name="SelectWall">
 					<option value="/">Main</option>
 					<optgroup label="Main">

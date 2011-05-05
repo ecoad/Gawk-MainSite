@@ -8,10 +8,9 @@ $shareTitle = "Gawk on this wall";
 ?>
 <div id="social">
 	<ul>
-		<li>Gawk Wall</li>
-		<li>About</li>
-		<li>Website</li>
-		<li>Twitter</li>
-		<li>Facebook</li>
+		<li>&copy; <?php echo date("Y"); ?> <a href="/" title="go to gawkwall.com">gawkwall</a></li>
+		<li><a href="/contact/" title="contact us">contact</a></li>
+		<li><a href="http://www.twitter.com/gawkwall" title="go to our Twitter page">follow us on Twitter</a></li>
+		<li><a href="#" title="get the iPhone app!">iPhone</a></li>
 	</ul>
 </div>

@@ -3,8 +3,6 @@ function MemberControl (config) {
 	var global = this;
 	var member = {};
 
-	var config = config;
-
 	var loggedIn = false;
 
 	init();
@@ -53,6 +51,7 @@ function MemberControl (config) {
 			Action: "Member.Login",
 			FacebookId: facebookId
 		}, function() {
+			$(document).trigger("GawkLoggingInOverlayShow");
 			window.location.reload();
 		}, "json");
 	}
