@@ -51,8 +51,8 @@ function GawkView(config) {
 			wallId: config.getWall().secureId
 		};
 
-		swfobject.embedSWF("/resource/flash/Gawk.swf?v=@VERSION-NUMBER@", gawkFlashContainerElement.attr("id"), "1050", "655", "9.0.0", false,
-				gawkFlashVars, {}, {id: swfObjectId});
+		swfobject.embedSWF("/resource/flash/GawkFlash.swf?v=@VERSION-NUMBER@", gawkFlashContainerElement.attr("id"),
+			"1050", "655", "9.0.0", false, gawkFlashVars, {}, {id: swfObjectId});
 	}
 
 	function onGetWallResponse(event, response) {
