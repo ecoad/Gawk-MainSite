@@ -76,6 +76,7 @@ $application->registry->set("Facebook/Secret", "@FacebookSecret@");
 
 $application->registry->set("Wall/DefaultLength", 30);
 $application->registry->set("Wall/MainWallMinimumRating", 0);
+$application->registry->set("Wall/DefaultWallPollLength", 5000); //in milliseconds for checking for new Gawks
 
 if (!isset($_SESSION["Style"])) {
 	$_SESSION["Style"] = "default";

@@ -29,10 +29,13 @@ class FlashWebService {
 
 				if (is_array($response->videos)) {
 					$response->success = true;
-				}
 
-				$response->mediaServerLocation = $this->application->registry->get("MediaServer/Address");
-				$response->binaryLocation = $this->application->registry->get("Site/Address") . "/resource/binary/";
+					$response->videosHash = md5(json_encode($response->videos));
+					$response->updatePollLength = $this->application->registry->get("Wall/DefaultWallPollLength");
+
+					$response->mediaServerLocation = $this->application->registry->get("MediaServer/Address");
+					$response->binaryLocation = $this->application->registry->get("Site/Address") . "/resource/binary/";
+				}
 				break;
 		}
 
