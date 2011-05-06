@@ -54,7 +54,7 @@ function LoginWidget() {
 	function showLoggedIn(response) {
 		if (response.success) {
 			var profileName = loggedInElement.find(".name");
-			profileName.html(response.member.alias);
+			profileName.html(response.member.firstName);
 			profileName.attr("href", "/u/" + response.member.alias);
 
 			loggedInElement.show();

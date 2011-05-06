@@ -75,7 +75,7 @@ function GawkView(config) {
 		var mainOptionGroup = $("<optgroup>").attr("label", "main");
 		select.append(mainOptionGroup);
 
-		var mainOption = $("<option>").attr("value", "/").html("Main");
+		var mainOption = $("<option>").attr("value", "/").html("Main Wall");
 		mainOptionGroup.append(mainOption);
 
 		var friendsOption = $("<option>").attr("value", "/friends").html("Friends");
@@ -83,9 +83,9 @@ function GawkView(config) {
 
 		select.append(mainOptionGroup);
 
-		var myWallsOptionGroup = $("<optgroup>").attr("label", "my walls");
 
 		if (recentActivity.wallsCreatedByMember.length > 0) {
+			var myWallsOptionGroup = $("<optgroup>").attr("label", "my walls");
 			$(recentActivity.wallsCreatedByMember).each(function(index, value) {
 				var wallOption = $("<option>").attr("value", value.url).html(value.name);
 				myWallsOptionGroup.append(wallOption);
@@ -112,6 +112,9 @@ function GawkView(config) {
 			});
 			select.append(recentOptionGroup);
 		}
+
+		var createWallOption = $("<option>").attr("value", "/wall/").html("create a wall&hellip;");
+		select.append(createWallOption);
 	}
 
 	function onLoggedIn() {

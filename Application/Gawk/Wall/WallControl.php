@@ -8,6 +8,7 @@ class WallControl extends DataControl {
 	public $sequence = "Wall_Id_seq";
 	public $defaultOrder = "Id";
 	public $searchFields = array("Id");
+	protected $reservedUrls = array("wall", "friends", "admin", "api", "u", "booth", "favicon.ico", "deploy-info.json", "robots.txt");
 
 	public function init() {
 		$this->fieldMeta["Id"] = new FieldMeta(
@@ -17,7 +18,7 @@ class WallControl extends DataControl {
 			"Secure ID", "", FM_TYPE_STRING, 50, FM_STORE_ALWAYS, false);
 
 		$this->fieldMeta["Url"] = new FieldMeta(
-			"URL", "", FM_TYPE_STRING, 100, FM_STORE_ALWAYS, false, FM_OPTIONS_UNIQUE);
+			"URL", "", FM_TYPE_STRING, 100, FM_STORE_ALWAYS, false /*, FM_OPTIONS_UNIQUE*/);
 
 		$this->fieldMeta["Name"] = new FieldMeta(
 			"Name", "", FM_TYPE_STRING, 100, FM_STORE_ALWAYS, false);
@@ -156,9 +157,18 @@ class WallControl extends DataControl {
 	}
 
 	public function validateUrl($url) {
-		//TODO: Allow hyphens and underscores
-		if (!preg_match('/^[\da-z-]+$/', $url)) {
-			$this->errorControl->addError("'Url' must be only lowercase a-z, 0-9 and hyphens", "InvalidUrl");
+		if (!preg_match('/^[\da-z-+]+$/', $url)) {
+			$this->errorControl->addError("'Url' must be only a-Z, 0-9, and hyphens e.g. 'ski-trip-2011', 'JohnsFriends'", "InvalidUrl");
+			return false;
+		}
+
+		if ($existingWallDataEntity = $this->getWallByUrlFriendlyName($url)) {
+			$this->errorControl->addError("'Url' already exists, please choose another", "DuplicateUrl");
+			return false;
+		}
+
+		if (array_search($url, $this->reservedUrls) !== false) {
+			$this->errorControl->addError("'Url' is not allowed, please choose another", "ReservedUrl");
 			return false;
 		}
 		return true;
@@ -181,9 +191,17 @@ class WallControl extends DataControl {
 				break;
 		}
 
-		if ($wallDataEntity = $this->itemByField($wallUrl, "Url")) {
+		if ($wallDataEntity = $this->getWallByUrlFriendlyName($wallUrl)) {
 			return $wallDataEntity->toObject();
 		}
+	}
+
+	public function getWallByUrlFriendlyName($url) {
+		$filter = CoreFactory::getFilter();
+		$filter->addConditional($this->table, "Url", $url, "ILIKE");
+		$this->setFilter($filter);
+
+		return $this->getNext();
 	}
 
 	/**

@@ -48,7 +48,7 @@ function WallSelectView() {
 	function addItemToList(wall, ul) {
 		var li, link;
 
-		link = $("<a>").attr("href", wall.url).html(wall.name).attr("title", wall.description);
+		link = $("<a>").attr("href", "/" + wall.url).html(wall.name).attr("title", wall.description);
 
 		li = $("<li>").html(link);
 		ul.append(li);

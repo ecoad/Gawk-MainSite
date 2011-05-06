@@ -30,6 +30,7 @@ class FlashWebService {
 				if (is_array($response->videos)) {
 					$response->success = true;
 
+					$response->serverTime = time();
 					$response->videosHash = md5(json_encode($response->videos));
 					$response->updatePollLength = $this->application->registry->get("Wall/DefaultWallPollLength");
 

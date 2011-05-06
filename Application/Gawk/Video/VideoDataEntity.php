@@ -23,6 +23,8 @@ class VideoDataEntity extends DataEntity {
 			$video->member = $memberDataEntity->toObject();
 		}
 
+		$video->dateCreatedTime = strtotime($video->dateCreated);
+
 		return $video;
 	}
 }

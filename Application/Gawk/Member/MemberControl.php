@@ -109,7 +109,7 @@ class CustomMemberControl extends MemberControl {
 	public function getMemberDataEntityByEmailAddressPassword($emailAddress, $password) {
 		$this->reset();
 		$filter = CoreFactory::getFilter();
-		$filter->addConditional($this->table, "EmailAddress", $emailAddress);
+		$filter->addConditional($this->table, "EmailAddress", $emailAddress, "ILIKE");
 		$filter->addConditional($this->table, "Password", sha1($password));
 		$this->setFilter($filter);
 
@@ -185,11 +185,19 @@ class CustomMemberControl extends MemberControl {
 	public function getMemberByRequestUrl($requestUrl) {
 		$requestPieces = explode("/", trim($requestUrl));
 		$alias = $requestPieces[2];
-		if (!$memberDataEntity = $this->itemByField($alias, "Alias")) {
+		if (!$memberDataEntity = $this->getMemberDataEntityByAlias($alias)) {
 			return false;
 		}
 
 		return $memberDataEntity->toObject();
+	}
+
+	public function getMemberDataEntityByAlias($alias) {
+		$filter = CoreFactory::getFilter();
+		$filter->addConditional($this->table, "Alias", $alias, "ILIKE");
+		$this->setFilter($filter);
+
+		return $this->getNext();
 	}
 
 	public function afterInsert(DataEntity $dataEntity) {

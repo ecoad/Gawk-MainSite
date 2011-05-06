@@ -211,7 +211,15 @@ class MemberAuthentication {
 				$facebookData->firstName = $facebookMember[0]["first_name"];
 				$facebookData->lastName = $facebookMember[0]["first_name"];
 				$facebookData->facebookId = $facebookId;
-				$facebookData->alias = $facebookData->firstName . " " . $facebookData->lastName;
+
+				$prettyUrlFormatter = CoreFactory::getPrettyUrlFormatter();
+				$alias = $prettyUrlFormatter->format(strtolower($facebookData->firstName . " " . $facebookData->lastName));
+
+				if ($existingAliasMemberDataEntity = $this->memberControl->getMemberDataEntityByAlias($alias)) {
+					$alias .= "+" . uniqid();
+				}
+
+				$facebookData->alias = $alias;
 				return $facebookData;
 			} catch (FacebookApiException $error) {
 				$this->errorControl->addError($error->getMessage());
