@@ -24,13 +24,13 @@ if ($loggedInMemberDataEntity = $memberAuthentication->getLoggedInMemberDataEnti
 $layout = CoreFactory::getLayout("Site/Template/Default/Main.php");
 $layout->set("Title", "Gawk by " . $member->alias . " / " . $application->registry->get("Title"));
 $layout->set("Name", $application->registry->get("Title"));
-$layout->set("Section", "home");
+$layout->set("Section", "profile");
 $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.
 ?>
 <div><a href="/">Back to Wall</a></div>
-<div id="gawk-view" style="display: none;">
+<div id="gawk-view">
 	Insert gawk here
 </div>
 <?php

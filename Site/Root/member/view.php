@@ -19,7 +19,7 @@ if ($loggedInMemberDataEntity = $memberAuthentication->getLoggedInMemberDataEnti
 $layout = CoreFactory::getLayout("Site/Template/Default/Main.php");
 $layout->set("Title", $member->alias . " / " . $application->registry->get("Title"));
 $layout->set("Name", $application->registry->get("Title"));
-$layout->set("Section", "home");
+$layout->set("Section", "profile");
 $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.

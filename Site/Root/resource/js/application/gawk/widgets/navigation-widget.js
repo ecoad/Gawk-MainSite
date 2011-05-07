@@ -24,9 +24,11 @@ function NavigationWidget() {
 		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
 		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
 
+		/*
 		$(viewEventNames).each(function(index, eventName) {
 			$(document).bind(eventName, onViewChangeUpdateNavigation);
 		});
+		*/
 
 		newWallElement.click(function(event) {
 			if (!loggedIn) {
@@ -43,6 +45,7 @@ function NavigationWidget() {
 		});
 	}
 
+	/*
 	function onViewChangeUpdateNavigation(event) {
 		$(".navigation-item").removeClass("selected");
 
@@ -62,6 +65,7 @@ function NavigationWidget() {
 				break;
 		}
 	}
+	*/
 
 	function onLoggedIn(event, logInResponse) {
 		loggedIn = true;
