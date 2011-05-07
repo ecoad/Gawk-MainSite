@@ -209,7 +209,7 @@ class MemberAuthentication {
 
 				$facebookData = new stdClass();
 				$facebookData->firstName = $facebookMember[0]["first_name"];
-				$facebookData->lastName = $facebookMember[0]["first_name"];
+				$facebookData->lastName = $facebookMember[0]["last_name"];
 				$facebookData->facebookId = $facebookId;
 
 				$prettyUrlFormatter = CoreFactory::getPrettyUrlFormatter();
