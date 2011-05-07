@@ -193,6 +193,7 @@ class WallControl extends DataControl {
 		switch ($wallUrl) {
 			case "":
 			case "wall":
+			case substr($wallUrl, 0, 1) == "?":
 				return $this->getMainWall();
 				break;
 		}
