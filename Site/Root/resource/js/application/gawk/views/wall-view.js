@@ -4,16 +4,23 @@ function GawkView(config) {
 	var gawkFlashContainerElement = $("<div>").attr("id", "Gawk");
 	var loggedIn = false;
 	var wall = config.getWall();
-	element.append(gawkFlashContainerElement);
+	var bookmarkLink = element.find("h3").find("span.bookmark");
 
 	function init() {
+		element.append(gawkFlashContainerElement);
 		$(document).bind("GawkModelInit", onModelInit);
 	}
 
 	function setupView() {
 		element.find(".wall-information").show();
-		element.find("h3").html(wall.name);
+		element.find("h3").find("span.name").html(wall.name);
 		element.find("p.description").html(wall.description);
+
+		if (wall.url == "/") {
+			bookmarkLink.hide();
+		} else {
+			bookmarkLink.show();
+		}
 	}
 
 	function onModelInit() {
@@ -42,6 +49,8 @@ function GawkView(config) {
 				$(document).trigger("GawkUILoginOverlayShow");
 			}
 		});
+		element.find("h3").find("span.bookmark").click(onBookmarkClick);
+		$("select[name=SelectWall]").change(onWallSelectChange);
 	}
 
 	function addView() {
@@ -118,6 +127,16 @@ function GawkView(config) {
 		select.append(createWallOption);
 	}
 
+	function onBookmarkClick(event) {
+		event.preventDefault();
+		$.post(config.getApiLocation(), {
+			Action: "MemberWallBookmark.AddWallBookmark",
+			WallSecureId: wall.secureId
+		}, function() {
+			console.debug("hi");
+		}, "json");
+	}
+
 	function onLoggedIn() {
 		loggedIn = true;
 		document.getElementById(swfObjectId).logInFromExternal();
@@ -143,6 +162,10 @@ function GawkView(config) {
 
 	function onGawkMainWallDenyOverlay() {
 		$.box.show({content: $("#gawk-main-wall-overlay")});
+	}
+
+	function onWallSelectChange() {
+		window.location = $('select[name=SelectWall]').val();
 	}
 
 	init();

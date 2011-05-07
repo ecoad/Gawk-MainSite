@@ -11,7 +11,7 @@
 			<div class="login-widget">
 				<div id="fb-root"></div>
 				<div class="logged-in" style="display:none;">
-					Hello <a class="name" href="#"></a> | <a class="logout" href="#">logout</a>
+					hello <a class="name" href="#"></a> | <a class="logout" href="#">logout</a>
 				</div>
 				<div class="logged-out" style="display:none;">
 					login or register <fb:login-button></fb:login-button>

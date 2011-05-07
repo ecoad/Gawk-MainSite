@@ -2,11 +2,11 @@
 	<a href="#" class="record">RECORD GAWK</a>
 </div>
 <div class="wall-information" style="float:left; display: none;">
-	<h3>Main Wall</h3>
-	<p class="description">The main wall is a collection of the latest and highly rated Gawks.</p>
+	<h3><span class="bookmark" style="display: none;"><img src="http://www.srkexport.com/images/favourites-icon.gif" /> </span><span class="name">Wall</span></h3>
+	<p class="description"></p>
 </div>
 <div class="wall-select" style="float:right; padding: 5px; display: none;">
-	<form class="select-wall" method="get" action="" onchange="window.location = $('select[name=SelectWall]').val();">
+	<form class="select-wall" method="get" action="">
 		<fieldset>
 			<label>
 				<strong>select wall</strong>
