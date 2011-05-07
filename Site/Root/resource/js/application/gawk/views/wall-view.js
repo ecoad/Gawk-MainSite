@@ -75,11 +75,12 @@ function GawkView(config) {
 		var mainOptionGroup = $("<optgroup>").attr("label", "main");
 		select.append(mainOptionGroup);
 
-		var mainOption = $("<option>").attr("value", "/").html("Main Wall");
+		var mainOption = $("<option>").attr("value", "/").html("main wall");
 		mainOptionGroup.append(mainOption);
-
-		var friendsOption = $("<option>").attr("value", "/friends").html("Friends");
+		var friendsOption = $("<option>").attr("value", "/friends").html("friends");
 		mainOptionGroup.append(friendsOption);
+		var favouritedOption = $("<option>").attr("value", "/favourited").html("favourites");
+		mainOptionGroup.append(favouritedOption);
 
 		select.append(mainOptionGroup);
 

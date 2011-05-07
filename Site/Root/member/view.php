@@ -39,9 +39,11 @@ $layout->start("Main");
 	<h1><?php echo $member->alias; ?></h1>
 <?php
 if ($memberIsOnOwnMemberPage) {
+	/*
 ?>
-	<p><a href="/u/<?php echo $member->alias; ?>/edit">Edit your profile</a></p>
+	<p><a href="/u/<?php echo $member->alias; ?>/edit">edit your profile</a></p>
 <?php
+	*/
 } else {
 ?>
 	<div class="friendship">
@@ -69,11 +71,19 @@ foreach ($member->friends as $friend) {
 	</div>
 	<div class="walls">
 		<h2>walls</h2>
-		<h3>my bookmarks</h3>
+		<h3>bookmarks</h3>
 		<ul>
 <?php
+if (count($recentWallActivity->bookmarks) == 0) {
+?>
+			<li>no bookmarks</li>
+<?php
+}
 foreach ($recentWallActivity->bookmarks as $memberBookmark) {
 ?>
+			<li>
+				<a href="/<?php echo $memberBookmark->url; ?>"><?php echo $memberBookmark->name; ?></a> [x]
+			</li>
 <?php
 }
 ?>
@@ -81,6 +91,11 @@ foreach ($recentWallActivity->bookmarks as $memberBookmark) {
 		<h3>walls created by <?php echo $member->alias; ?></h3>
 		<ul>
 <?php
+if (count($recentWallActivity->wallsCreatedByMember) == 0) {
+?>
+			<li>no walls<?php echo $memberIsOnOwnMemberPage ? " (<a href=\"/wall/\">create a wall</a>)" : ""; ?></li>
+<?php
+}
 foreach ($recentWallActivity->wallsCreatedByMember as $memberWall) {
 ?>
 			<li>
@@ -93,6 +108,11 @@ foreach ($recentWallActivity->wallsCreatedByMember as $memberWall) {
 		<h3>walls <?php echo $member->alias; ?> has participated on</h3>
 		<ul>
 <?php
+if (count($recentWallActivity->recentWallParticipation) == 0) {
+?>
+			<li>no walls</li>
+<?php
+}
 foreach ($recentWallActivity->recentWallParticipation as $memberWallParticipation) {
 ?>
 			<li>
