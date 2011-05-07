@@ -1,5 +1,5 @@
 function GawkView(config) {
-	var element = $("#gawk-view");
+	var element = $("#wall-view");
 	var swfObjectId = "gawk-swf";
 	var gawkFlashContainerElement = $("<div>").attr("id", "Gawk");
 	var loggedIn = false;
@@ -26,7 +26,7 @@ function GawkView(config) {
 		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
 
 		$(document).bind("GawkUIAllHide", onHideView);
-		$(document).bind("GawkUIGawkShow", onShowView);
+		$(document).bind("GawkUIWallShow", onShowView);
 		$(document).bind("GawkModelGetWallResponse", onGetWallResponse);
 		$(document).bind("GawkModelGetRecentWallActivityResponse", onRecentWallActivityResponse);
 		$(document).bind("GawkMainWallDenyOverlayShow", onGawkMainWallDenyOverlay);

@@ -2,6 +2,10 @@
 require_once("Application/Bootstrap.php");
 $facebook = Factory::getFacebook($application);
 
+if (!$member = $memberControl->getMemberByRequestUrl($_SERVER["REQUEST_URI"])) {
+	include "Site/Root/error/404.php";
+}
+
 $videoControl = Factory::getMemberControl();
 if (!$video = $videoControl->getVideoByRequestUrl($_SERVER["REQUEST_URI"])) {
 	include "Site/Root/error/404.php";
@@ -17,7 +21,7 @@ if ($loggedInMemberDataEntity = $memberAuthentication->getLoggedInMemberDataEnti
 }
 
 $layout = CoreFactory::getLayout("Site/Template/Default/Main.php");
-$layout->set("Title", "View Gawk / " . $application->registry->get("Title"));
+$layout->set("Title", "Gawk by " . $member->alias . " / " . $application->registry->get("Title"));
 $layout->set("Name", $application->registry->get("Title"));
 $layout->set("Section", "home");
 $layout->start("Style");
@@ -25,26 +29,7 @@ $layout->start("Main");
 // The main page content goes here.
 ?>
 <div><a href="/">Back to Wall</a></div>
-<div id="public-profile-view" style="display: none;">
-	<h1><?php echo $member->alias; ?></h1>
-<?php
-if ($memberIsOnOwnMemberPage) {
-?>
-	<p><a href="/u/<?php echo $member->alias; ?>/edit">Edit your profile</a></p>
-<?php
-}
-?>
-	<div class="friendship">
-		<a href="#" class="logged-in" style="display: none;">Befriend</a>
-		<a href="/member/login/" class="logged-out" style="display: none;">Login to add friends</a>
-	</div>
-	<?php echo $member->profileVideoLocation; ?>
-
-	<div class="recent-gawks">
-		<h2>Recent Gawks</h2>
-		<p>(insert mini gawk wall)</p>
-	</div>
-
+<div id="gawk-view" style="display: none;">
 </div>
 <?php
 $layout->start("JavaScript");
@@ -55,7 +40,7 @@ $layout->start("JavaScript");
 //<![CDATA[
 $(document).ready(function() {
 	var gawk = new Gawk({
-		initView: "PublicProfile",
+		initView: "GawkView",
 		member: "<?php echo addslashes(json_encode($member)); ?>",
 		apiLocation: "<?php echo $application->registry->get("Site/Address"); ?>/api/",
 		fbAppId: "<?php echo $facebook->getAppId(); ?>",

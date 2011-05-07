@@ -152,40 +152,40 @@ body {
  * GAWK WALL VIEW
  */
  
-#gawk-view div.record-gawk {
+#wall-view div.record-gawk {
 	padding-right: 10px;
 }
  
-#gawk-view a.record {
+#wall-view a.record {
 	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat 0 0;
 	width: 114px;
 	height: 31px;
 	display: block;
 	text-indent: -9999px;
 }
-#gawk-view a.record:hover { background-position: 0 -31px; }
-#gawk-view a.record:active { background-position: 0 -62px; }
+#wall-view a.record:hover { background-position: 0 -31px; }
+#wall-view a.record:active { background-position: 0 -62px; }
 
-#gawk-view #gawk-swf {
+#wall-view #gawk-swf {
 	margin-top: 10px;
 }
 
-#gawk-view .wall-information h3 {
+#wall-view .wall-information h3 {
 	font-size: 15px;
 	font-weight: bold;
 }
 
-#gawk-view .wall-information .description {
+#wall-view .wall-information .description {
 	font-size: 13px;
 	font-family: Arial, Sans-serif;
 	color: #6e6e6e;
 }
 
-#gawk-view .wall-select {
+#wall-view .wall-select {
 	color: #3c3c3c;
 }
 	
-#gawk-view .wall-select select{
+#wall-view .wall-select select{
 	padding: 5px; 
 	margin-left: 5px;
 }

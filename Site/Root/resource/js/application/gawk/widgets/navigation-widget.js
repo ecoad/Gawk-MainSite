@@ -7,7 +7,7 @@ function NavigationWidget() {
 	var newGawkElement = element.find(".new-gawk");
 	var newWallElement = element.find(".wall-select");
 	var yoursElement = element.find(".yours");
-	var viewEventNames = ["GawkUIGawkShow", "GawkUIPublicProfileShow", "GawkUIProfileEditShow", "GawkUILoginShow",
+	var viewEventNames = ["GawkUIWallShow", "GawkUIPublicProfileShow", "GawkUIProfileEditShow", "GawkUILoginShow",
 		"GawkUIYoursShow", "GawkUIWallEditShow", "GawkUIWallSelectShow"];
 
 	init();
@@ -47,7 +47,7 @@ function NavigationWidget() {
 		$(".navigation-item").removeClass("selected");
 
 		switch (event.type) {
-			case "GawkUIGawkShow":
+			case "GawkUIWallShow":
 				newGawkElement.addClass("selected");
 				break;
 			case "GawkUIPublicProfileShow":
