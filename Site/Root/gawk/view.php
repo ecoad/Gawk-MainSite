@@ -12,6 +12,7 @@ if (!$member = $memberControl->getMemberByRequestUrl($_SERVER["REQUEST_URI"])) {
 if (!$video = $videoControl->getVideoByRequestUrl($_SERVER["REQUEST_URI"])) {
 	include "Site/Root/error/404.php";
 }
+$video->dateCreatedFormatted = date("jS M Y", strtotime($video->dateCreated));
 
 if (!$wall = $wallControl->getWallWithSecureId($video->wallSecureId)) {
 	throw new RuntimeException("Video SecureID: " . $video->wallSecureId . " linking to non-existing wall");
@@ -35,22 +36,15 @@ $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.
 ?>
-<div><a href="/">Back to Wall</a></div>
 <div id="gawk-view">
-	Insert gawk here
+	<div><img src="http://dummyimage.com/175x131/000/fff.png&text=gawk+here" /></div>
 	<ul>
 		<li>
-			<a href="<?php echo $memberUrlHelper->getProfileUrl($member); ?>">
-				view <?php echo $member->firstName; ?>'s profile
-			</a>
+			by: <a title="View profile" href="<?php echo $memberUrlHelper->getProfileUrl($member); ?>">
+			<?php echo $member->alias; ?></a> on <?php echo $video->dateCreatedFormatted; ?>
 		</li>
-		<li>
-
-		</li>
+		<li>from: <a href="/<?php echo $wall->url; ?>"><?php echo $wall->name; ?></a></li>
 	</ul>
-	<?php var_dump($wall); ?>
-	<?php var_dump($video); ?>
-	<?php var_dump($member); ?>
 </div>
 <?php
 $layout->start("JavaScript");
