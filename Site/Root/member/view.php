@@ -18,6 +18,11 @@ if ($loggedInMemberDataEntity = $memberAuthentication->getLoggedInMemberDataEnti
 	}
 }
 
+$memberWallBookmarkWebService = Factory::getMemberWallBookmarkWebService();
+$recentWallActivityResponse = $memberWallBookmarkWebService->handleRequest(
+	MemberWallBookmarkWebService::SERVICE_GET_RECENT_WALL_ACTIVITY, null, array("Token" => $member->token));
+$recentWallActivity = $recentWallActivityResponse->recentActivity;
+
 $layout = CoreFactory::getLayout("Site/Template/Default/Main.php");
 $layout->set("Title", $member->alias . " / " . $application->registry->get("Title"));
 $layout->set("Name", $application->registry->get("Title"));
@@ -37,15 +42,17 @@ if ($memberIsOnOwnMemberPage) {
 ?>
 	<p><a href="/u/<?php echo $member->alias; ?>/edit">Edit your profile</a></p>
 <?php
-}
+} else {
 ?>
 	<div class="friendship">
 		<a href="#" class="logged-in" style="display: none;">Befriend</a>
 		<a href="/member/login/" class="logged-out" style="display: none;">Login to add friends</a>
 	</div>
-	<?php var_dump($member); ?>
+<?php
+}
+?>
 	<div class="friends">
-		<h2>Friends</h2>
+		<h2>friends</h2>
 		<ul>
 <?php
 foreach ($member->friends as $friend) {
@@ -54,6 +61,42 @@ foreach ($member->friends as $friend) {
 				<a href="<?php echo $memberUrlHelper->getProfileUrl($friend); ?>" title="View profile">
 					<?php echo $friend->alias; ?>
 				</a>
+			</li>
+<?php
+}
+?>
+		</ul>
+	</div>
+	<div class="walls">
+		<h2>walls</h2>
+		<h3>my bookmarks</h3>
+		<ul>
+<?php
+foreach ($recentWallActivity->bookmarks as $memberBookmark) {
+?>
+<?php
+}
+?>
+		</ul>
+		<h3>walls created by <?php echo $member->alias; ?></h3>
+		<ul>
+<?php
+foreach ($recentWallActivity->wallsCreatedByMember as $memberWall) {
+?>
+			<li>
+				<a href="/<?php echo $memberWall->url; ?>"><?php echo $memberWall->name; ?></a>
+			</li>
+<?php
+}
+?>
+		</ul>
+		<h3>walls <?php echo $member->alias; ?> has participated on</h3>
+		<ul>
+<?php
+foreach ($recentWallActivity->recentWallParticipation as $memberWallParticipation) {
+?>
+			<li>
+				<a href="/<?php echo $memberWallParticipation->url; ?>"><?php echo $memberWallParticipation->name; ?></a>
 			</li>
 <?php
 }

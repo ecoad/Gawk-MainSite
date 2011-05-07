@@ -25,12 +25,6 @@ $layout->start("Main");
 		<div id="wall-edit-view" style="display: none;">
 <?php include "Site/Template/Default/Gawk/Wall/WallEditView.php"; ?>
 		</div>
-		<div id="yours-view" style="display: none;">
-<?php include "Site/Template/Default/Gawk/YoursView.php"; ?>
-		</div>
-		<div id="login-view" style="display: none;">
-<?php include "Site/Template/Default/Gawk/LoginView.php"; ?>
-		</div>
 	</div>
 <?php
 $layout->start("JavaScript");
