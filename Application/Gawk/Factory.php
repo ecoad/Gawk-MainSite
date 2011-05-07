@@ -186,7 +186,7 @@ class Factory {
 	 * @return VideoUrlHelper
 	 */
 	static function getVideoUrlHelper() {
-		require_once "Video/VideoUrlHelper";
+		require_once "Gawk/Video/VideoUrlHelper.php";
 		return new VideoUrlHelper();
 	}
 

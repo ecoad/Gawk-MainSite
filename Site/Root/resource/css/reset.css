@@ -60,11 +60,13 @@ li {
 }
 
 a {
-	text-decoration: underline;
+	text-decoration: none;
+	color: #000;
+	font-weight: bold;
 }
 
 a:hover {
-	text-decoration: none;
+	text-decoration: hover;
 }
 
 caption, th {

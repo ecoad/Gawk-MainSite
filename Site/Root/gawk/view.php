@@ -12,7 +12,7 @@ if (!$member = $memberControl->getMemberByRequestUrl($_SERVER["REQUEST_URI"])) {
 if (!$video = $videoControl->getVideoByRequestUrl($_SERVER["REQUEST_URI"])) {
 	include "Site/Root/error/404.php";
 }
-$video->dateCreatedFormatted = date("jS M Y", strtotime($video->dateCreated));
+$video->dateCreatedFormatted = date("jS M Y H:i", strtotime($video->dateCreated));
 
 if (!$wall = $wallControl->getWallWithSecureId($video->wallSecureId)) {
 	throw new RuntimeException("Video SecureID: " . $video->wallSecureId . " linking to non-existing wall");
@@ -20,6 +20,7 @@ if (!$wall = $wallControl->getWallWithSecureId($video->wallSecureId)) {
 
 $memberAuthentication = Factory::getMemberAuthentication();
 $memberUrlHelper = Factory::getMemberUrlHelper();
+$videoUrlHelper = Factory::getVideoUrlHelper();
 
 $memberIsVideoAuthor = false;
 if ($loggedInMemberDataEntity = $memberAuthentication->getLoggedInMemberDataEntity()) {
@@ -29,15 +30,20 @@ if ($loggedInMemberDataEntity = $memberAuthentication->getLoggedInMemberDataEnti
 }
 
 $layout = CoreFactory::getLayout("Site/Template/Default/Main.php");
-$layout->set("Title", "Gawk by " . $member->alias . " / " . $application->registry->get("Title"));
+$layout->set("Title", "gawk by " . $member->alias . " / " . $application->registry->get("Title"));
 $layout->set("Name", $application->registry->get("Title"));
 $layout->set("Section", "profile");
 $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.
 ?>
+<div class="breadcrumb">
+	<a href="/">home</a> / <a title="View profile" href="<?php echo $memberUrlHelper->getProfileUrl($member); ?>">
+		<?php echo $member->alias; ?></a> / <a href="<?php echo $videoUrlHelper->getVideoUrl($video, $member); ?>">view gawk</a> /
+		<?php echo $video->secureId; ?>
+</div>
 <div id="gawk-view">
-	<div><img src="http://dummyimage.com/175x131/000/fff.png&text=gawk+here" /></div>
+	<div><img src="http://dummyimage.com/175x131/000/fff.png&text=video+here" /></div>
 	<ul>
 		<li>
 			by: <a title="View profile" href="<?php echo $memberUrlHelper->getProfileUrl($member); ?>">

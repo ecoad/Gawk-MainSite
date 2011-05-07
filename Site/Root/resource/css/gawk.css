@@ -148,6 +148,14 @@ body {
 	
 }
 
+#main-content .breadcrumb {
+	font-size: 11px;
+	margin-bottom: 10px;
+	padding: 2px;
+	background-color: #F2EFEF;
+}
+
+
 /*
  * GAWK WALL VIEW
  */
@@ -207,7 +215,7 @@ body {
 }
 
 #footer #social ul {
-	width: 360px;
+	width: 400px;
 	margin: 0 auto;
 }
 #footer #social li {

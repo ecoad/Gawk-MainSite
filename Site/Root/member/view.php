@@ -1,6 +1,8 @@
 <?php
 require_once("Application/Bootstrap.php");
 $facebook = Factory::getFacebook($application);
+$memberUrlHelper = Factory::getMemberUrlHelper();
+$videoUrlHelper = Factory::getVideoUrlHelper();
 
 $memberControl = Factory::getMemberControl();
 if (!$member = $memberControl->getMemberByRequestUrl($_SERVER["REQUEST_URI"])) {
@@ -24,7 +26,10 @@ $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.
 ?>
-<div><a href="/">Back to main page</a></div>
+<div class="breadcrumb">
+	<a href="/">home</a> / <a title="View profile" href="<?php echo $memberUrlHelper->getProfileUrl($member); ?>">profile</a> /
+		<?php echo $member->alias; ?>
+</div>
 <div id="public-profile-view" style="display: none;">
 	<h1><?php echo $member->alias; ?></h1>
 <?php
