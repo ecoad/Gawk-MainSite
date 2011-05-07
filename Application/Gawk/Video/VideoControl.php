@@ -106,6 +106,21 @@ class VideoControl extends DataControl {
 		return $videoDataEntity;
 	}
 
+	/**
+	 * Get Video by request URL
+	 * @param string $requestUrl
+	 * @return Video
+	 */
+	public function getVideoByRequestUrl($requestUrl) {
+		$requestPieces = explode("/", trim($requestUrl));
+		$videoSecureId = $requestPieces[4];
+		if (!$videoDataEntity = $this->getVideoDataEntityBySecureId($videoSecureId, true)) {
+			return false;
+		}
+
+		return $videoDataEntity->toObject();
+	}
+
 	public function makeNew() {
 		$videoDataEntity = parent::makeNew();
 		$videoDataEntity->set("SecureId", $this->getRandomSecureId());
@@ -134,12 +149,21 @@ class VideoControl extends DataControl {
 		}
 	}
 
-	public function deleteBySecureId($secureId) {
+	/**
+	 * @param string $secureId
+	 * @param boolean $allowCaseInsensitive
+	 * @return VideoDataEntity
+	 */
+	public function getVideoDataEntityBySecureId($secureId, $allowCaseInsensitive = false) {
 		$filter = CoreFactory::getFilter();
-		$filter->addConditional($this->table, "SecureId", $secureId);
+		$filter->addConditional($this->table, "SecureId", $secureId, $allowCaseInsensitive ? "ILIKE" : "=");
 		$this->setFilter($filter);
 
-		if ($video = $this->getNext()) {
+		return $this->getNext();
+	}
+
+	public function deleteBySecureId($secureId) {
+		if ($video = $this->getVideoDataEntityBySecureId($secureId)) {
 			$this->delete($video->get("Id"));
 			return true;
 		}

@@ -1,12 +1,13 @@
 <?php
 require_once("Application/Bootstrap.php");
 $facebook = Factory::getFacebook($application);
+$memberControl = Factory::getMemberControl();
 
 if (!$member = $memberControl->getMemberByRequestUrl($_SERVER["REQUEST_URI"])) {
 	include "Site/Root/error/404.php";
 }
 
-$videoControl = Factory::getMemberControl();
+$videoControl = Factory::getVideoControl();
 if (!$video = $videoControl->getVideoByRequestUrl($_SERVER["REQUEST_URI"])) {
 	include "Site/Root/error/404.php";
 }
@@ -30,6 +31,7 @@ $layout->start("Main");
 ?>
 <div><a href="/">Back to Wall</a></div>
 <div id="gawk-view" style="display: none;">
+	Insert gawk here
 </div>
 <?php
 $layout->start("JavaScript");
