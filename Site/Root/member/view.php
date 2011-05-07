@@ -43,7 +43,7 @@ if ($memberIsOnOwnMemberPage) {
 		<a href="#" class="logged-in" style="display: none;">Befriend</a>
 		<a href="/member/login/" class="logged-out" style="display: none;">Login to add friends</a>
 	</div>
-	<?php echo $member->profileVideoLocation; ?>
+	<?php var_dump($member); ?>
 
 	<div class="recent-gawks">
 		<h2>Recent Gawks</h2>

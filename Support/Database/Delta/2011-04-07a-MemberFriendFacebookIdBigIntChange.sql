@@ -1,0 +1,1 @@
+ALTER TABLE "MemberFriend" ALTER "FriendFacebookId" TYPE bigint;
