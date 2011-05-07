@@ -5,7 +5,7 @@ $memberUrlHelper = Factory::getMemberUrlHelper();
 $videoUrlHelper = Factory::getVideoUrlHelper();
 
 $memberControl = Factory::getMemberControl();
-if (!$member = $memberControl->getMemberByRequestUrl($_SERVER["REQUEST_URI"])) {
+if (!$member = $memberControl->getMemberByRequestUrl($_SERVER["REQUEST_URI"], true)) {
 	include "Site/Root/error/404.php";
 }
 
@@ -44,6 +44,22 @@ if ($memberIsOnOwnMemberPage) {
 		<a href="/member/login/" class="logged-out" style="display: none;">Login to add friends</a>
 	</div>
 	<?php var_dump($member); ?>
+	<div class="friends">
+		<h2>Friends</h2>
+		<ul>
+<?php
+foreach ($member->friends as $friend) {
+?>
+			<li>
+				<a href="<?php echo $memberUrlHelper->getProfileUrl($friend); ?>" title="View profile">
+					<?php echo $friend->alias; ?>
+				</a>
+			</li>
+<?php
+}
+?>
+		</ul>
+	</div>
 
 	<div class="recent-gawks">
 		<h2>Recent Gawks</h2>
