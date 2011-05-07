@@ -68,14 +68,14 @@ class MemberWallBookmarkControl extends DataControl {
 		}
 
 		$wallControl = Factory::getWallControl();
-		if (!$wallDataEntity = $wallControl->getWallWithSecureId($wallSecureId)) {
+		if (!$wall = $wallControl->getWallWithSecureId($wallSecureId)) {
 			$this->errorControl->addError("Invalid Wall secure ID", "InvalidWallSecureId");
 			return false;
 		}
 
 		$memberWallBookmarkDataEntity = $this->makeNew();
 		$memberWallBookmarkDataEntity->set("MemberSecureId", $memberDataEntity->get("SecureId"));
-		$memberWallBookmarkDataEntity->set("WallSecureId", $wallDataEntity->get("SecureId"));
+		$memberWallBookmarkDataEntity->set("WallSecureId", $wall->secureId);
 		if ($memberWallBookmarkDataEntity->save()) {
 			return true;
 		}
@@ -105,13 +105,13 @@ class MemberWallBookmarkControl extends DataControl {
 	 */
 	public function getWallBookmarked(CustomMemberDataEntity $memberDataEntity, $wallSecureId) {
 		$wallControl = Factory::getWallControl();
-		if (!$wallDataEntity = $wallControl->getWallWithSecureId($wallSecureId)) {
+		if (!$wall = $wallControl->getWallWithSecureId($wallSecureId)) {
 			$this->errorControl->addError("Invalid Wall secure ID", "InvalidWallSecureId");
 			return false;
 		}
 
 		$filter = CoreFactory::getFilter();
-		$filter->addConditional($this->table, "WallSecureId", $wallDataEntity->get("SecureId"));
+		$filter->addConditional($this->table, "WallSecureId", $wall->secureId);
 		$filter->addConditional($this->table, "MemberSecureId", $memberDataEntity->get("SecureId"));
 		$this->setFilter($filter);
 

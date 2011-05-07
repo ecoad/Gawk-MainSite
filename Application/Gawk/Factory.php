@@ -111,6 +111,14 @@ class Factory {
 	}
 
 	/**
+	 * @return MemberUrlHelper
+	 */
+	static function getMemberUrlHelper() {
+		require_once "Member/MemberUrlHelper.php";
+		return new MemberUrlHelper();
+	}
+
+	/**
 	 * @return MemberWebService
 	 */
 	static function getMemberWebService() {
@@ -172,6 +180,14 @@ class Factory {
 	public static function getFlashWebService() {
 		require_once "Gawk/Platform/Flash/WebService/FlashWebService.php";
 		return new FlashWebService();
+	}
+
+	/**
+	 * @return VideoUrlHelper
+	 */
+	static function getVideoUrlHelper() {
+		require_once "Video/VideoUrlHelper";
+		return new VideoUrlHelper();
 	}
 
 }

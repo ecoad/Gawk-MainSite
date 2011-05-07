@@ -51,7 +51,7 @@ class WallControl extends DataControl {
 		}
 
 		$wallControl = Factory::getWallControl();
-		if (!$wallDataEntity = $wallControl->getWallWithSecureId($wallSecureId)) {
+		if (!$wall = $wallControl->getWallWithSecureId($wallSecureId)) {
 			$this->errorControl->addError("Invalid Wall secure ID", "InvalidWall");
 			return false;
 		}
@@ -106,6 +106,9 @@ class WallControl extends DataControl {
 		return $videos;
 	}
 
+	/**
+	 * @param Filter $filter
+	 */
 	protected function getVideoFilter(Filter $filter = null) {
 		if (!$filter) {
 			$filter = CoreFactory::getFilter();
@@ -176,10 +179,13 @@ class WallControl extends DataControl {
 
 	/**
 	 * @param string $wallSecureId
-	 * @return WallDataEntity Wall
+	 * @return Wall
 	 */
 	public function getWallWithSecureId($wallSecureId) {
-		return $this->itemByField($wallSecureId, "SecureId");
+		if (!$wallDataEntity = $this->itemByField($wallSecureId, "SecureId")) {
+			return false;
+		}
+		return $wallDataEntity->toObject();
 	}
 
 	public function getWallByRequestUrl($requestUrl) {
