@@ -20,12 +20,19 @@ class FlashWebService {
 
 		switch($method) {
 			case self::SERVICE_INIT_APPLICATION:
-				$_GET["PreviousRunTime"] = $this->application->defaultValue($_GET["PreviousRunTime"], null);
+				$getData["PreviousRunTime"] = $this->application->defaultValue($getData["PreviousRunTime"], null);
 				$wallControl = Factory::getWallControl();
-				if (isset($_GET["WallSecureId"]) && ($_GET["WallSecureId"] != "")) {
-					$response->videos = $wallControl->getVideosByWallSecureId($_GET["WallSecureId"], $_GET["PreviousRunTime"]);
-				} else {
-					$response->videos = $wallControl->getVideosByMainWall();
+
+				switch ($getData["WallSecureId"]) {
+					case "main-wall":
+						$response->videos = $wallControl->getVideosByMainWall();
+						break;
+					case "favourite-gawks":
+						$response->videos = $wallControl->getVideosByFriends();
+						break;
+					default:
+						$response->videos = $wallControl->getVideosByWallSecureId($getData["WallSecureId"], $getData["PreviousRunTime"]);
+						break;
 				}
 
 				$response->previousRunTime = strtotime($this->application->getCurrentUtcDateTime());

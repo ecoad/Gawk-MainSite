@@ -16,7 +16,7 @@ function GawkView(config) {
 		element.find("h3").find("span.name").html(wall.name);
 		element.find("p.description").html(wall.description);
 
-		if (wall.url == "/") {
+		if (config.isWallSecureIdSystem(wall.secureId)) {
 			bookmarkLink.hide();
 		} else {
 			bookmarkLink.show();
@@ -40,7 +40,7 @@ function GawkView(config) {
 
 		element.find(".record").bind("click", function (event) {
 			if (loggedIn) {
-				if (wall.url == "/") {
+				if (config.isWallSecureIdSystem(wall.secureId)) {
 					$(document).trigger("GawkMainWallDenyOverlayShow");
 				} else {
 					document.getElementById(swfObjectId).recordNewFromExternal();

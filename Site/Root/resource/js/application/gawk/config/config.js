@@ -36,4 +36,14 @@ function Config(configData) {
 	Config.prototype.getInitView = function() {
 		return initView;
 	};
+
+	Config.prototype.isWallSecureIdSystem = function(wallSecureId) {
+		switch (wallSecureId) {
+			case "main-wall":
+			case "favourite-gawks":
+				return true;
+				break;
+		};
+		return false;
+	};
 }

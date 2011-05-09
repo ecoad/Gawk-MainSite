@@ -17,6 +17,8 @@
 	AliasMatch ^/u/(.*)/edit @ProjectPath@/Site/Root/member/edit.php
 	AliasMatch ^/u/(.*) @ProjectPath@/Site/Root/member/view.php
 	AliasMatch ^/booth/(.*) @ProjectPath@/Site/Root/booth/$1
+	AliasMatch ^/contact/thanks @ProjectPath@/Site/Root/contact/thanks.php
+	AliasMatch ^/contact(.*) @ProjectPath@/Site/Root/contact/index.php
 	AliasMatch ^/(.*) @ProjectPath@/Site/Root/index.php
 
 	php_admin_value include_path ".:@ProjectPath@:@ProjectPath@/Application:@ProjectPath@/Site/Root:/usr/share/php"
