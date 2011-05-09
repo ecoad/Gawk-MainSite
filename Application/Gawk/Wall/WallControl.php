@@ -41,11 +41,12 @@ class WallControl extends DataControl {
 
 	/**
 	 * @param string $wallSecureId
+	 * @param integer $previousRunTime
 	 * @param integer $currentPage
 	 * @param integer $pageLength
 	 * @return array Videos
 	 */
-	public function getVideosByWallSecureId($wallSecureId, $currentPage = 1, $pageLength = -1) {
+	public function getVideosByWallSecureId($wallSecureId, $previousRunTime = null, $currentPage = 1, $pageLength = -1) {
 		if ($pageLength == -1) {
 			$pageLength = $this->application->registry->get("Wall/DefaultLength");
 		}
@@ -60,11 +61,15 @@ class WallControl extends DataControl {
 		$filter = $this->getVideoFilter();
 		$filter->addOrder("DateCreated", true);
 		$filter->addConditional($videoControl->table, "WallSecureId", $wallSecureId);
+		if ($previousRunTime !== null) {
+			$filter->addConditional($videoControl->table, "DateCreated", gmdate("Y-m-d H:i:s", $previousRunTime), ">=");
+		}
 		$filter->addLimit($this->application->registry->get("Wall/DefaultLength"));
 		$videoControl->setFilter($filter);
 		$videos = array();
+		$this->application->log("PRE ///" . $previousRunTime . "\\\ ", "sql");
 		while ($videoDataEntity = $videoControl->getPage($currentPage, $pageLength)) {
-			$videos[] = $videoDataEntity->toObject();
+			$videos[] = $videoDataEntity->toObject($previousRunTime);
 		}
 
 		return $videos;

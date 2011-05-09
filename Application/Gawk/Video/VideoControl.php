@@ -99,7 +99,10 @@ class VideoControl extends DataControl {
 		}
 		foreach ((array)$video as $key => $value) {
 			if (($value !== null) && ($value !== "") && is_scalar($value)) {
-				$videoDataEntity->set(ucfirst($key), $value);
+				$fieldCamelCase = ucfirst($key);
+				if (isset($this->fieldMeta[$fieldCamelCase])) {
+					$videoDataEntity->set($fieldCamelCase, $value);
+				}
 			}
 		}
 

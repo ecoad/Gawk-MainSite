@@ -38,7 +38,7 @@ function GawkView(config) {
 		$(document).bind("GawkModelGetRecentWallActivityResponse", onRecentWallActivityResponse);
 		$(document).bind("GawkMainWallDenyOverlayShow", onGawkMainWallDenyOverlay);
 
-		element.find(".record").bind("click", function () {
+		element.find(".record").bind("click", function (event) {
 			if (loggedIn) {
 				if (wall.url == "/") {
 					$(document).trigger("GawkMainWallDenyOverlayShow");
@@ -48,6 +48,8 @@ function GawkView(config) {
 			} else {
 				$(document).trigger("GawkUILoginOverlayShow");
 			}
+
+			event.preventDefault();
 		});
 		element.find("h3").find("span.bookmark").click(onBookmarkClick);
 		$("select[name=SelectWall]").change(onWallSelectChange);

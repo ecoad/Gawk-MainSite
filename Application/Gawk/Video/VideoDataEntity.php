@@ -5,7 +5,7 @@ class VideoDataEntity extends DataEntity {
 	/**
 	 * @return Video
 	 **/
-	public function toObject() {
+	public function toObject($previousRunTime = null) {
 		$array = array();
 		foreach ($this->data as $k => $v) {
 			switch($this->control->fieldMeta[$k]->type) {
@@ -23,8 +23,13 @@ class VideoDataEntity extends DataEntity {
 			$video->member = $memberDataEntity->toObject();
 		}
 
-		$video->dateCreatedTime = strtotime($video->dateCreated);
 
+		$this->control->application->log("ZZZ ..." . $previousRunTime . "...", "sql");
+		if ($previousRunTime !== null) {
+			$date = new DateTime($video->dateCreated, new DateTimeZone("UTC"));
+			$this->control->application->log("JIM " . $video->dateCreated . " " . $date->format("U") . " " . $previousRunTime . "+++JOHN", "sql");
+			$video->newVideoAfterInit = ($date->format("U") > $previousRunTime); //Convert times to same timezone
+		}
 		return $video;
 	}
 }

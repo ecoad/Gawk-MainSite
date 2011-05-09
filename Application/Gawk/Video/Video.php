@@ -15,6 +15,7 @@ class Video {
 	public $approved = false;
 	public $rating = 0;
 	public $dateCreated = "";
+	public $newVideoAfterInit = false;
 
 	public function __construct($videoData = null) {
 		$this->member = new Member();

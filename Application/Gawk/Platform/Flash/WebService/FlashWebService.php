@@ -20,19 +20,20 @@ class FlashWebService {
 
 		switch($method) {
 			case self::SERVICE_INIT_APPLICATION:
+				$_GET["PreviousRunTime"] = $this->application->defaultValue($_GET["PreviousRunTime"], null);
 				$wallControl = Factory::getWallControl();
 				if (isset($_GET["WallSecureId"]) && ($_GET["WallSecureId"] != "")) {
-					$response->videos = $wallControl->getVideosByWallSecureId($_GET["WallSecureId"]);
+					$response->videos = $wallControl->getVideosByWallSecureId($_GET["WallSecureId"], $_GET["PreviousRunTime"]);
 				} else {
 					$response->videos = $wallControl->getVideosByMainWall();
 				}
 
+				$response->previousRunTime = strtotime($this->application->getCurrentUtcDateTime());
 				if (is_array($response->videos)) {
 					$response->success = true;
 
-					$response->serverTime = time();
-					$response->videosHash = md5(json_encode($response->videos));
-					$response->updatePollLength = $this->application->registry->get("Wall/DefaultWallPollLength");
+					//$response->updatePollLength = $this->application->registry->get("Wall/DefaultWallPollLength");
+					$response->updatePollLength = 10000;
 
 					$response->mediaServerLocation = $this->application->registry->get("MediaServer/Address");
 					$response->binaryLocation = $this->application->registry->get("Site/Address") . "/resource/binary/";

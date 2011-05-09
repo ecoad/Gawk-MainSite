@@ -37,11 +37,10 @@ class WallWebService {
 				if ($method == self::SERVICE_GET_VIDEOS_BY_MAIN_WALL) {
 					$videos = $wallControl->getVideosByMainWall();
 				} else {
-					$videos = $wallControl->getVideosByWallSecureId($getData["WallSecureId"]);
+					$videos = $wallControl->getVideosByWallSecureId($getData["WallSecureId"], $_GET["PreviousRunTime"]);
 				}
 				if (is_array($videos)) {
 					$response->videos = $videos;
-					$response->videosHash = md5(json_encode($videos));
 					$response->success = true;
 					$response->updatePollLength = $this->application->registry->get("Wall/DefaultWallPollLength");
 				}
