@@ -2,8 +2,8 @@ function Gawk(configData) {
 	var global = this;
 	var config = new Config(configData);
 
-	var gawkView, wallSelectView, wallEditView, publicProfileView, profileEditView, loginView, loginWidget, navigationWidget, memberControl,
-		memberRecentWallsControl;
+	var gawkView, memberWallBookmarkControl, wallSelectView, wallEditView, publicProfileView, profileEditView, loginView,
+		loginWidget, navigationWidget, memberControl, memberRecentWallsControl;
 
 	function init() {
 		initModels();
@@ -25,6 +25,10 @@ function Gawk(configData) {
 
 		try {
 			wallControl = new WallControl(config, memberControl);
+		} catch (e) {}
+
+		try {
+			memberWallBookmarkControl = new MemberWallBookmarkControl(config);
 		} catch (e) {}
 	}
 

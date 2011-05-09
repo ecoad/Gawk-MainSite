@@ -59,7 +59,7 @@ function GawkView(config) {
 		element.show();
 		gawkFlashVars = {
 			apiLocation: config.getApiLocation(),
-			wallId: config.getWall().secureId
+			wallId: wall.secureId
 		};
 
 		var params = {};
@@ -75,6 +75,8 @@ function GawkView(config) {
 	}
 
 	function onRecentWallActivityResponse(event, response) {
+		//TODO: Refactor
+
 		var recentActivity = response.recentActivity;
 		element.find("div.wall-select").show();
 		var select = element.find("div.wall-select").find("select[name=SelectWall]");
@@ -94,7 +96,6 @@ function GawkView(config) {
 		mainOptionGroup.append(favouritedOption);
 
 		select.append(mainOptionGroup);
-
 
 		if (recentActivity.wallsCreatedByMember.length > 0) {
 			var myWallsOptionGroup = $("<optgroup>").attr("label", "my walls");
@@ -127,16 +128,32 @@ function GawkView(config) {
 
 		var createWallOption = $("<option>").attr("value", "/wall/").html("create a wall&hellip;");
 		select.append(createWallOption);
+
+		setWallBookmarkState(recentActivity.bookmarks);
+	}
+
+	function setWallBookmarkState(memberBookmarks) {
+		element.find("h3").find("span.bookmark").removeClass("selected");
+		$(memberBookmarks).each(function(index, bookmark) {
+			if (bookmark.secureId == wall.secureId) {
+				element.find("h3").find("span.bookmark").addClass("selected");
+				return false;
+			}
+		});
 	}
 
 	function onBookmarkClick(event) {
 		event.preventDefault();
-		$.post(config.getApiLocation(), {
-			Action: "MemberWallBookmark.AddWallBookmark",
-			WallSecureId: wall.secureId
-		}, function() {
-			console.debug("hi");
-		}, "json");
+
+		var isAlreadyBookmarked = element.find("h3").find("span.bookmark").hasClass("selected");
+
+		if (isAlreadyBookmarked) {
+			element.find("h3").find("span.bookmark").removeClass("selected");
+			$(document).trigger("GawkUIMemberWallBookmarkRemoveRequest", wall.secureId);
+		} else {
+			element.find("h3").find("span.bookmark").addClass("selected");
+			$(document).trigger("GawkUIMemberWallBookmarkAddRequest", wall.secureId);
+		}
 	}
 
 	function onLoggedIn() {
