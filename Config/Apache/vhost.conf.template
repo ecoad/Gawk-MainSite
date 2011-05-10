@@ -9,6 +9,7 @@
 	AliasMatch ^/favicon.ico @ProjectPath@/Site/Root/favicon.ico
 	AliasMatch ^/robots.txt @ProjectPath@/Site/Root/robots.txt
 	AliasMatch ^/deploy-info.json @ProjectPath@/Site/Root/deploy-info.json
+	AliasMatch ^/account(.*) @ProjectPath@/Site/Root/account$1
 	AliasMatch ^/admin(.*) @ProjectPath@/Site/Root/admin$1
 	AliasMatch ^/api(.*) @ProjectPath@/Site/Root/api$1
 	AliasMatch ^/error(.*) @ProjectPath@/Site/Root/error$1

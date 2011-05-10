@@ -9,7 +9,7 @@ class WallControl extends DataControl {
 	public $defaultOrder = "Id";
 	public $searchFields = array("Id");
 	protected $reservedUrls = array("wall", "friends", "starred", "favourite-gawks", "favourited", "admin", "api", "u",
-		"booth", "favicon.ico", "deploy-info.json", "robots.txt", "contact");
+		"booth", "favicon.ico", "deploy-info.json", "robots.txt", "contact", "account");
 
 	public function init() {
 		$this->fieldMeta["Id"] = new FieldMeta(

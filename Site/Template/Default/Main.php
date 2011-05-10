@@ -48,7 +48,6 @@ echo $cssAggregator->output();
 ?>
 		<link rel="stylesheet" type="text/css" href="/resource/css/layout/social-media.css?v=@VERSION-NUMBER@" media="all" />
 		<link rel="stylesheet" type="text/css" href="/resource/css/box.css?v=@VERSION-NUMBER@" media="all" />
-  	<link rel="stylesheet" type="text/css" href="/resource/css/reset.css?v=@VERSION-NUMBER@" media="all" />
   	<link rel="stylesheet" type="text/css" href="/resource/css/gawk.css?v=@VERSION-NUMBER@" media="all" />
 		<!--[if lt IE 7]>
 			<script src="/resource/js/browser/internet-explorer/DD_roundies/DD_roundies.js?v=@VERSION-NUMBER@" type="text/javascript"></script>
