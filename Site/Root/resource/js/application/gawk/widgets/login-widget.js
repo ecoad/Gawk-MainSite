@@ -16,8 +16,9 @@ function LoginWidget() {
 		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
 		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
 		$(document).bind("GawkUILoginOverlayShow", onLoginOverlayShow);
-		$(document).bind("GawkLoggingInOverlayShow", onLoggingInOverlayShow);
-		$(document).bind("GawkLoggingOutOverlayShow", onLoggingOutOverlayShow);
+		$(document).bind("GawkUILoggingInOverlayShow", onLoggingInOverlayShow);
+		$(document).bind("GawkUILoggingOutOverlayShow", onLoggingOutOverlayShow);
+		$(document).bind("GawkUILoggingOutOverlayShow", onLoggingOutOverlayShow);
 
 //		siteLoginLink.click(onSiteLoginClick);
 //		siteRegisterLink.click(onSiteRegisterClick);
@@ -46,7 +47,7 @@ function LoginWidget() {
 
 	function onLogOutClick(event) {
 		event.preventDefault;
-		$(document).trigger("GawkLoggingOutOverlayShow");
+		$(document).trigger("GawkUILoggingOutOverlayShow");
 		$(document).trigger("GawkUILogoutRequest");
 	}
 

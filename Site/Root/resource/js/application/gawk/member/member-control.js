@@ -51,7 +51,7 @@ function MemberControl (config) {
 			Action: "Member.Login",
 			FacebookId: facebookId
 		}, function() {
-			$(document).trigger("GawkLoggingInOverlayShow");
+			$(document).trigger("GawkUILoggingInOverlayShow");
 			window.location.reload();
 		}, "json");
 	}

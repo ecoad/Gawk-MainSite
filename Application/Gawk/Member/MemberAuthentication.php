@@ -238,6 +238,9 @@ class MemberAuthentication {
 	public function isRequestLogInOnly($requestUri) {
 		switch (true) {
 			case ($requestUri == "/wall/"):
+			case ($requestUri == "/starred"):
+			case ($requestUri == "/friends"):
+			case ($requestUri == "/profile/edit"):
 				return true;
 				break;
 		}
