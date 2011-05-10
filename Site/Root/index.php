@@ -6,6 +6,10 @@ $wallControl = Factory::getWallControl();
 if (!$wall = $wallControl->getWallByRequestUrl($_SERVER["REQUEST_URI"])) {
 	include "Site/Root/error/404.php";
 }
+$memberAuthentication = Factory::getMemberAuthentication();
+if ($memberAuthentication->isRequestLogInOnly($_SERVER["REQUEST_URI"]) &&  !$memberAuthentication->isLoggedIn()) {
+	$application->redirect("/?Login");
+}
 
 $layout = CoreFactory::getLayout("Site/Template/Default/Main.php");
 $layout->set("Title", $application->registry->get("Title"));

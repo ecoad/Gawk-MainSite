@@ -133,14 +133,13 @@ class MemberAuthentication {
 		}
 		if ($token) {
 			if ($memberDataEntity = $this->memberControl->getMemberDataEntityByToken($token, false)) {
-				$memberDataEntity->set("Token", $this->generateToken());
 				$this->memberControl->updateField($memberDataEntity, "Token", "");
-				if ($memberDataEntity->get("FacebookId") != "") {
-					return $this->revokeFacebookSession();
-				}
 				try {
 					session_destroy();
 				} catch (Exception $exception) {
+				}
+				if ($memberDataEntity->get("FacebookId") != "") {
+					return $this->revokeFacebookSession();
 				}
 				return true;
 			} else {
@@ -227,6 +226,23 @@ class MemberAuthentication {
 		} else {
 			$this->errorControl->addError("Could not get Facebook session");
 		}
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isLoggedIn() {
+		return isset($_SESSION["Token"]);
+	}
+
+	public function isRequestLogInOnly($requestUri) {
+		switch (true) {
+			case ($requestUri == "/wall/"):
+				return true;
+				break;
+		}
+
+		return false;
 	}
 
 	/**

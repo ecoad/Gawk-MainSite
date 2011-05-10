@@ -98,6 +98,10 @@ include "Site/Template/Default/Widget/Footer.php";
 				<h3>logging in&hellip;</h3>
 				<p>please wait a moment while we log you in</p>
 			</div>
+			<div class="overlay" id="logging-out-overlay">
+				<h3>logging out&hellip;</h3>
+				<p>please wait a moment while we log you out</p>
+			</div>
 		</div>
 		<script type="text/javascript" src="/resource/js/jquery/jquery.js?v=@VERSION-NUMBER@"></script>
 		<script type="text/javascript" src="/resource/js/jquery/jquery.json-2.2.js?v=@VERSION-NUMBER@"></script>

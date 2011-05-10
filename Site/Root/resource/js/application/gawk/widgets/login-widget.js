@@ -2,10 +2,8 @@ function LoginWidget() {
 	var global = this;
 
 	var element = $(".login-widget");
-	(element.length == 0) ? alert("#login-widget not found") : "";
 
 	var loggedInElement = element.find(".logged-in");
-	(loggedInElement.length == 0) ? alert(".logged-in not found") : "";
 
 	var loggedOutElement = element.find(".logged-out");
 
@@ -19,10 +17,15 @@ function LoginWidget() {
 		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
 		$(document).bind("GawkUILoginOverlayShow", onLoginOverlayShow);
 		$(document).bind("GawkLoggingInOverlayShow", onLoggingInOverlayShow);
+		$(document).bind("GawkLoggingOutOverlayShow", onLoggingOutOverlayShow);
 
 //		siteLoginLink.click(onSiteLoginClick);
 //		siteRegisterLink.click(onSiteRegisterClick);
 		logOutLink.click(onLogOutClick);
+
+		if (window.location.search == "?Login") {
+			$(document).trigger("GawkUILoginOverlayShow");
+		}
 	}
 
 	/*
@@ -43,7 +46,7 @@ function LoginWidget() {
 
 	function onLogOutClick(event) {
 		event.preventDefault;
-
+		$(document).trigger("GawkLoggingOutOverlayShow");
 		$(document).trigger("GawkUILogoutRequest");
 	}
 
@@ -78,6 +81,10 @@ function LoginWidget() {
 
 	function onLoggingInOverlayShow() {
 		$.box.show({content: $("#logging-in-overlay")});
+	}
+
+	function onLoggingOutOverlayShow() {
+		$.box.show({content: $("#logging-out-overlay")});
 	}
 
 	assignEventListeners();
