@@ -46,6 +46,7 @@ if ($_SESSION["Style"] == "large") {
 echo $cssAggregator->output();
 */
 ?>
+		<link rel="stylesheet" type="text/css" href="/resource/css/reset.css?v=@VERSION-NUMBER@" media="all" />
 		<link rel="stylesheet" type="text/css" href="/resource/css/layout/social-media.css?v=@VERSION-NUMBER@" media="all" />
 		<link rel="stylesheet" type="text/css" href="/resource/css/box.css?v=@VERSION-NUMBER@" media="all" />
   	<link rel="stylesheet" type="text/css" href="/resource/css/gawk.css?v=@VERSION-NUMBER@" media="all" />
