@@ -1,0 +1,181 @@
+/******************************************/
+/* CSS powered by clock - www.clock.co.uk */
+/******************************************/
+
+
+/**
+ * Global Styles
+ */
+
+@font-face {
+  font-family: "Francois One";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Francois One"), local("FrancoisOne"), url("http://themes.googleusercontent.com/font?kit=bYbkq2nU2TSx4SwFbz5sCKRDOzjiPcYnFooOUGCOsRk") format("woff");
+}
+
+/**
+ * Global Styles
+ */
+
+body {
+	background-color: #AEE0E8;
+}
+
+#container {
+}
+
+#wrapper {
+}
+
+
+/**
+ * Header
+ */
+
+#main-header {
+}
+
+
+/**
+ * Main Navigation
+ */
+
+#navigation {
+}
+
+
+/**
+ * Main Content
+ */
+
+#main-content {
+}
+
+#main-content:after {
+	content: '';
+	position: fixed;
+	right: 0px;
+	bottom: 25px;
+	
+	display: block;
+	width: 229px;
+	height: 229px;
+	
+	background-image: url("/resource/image/booth/illustration.png");
+	background-position: right bottom;
+	background-repeat: no-repeat;
+}
+
+
+/**
+ * Footer
+ */
+
+#footer {
+	background-color: #000000;
+}
+
+#footer ul {
+	position: relative;
+	width: 940px;
+	height: 21px;
+	padding: 0px 0px 0px 0px;
+	margin: 0px auto 0px auto;
+}
+
+#footer li {
+	position: absolute;
+	height: 24px;
+	line-height: 27px;
+	font-size: 11px;
+	color: #FFFFFF;
+	
+	background-position: right top;
+	background-repeat: no-repeat;
+}
+
+#footer .clock {
+	left: 0px;
+	padding-right: 67px;
+	background-image: url("/resource/image/booth/clock.gif");
+}
+
+#footer li span {
+	display: block;
+	text-indent: -9999px;
+}
+
+#footer .gawkwall {
+	right: 0px;
+	padding-right: 100px;
+	background-image: url("/resource/image/booth/gawkwall.gif");
+}
+
+
+/**
+ * Styles for generic HTML elements
+ */
+
+em {
+	text-transform: uppercase;
+}
+
+h1, h2, h3, h4, h5 {
+	color: #000000;
+	letter-spacing: -0.5px;
+	font-family: "Francois One", Arial, Helvetica, sans-serif;
+}
+
+h1 {
+	font-size: 44px;
+	margin-bottom: 30px;
+}
+
+h2 {
+	font-size: 22px;
+	margin-bottom: 20px;
+}
+
+
+/**
+ * Main Content
+ */
+
+/* p, ul, li,  */
+
+#main-content p {
+	margin-bottom: 10px;
+	line-height: 1.4em;
+}
+
+#main-content ul {
+	margin-bottom: 15px;
+}
+
+#main-content li {
+	margin-bottom: 3px;
+	line-height: 1.4em;
+	list-style: disc;
+	list-style-position: inside;
+}
+
+
+/**
+ * General Classes
+ */
+
+.column {
+	float: left;
+	border-top: 8px solid #000000;
+	padding-top: 10px;
+}
+
+.secondary {
+}
+
+.introduction {
+	width: 30%;
+	margin-right: 5%;
+	margin-bottom: 30px;
+}

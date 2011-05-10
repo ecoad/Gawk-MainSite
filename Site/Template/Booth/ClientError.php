@@ -22,7 +22,7 @@ if ($_SESSION["Style"] != "high-contrast") {
 	// If you need to add stylesheets add them below.
 	$cssAggregator->collect(
 		array(
-			"/resource/css/reset.css",
+			"/resource/css/base.css",
 			"/resource/css/structure.css",
 			"/resource/css/global.css"
 		)

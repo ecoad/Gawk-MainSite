@@ -7,12 +7,40 @@
  */
 
 form {
+	background-color: rgba(255,255,255,0.25);
+	
+	-webkit-border-radius: 10px 10px 10px 10px;
+	   -moz-border-radius: 10px 10px 10px 10px;
+	     -o-border-radius: 10px 10px 10px 10px;
+	        border-radius: 10px 10px 10px 10px;
+}
+
+form small {
+	clear: both;
 }
 
 fieldset {
+	position: relative;
+	float: left;
+	width: 100%;
 }
 
 fieldset legend {
+}
+
+
+/**
+ * Portal Styles
+ */
+
+.portal {
+	float: left;
+	width: 55%;
+	padding: 4% 5% 4% 5%;
+}
+
+.portal fieldset {
+	margin-bottom: 25px;
 }
 
 
@@ -25,20 +53,14 @@ form .label {
 	float: left;
 	clear: both;
 	width: 100%;
-	margin: 6px 0px 6px 0px;
+	height: 0px;
+	margin: 0px 0px 0px 0px;
 	position: relative;
+	text-indent: -9999px;
 }
 
 form label strong,
 form .label strong {
-	display: block;
-	padding-right: 20px;
-	float: left;
-	font-weight: normal;
-	text-align: right;
-	line-height: 1.9em;
-	width: 150px;
-	position: relative;
 }
 
 
@@ -49,19 +71,25 @@ form .label strong {
 /* .button */
 
 .button {
-	font-style: italic;
-	cursor: pointer;
-	padding: 5px 8px 5px 8px;
-	border: 1px solid #666666;
+	float: left;
   width: auto; /* prevents ie6/7 from adding too much left and right padding */
+	padding: 0px 12px 0px 12px;
+	
+	height: 34px;
+	border: none;
   overflow: visible; /* prevents ie6/7 from adding too much left and right padding */
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  border-top-left-radius: 6px;
-	border-top-right-radius: 6px;
-	border-bottom-right-radius: 6px;
-	border-bottom-left-radius: 6px;
-	background-color: #F2F2F2;
+
+	font-family: "Francois One", Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+	text-transform: uppercase;
+	background-color: #00ADEE;
+	
+	cursor: pointer;
+	
+	-webkit-border-radius: 5px 5px 5px 5px;
+	   -moz-border-radius: 5px 5px 5px 5px;
+	     -o-border-radius: 5px 5px 5px 5px;
+	        border-radius: 5px 5px 5px 5px;
 }
 
 .button:hover {
@@ -72,26 +100,37 @@ form .label strong {
 /* .textbox, select */
 
 .textbox, select {
-	border: 1px solid #CCCCCC;
-	background-color: #FFFFFF !important; /* sorts out iIE6/7 google toolbar overwriting the background colour issue  */
+	height: 24px;
+	margin: 0px 12px 0px 0px;
+	border: none;
+	outline: none;
+	
+	-webkit-box-shadow: 0px 0px 0px 1px rgba(182,213,234,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
+	   -moz-box-shadow: 0px 0px 0px 1px rgba(182,213,234,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
+	     -o-box-shadow: 0px 0px 0px 1px rgba(182,213,234,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
+	        box-shadow: 0px 0px 0px 1px rgba(182,213,234,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
+	
+	-webkit-border-radius: 5px 5px 5px 5px;
+	   -moz-border-radius: 5px 5px 5px 5px;
+	     -o-border-radius: 5px 5px 5px 5px;
+	        border-radius: 5px 5px 5px 5px;
 }
 
 .textbox {
-	padding: 6px 6px 6px 6px;
+	float: left;
+	padding: 5px 10px 5px 10px;
 }
 
 select {
 	padding: 5px 6px 5px 6px;
 }
 
-.textbox:hover, select:hover {
-	border: 1px solid #666666;
-	background-color: #CCCCCC !important; /* sorts out iIE6/7 google toolbar overwriting the background colour issue  */
-}
-
+.textbox:hover, select:hover,
 .textbox:focus, select:focus {
-	border: 1px solid #666666;
-	background-color: #EAEAEA !important; /* sorts out iIE6/7 google toolbar overwriting the background colour issue  */
+	-webkit-box-shadow: 0px 0px 0px 1px rgba(110,181,229,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
+	   -moz-box-shadow: 0px 0px 0px 1px rgba(110,181,229,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
+	     -o-box-shadow: 0px 0px 0px 1px rgba(110,181,229,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
+	        box-shadow: 0px 0px 0px 1px rgba(110,181,229,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
 }
 
 /* .textbox widths */
@@ -113,7 +152,7 @@ form .medium {
 }
 
 form .wide {
-	width: 488px;
+	width: 416px;
 }
 
 form .max {
@@ -233,20 +272,35 @@ form h3 {
  * .form-errors
  */
 
-.form-errors {
-	background-color: #FFC0C0;
-	padding: 20px 20px 20px 20px;
-	margin: 0px 0px 40px 0px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
-	border-bottom-left-radius: 10px;
+.error {
+	position: absolute;
+	top: 46px;
+	
+	width: 406px;
+	padding: 10px 15px 0px 15px;
+	
+	color: #FFFFFF;
+	background-color: #000000;
+	
+	-webkit-border-radius: 5px 5px 5px 5px;
+	   -moz-border-radius: 5px 5px 5px 5px;
+	     -o-border-radius: 5px 5px 5px 5px;
+	        border-radius: 5px 5px 5px 5px;
 }
 
-.form-errors h2 {
-	color: #FF0000;
+.error:before {
+	content: '';
+	position: absolute;
+	top: -11px;
+	left: 15px;
+	
+	display: block;
+	width: 15px;
+	height: 11px;
+	
+	background-image: url("/resource/image/booth/tooltip.png");
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
 }
 
 /**
@@ -259,51 +313,4 @@ form h3 {
 
 .contact #utility {
 	width: 300px;
-}
-
-/* Bot Prevention */
-
-#bot-prevent {
-	float: left;
-	width: 100%;
-	clear: both;
-	border-top: 1px solid #CCCCCC;
-	padding: 20px 0px 0px 0px;
-	margin: 15px 0px 0px 0px;
-}
-
-#bot-prevent h3,
-#bot-prevent p {
-	padding-left: 170px;
-}
-
-/**
- * Account Relevant Styles
- */
-
-.account fieldset {
-	border: 1px solid #CCCCCC;
-	margin: 10px;
-	padding: 20px 20px 20px 20px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
-	border-bottom-left-radius: 10px;
-	-moz-box-shadow: 0px 0px 5px #CDCDCD;
-	-webkit-box-shadow: 0px 0px 5px #999999;
-	box-shadow: 0px 0px 5px #999999;
-}
-
-.log-on #main-content,
-.password-request #main-content {
-	width: 880px;
-	margin: 0px 0px 20px 0px;
-}
-
-.log-on form,
-.password-request form {
-	width: 650px;
-	margin: 0px auto 0px auto;
 }

@@ -4,7 +4,7 @@ public/css/*.css
 # Eclipse
 /.project
 /.settings
-/.buildpath
+.buildpath
 
 # Windows
 Thumbs.db

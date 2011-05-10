@@ -1,7 +1,7 @@
 <?php
 require_once("Application/Bootstrap.php");
 
-if ($application->parseSubmit() == "Enter") {
+if ($application->parseSubmit() == "Start") {
 	$httpRequest = CoreFactory::getHttpRequest();
 	$httpRequest->setUrl("http://clockgaming.com/save.php");
 
@@ -25,15 +25,33 @@ $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.
 ?>
-<div>
-	<h1>Welcome to the Booth</h1>
-	<p>Introduction to why you are in a wooden box&hellip;</p>
-
-	<form action="" method="post">
-		<div class="invalid-email-address" style="display: none;">
-			Please enter a valid email address and try again.
-		</div>
-		Enter your email address: <input name="EmailAddress" type="text" /> <input type="submit" name="Submit" value="Enter"/>
+<h1>Welcome to the Clock Gawk Booth!</h1>
+<div class="introduction column">
+	<h2>Why are you in a wooden box?</h2>
+	<p>
+		Well, you've got a chance to <b>win an iPad2</b>, you see&hellip;
+	</p>
+	<p>
+		All you need to do is record your <b>3 seconds of fun</b>, submit it and it will be added to our wall &ndash; it's that simple. 
+		We'll be announcing the winner on <b>23rd May</b> through <b>@clock on Twitter</b>. The more entertaining your are, the better your chances of winning!
+	</p>
+</div>
+<div class="secondary">
+	<form action="" method="post" class="portal">
+		<h2>Let's get going&hellip;</h2>
+		<fieldset>
+			<div class="invalid-email-address error" style="display: none;">
+				<p>
+					Oops, that's not a valid email address. Please try again.
+				</p>
+			</div>
+			<label for="email">
+				<strong>Enter your email address:</strong>
+			</label>
+			<input id="email" class="textbox wide" name="EmailAddress" type="text" placeholder="Please enter your email address" autocomplete="off" />
+			<input class="button start" type="submit" name="Submit" value="Start" />
+		</fieldset>
+		<small>By entering this competition, I am agreeing to its <a href="#">terms and conditions</a>.</small>
 	</form>
 </div>
 <?php
