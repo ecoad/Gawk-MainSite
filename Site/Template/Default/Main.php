@@ -9,6 +9,10 @@ $application = CoreFactory::getApplication();
 		<meta name="description" content="<?php echo $application->registry->get("Description"); ?>" />
 		<meta name="keywords" content="" />
 		<meta charset="utf-8" />
+		<meta property="og:title" content="Gawk Wall"/>
+		<meta property="og:description" content=""/>
+		<meta property="og:site_name" content="Gawk Wall"/>
+		<meta property="og:image" content=""/>
 
 		<link rel="shortcut icon" href="/favicon.ico?v=@VERSION-NUMBER@" />
 <?php
@@ -97,9 +101,15 @@ include "Site/Template/Default/Widget/Footer.php";
 				<h3>logging out&hellip;</h3>
 				<p>please wait a moment while we log you out</p>
 			</div>
+			<div class="overlay" id="welcome-overlay">
+				<h3>welcome to gawkwall</h3>
+				<p>there are only a few things you need to know about gawking</p>
+				<img src="http://dummyimage.com/800x400/abc/123" />
+			</div>
 		</div>
 		<script type="text/javascript" src="/resource/js/jquery/jquery.js?v=@VERSION-NUMBER@"></script>
 		<script type="text/javascript" src="/resource/js/jquery/jquery.json-2.2.js?v=@VERSION-NUMBER@"></script>
+		<script type="text/javascript" src="/resource/js/jquery/jquery.cookie.js?v=@VERSION-NUMBER@"></script>
 		<script type="text/javascript" src="/resource/js/application/gawk/config/config.js?v=@VERSION-NUMBER@"></script>
 		<script type="text/javascript" src="/resource/js/application/gawk/widgets/login-widget.js?v=@VERSION-NUMBER@"></script>
 		<script type="text/javascript" src="/resource/js/application/gawk/widgets/navigation-widget.js?v=@VERSION-NUMBER@"></script>

@@ -44,26 +44,26 @@ body {
 
 #main-header .utility {
 	position: absolute;
-	margin-left: 682px;
-	width: 400px;
+	margin-left: 674px;
+	width: 368px;
 	padding-top: 22px;
 }
 
 #main-header .utility .upper {
 	float: left;
-	width: 400px;
+	width: 390px;
 	height: 20px;
 }
 
 #main-header .utility .lower {
 	padding-top: 10px;
 	float: left;
-	width: 368px;
+	width: 375px;
 }
 
 #main-header .utility .login-widget {
 	float: left;
-	width: 194px;
+	width: 190px;
 	text-align: right;
 	padding-right: 7px;
 }
@@ -76,12 +76,13 @@ body {
 
 #main-header .utility .share {
 	float: right;
-	width: 195px;
+	width: 192px;
 }
 
 #main-header .utility .twitter {
 	float: left;
 	width: 96px;
+	padding-right: 5px;
 }
 
 #main-header .utility .facebook {

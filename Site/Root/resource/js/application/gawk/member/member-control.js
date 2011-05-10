@@ -9,6 +9,7 @@ function MemberControl (config) {
 
 	function init() {
 		$(document).bind("GawkModelInit", onModelInit);
+		checkFirstVisit();
 	}
 
 	function onModelInit() {
@@ -68,6 +69,13 @@ function MemberControl (config) {
 
 	function getLoggedInMember() {
 		$.get(config.getApiLocation(), {Action: "Member.GetLoggedInMember"}, onLoginResponse, "json");
+	}
+
+	function checkFirstVisit() {
+		if ($.cookie("FirstVisit") == null) {
+			$(document).trigger("GawkUIWelcomeOverlayShow");
+			$.cookie("FirstVisit", "true", {expires: 3650});
+		}
 	}
 
 	function onLoginResponse(response) {
