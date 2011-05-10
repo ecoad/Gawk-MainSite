@@ -89,11 +89,6 @@ include "Site/Template/Default/Widget/Footer.php";
 				<h3>login with Facebook</h3>
 				<p>login with your Facebook details to continue <fb:login-button></fb:login-button></p>
 			</div>
-			<div class="overlay" id="gawk-main-wall-overlay">
-				<h3>you can't gawk on this wall</h3>
-				<p>the main wall is a collection of the best and latest gawks from other walls</p>
-				<p>gawk on <a href="/wall/">another wall</a> or <a href="/wall/">create one</a>
-			</div>
 			<div class="overlay" id="logging-in-overlay">
 				<h3>logging in&hellip;</h3>
 				<p>please wait a moment while we log you in</p>

@@ -18,7 +18,6 @@ function LoginWidget() {
 		$(document).bind("GawkUILoginOverlayShow", onLoginOverlayShow);
 		$(document).bind("GawkUILoggingInOverlayShow", onLoggingInOverlayShow);
 		$(document).bind("GawkUILoggingOutOverlayShow", onLoggingOutOverlayShow);
-		$(document).bind("GawkUILoggingOutOverlayShow", onLoggingOutOverlayShow);
 
 //		siteLoginLink.click(onSiteLoginClick);
 //		siteRegisterLink.click(onSiteRegisterClick);

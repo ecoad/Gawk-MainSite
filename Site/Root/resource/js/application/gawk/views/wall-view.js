@@ -36,12 +36,13 @@ function GawkView(config) {
 		$(document).bind("GawkUIWallShow", onShowView);
 		$(document).bind("GawkModelGetWallResponse", onGetWallResponse);
 		$(document).bind("GawkModelGetRecentWallActivityResponse", onRecentWallActivityResponse);
-		$(document).bind("GawkMainWallDenyOverlayShow", onGawkMainWallDenyOverlay);
+		$(document).bind("GawkUIMainWallDenyOverlayShow", onGawkMainWallDenyOverlay);
+		$(document).bind("GawkUINoWebcamOverlayShow", onNoWebcamOverlayShow);
 
 		element.find(".record").bind("click", function (event) {
 			if (loggedIn) {
 				if (config.isWallSecureIdSystem(wall.secureId)) {
-					$(document).trigger("GawkMainWallDenyOverlayShow");
+					$(document).trigger("GawkUIMainWallDenyOverlayShow");
 				} else {
 					document.getElementById(swfObjectId).recordNewFromExternal();
 				}
@@ -181,6 +182,10 @@ function GawkView(config) {
 
 	function onGawkMainWallDenyOverlay() {
 		$.box.show({content: $("#gawk-main-wall-overlay")});
+	}
+
+	function onNoWebcamOverlayShow() {
+		$.box.show({content: $("#gawk-no-webcam-overlay")});
 	}
 
 	function onWallSelectChange() {

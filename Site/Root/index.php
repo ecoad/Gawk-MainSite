@@ -30,6 +30,17 @@ $layout->start("Main");
 <?php include "Site/Template/Default/Gawk/Wall/WallEditView.php"; ?>
 		</div>
 	</div>
+	<div style="display: none;">
+		<div class="overlay" id="gawk-main-wall-overlay">
+			<h3>you can't gawk on this wall</h3>
+			<p>the main wall is a collection of the best and latest gawks from other walls</p>
+			<p>gawk on <a href="/wall/">another wall</a> or <a href="/wall/">create one</a>
+		</div>
+		<div class="overlay" id="gawk-no-webcam-overlay">
+			<h3>you don't seem to have a webcam!</h3>
+			<p>you need a webcam or the <a href="#">iPhone app</a> to record gawks</p>
+		</div>
+	</div>
 <?php
 $layout->start("JavaScript");
 ?>

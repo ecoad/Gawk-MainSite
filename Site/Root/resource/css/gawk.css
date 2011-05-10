@@ -232,6 +232,9 @@ body {
 div.overlay {
 	margin: 50px; color: #000;
 }
+div.overlay a{
+	font-weight: bold;
+}
 div.overlay h3 {
 	font-size: 20px;
 	padding-bottom: 20px;
