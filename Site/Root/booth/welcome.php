@@ -20,7 +20,7 @@ DATA;
 $layout = CoreFactory::getLayout("Site/Template/Booth/Main.php");
 $layout->set("Title", "Gawk Booth");
 $layout->set("Name", $application->registry->get("Title"));
-$layout->set("Section", "home");
+$layout->set("Section", "welcome");
 $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.

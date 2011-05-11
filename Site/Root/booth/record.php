@@ -4,7 +4,7 @@ require_once("Application/Bootstrap.php");
 $layout = CoreFactory::getLayout("Site/Template/Booth/Main.php");
 $layout->set("Title", "Gawk Booth");
 $layout->set("Name", $application->registry->get("Title"));
-$layout->set("Section", "home");
+$layout->set("Section", "record");
 $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.
@@ -35,7 +35,7 @@ $layout->start("JavaScript");
 //<![CDATA[
 $(document).ready(function() {
 	gawkFlashVars = {
-			apiLocation: "<?php echo $application->registry->get("Site/Address"); ?>/api/",
+			apiLocation: "http://staging.gawkwall.com/api/",
 			wallId: "gawk"
 		};
 

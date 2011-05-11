@@ -1,17 +1,15 @@
 <?php
 require_once("Application/Bootstrap.php");
-//
-//$layout = CoreFactory::getLayout("Site/Template/Booth/Main.php");
-//$layout->set("Title", "Gawk Booth");
-//$layout->set("Name", $application->registry->get("Title"));
-//$layout->set("Section", "home");
-//$layout->start("Style");
-//$layout->start("Main");
-//// The main page content goes here.
+
+$layout = CoreFactory::getLayout("Site/Template/Booth/Main.php");
+$layout->set("Title", "Gawk Booth");
+$layout->set("Name", $application->registry->get("Title"));
+$layout->set("Section", "wall");
+$layout->start("Style");
+$layout->start("Main");
+// The main page content goes here.
 ?>
-<div>
-	<div id="gawk-container"></div>
-</div>
+<div id="gawk-container"></div>
 <?php
 //$layout->start("JavaScript");
 ?>
@@ -27,6 +25,7 @@ $(document).ready(function() {
 
 		var params = {};
 		params.allowscriptaccess = "always";
+		params.wmode = "transparent";
 
 		swfobject.embedSWF("/resource/flash/GawkBoothWall.swf?v=@VERSION-NUMBER@", "gawk-container",
 			"1920", "1150", "9.0.0", false, gawkFlashVars, params, {id: "gawk-swf"});
@@ -34,4 +33,4 @@ $(document).ready(function() {
 //]]>
 	</script>
 <?php
-//$layout->render();
+$layout->render();

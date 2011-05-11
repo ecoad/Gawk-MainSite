@@ -129,7 +129,7 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 {
-	width: 280px;
+	width: 282px;
 	font-size: 36px;
 	line-height: 38px;
 	letter-spacing: -2px;
@@ -200,4 +200,42 @@ h2 {
 *::-moz-selection {
 	color: #FFFFFF;
  	background-color: #00ADEE;
+}
+
+
+/**
+ * Thanks Page
+ */
+
+.thanks .secondary {
+	position: relative;
+	top: -65px;
+	text-align: center;
+}
+
+.thanks #main-content:after,
+.wall #main-content:after {
+	background-image: none;
+}
+
+
+/**
+ * Wall Page
+ */
+
+#container.wall {
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	overflow: hidden;
+	
+	background-image: url("/resource/image/booth/wall-item.gif");
+}
+
+.wall #main-content {
+	width: 100%;
+}
+
+.wall #footer ul {
+	width: 96%;
+	margin: 0px 2% 0px 2%;
 }
