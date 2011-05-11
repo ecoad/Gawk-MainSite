@@ -115,24 +115,54 @@ class WallControl extends DataControl {
 	/**
 	 * Get recent gawks for profile
 	 * @param string $memberSecureId
+	 * @param integer $limit
 	 * @return array Videos
 	 */
-	public function getVideosByProfileRecent($memberSecureId) {
+	public function getVideosByProfileRecent($memberSecureId, $limit = 6) {
+		$this->reset();
 		$videoControl = Factory::getVideoControl();
 		$filter = $this->getVideoFilter();
 		$filter->addConditional($videoControl->table, "MemberSecureId", $memberSecureId);
-//		if ($timePeriodDays !== -1) {
+//		if ($timePeriodDays !== -1	) {
 //			$dateTimeSince = date("Y-m-d H:i:s", time() - (SECONDS_IN_DAY * $timePeriodDays));
 //			$filter->addConditional($videoControl->table, "DateCreated", $dateTimeSince, ">=");
 //		}
 
 		$filter->addOrder("DateCreated", true);
-		$filter->addLimit(6);
+		$filter->addLimit($limit);
 
 		$videoControl->setFilter($filter);
 		$videos = array();
 		while ($videoDataEntity = $videoControl->getNext()) {
 			$videos[] = $videoDataEntity->toObject();
+		}
+
+		return $videos;
+	}
+
+	/**
+	 * Get profile gawk video
+	 * @param string $memberSecureId
+	 * @return array Videos
+	 */
+	public function getVideosByProfileGawk($memberSecureId) {
+		$videos = array();
+
+		$memberControl = Factory::getMemberControl();
+		$videoControl = Factory::getVideoControl();
+		if (!$memberDataEntity = $memberControl->getMemberDataEntityBySecureId($memberSecureId)) {
+			$this->application->errorControl->addError("Member SecureId not found: " . $memberSecureId);
+			return $videos;
+		}
+
+		if ($memberDataEntity->get("ProfileVideoSecureId") != "") {
+			if ($videoDataEntity = $videoControl->itemByField($memberDataEntity->get("ProfileVideoSecureId"), "SecureId")) {
+				$videos[] = $videoDataEntity->toObject();
+			}
+		}
+
+		if (count($videos) == 0) {
+			$videos = $this->getVideosByProfileRecent($memberSecureId, 1);
 		}
 
 		return $videos;

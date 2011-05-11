@@ -12,7 +12,7 @@ function PublicProfileView(config) {
 
 	function onModelInit() {
 		assignEventListeners();
-		showRecentGawks();
+		showProfileGawkAndRecentGawks();
 	}
 
 	function assignEventListeners() {
@@ -27,19 +27,28 @@ function PublicProfileView(config) {
 		});
 	}
 
-	function showRecentGawks() {
+	function showProfileGawkAndRecentGawks() {
+		var params = {};
+		params.allowscriptaccess = "always";
+		params.wmode = "transparent";
+
 		gawkFlashVars = {
 			apiLocation: config.getApiLocation(),
 			wallId: "profile-recent",
 			profileSecureId: profileMember.secureId
 		};
 
-		var params = {};
-		params.allowscriptaccess = "always";
-		params.wmode = "transparent";
-
 		swfobject.embedSWF("/resource/flash/GawkProfileRecentFlash.swf?v=@VERSION-NUMBER@", "recent-swf-container",
 			"1050", "131", "9.0.0", false, gawkFlashVars, params, {id: "recent-swf"});
+
+		gawkFlashVars = {
+			apiLocation: config.getApiLocation(),
+			wallId: "profile-gawk",
+			profileSecureId: profileMember.secureId
+		};
+
+		swfobject.embedSWF("/resource/flash/GawkProfileGawkFlash.swf?v=@VERSION-NUMBER@", "profile-swf-container",
+				"175", "131", "9.0.0", false, gawkFlashVars, params, {id: "profile-swf"});
 	}
 
 	function allowLoggedInControls() {

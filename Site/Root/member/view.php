@@ -43,7 +43,7 @@ $layout->start("Main");
 <div id="public-profile-view">
 	<div class="profile-main">
 		<div class="profile-gawk">
-			<img src="http://dummyimage.com/175x131/000/fff.png&text=profile+here" />
+			<div id="profile-swf-container">&nbsp;</div>
 		</div>
 		<div class="details">
 			<div class="name">

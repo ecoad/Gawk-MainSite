@@ -33,6 +33,9 @@ class FlashWebService {
 					case "profile-recent":
 						$response->videos = $wallControl->getVideosByProfileRecent($getData["ProfileSecureId"]);
 						break;
+					case "profile-gawk":
+						$response->videos = $wallControl->getVideosByProfileGawk($getData["ProfileSecureId"]);
+						break;
 					default:
 						$response->videos = $wallControl->getVideosByWallSecureId($getData["WallSecureId"], $getData["PreviousRunTime"]);
 						break;
