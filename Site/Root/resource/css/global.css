@@ -58,6 +58,7 @@ body {
 	right: 0px;
 	bottom: 25px;
 	
+	clear: both;
 	display: block;
 	width: 229px;
 	height: 229px;
@@ -123,12 +124,16 @@ em {
 
 h1, h2, h3, h4, h5 {
 	color: #000000;
-	letter-spacing: -0.5px;
+	letter-spacing: -1px;
 	font-family: "Francois One", Arial, Helvetica, sans-serif;
 }
 
 h1 {
-	font-size: 44px;
+	width: 280px;
+	font-size: 36px;
+	line-height: 38px;
+	letter-spacing: -2px;
+	text-transform: uppercase;
 	margin-bottom: 30px;
 }
 
@@ -167,15 +172,32 @@ h2 {
 
 .column {
 	float: left;
-	border-top: 8px solid #000000;
+}
+
+.primary {
+	width: 30%;
+	
 	padding-top: 10px;
+	margin: 0px 5% 30px 0px;
+	
+	border-top: 8px solid #000000;
 }
 
 .secondary {
+	width: 65%;
 }
 
-.introduction {
-	width: 30%;
-	margin-right: 5%;
-	margin-bottom: 30px;
+
+/**
+ * Sprinkles of niceness
+ */
+
+*::selection {
+	color: #FFFFFF;
+	background-color: #00ADEE;
+}
+
+*::-moz-selection {
+	color: #FFFFFF;
+ 	background-color: #00ADEE;
 }

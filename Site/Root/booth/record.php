@@ -9,10 +9,22 @@ $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.
 ?>
-<div>
-	<h1>Booth Up</h1>
-	<p>Description</p>
 
+<h1>Let's Record!</h1>
+<div class="column primary">
+	<h2>Hit that button</h2>
+	<p>
+		Okay, so hopefully this is all fairly self-explanatory, really. <b>Hit the record button</b> to, er, record&hellip;
+	</p>
+	<p>
+		Once that's done, you can watch your video to <b>make sure you're happy</b> with it &ndash; if you're not then you 
+		can choose to <b>re-record</b>.
+	</p>
+	<p>
+		If you are, then <b>add it to the wall</b> and you're done!
+	</p>
+</div>
+<div class="column secondary">
 	<div id="gawk-container"></div>
 </div>
 <?php
@@ -31,7 +43,7 @@ $(document).ready(function() {
 		params.allowscriptaccess = "always";
 
 		swfobject.embedSWF("/resource/flash/GawkBooth.swf?v=@VERSION-NUMBER@", "gawk-container",
-			"550", "400", "9.0.0", false, gawkFlashVars, params, {id: "gawk-swf"});
+			"611", "458", "9.0.0", false, gawkFlashVars, params, {id: "gawk-swf"});
 });
 //]]>
 	</script>
