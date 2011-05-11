@@ -20,13 +20,13 @@ DATA;
 $layout = CoreFactory::getLayout("Site/Template/Booth/Main.php");
 $layout->set("Title", "Gawk Booth");
 $layout->set("Name", $application->registry->get("Title"));
-$layout->set("Section", "home");
+$layout->set("Section", "welcome");
 $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.
 ?>
 <h1>Welcome to the Clock Gawk Booth!</h1>
-<div class="introduction column">
+<div class="column primary">
 	<h2>Why are you in a wooden box?</h2>
 	<p>
 		Well, you've got a chance to <b>win an iPad2</b>, you see&hellip;
@@ -36,7 +36,7 @@ $layout->start("Main");
 		We'll be announcing the winner on <b>23rd May</b> through <b>@clock on Twitter</b>. The more entertaining your are, the better your chances of winning!
 	</p>
 </div>
-<div class="secondary">
+<div class="column secondary">
 	<form action="" method="post" class="portal">
 		<h2>Let's get going&hellip;</h2>
 		<fieldset>

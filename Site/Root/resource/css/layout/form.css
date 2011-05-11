@@ -34,8 +34,11 @@ fieldset legend {
  */
 
 .portal {
+	position: relative;
+	top: -6px;
+	
 	float: left;
-	width: 55%;
+	width: 90%;
 	padding: 4% 5% 4% 5%;
 }
 
