@@ -151,12 +151,22 @@ body {
 
 #main-content .breadcrumb {
 	font-size: 11px;
-	margin-bottom: 10px;
-	padding: 2px;
-	background-color: #F2EFEF;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	color: #6e6e6e;
 }
 
+#main-content .breadcrumb a {
+	font-weight: bold;
+	color: #6e6e6e;
+}
 
+#main-content .breadcrumb hr {
+	display: block;
+	height: 22px;
+	color: #272727;
+	background-color: #272727;
+}
 /*
  * GAWK WALL VIEW
  */

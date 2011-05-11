@@ -1,0 +1,104 @@
+.profile-main {
+	width: 1050px;
+	height: 174px;
+	display: block;
+}
+
+h2{
+	font-size: 15px;
+	font-weight: bold;
+	padding-bottom: 10px;
+	color: #3c3c3c;
+}
+
+h3{
+	font-size: 15px;
+	padding-bottom: 10px;
+	color: #3c3c3c;
+}
+
+.profile-main .profile-gawk {
+	width: 180;
+	float: left;
+	position: block;
+	padding-right: 20px;
+}
+
+.profile-main .name {
+	height: 50px;
+}
+
+.profile-main .name h1 {
+	float: left;
+	font-size: 33px;
+	font-weight: bold;
+	color: #3c3c3c;
+}
+
+.profile-main .gawk-count {
+	float: left;
+	padding-top: 17px;
+	padding-left: 8px;
+	font-size: 17px;
+	color: #6e6e6e;
+}
+
+.profile-main .description {
+	color: #6e6e6e;
+}
+
+.profile-main .website {
+	padding-bottom: 15px;
+}
+
+.profile-main .controls {
+	float: right;
+	padding-top: 5px;
+}
+
+.profile-main .controls a.button {
+	float: right;
+	width: 114px;
+	height: 31px;
+	display: block;
+	text-indent: -9999px;
+}
+
+.profile-main .controls a.add-friend{
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -114px -112px;
+}
+.profile-main .controls a.remove-friend{
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -114px -174px;
+}
+.profile-main .controls a.edit-profile{
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -114px -143px;
+}
+
+.recent-gawks {
+	height: 200px;
+}
+
+.profile-other {
+	height: 210px;
+}
+
+.profile-other .beancan {
+	width: 525px;
+	float: left;
+	min-height: 100px;
+}
+
+li.friend {
+	float: left;
+	width: 130px;
+	height: 106px;
+}
+
+.wall-list {
+	float: left;
+	width: 175px;
+}
+
+.wall-list ul {
+	list-style: square inside none;
+}

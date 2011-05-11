@@ -187,4 +187,19 @@ class VideoControl extends DataControl {
 	public function getDataEntity() {
 		return new VideoDataEntity($this);
 	}
+
+	/**
+	 * Utility function to find out the number of Gawks a member has made
+	 * @param Member $member
+	 * @return integer
+	 */
+	public function getVideoCountByMember(Member $member) {
+		$sql = <<<SQL
+SELECT COUNT(*) FROM "Video" WHERE "MemberSecureId" = '{$member->secureId}';
+SQL;
+		$this->initTable();
+		$result = $this->databaseControl->query($sql);
+		$row = $this->databaseControl->fetchRow($result);
+		return $row[0];
+	}
 }

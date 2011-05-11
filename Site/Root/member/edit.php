@@ -1,6 +1,7 @@
 <?php
 require_once("Application/Bootstrap.php");
 $facebook = Factory::getFacebook($application);
+$memberUrlHelper = Factory::getMemberUrlHelper();
 
 $memberControl = Factory::getMemberControl();
 if (!$member = $memberControl->getMemberByRequestUrl($_SERVER["REQUEST_URI"])) {
@@ -14,27 +15,61 @@ if ($loggedInMemberDataEntity = $memberAuthentication->getLoggedInMemberDataEnti
 	}
 }
 
+$formWebsiteLabel = "Website";
+$formDescriptionLabel = "Description";
+$formRemoveProfileGawkLabel = "RemoveProfileGawk";
+$formSubmitLabel = "save";
+
+if ($application->parseSubmit() == $formSubmitLabel) {
+	$memberWebService = Factory::getMemberWebService();
+	$response = $memberWebService->handleRequest(MemberWebService::SERVICE_UPDATE_PROFILE, $_POST);
+	if ($response->success) {
+		$application->redirect($memberUrlHelper->getProfileUrl($response->member));
+	}
+}
+
+$tabIndex = 0;
+
 $layout = CoreFactory::getLayout("Site/Template/Default/Main.php");
-$layout->set("Title", "Edit Profile / " . $application->registry->get("Title"));
+$layout->set("Title", "edit profile / " . $application->registry->get("Title"));
 $layout->set("Name", $application->registry->get("Title"));
 $layout->set("Section", "profile");
 $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.
 ?>
+<div class="breadcrumb">
+	<a href="/">home</a> / <a title="View profile" href="<?php echo $memberUrlHelper->getProfileUrl($member); ?>">profile</a> /
+		edit
+</div>
 <div><a href="/u/<?php echo $member->alias; ?>">View your profile</a></div>
 <div id="profile-edit-view" style="display: none;">
 	<h1>Edit Profile</h1>
 	<form method="post" action="">
 		<fieldset>
 			<label>
-				<strong class="required">Password <span>*</span></strong>
-				<input name="Password" type="password" class="textbox wide"
-					tabindex="<?php echo $tabIndex++; ?>" value=""/>
+				<strong>website</strong>
+				<input name="ProfileData[<?php echo $formWebsiteLabel; ?>]" type="text" class="textbox wide"
+					tabindex="<?php echo $tabIndex++; ?>" value="<?php echo $member->website; ?>"/>
 			</label><br />
+			<label>
+				<strong>mini-bio</strong><br>
+				<textarea tabindex="<?php echo $tabIndex++; ?>" class="textbox wide" rows="7" cols="40"
+					name="ProfileData[<?php echo $formDescriptionLabel; ?>]"><?php echo $member->description; ?></textarea>
+			</label><br />
+<?php
+if ($member->profileVideoSecureId != "") {
+?>
+			<label>
+				<strong>profile gawk</strong><br>
+				<img src="http://dummyimage.com/200x174/<?php echo $member->profileVideoSecureId; ?>/789" /><br />
+				remove <input type="checkbox" name="ProfileData[<?php echo $formRemoveProfileGawkLabel; ?>]" />
+			</label>
+<?php
+}
+?>
 			<div class="controls">
-				<input name="Submit" type="submit" tabindex="<?php echo $tabIndex++; ?>" class="button" value="Save" accesskey="s" title="Save all changes and return to the last page" />
-				<input name="Submit" type="submit" tabindex="<?php echo $tabIndex++; ?>" class="button" value="Cancel" accesskey="c" title="Return to the previous page but do not save changes first" />
+				<input name="Submit" type="submit" tabindex="<?php echo $tabIndex++; ?>" class="button" value="<?php echo $formSubmitLabel; ?>" accesskey="s" title="Save all changes and return to the last page" />
 			</div>
 		</fieldset>
 	</form>

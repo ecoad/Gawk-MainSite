@@ -29,6 +29,7 @@ $(document).ready(function() {
 
 		var params = {};
 		params.allowscriptaccess = "always";
+		params.wmode = "transparent";
 
 		swfobject.embedSWF("/resource/flash/GawkBooth.swf?v=@VERSION-NUMBER@", "gawk-container",
 			"550", "400", "9.0.0", false, gawkFlashVars, params, {id: "gawk-swf"});

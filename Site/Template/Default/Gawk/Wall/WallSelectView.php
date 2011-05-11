@@ -1,5 +1,6 @@
 <div class="breadcrumb">
 	<a href="/">home</a> / <a href="/wall/">wall</a> / create wall
+	<hr />
 </div>
 <div>
 	<div class="select-walls" style="float: left; width: 400px; min-height: 200px; padding: 10px;">

@@ -65,6 +65,7 @@ function GawkView(config) {
 
 		var params = {};
 		params.allowscriptaccess = "always";
+		params.wmode = "transparent";
 
 		swfobject.embedSWF("/resource/flash/GawkFlash.swf?v=@VERSION-NUMBER@", gawkFlashContainerElement.attr("id"),
 			"1050", "655", "9.0.0", false, gawkFlashVars, params, {id: swfObjectId});

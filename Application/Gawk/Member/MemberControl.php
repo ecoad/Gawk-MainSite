@@ -64,6 +64,12 @@ class CustomMemberControl extends MemberControl {
 		$this->fieldMeta["Twitter"] = new FieldMeta(
 			"Twitter", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, true);
 
+		$this->fieldMeta["Website"] = new FieldMeta(
+			"Website", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, true);
+
+		$this->fieldMeta["Description"] = new FieldMeta(
+			"Description", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, true);
+
 		$this->fieldMeta["Token"] = new FieldMeta(
 			"Token", "", FM_TYPE_STRING, null, FM_STORE_NEVER, true);
 
@@ -143,20 +149,25 @@ class CustomMemberControl extends MemberControl {
 
 	/**
 	 * Update a member's profile
-	 * @param stdClass $memberData
-	 * @return boolean True if successfully
-	 * @deprecated
+	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param Member $updatedMemberData
+	 * @return CustomMemberDataEntity
 	 */
-	public function updateProfile(stdClass $memberData) {
-		$memberAuthentication = Factory::getMemberAuthentication();
-		if ($member = $memberAuthentication->getLoggedInUser()) {
-			$member->set("GawksPublic", $memberData->privacy->gawksPublic);
-			$member->set("GawksFavouritePublic", $memberData->privacy->gawksFavouritePublic);
-
-			return (boolean)$member->save();
-		} else {
-			$this->application->errorControl->addError("Member not logged in");
+	public function updateProfile(CustomMemberDataEntity $memberDataEntity, array $profileData) {
+		$textFields = array("Website", "Description");
+		foreach ($textFields as $textField) {
+			if (isset($profileData[$textField])) {
+				$memberDataEntity->set($textField, $profileData[$textField]);
+				$this->updateField($memberDataEntity, $textField, $profileData[$textField]);
+			}
 		}
+
+		if (isset($profileData["RemoveProfileGawk"])) {
+			$memberDataEntity->set("ProfileVideoSecureId", null);
+			$this->updateField($memberDataEntity, "ProfileVideoSecureId", null);
+		}
+
+		return $memberDataEntity;
 	}
 
 	/**
