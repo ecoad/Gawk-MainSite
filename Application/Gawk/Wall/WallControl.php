@@ -113,6 +113,32 @@ class WallControl extends DataControl {
 	}
 
 	/**
+	 * Get recent gawks for profile
+	 * @param string $memberSecureId
+	 * @return array Videos
+	 */
+	public function getVideosByProfileRecent($memberSecureId) {
+		$videoControl = Factory::getVideoControl();
+		$filter = $this->getVideoFilter();
+		$filter->addConditional($videoControl->table, "MemberSecureId", $memberSecureId);
+//		if ($timePeriodDays !== -1) {
+//			$dateTimeSince = date("Y-m-d H:i:s", time() - (SECONDS_IN_DAY * $timePeriodDays));
+//			$filter->addConditional($videoControl->table, "DateCreated", $dateTimeSince, ">=");
+//		}
+
+		$filter->addOrder("DateCreated", true);
+		$filter->addLimit(6);
+
+		$videoControl->setFilter($filter);
+		$videos = array();
+		while ($videoDataEntity = $videoControl->getNext()) {
+			$videos[] = $videoDataEntity->toObject();
+		}
+
+		return $videos;
+	}
+
+	/**
 	 * @param Filter $filter
 	 */
 	protected function getVideoFilter(Filter $filter = null) {

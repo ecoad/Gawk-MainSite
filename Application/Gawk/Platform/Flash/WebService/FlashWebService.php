@@ -27,8 +27,11 @@ class FlashWebService {
 					case "main-wall":
 						$response->videos = $wallControl->getVideosByMainWall();
 						break;
-					case "favourite-gawks":
-						$response->videos = $wallControl->getVideosByFriends();
+//					case "favourite-gawks":
+//						$response->videos = $wallControl->getVideosByFriends();
+//						break;
+					case "profile-recent":
+						$response->videos = $wallControl->getVideosByProfileRecent($getData["ProfileSecureId"]);
 						break;
 					default:
 						$response->videos = $wallControl->getVideosByWallSecureId($getData["WallSecureId"], $getData["PreviousRunTime"]);

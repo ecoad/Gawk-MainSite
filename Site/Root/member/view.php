@@ -6,7 +6,7 @@ $videoUrlHelper = Factory::getVideoUrlHelper();
 $videoControl = Factory::getVideoControl();
 
 $memberControl = Factory::getMemberControl();
-if (!$member = $memberControl->getMemberByRequestUrl($_SERVER["REQUEST_URI"], true)) {
+if (!$profileMember = $memberControl->getMemberByRequestUrl($_SERVER["REQUEST_URI"], true)) {
 	include "Site/Root/error/404.php";
 }
 
@@ -14,18 +14,18 @@ $memberAuthentication = Factory::getMemberAuthentication();
 
 $memberIsOnOwnMemberPage = false;
 if ($loggedInMemberDataEntity = $memberAuthentication->getLoggedInMemberDataEntity()) {
-	if ($loggedInMemberDataEntity->get("SecureId") == $member->secureId) {
+	if ($loggedInMemberDataEntity->get("SecureId") == $profileMember->secureId) {
 		$memberIsOnOwnMemberPage = true;
 	}
 }
 
 $memberWallBookmarkWebService = Factory::getMemberWallBookmarkWebService();
 $recentWallActivityResponse = $memberWallBookmarkWebService->handleRequest(
-	MemberWallBookmarkWebService::SERVICE_GET_RECENT_WALL_ACTIVITY, null, array("Token" => $member->token));
+	MemberWallBookmarkWebService::SERVICE_GET_RECENT_WALL_ACTIVITY, null, array("Token" => $profileMember->token));
 $recentWallActivity = $recentWallActivityResponse->recentActivity;
 
 $layout = CoreFactory::getLayout("Site/Template/Default/Main.php");
-$layout->set("Title", $member->alias . " / " . $application->registry->get("Title"));
+$layout->set("Title", $profileMember->alias . " / " . $application->registry->get("Title"));
 $layout->set("Name", $application->registry->get("Title"));
 $layout->set("Section", "profile");
 $layout->start("Style");
@@ -36,8 +36,8 @@ $layout->start("Main");
 // The main page content goes here.
 ?>
 <div class="breadcrumb">
-	<a href="/">home</a> / <a title="View profile" href="<?php echo $memberUrlHelper->getProfileUrl($member); ?>">profile</a> /
-		<?php echo $member->alias; ?>
+	<a href="/">home</a> / <a title="View profile" href="<?php echo $memberUrlHelper->getProfileUrl($profileMember); ?>">profile</a> /
+		<?php echo $profileMember->alias; ?>
 	<hr />
 </div>
 <div id="public-profile-view">
@@ -47,37 +47,37 @@ $layout->start("Main");
 		</div>
 		<div class="details">
 			<div class="name">
-				<h1><?php echo $member->alias; ?></h1>
-				<span class="gawk-count"><?php echo $videoControl->getVideoCountByMember($member); ?> gawks</span>
+				<h1><?php echo $profileMember->alias; ?></h1>
+				<span class="gawk-count"><?php echo $videoControl->getVideoCountByMember($profileMember); ?> gawks</span>
 				<div class="controls">
 <?php
 if ($memberIsOnOwnMemberPage) {
 ?>
-					<a class="button edit-profile" href="/u/<?php echo $member->alias; ?>/edit">edit your profile</a>
+					<a class="button edit-profile" href="/u/<?php echo $profileMember->alias; ?>/edit">edit your profile</a>
 <?php
 } else {
 ?>
-					<a class="button add-friend" href="#">add friend</a>
+					<a class="button add-friend friend-control" href="#" style="display: none;">add friend</a>
 <?php
 }
 ?>
 				</div>
 			</div>
-			<p class="website"><a href="<?php echo $member->website; ?>"><?php echo $member->website; ?></a></p>
-			<p class="description"><?php echo $member->description; ?></p>
+			<p class="website"><a href="<?php echo $profileMember->website; ?>"><?php echo $profileMember->website; ?></a></p>
+			<p class="description"><?php echo $profileMember->description; ?></p>
 		</div>
 		</div>
 	</div>
 	<div class="recent-gawks">
 		<h2>most recent gawks</h2>
-		<img src="http://dummyimage.com/175x131/000/fff.png&text=recent+gawks" /><img src="http://dummyimage.com/175x131/000/fff.png&text=recent+gawks" /><img src="http://dummyimage.com/175x131/000/fff.png&text=recent+gawks" /><img src="http://dummyimage.com/175x131/000/fff.png&text=recent+gawks" /><img src="http://dummyimage.com/175x131/000/fff.png&text=recent+gawks" /><img src="http://dummyimage.com/175x131/000/fff.png&text=recent+gawks" />
+		<div id="recent-swf-container">&nbsp;</div>
 	</div>
 	<div class="profile-other">
 		<div class="friends beancan">
-			<h2><?php echo $member->alias; ?>'s friends</h2>
+			<h2><?php echo $profileMember->alias; ?>'s friends</h2>
 			<ul>
 <?php
-foreach ($member->friends as $friend) {
+foreach ($profileMember->friends as $friend) {
 ?>
 				<li class="friend">
 					<a href="<?php echo $memberUrlHelper->getProfileUrl($friend); ?>" title="View profile">
@@ -161,7 +161,7 @@ $layout->start("JavaScript");
 $(document).ready(function() {
 	var gawk = new Gawk({
 		initView: "PublicProfile",
-		member: "<?php echo addslashes(json_encode($member)); ?>",
+		profileMember: "<?php echo addslashes(json_encode	($profileMember)); ?>",
 		apiLocation: "<?php echo $application->registry->get("Site/Address"); ?>/api/",
 		fbAppId: "<?php echo $facebook->getAppId(); ?>",
 		fbSession: <?php echo json_encode($facebook->getSession()); ?>

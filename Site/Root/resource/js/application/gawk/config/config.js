@@ -1,6 +1,6 @@
 function Config(configData) {
 	var	apiLocation = configData.apiLocation,
-	wall = null, member = null,
+	wall = null, profileMember = null,
 	initView = configData.initView,
 	fbAppId = configData.fbAppId,
 	fbSession = configData.fbSession;
@@ -10,7 +10,7 @@ function Config(configData) {
 	} catch (e) {}
 
 	try {
-		member = $.parseJSON(configData.member);
+		profileMember = $.parseJSON(configData.profileMember);
 	} catch (e) {}
 
 	Config.prototype.getApiLocation = function() {
@@ -21,8 +21,8 @@ function Config(configData) {
 		return wall;
 	};
 
-	Config.prototype.getMember = function() {
-		return member;
+	Config.prototype.getProfileMember = function() {
+		return profileMember;
 	};
 
 	Config.prototype.getFacebookAppId = function() {
