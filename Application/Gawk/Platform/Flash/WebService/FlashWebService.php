@@ -24,16 +24,19 @@ class FlashWebService {
 				$wallControl = Factory::getWallControl();
 
 				switch ($getData["WallSecureId"]) {
-					case "main-wall":
-						$response->videos = $wallControl->getVideosByMainWall();
+					// Main Wall
+					case $wallControl->getSystemWallFactory()->getMainWall()->secureId:
+						$response->videos = $wallControl->getVideosByMainWall($getData["PreviousRunTime"]);
 						break;
 //					case "favourite-gawks":
 //						$response->videos = $wallControl->getVideosByFriends();
 //						break;
-					case "profile-recent":
+					// Profile Recent
+					case $wallControl->getSystemWallFactory()->getProfileRecentWall()->secureId:
 						$response->videos = $wallControl->getVideosByProfileRecent($getData["ProfileSecureId"]);
 						break;
-					case "profile-gawk":
+					// Profile Gawk
+					case $wallControl->getSystemWallFactory()->getProfileGawkWall()->secureId:
 						$response->videos = $wallControl->getVideosByProfileGawk($getData["ProfileSecureId"]);
 						break;
 					default:

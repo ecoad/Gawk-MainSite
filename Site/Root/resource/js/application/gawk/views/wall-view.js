@@ -3,12 +3,14 @@ function GawkView(config) {
 	var swfObjectId = "gawk-swf";
 	var gawkFlashContainerElement = $("<div>").attr("id", "Gawk");
 	var loggedIn = false;
+	var wallLoaded = false;
 	var wall = config.getWall();
 	var bookmarkLink = element.find("h3").find("span.bookmark");
 
 	function init() {
 		element.append(gawkFlashContainerElement);
 		$(document).bind("GawkModelInit", onModelInit);
+		$(document).bind("GawkUIFlashLoaded", onFlashLoaded);
 	}
 
 	function setupView() {
@@ -26,6 +28,11 @@ function GawkView(config) {
 	function onModelInit() {
 		addView();
 		assignEventListeners();
+	}
+
+	function onFlashLoaded() {
+		console.debug("flash load");
+		wallLoaded = true;
 	}
 
 	function assignEventListeners() {
@@ -160,7 +167,13 @@ function GawkView(config) {
 
 	function onLoggedIn() {
 		loggedIn = true;
-		document.getElementById(swfObjectId).logInFromExternal();
+		if (wallLoaded) {
+			console.debug("inst log");
+			document.getElementById(swfObjectId).logInFromExternal();
+		} else {
+			console.debug("try again");
+			setTimeout(onLoggedIn, 500);
+		}
 	}
 
 	function onLoggedOut() {

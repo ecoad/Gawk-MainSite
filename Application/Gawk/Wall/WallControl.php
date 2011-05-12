@@ -11,6 +11,16 @@ class WallControl extends DataControl {
 	protected $reservedUrls = array("wall", "friends", "starred", "favourite-gawks", "favourited", "admin", "api", "u",
 		"booth", "favicon.ico", "deploy-info.json", "robots.txt", "contact", "account");
 
+	/**
+	 * @var SystemWallFactory
+	 */
+	protected $systemWallFactory;
+
+	public function __construct() {
+		parent::DataControl();
+		$this->systemWallFactory = Factory::getSystemWallFactory();
+	}
+
 	public function init() {
 		$this->fieldMeta["Id"] = new FieldMeta(
 			"Id", "", FM_TYPE_INTEGER, null, FM_STORE_NEVER, false);
@@ -41,34 +51,43 @@ class WallControl extends DataControl {
 	}
 
 	/**
-	 * @param string $wallSecureId
+	 * Return videos by Wall
+	 * @param Wall $wall
+	 * @param string $memberSecureId
 	 * @param integer $previousRunTime
-	 * @param integer $currentPage
-	 * @param integer $pageLength
-	 * @return array Videos
+	 * @param stdClass $currentPageObject
 	 */
-	public function getVideosByWallSecureId($wallSecureId, $previousRunTime = null, $currentPage = 1, $pageLength = -1) {
-		if ($pageLength == -1) {
+	protected function getVideosByWall(Wall $wall, $memberSecureId = null, $previousRunTime = null, $currentPageObject = null) {
+		$this->reset();
+		if (!$currentPageObject) {
 			$pageLength = $this->application->registry->get("Wall/DefaultLength");
 		}
-
-		$wallControl = Factory::getWallControl();
-		if (!$wall = $wallControl->getWallWithSecureId($wallSecureId)) {
-			$this->errorControl->addError("Invalid Wall secure ID", "InvalidWall");
-			return false;
-		}
+		$currentPage = 1;
 
 		$videoControl = Factory::getVideoControl();
 		$filter = $this->getVideoFilter();
-		$filter->addOrder("DateCreated", true);
-		$filter->addConditional($videoControl->table, "WallSecureId", $wallSecureId);
+
+		switch ($wall->secureId) {
+			case $this->systemWallFactory->getMainWall()->secureId:
+				$filter->addConditional($videoControl->table, "Rating", $this->application->registry->get("Wall/MainWallMinimumRating"), ">=");
+				$filter->addOrder("Rating", true);
+				break;
+			case $this->systemWallFactory->getProfileRecentWall()->secureId:
+				$filter->addConditional($videoControl->table, "MemberSecureId", $memberSecureId);
+				break;
+			default:
+				$filter->addConditional($videoControl->table, "WallSecureId", $wall->secureId);
+				$filter->addOrder("DateCreated", true);
+				break;
+		}
+
 		if ($previousRunTime !== null) {
 			$filter->addConditional($videoControl->table, "DateCreated", gmdate("Y-m-d H:i:s", $previousRunTime), ">=");
 		}
+
 		$filter->addLimit($this->application->registry->get("Wall/DefaultLength"));
 		$videoControl->setFilter($filter);
 		$videos = array();
-		$this->application->log("PRE ///" . $previousRunTime . "\\\ ", "sql");
 		while ($videoDataEntity = $videoControl->getPage($currentPage, $pageLength)) {
 			$videos[] = $videoDataEntity->toObject($previousRunTime !== null ? true : false);
 		}
@@ -77,31 +96,29 @@ class WallControl extends DataControl {
 	}
 
 	/**
-	 * Get main wall
-	 * @param integer $timePeriodDays
+	 * @param string $wallSecureId
+	 * @param integer $previousRunTime
 	 * @param integer $currentPage
 	 * @param integer $pageLength
 	 * @return array Videos
 	 */
-	public function getVideosByMainWall($timePeriodDays = 1, $currentPage = 1, $pageLength = -1) {
-		if ($pageLength == -1) {
-			$pageLength = $this->application->registry->get("Wall/DefaultLength");
+	public function getVideosByWallSecureId($wallSecureId, $previousRunTime = null, $currentPage = 1, $pageLength = -1) {
+		if (!$wall = $this->getWallWithSecureId($wallSecureId)) {
+			$this->errorControl->addError("Invalid Wall secure ID", "InvalidWall");
+			return false;
 		}
 
-		$videoControl = Factory::getVideoControl();
-		$filter = $this->getVideoFilter();
-		$filter->addConditional($videoControl->table, "Rating", $this->application->registry->get("Wall/MainWallMinimumRating"), ">=");
+		return $this->getVideosByWall($wall, null, $previousRunTime, null);
+	}
 
-		$filter->addOrder("Rating", true);
-		$filter->addLimit($this->application->registry->get("Wall/DefaultLength"));
-
-		$videoControl->setFilter($filter);
-		$videos = array();
-		while ($videoDataEntity = $videoControl->getPage($currentPage, $pageLength)) {
-			$videos[] = $videoDataEntity->toObject();
-		}
-
-		return $videos;
+	/**
+	 * Get main wall
+	 * @param integer $currentPage
+	 * @param integer $pageLength
+	 * @return array Videos
+	 */
+	public function getVideosByMainWall($previousRunTime = null, $currentPage = 1, $pageLength = -1) {
+		return $this->getVideosByWall($this->systemWallFactory->getMainWall(), null, $previousRunTime, null);
 	}
 
 	/**
@@ -111,25 +128,7 @@ class WallControl extends DataControl {
 	 * @return array Videos
 	 */
 	public function getVideosByProfileRecent($memberSecureId, $limit = 6) {
-		$this->reset();
-		$videoControl = Factory::getVideoControl();
-		$filter = $this->getVideoFilter();
-		$filter->addConditional($videoControl->table, "MemberSecureId", $memberSecureId);
-//		if ($timePeriodDays !== -1	) {
-//			$dateTimeSince = date("Y-m-d H:i:s", time() - (SECONDS_IN_DAY * $timePeriodDays));
-//			$filter->addConditional($videoControl->table, "DateCreated", $dateTimeSince, ">=");
-//		}
-
-		$filter->addOrder("DateCreated", true);
-		$filter->addLimit($limit);
-
-		$videoControl->setFilter($filter);
-		$videos = array();
-		while ($videoDataEntity = $videoControl->getNext()) {
-			$videos[] = $videoDataEntity->toObject();
-		}
-
-		return $videos;
+		return $this->getVideosByWall($this->systemWallFactory->getProfileRecentWall(), $memberSecureId);
 	}
 
 	/**
@@ -150,14 +149,11 @@ class WallControl extends DataControl {
 		if ($memberDataEntity->get("ProfileVideoSecureId") != "") {
 			if ($videoDataEntity = $videoControl->itemByField($memberDataEntity->get("ProfileVideoSecureId"), "SecureId")) {
 				$videos[] = $videoDataEntity->toObject();
+				return $videos;
 			}
 		}
 
-		if (count($videos) == 0) {
-			$videos = $this->getVideosByProfileRecent($memberSecureId, 1);
-		}
-
-		return $videos;
+		return $this->getVideosByWall($this->systemWallFactory->getProfileRecentWall(), $memberSecureId);
 	}
 
 	/**
@@ -248,7 +244,7 @@ class WallControl extends DataControl {
 			case "":
 			case "wall":
 			case substr($wallUrl, 0, 1) == "?":
-				return $this->getMainWall();
+				return $this->systemWallFactory->getMainWall();
 				break;
 		}
 
@@ -285,44 +281,10 @@ class WallControl extends DataControl {
 	}
 
 	/**
-	 * @return Wall
+	 * Get the System Wall Factory
+	 * @return SystemWallFactory
 	 */
-	public function getMainWall() {
-		$wall = Factory::getWall();
-		$wall->description = <<<DESCR
-This is the main wall, where highly rated Gawks appear from other walls. Visit another wall or create your own.
-DESCR;
-		$wall->url = "/";
-		$wall->name = "Main Wall";
-		$wall->secureId = "main-wall";
-		return $wall;
-	}
-
-	/**
-	 * @return Wall
-	 */
-	public function getFriendsWall() {
-		$wall = Factory::getWall();
-		$wall->description = <<<DESCR
-This is the wall of your friends. Their Gawks from other walls will appear on here.
-DESCR;
-		$wall->url = "/friends";
-		$wall->name = "Your friends";
-		$wall->secureId = "friends";
-		return $wall;
-	}
-
-	/**
-	 * @return Wall
-	 */
-	public function getFavouriteGawksWall() {
-		$wall = Factory::getWall();
-		$wall->description = <<<DESCR
-This is the wall of your favourite Gawks
-DESCR;
-		$wall->url = "/favourite-gawks";
-		$wall->name = "Favourite Gawks";
-		$wall->secureId = "favourite-gawks";
-		return $wall;
+	public function getSystemWallFactory() {
+		return $this->systemWallFactory;
 	}
 }
