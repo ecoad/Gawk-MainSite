@@ -84,7 +84,6 @@ function Gawk(configData) {
 	}
 
 	function onWelcomeOverlayShow() {
-		console.debug("hi");
 		$.box.show({content: $("#welcome-overlay")});
 	}
 

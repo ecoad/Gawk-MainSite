@@ -134,34 +134,27 @@ class MemberAuthentication {
 		if ($token) {
 			if ($memberDataEntity = $this->memberControl->getMemberDataEntityByToken($token, false)) {
 				$this->memberControl->updateField($memberDataEntity, "Token", "");
-				try {
-					session_destroy();
-				} catch (Exception $exception) {
-				}
-				if ($memberDataEntity->get("FacebookId") != "") {
-					return $this->revokeFacebookSession();
-				}
-				return true;
 			} else {
 				$this->errorControl->addError("Could not find Member by token", "InvalidToken");
 			}
-		} else {
-			$this->errorControl->addError("No token", "InvalidToken");
 		}
 
-		return false;
+		try {
+			session_destroy();
+		} catch (Exception $exception) {
+		}
+		$this->revokeFacebookSession();
+
+		return true;
 	}
 
 	/**
 	 * Remove Facebook cookie set locally
 	 */
 	protected function revokeFacebookSession() {
-		$facebook = Factory::getFacebook(CoreFactory::getApplication());
-		if ($facebook->getSession()) {
-			$facebookCookieId = "fbs_" . $facebook->getAppId();
-			setcookie($facebookCookieId, "", time() - 300, "/", $this->application->registry->get("Site/CommonDomain"));
-			return true;
-		}
+		$facebookCookieId = "fbs_" . $this->application->registry->get("Facebook/AppId");
+		setcookie($facebookCookieId, "", time() - 300, "/", $this->application->registry->get("Site/CommonDomain"));
+		return true;
 	}
 
 	/**

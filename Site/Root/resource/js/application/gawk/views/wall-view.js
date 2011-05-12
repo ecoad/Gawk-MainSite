@@ -31,7 +31,6 @@ function GawkView(config) {
 	}
 
 	function onFlashLoaded() {
-		console.debug("flash load");
 		wallLoaded = true;
 	}
 
@@ -168,10 +167,8 @@ function GawkView(config) {
 	function onLoggedIn() {
 		loggedIn = true;
 		if (wallLoaded) {
-			console.debug("inst log");
 			document.getElementById(swfObjectId).logInFromExternal();
 		} else {
-			console.debug("try again");
 			setTimeout(onLoggedIn, 500);
 		}
 	}
