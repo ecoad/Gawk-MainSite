@@ -70,7 +70,7 @@ class WallControl extends DataControl {
 		$videos = array();
 		$this->application->log("PRE ///" . $previousRunTime . "\\\ ", "sql");
 		while ($videoDataEntity = $videoControl->getPage($currentPage, $pageLength)) {
-			$videos[] = $videoDataEntity->toObject($previousRunTime);
+			$videos[] = $videoDataEntity->toObject($previousRunTime !== null ? true : false);
 		}
 
 		return $videos;
@@ -91,10 +91,6 @@ class WallControl extends DataControl {
 		$videoControl = Factory::getVideoControl();
 		$filter = $this->getVideoFilter();
 		$filter->addConditional($videoControl->table, "Rating", $this->application->registry->get("Wall/MainWallMinimumRating"), ">=");
-//		if ($timePeriodDays !== -1) {
-//			$dateTimeSince = date("Y-m-d H:i:s", time() - (SECONDS_IN_DAY * $timePeriodDays));
-//			$filter->addConditional($videoControl->table, "DateCreated", $dateTimeSince, ">=");
-//		}
 
 		$filter->addOrder("Rating", true);
 		$filter->addLimit($this->application->registry->get("Wall/DefaultLength"));
@@ -104,10 +100,6 @@ class WallControl extends DataControl {
 		while ($videoDataEntity = $videoControl->getPage($currentPage, $pageLength)) {
 			$videos[] = $videoDataEntity->toObject();
 		}
-
-//		if (($timePeriodDays !== -1) && (count($videos) < $this->application->registry->get("Wall/DefaultLength"))) {
-//			$this->getVideosByMainWall(-1);
-//		}
 
 		return $videos;
 	}
