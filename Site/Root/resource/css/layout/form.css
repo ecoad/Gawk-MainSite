@@ -82,7 +82,7 @@ form .label strong {
 	border: none;
   overflow: visible; /* prevents ie6/7 from adding too much left and right padding */
 
-	font-family: "Francois One", Arial, Helvetica, sans-serif;
+	font-family: "FranklinGothicDemiCondRegular", Arial, Helvetica, sans-serif;
 	color: #FFFFFF;
 	text-transform: uppercase;
 	background-color: #00ADEE;
