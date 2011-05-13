@@ -6,11 +6,17 @@ function Gawk(configData) {
 		loginWidget, navigationWidget, memberControl, memberRecentWallsControl;
 
 	function init() {
+		addEventListeners();
+
 		initModels();
 		initControllers();
 
 		$(document).trigger("GawkModelInit");
 		showCurrentView();
+	}
+
+	function addEventListeners() {
+		$(document).bind("GawkUIWelcomeOverlayShow", onWelcomeOverlayShow);
 	}
 
 	function initModels() {
@@ -75,6 +81,11 @@ function Gawk(configData) {
 	function onLoginShow(event, type) {
 		//TODO reimplement
 		$(document).trigger("GawkUI" + type + "Request");
+	}
+
+	function onWelcomeOverlayShow() {
+		console.debug("hi");
+		$.box.show({content: $("#welcome-overlay")});
 	}
 
 	init();

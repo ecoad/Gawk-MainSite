@@ -12,6 +12,8 @@ class Member {
 	public $secureId = "";
 	public $profileVideoSecureId = "";
 	public $profileVideoLocation = "";
+	public $website = "";
+	public $description = "";
 
 	public function __construct($memberData = null) {
 		if ($memberData) {

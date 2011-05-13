@@ -7,6 +7,7 @@ class MemberWebService {
 	const SERVICE_LOGOUT = "Logout";
 	const SERVICE_GET_LOGGED_IN_MEMBER = "GetLoggedInMember";
 	const SERVICE_REGISTER_MEMBER = "RegisterMember";
+	const SERVICE_UPDATE_PROFILE = "UpdateProfile";
 	const SERVICE_SEND_MEMBER_PANEL_ACTION = "SendMemberPanelAction";
 
 	/**
@@ -20,7 +21,7 @@ class MemberWebService {
 	protected $memberAuthentication;
 
 	/**
-	 * @var MemberControl
+	 * @var CustomMemberControl
 	 */
 	protected $memberControl;
 
@@ -58,6 +59,15 @@ class MemberWebService {
 				if ($memberDataEntity = $this->memberControl->registerMember($member)) {
 					$response->member = $memberDataEntity->toObject(true);
 					$response->success = true;
+				}
+				break;
+			case self::SERVICE_UPDATE_PROFILE:
+				$postData["Token"] = $this->application->defaultValue($postData["Token"], "");
+				if ($memberDataEntity = $this->memberAuthentication->getLoggedInMemberDataEntity($postData["Token"])) {
+					if ($memberDataEntity = $this->memberControl->updateProfile($memberDataEntity, $postData["ProfileData"])) {
+						$response->success = true;
+						$response->member = $memberDataEntity->toObject(false, true);
+					}
 				}
 				break;
 			case self::SERVICE_SEND_MEMBER_PANEL_ACTION:

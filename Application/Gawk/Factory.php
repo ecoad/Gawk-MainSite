@@ -190,4 +190,14 @@ class Factory {
 		return new VideoUrlHelper();
 	}
 
+	/**
+	 * @return SystemWallFactory
+	 */
+	static function getSystemWallFactory() {
+		require_once "Gawk/Wall/SystemWallFactory.php";
+		return new SystemWallFactory();
+	}
+
+
+
 }

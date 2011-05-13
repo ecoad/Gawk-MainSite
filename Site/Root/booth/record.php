@@ -17,7 +17,7 @@ $layout->start("Main");
 		Okay, so hopefully this is all fairly self-explanatory, really. <b>Hit the record button</b> to, er, record&hellip;
 	</p>
 	<p>
-		Once that's done, you can watch your video to <b>make sure you're happy</b> with it &ndash; if you're not then you 
+		Once that's done, you can watch your video to <b>make sure you're happy</b> with it &ndash; if you're not then you
 		can choose to <b>re-record</b>.
 	</p>
 	<p>
@@ -35,7 +35,7 @@ $layout->start("JavaScript");
 //<![CDATA[
 $(document).ready(function() {
 	gawkFlashVars = {
-			apiLocation: "http://staging.gawkwall.com/api/",
+			apiLocation: "<?php echo $application->registry->get("Site/Address"); ?>/api/",
 			wallId: "gawk"
 		};
 

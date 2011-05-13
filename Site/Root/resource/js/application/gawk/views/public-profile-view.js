@@ -1,10 +1,10 @@
 function PublicProfileView(config) {
 	var global = this,
-		viewMember = config.getMember(),
+		profileMember = config.getProfileMember(),
 		member = null,
 		element = $("#public-profile-view"),
 		aliasElement = element.find("h1"),
-		friendLink = $(element.find("a.logged-in"));
+		friendLink = $(element.find("a.friend-control"));
 
 	function init() {
 		$(document).bind("GawkModelInit", onModelInit);
@@ -12,6 +12,7 @@ function PublicProfileView(config) {
 
 	function onModelInit() {
 		assignEventListeners();
+		showProfileGawkAndRecentGawks();
 	}
 
 	function assignEventListeners() {
@@ -20,10 +21,38 @@ function PublicProfileView(config) {
 
 		$(document).bind("GawkUIAllHide", onHideView);
 		$(document).bind("GawkUIPublicProfileShow", onShowView);
+
+		friendLink.bind("click", function () {
+			$(document).trigger("GawkUILoginOverlayShow");
+		});
 	}
 
-	function showLoggedInControls() {
-		if (member.friends[viewMember.secureId]) {
+	function showProfileGawkAndRecentGawks() {
+		var params = {};
+		params.allowscriptaccess = "always";
+		params.wmode = "transparent";
+
+		gawkFlashVars = {
+			apiLocation: config.getApiLocation(),
+			wallId: "profile-recent",
+			profileSecureId: profileMember.secureId
+		};
+
+		swfobject.embedSWF("/resource/flash/GawkProfileRecentFlash.swf?v=@VERSION-NUMBER@", "recent-swf-container",
+			"1050", "131", "9.0.0", false, gawkFlashVars, params, {id: "recent-swf"});
+
+		gawkFlashVars = {
+			apiLocation: config.getApiLocation(),
+			wallId: "profile-gawk",
+			profileSecureId: profileMember.secureId
+		};
+
+		swfobject.embedSWF("/resource/flash/GawkProfileGawkFlash.swf?v=@VERSION-NUMBER@", "profile-swf-container",
+				"175", "131", "9.0.0", false, gawkFlashVars, params, {id: "profile-swf"});
+	}
+
+	function allowLoggedInControls() {
+		if (member.friends[profileMember.secureId]) {
 			setFriendLink(true);
 		} else {
 			setFriendLink(false);
@@ -32,13 +61,15 @@ function PublicProfileView(config) {
 		element.find(".logged-out").hide();
 	}
 
-	function showLoggedOutControls() {
+	function disallowLoggedOutControls() {
 		element.find(".logged-out").show();
 		element.find(".logged-in").hide();
 	}
 
 	function setFriendLink(isFriend) {
 		friendLink.unbind("click");
+		friendLink.toggleClass("add-friend");
+		friendLink.toggleClass("remove-friend");
 		if (isFriend) {
 			friendLink.html("Unfriend");
 			friendLink.click(onUnfriendClick);
@@ -46,12 +77,13 @@ function PublicProfileView(config) {
 			friendLink.html("Befriend");
 			friendLink.click(onBefriendClick);
 		}
+		friendLink.show();
 	}
 
 	function onBefriendClick(event) {
 		event.preventDefault();
 
-		$(document).trigger("GawkModelAddFriend", [viewMember.secureId]);
+		$(document).trigger("GawkModelAddFriend", [profileMember.secureId]);
 		setFriendLink(true);
 
 	}
@@ -59,18 +91,18 @@ function PublicProfileView(config) {
 	function onUnfriendClick(event) {
 		event.preventDefault();
 
-		$(document).trigger("GawkModelRemoveFriend", [viewMember.secureId]);
+		$(document).trigger("GawkModelRemoveFriend", [profileMember.secureId]);
 		setFriendLink(false);
 	}
 
 	function onLoggedIn(event, response) {
 		member = response.member;
-		showLoggedInControls();
+		allowLoggedInControls();
 	}
 
 	function onLoggedOut() {
 		member = null;
-		showLoggedOutControls();
+		disallowLoggedOutControls();
 	}
 
 	function onShowView() {
