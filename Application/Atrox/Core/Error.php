@@ -52,9 +52,21 @@ class ErrorControl {
 	function addError($value, $key = null) {
 		$this->hasErrors = true;
 		if ($key) {
-			$this->errorList[$key] = $value;	
+			$this->errorList[$key] = $value;
 		} else {
-			$this->errorList[] = $value;				
+			$this->errorList[] = $value;
+		}
+	}
+
+	/**
+	 * Add Errors
+	 *
+	 * @param array $errors
+	 *
+	 */
+	public function addErrors(array $errors) {
+		foreach ($errors as $key => $error) {
+			$this->addError($error, $key);
 		}
 	}
 
@@ -77,8 +89,8 @@ class ErrorControl {
 	}
 
 	/**
-	 * Returns an array filled with errors that have been set 
-	 * and clears the list of errors. 
+	 * Returns an array filled with errors that have been set
+	 * and clears the list of errors.
 	 * @return Array Error Descriptions
 	 */
 	function getErrors($reset = true) {

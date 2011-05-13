@@ -6,6 +6,21 @@ class VideoFileUpload {
 	 */
 	protected $videoControl;
 
+	public function optimiseFlashVideo(VideoControl $videoControl, Video $video) {
+		$fileLocation = $videoControl->application->registry->get("Binary/Path") . "/";
+
+		$fullPathFile = $fileLocation . $video->filename;
+
+		$newFileName = substr($video->filename, 0, strripos($video->filename, ".")) . ".mp4";
+		$fullPathNewFile = $fileLocation . $newFileName;
+
+		shell_exec("ffmpeg -i $fullPathFile -an -vcodec libx264 -vpre slow -crf 22 -threads 0 $fullPathNewFile");
+
+		unlink($fullPathFile);
+
+		return $newFileName;
+	}
+
 	/**
 	 * @param VideoControl $videoControl
 	 * @param array $filesData
@@ -15,6 +30,9 @@ class VideoFileUpload {
 		$this->videoControl = $videoControl;
 
 		switch ($sourceDevice) {
+			case VideoControl::SOURCE_FLASH:
+				$fileName = $this->mapFlashUpload($filesData["VideoFile"]);
+				break;
 			case VideoControl::SOURCE_IPHONE:
 				$fileName = $this->mapIphoneUpload($filesData["VideoFile"]);
 				break;

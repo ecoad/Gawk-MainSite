@@ -62,10 +62,11 @@ class VideoControl extends DataControl {
 			return false;
 		}
 
+		$videoFileUpload = Factory::getVideoFileUpload();
 		if ($video->uploadSource == self::SOURCE_FLASH) {
 			// Wowza places FLV in correct location
+			$video->filename =  $videoFileUpload->optimiseFlashVideo($this, $video);
 		} else {
-			$videoFileUpload = Factory::getVideoFileUpload();
 			if (!$fileName = $videoFileUpload->saveFile($this, $filesData, $video->uploadSource)) {
 				return false;
 			}
