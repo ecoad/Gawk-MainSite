@@ -8,10 +8,14 @@
  */
 
 @font-face {
-  font-family: "Francois One";
-  font-style: normal;
+  font-family: "FranklinGothicDemiCondRegular";
+  src: url("/resource/font/franklingothicdemicondensed-webfont.eot");
+  src: url("/resource/font/franklingothicdemicondensed-webfont.eot?#iefix") format("embedded-opentype"),
+       url("/resource/font/franklingothicdemicondensed-webfont.woff") format("woff"),
+       url("/resource/font/franklingothicdemicondensed-webfont.ttf") format("truetype"),
+       url("/resource/font/franklingothicdemicondensed-webfont.svg#FranklinGothicDemiCondRegular") format("svg");
   font-weight: normal;
-  src: local("Francois One"), local("FrancoisOne"), url("http://themes.googleusercontent.com/font?kit=bYbkq2nU2TSx4SwFbz5sCKRDOzjiPcYnFooOUGCOsRk") format("woff");
+  font-style: normal;
 }
 
 /**
@@ -125,7 +129,7 @@ em {
 h1, h2, h3, h4, h5 {
 	color: #000000;
 	letter-spacing: -1px;
-	font-family: "Francois One", Arial, Helvetica, sans-serif;
+	font-family: "FranklinGothicDemiCondRegular", Arial, Helvetica, sans-serif;
 }
 
 h1 {
