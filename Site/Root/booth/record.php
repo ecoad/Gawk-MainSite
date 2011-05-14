@@ -42,7 +42,7 @@ $(document).ready(function() {
 			videoHeight: 230,
 			frameRate:15,
 			bitRate:50000,
-			keyFrame:15
+			keyFrame:16
 		};
 
 		var params = {};

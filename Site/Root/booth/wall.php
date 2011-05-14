@@ -25,10 +25,10 @@ $(document).ready(function() {
 
 		var params = {};
 		params.allowscriptaccess = "always";
-		params.wmode = "transparent";
+		params.wmode = "direct";
 
 		swfobject.embedSWF("/resource/flash/GawkBoothWall.swf?v=@VERSION-NUMBER@", "gawk-container",
-			"1920", "1150", "9.0.0", false, gawkFlashVars, params, {id: "gawk-swf"});
+			"1920", "1150", "10.0.0", false, gawkFlashVars, params, {id: "gawk-swf"});
 });
 //]]>
 	</script>
