@@ -14,7 +14,7 @@ class VideoFileUpload {
 		$newFileName = substr($video->filename, 0, strripos($video->filename, ".")) . ".mp4";
 		$fullPathNewFile = $fileLocation . $newFileName;
 
-		shell_exec("ffmpeg -i $fullPathFile -s 320x230 -r 15 -an -vcodec libx264 -vpre hq -crf 22 -threads 0 $fullPathNewFile");
+		shell_exec("ffmpeg -i $fullPathFile -s 320x230 -an -vcodec libx264 -vpre hq -crf 22 -threads 0 $fullPathNewFile");
 
 		unlink($fullPathFile);
 
