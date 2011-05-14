@@ -208,6 +208,22 @@ h2 {
 
 
 /**
+ * Record Page
+ */
+
+#container.record {
+	background-image: url("/resource/image/booth/illustration-record.gif");
+	background-position: center 0px;
+	background-repeat: no-repeat;
+}
+
+.record .secondary {
+	position: relative;
+	top: -18px;
+}
+
+
+/**
  * Thanks Page
  */
 
