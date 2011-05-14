@@ -36,7 +36,13 @@ $layout->start("JavaScript");
 $(document).ready(function() {
 	gawkFlashVars = {
 			apiLocation: "<?php echo $application->registry->get("Site/Address"); ?>/api/",
-			wallId: "gawk"
+			wallId: "gawk",
+			uiLocation: "/resource/flash/gawk-booth-ui.swf",
+			videoWidth: 320,
+			videoHeight: 230,
+			frameRate:15,
+			bitRate:50000,
+			keyFrame:15
 		};
 
 		var params = {};
