@@ -33,6 +33,7 @@ class VideoFileUpload {
 	}
 
 	public function optimiseFlashVideo(VideoControl $videoControl, Video $video) {
+		return $video->filename; //Temporary
 		$fileLocation = $videoControl->application->registry->get("Binary/Path") . "/";
 
 		$fullPathFile = $fileLocation . $video->filename;
