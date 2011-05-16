@@ -67,7 +67,8 @@ function GawkView(config) {
 		gawkFlashVars = {
 			apiLocation: config.getApiLocation(),
 			wallId: wall.secureId,
-			useStageVideo: "false"
+			useStageVideo: "false",
+			useDebugOverlay: "false"
 		};
 
 		var params = {};
