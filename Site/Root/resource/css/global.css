@@ -259,3 +259,37 @@ h2 {
 	width: 96%;
 	margin: 0px 2% 0px 2%;
 }
+
+
+/**
+ * Overlays
+ */
+
+.overlay {
+	position: absolute;
+	top: 75px;
+	clear: both;
+	width: 900px;
+	height: 500px;
+	padding: 20px 20px 20px 20px;
+	background-color: rgba(255,255,255,0.95);
+	
+	-webkit-border-radius: 10px 10px 10px 10px;
+	   -moz-border-radius: 10px 10px 10px 10px;
+	     -o-border-radius: 10px 10px 10px 10px;
+	        border-radius: 10px 10px 10px 10px;
+}
+
+.overlay ol {
+	width: 900px;
+	height: 430px;
+	overflow: auto;
+}
+
+.overlay .close {
+	float: right;
+	font-size: 14px;
+	font-family: "FranklinGothicDemiCondRegular", Arial, Helvetica, sans-serif;
+	color: #000000;
+	text-transform: uppercase;
+}

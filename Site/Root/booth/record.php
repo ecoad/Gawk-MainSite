@@ -23,6 +23,9 @@ $layout->start("Main");
 	<p>
 		If you are, then <b>add it to the wall</b> and you're done!
 	</p>
+	<p>
+		Or if you'd like to go back to the start, you <a href="welcome.php">can do so here<a/>&hellip;
+	</p>
 </div>
 <div class="column secondary">
 	<div id="gawk-container"></div>
