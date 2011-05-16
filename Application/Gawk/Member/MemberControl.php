@@ -35,7 +35,7 @@ class CustomMemberControl extends MemberControl {
 			"Secure ID", "", FM_TYPE_STRING, 50, FM_STORE_ALWAYS, false,	FM_OPTIONS_UNIQUE);
 
 		$this->fieldMeta["Alias"] = new FieldMeta(
-			"Name", "", FM_TYPE_STRING, 20, FM_STORE_ALWAYS, false, FM_OPTIONS_UNIQUE);
+			"alias", "", FM_TYPE_STRING, 20, FM_STORE_ALWAYS, false, FM_OPTIONS_UNIQUE);
 
 		$this->fieldMeta["Password"] = new FieldMeta(
 			"Password", "", FM_TYPE_PASSWORD, 20, FM_STORE_ADD, true);
@@ -154,17 +154,24 @@ class CustomMemberControl extends MemberControl {
 	 * @return CustomMemberDataEntity
 	 */
 	public function updateProfile(CustomMemberDataEntity $memberDataEntity, array $profileData) {
-		$textFields = array("Website", "Description");
+
+		$textFields = array("Website", "Description", "Alias");
 		foreach ($textFields as $textField) {
 			if (isset($profileData[$textField])) {
 				$memberDataEntity->set($textField, $profileData[$textField]);
-				$this->updateField($memberDataEntity, $textField, $profileData[$textField]);
 			}
 		}
-
 		if (isset($profileData["RemoveProfileGawk"])) {
 			$memberDataEntity->set("ProfileVideoSecureId", null);
-			$this->updateField($memberDataEntity, "ProfileVideoSecureId", null);
+		}
+
+		if ($memberDataEntity->validate()) {
+			foreach ($textFields as $textField) {
+				$this->updateField($memberDataEntity, $textField, $profileData[$textField]);
+			}
+			if (isset($profileData["RemoveProfileGawk"])) {
+				$this->updateField($memberDataEntity, "ProfileVideoSecureId", null);
+			}
 		}
 
 		return $memberDataEntity;
@@ -203,6 +210,10 @@ class CustomMemberControl extends MemberControl {
 		return $memberDataEntity->toObject(false, $includeFriends);
 	}
 
+	/**
+	 * @param string $alias
+	 * @return CustomMemberControl
+	 */
 	public function getMemberDataEntityByAlias($alias) {
 		$filter = CoreFactory::getFilter();
 		$filter->addConditional($this->table, "Alias", $alias, "ILIKE");
@@ -210,6 +221,22 @@ class CustomMemberControl extends MemberControl {
 
 		return $this->getNext();
 	}
+
+	/**
+	 * (non-PHPdoc)
+	 * @see Application/Atrox/Core/Data/DataControl::validate()
+	 */
+	public function validate(CustomMemberDataEntity $member) {
+		$valid = parent::validate($member);
+
+		if (!preg_match('/^[\da-z-+]+$/', $member->get("Alias"))) {
+			$this->errorControl->addError("'Alias' must be only a-Z, 0-9, and hyphens e.g. 'joe-bloggs', 'Ben33'", "InvalidAlias");
+			$valid = false;
+		}
+
+		return $valid;
+	}
+
 
 	public function afterInsert(DataEntity $dataEntity) {
 	}

@@ -16,6 +16,7 @@ if ($loggedInMemberDataEntity = $memberAuthentication->getLoggedInMemberDataEnti
 }
 
 $formWebsiteLabel = "Website";
+$formAliasLabel = "Alias";
 $formDescriptionLabel = "Description";
 $formRemoveProfileGawkLabel = "RemoveProfileGawk";
 $formSubmitLabel = "save";
@@ -23,6 +24,8 @@ $formSubmitLabel = "save";
 if ($application->parseSubmit() == $formSubmitLabel) {
 	$memberWebService = Factory::getMemberWebService();
 	$response = $memberWebService->handleRequest(MemberWebService::SERVICE_UPDATE_PROFILE, $_POST);
+	$application->errorControl->addErrors($response->errors);
+	$member = $response->member;
 	if ($response->success) {
 		$application->redirect($memberUrlHelper->getProfileUrl($response->member));
 	}
@@ -43,17 +46,40 @@ $layout->start("Main");
 		edit
 </div>
 <div><a href="/u/<?php echo $member->alias; ?>">View your profile</a></div>
-<div id="profile-edit-view" style="display: none;">
-	<h1>Edit Profile</h1>
+<div id="profile-edit-view">
+	<h1>edit profile</h1>
+<?php
+if ($application->errorControl->hasErrors()) {
+?>
+	<div class="form-errors">
+		<h2>form error</h2>
+		<ul>
+<?php
+	foreach ($application->errorControl->getErrors() as $errorLabel => $errorDescription) {
+?>
+			<li><?php echo $errorDescription; ?></li>
+<?php
+	}
+?>
+		</ul>
+	</div>
+<?php
+}
+?>
 	<form method="post" action="">
 		<fieldset>
+			<label>
+				<strong>alias</strong>
+				<input name="ProfileData[<?php echo $formAliasLabel; ?>]" type="text" class="textbox wide"
+					tabindex="<?php echo $tabIndex++; ?>" value="<?php echo $member->alias; ?>"/>
+			</label><br />
 			<label>
 				<strong>website</strong>
 				<input name="ProfileData[<?php echo $formWebsiteLabel; ?>]" type="text" class="textbox wide"
 					tabindex="<?php echo $tabIndex++; ?>" value="<?php echo $member->website; ?>"/>
 			</label><br />
 			<label>
-				<strong>mini-bio</strong><br>
+				<strong>about</strong><br>
 				<textarea tabindex="<?php echo $tabIndex++; ?>" class="textbox wide" rows="7" cols="40"
 					name="ProfileData[<?php echo $formDescriptionLabel; ?>]"><?php echo $member->description; ?></textarea>
 			</label><br />

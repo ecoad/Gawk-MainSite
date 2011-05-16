@@ -65,7 +65,7 @@ class MemberWebService {
 				$postData["Token"] = $this->application->defaultValue($postData["Token"], "");
 				if ($memberDataEntity = $this->memberAuthentication->getLoggedInMemberDataEntity($postData["Token"])) {
 					if ($memberDataEntity = $this->memberControl->updateProfile($memberDataEntity, $postData["ProfileData"])) {
-						$response->success = true;
+						$response->success = !$this->application->errorControl->hasErrors();
 						$response->member = $memberDataEntity->toObject(false, true);
 					}
 				}

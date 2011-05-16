@@ -85,6 +85,9 @@ function MemberControl (config) {
 			$(document).trigger("GawkMemberLoggedIn", [response]);
 			$(document).trigger("GawkModelGetRecentWallActivity");
 		} else {
+			if (response.errors.InvalidToken) {
+				logOut();
+			}
 			$(document).trigger("GawkMemberLoggedOut");
 		}
 	}

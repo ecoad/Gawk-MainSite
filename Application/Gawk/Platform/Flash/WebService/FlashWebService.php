@@ -48,8 +48,7 @@ class FlashWebService {
 				if (is_array($response->videos)) {
 					$response->success = true;
 
-					//$response->updatePollLength = $this->application->registry->get("Wall/DefaultWallPollLength");
-					$response->updatePollLength = 10000;
+					$response->updatePollLength = $this->application->registry->get("Wall/DefaultWallPollLength");
 
 					$response->mediaServerLocation = $this->application->registry->get("MediaServer/Address");
 					$response->binaryLocation = $this->application->registry->get("Site/Address") . "/resource/binary/";

@@ -31,7 +31,6 @@ function GawkView(config) {
 	}
 
 	function onFlashLoaded() {
-		console.debug("flash load");
 		wallLoaded = true;
 	}
 
@@ -72,7 +71,7 @@ function GawkView(config) {
 
 		var params = {};
 		params.allowscriptaccess = "always";
-		params.wmode = "transparent";
+		params.wmode = "direct";
 
 		swfobject.embedSWF("/resource/flash/GawkFlash.swf?v=@VERSION-NUMBER@", gawkFlashContainerElement.attr("id"),
 			"1050", "655", "9.0.0", false, gawkFlashVars, params, {id: swfObjectId});
@@ -168,10 +167,8 @@ function GawkView(config) {
 	function onLoggedIn() {
 		loggedIn = true;
 		if (wallLoaded) {
-			console.debug("inst log");
 			document.getElementById(swfObjectId).logInFromExternal();
 		} else {
-			console.debug("try again");
 			setTimeout(onLoggedIn, 500);
 		}
 	}

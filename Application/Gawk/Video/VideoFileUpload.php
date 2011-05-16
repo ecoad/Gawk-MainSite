@@ -32,6 +32,21 @@ class VideoFileUpload {
 		return $fileName;
 	}
 
+	public function optimiseFlashVideo(VideoControl $videoControl, Video $video) {
+		$fileLocation = $videoControl->application->registry->get("Binary/Path") . "/";
+
+		$fullPathFile = $fileLocation . $video->filename;
+
+		$newFileName = substr($video->filename, 0, strripos($video->filename, ".")) . ".mp4";
+		$fullPathNewFile = $fileLocation . $newFileName;
+
+		shell_exec("ffmpeg -i $fullPathFile -s 320x230 -an -vcodec libx264 -vpre hq -crf 22 -threads 0 $fullPathNewFile");
+
+		unlink($fullPathFile);
+
+		return $newFileName;
+	}
+
 	protected function mapIphoneUpload(array $fileData) {
 		$fileName = $this->moveTemporaryFile($fileData["tmp_name"], $fileData["type"]);
 		$fileLocation = $this->videoControl->application->registry->get("Binary/Path") . "/";
@@ -41,7 +56,7 @@ class VideoFileUpload {
 		$newFileName = substr($fileName, 0, strripos($fileName, ".")) . ".mp4";
 		$fullPathNewFile = $fileLocation . $newFileName;
 
-		shell_exec("ffmpeg -i $fullPathFile -f mp4 -vcodec copy -acodec copy $fullPathNewFile");
+		shell_exec("ffmpeg -i $fullPathFile -s 320x230 -an -vcodec libx264 -vpre hq -crf 22 -threads 0 $fullPathNewFile");
 		unlink($fullPathFile);
 
 		return $newFileName;
