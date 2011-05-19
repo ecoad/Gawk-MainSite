@@ -46,6 +46,9 @@
 			<token key="IncludeServerAlias" value="${config.serveralias}" />
 			<token key="FacebookAppId" value="${facebook.appId}" />
 			<token key="FacebookSecret" value="${facebook.secret}" />
+			<token key="MediaServerProtocol" value="${mediaServer.protocol}" />
+			<token key="MediaServerLocation" value="${mediaServer.location}" />
+			<token key="MediaServerPort" value="${mediaServer.port}" />
 		</replacetokens>
 	</filterchain>
 
@@ -134,7 +137,9 @@
 		<property name="database.host" value="${${environment}.database.host}" />
 		<property name="database.port" value="${${environment}.database.port}" />
 		<property name="database.name" value="${${environment}.database.name}" />
-
+		<property name="mediaServer.location" value="mediaServer.location}" />
+		<property name="mediaServer.protocol" value="mediaServer.protocol}" />
+		<property name="mediaServer.port" value="mediaServer.port}" />
 		<property name="memcache.server" value="${${environment}.memcache.server}" />
 		<property name="config.serveralias" value="${${environment}.config.serveralias}" />
 
