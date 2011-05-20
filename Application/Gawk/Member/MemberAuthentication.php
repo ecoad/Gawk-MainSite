@@ -29,7 +29,8 @@ class MemberAuthentication {
 	}
 
 	public function login(array $loginData) {
-		if (isset($loginData["FacebookId"])) {
+		$facebookLogin = isset($loginData["FacebookId"]);
+		if ($facebookLogin) {
 			$loginData["PublicKey"] = $this->application->defaultValue($loginData["PublicKey"], null);
 			$loginData["Signature"] = $this->application->defaultValue($loginData["Signature"], null);
 			$memberDataEntity = $this->getFacebookRegisteredWithLoginData($loginData["FacebookId"], $loginData["PublicKey"], $loginData["Signature"]);
@@ -40,7 +41,11 @@ class MemberAuthentication {
 		if ($memberDataEntity) {
 			$this->setAuthenticatedSession($memberDataEntity);
 		} else {
-			$this->errorControl->addError("Unable to log in with provided credentials", "login");
+			if ($facebookLogin) {
+				$this->errorControl->addError("Unable to log in with provided credentials", "InvalidLoginCredentials");
+			} else {
+				$this->errorControl->addError("Incorrect email address or password", "InvalidLoginCredentials");
+			}
 		}
 
 		return $memberDataEntity;

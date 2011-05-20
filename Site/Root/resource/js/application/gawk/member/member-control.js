@@ -22,6 +22,8 @@ function MemberControl (config) {
 	function addEventListeners() {
 		$(document).bind("GawkUILogoutRequest", logOut);
 		$(document).bind("GawkUIProfileUpdate", onProfileUpdate);
+		$(document).bind("GawkUISiteLoginRequest", onSiteLoginRequest);
+		$(document).bind("GawkUISiteRegisterRequest", onSiteRegisterRequest);
 	}
 
 	function initFacebook() {
@@ -57,7 +59,10 @@ function MemberControl (config) {
 		}, "json");
 	}
 
-	/*
+	function onSiteLoginRequest(event, emailAddress, password) {
+		logInSiteRegisteredMember(emailAddress, password);
+	}
+
 	function logInSiteRegisteredMember(emailAddress, password) {
 		$.post(config.getApiLocation(), {
 				Action: "Member.Login",
@@ -65,17 +70,9 @@ function MemberControl (config) {
 				Password: password
 			}, onLoginResponse, "json");
 	}
-	*/
 
 	function getLoggedInMember() {
 		$.get(config.getApiLocation(), {Action: "Member.GetLoggedInMember"}, onLoginResponse, "json");
-	}
-
-	function checkFirstVisit() {
-		if ($.cookie("FirstVisit") == null) {
-			$(document).trigger("GawkUIWelcomeOverlayShow");
-			$.cookie("FirstVisit", "true", {expires: 3650});
-		}
 	}
 
 	function onLoginResponse(response) {
@@ -85,10 +82,29 @@ function MemberControl (config) {
 			$(document).trigger("GawkMemberLoggedIn", [response]);
 			$(document).trigger("GawkModelGetRecentWallActivity");
 		} else {
+			$(document).trigger("GawkMemberLoginInvalidCredentials", [response.errors]);
 			if (response.errors.InvalidToken) {
 				logOut();
 			}
-			$(document).trigger("GawkMemberLoggedOut");
+		}
+	}
+
+	function onSiteRegisterRequest(event, memberData) {
+		registerSiteRegisteredMember(memberData);
+	}
+
+	function registerSiteRegisteredMember(memberData) {
+		$.post(config.getApiLocation(), {
+			Action: "Member.RegisterMember",
+			MemberData: $.toJSON(memberData)
+		}, onSiteRegisterResponse, "json");
+	}
+
+	function onSiteRegisterResponse(response) {
+		if (response.success) {
+			window.location.reload();
+		} else {
+			$(document).trigger("GawkMemberRegisterInvalidCredentials", [response.errors]);
 		}
 	}
 
@@ -98,12 +114,19 @@ function MemberControl (config) {
 				window.location.reload();
 			});
 		});
-
 	}
 
 	function onProfileUpdate() {
 		$.post(config.getApiLocation(), {Action: "Member.UpdateProfile", Member: $.toJSON(getSkinnyMember())});
 	}
+
+	function checkFirstVisit() {
+		if ($.cookie("FirstVisit") == null) {
+			$(document).trigger("GawkUIWelcomeOverlayShow");
+			$.cookie("FirstVisit", "true", {expires: 3650});
+		}
+	}
+
 
 	this.getMember = function() {
 		return member;

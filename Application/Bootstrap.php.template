@@ -34,9 +34,9 @@ $application->setConnectionString(
 
 $htmlControl = CoreFactory::getHtmlControl();
 
-$application->registry->set("Name", "Gawk Wall");
-$application->registry->set("Title", "Gawk Wall");
-$application->registry->set("Description", "The Gawk Wall");
+$application->registry->set("Name", "gawkwall");
+$application->registry->set("Title", "gawkwall");
+$application->registry->set("Description", "this is the gawkwall");
 $application->registry->set("DefaultWall", "main");
 $application->registry->set("TwitterAccount", "gawkwall");
 
@@ -62,7 +62,8 @@ $application->securityControl->noAccessPage = "/account/no-access.php";
 $application->registry->set("Site/HasSsl", false);
 
 $application->registry->set("Site/Address", "http://@SiteDomain@");
-$application->registry->set("MediaServer/Address", "rtmp://@SiteDomain@/Gawk");
+$application->registry->set("MediaServer/Address", "@MediaServerProtocol@://@MediaServerLocation@:@MediaServerPort@/Gawk");
+$application->registry->set("MediaServer/BinaryAddress", "http://@MediaServerLocation@/resource/binary/");
 $application->registry->set("Site/Domain", "@SiteDomain@");
 $application->registry->set("Site/CommonDomain", "gawkwall.com");
 $application->registry->set("Site/Api", $application->registry->get("Site/Address") . "/api/");

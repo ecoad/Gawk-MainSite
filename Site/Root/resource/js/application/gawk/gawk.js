@@ -3,7 +3,7 @@ function Gawk(configData) {
 	var config = new Config(configData);
 
 	var gawkView, memberWallBookmarkControl, wallSelectView, wallEditView, publicProfileView, profileEditView, loginView,
-		loginWidget, navigationWidget, memberControl, memberRecentWallsControl;
+		loginWidget, navigationWidget, memberControl, memberRecentWallsControl, registerView;
 
 	function init() {
 		addEventListeners();
@@ -70,6 +70,10 @@ function Gawk(configData) {
 
 		try {
 			publicProfileView = new PublicProfileView(config);
+		} catch (e) { }
+
+		try {
+			registerView = new RegisterView();
 		} catch (e) { }
 	}
 

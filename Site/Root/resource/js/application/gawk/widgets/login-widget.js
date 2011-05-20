@@ -1,16 +1,9 @@
 function LoginWidget() {
-	var global = this;
-
-	var element = $(".login-widget");
-
-	var loggedInElement = element.find(".logged-in");
-
-	var loggedOutElement = element.find(".logged-out");
-
-//	var siteLoginLink = element.find(".site-login");
-//	var siteRegisterLink = element.find(".site-register");
-
-	var logOutLink = loggedInElement.find(".logout");
+	var global = this, element = $(".login-widget"),
+		loggedInElement = element.find(".logged-in"),
+		loggedOutElement = element.find(".logged-out"),
+		loginOverlayForm = $("#login-overlay form"),
+		logOutLink = loggedInElement.find(".logout");
 
 	function assignEventListeners() {
 		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
@@ -19,13 +12,32 @@ function LoginWidget() {
 		$(document).bind("GawkUILoggingInOverlayShow", onLoggingInOverlayShow);
 		$(document).bind("GawkUILoggingOutOverlayShow", onLoggingOutOverlayShow);
 
-//		siteLoginLink.click(onSiteLoginClick);
-//		siteRegisterLink.click(onSiteRegisterClick);
 		logOutLink.click(onLogOutClick);
+		loginOverlayForm.submit(onLoginOverlayFormSubmit);
 
 		if (window.location.search == "?Login") {
 			$(document).trigger("GawkUILoginOverlayShow");
 		}
+	}
+
+	function onLoginOverlayFormSubmit(event) {
+		event.preventDefault();
+
+		$(document).bind("GawkMemberLoginInvalidCredentials", onLoginOverlayInvalidCredentials);
+
+		var emailAddress = loginOverlayForm.find("input[name=EmailAddress]").val(),
+			password = loginOverlayForm.find("input[name=Password]").val();
+
+		$(document).trigger("GawkUISiteLoginRequest", [emailAddress, password]);
+	}
+
+	function onLoginOverlayInvalidCredentials(event, errors) {
+		$(document).unbind("GawkMemberLoginInvalidCredentials", onLoginOverlayInvalidCredentials);
+
+		var loginErrorsElement = loginOverlayForm.find(".login-error"),
+			errorsListElement = loginErrorsElement.find(".message").html(errors.InvalidLoginCredentials);
+
+		loginErrorsElement.show();
 	}
 
 	/*

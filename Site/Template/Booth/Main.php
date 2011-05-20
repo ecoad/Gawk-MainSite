@@ -15,20 +15,19 @@ $application = CoreFactory::getApplication();
 		<link rel="stylesheet" type="text/css" href="/resource/css/structure.css?v=@VERSION-NUMBER@" media="screen" />
 		<link rel="stylesheet" type="text/css" href="/resource/css/global.css?v=@VERSION-NUMBER@" media="screen" />
 		<link rel="stylesheet" type="text/css" href="/resource/css/layout/form.css?v=@VERSION-NUMBER@" media="screen" />
-		
+
 		<?php echo $this->get("Style"); ?>
-		
 	</head>
 	<body>
 		<div id="container" class="<?php echo $this->get("Section"); ?>">
 			<div id="wrapper">
-				
+
 				<div id="main-content">
 <?php echo $this->get("Main"); ?>
 				</div>
-				
+
 			</div>
-			
+
 			<div id="footer">
 				<ul>
 					<li class="clock">Presented by <span>Clock</span></li>
