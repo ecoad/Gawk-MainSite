@@ -180,7 +180,7 @@ class WallControl extends DataControl {
 		$wallDataEntity = null;
 		if (($wall->secureId != "") && $this->isMemberAuthorizedToEditWallBySecureId($wall->secureId)) {
 			$wallDataEntity = $this->itemByField($wall->secureId, "SecureId");
-			$this->validateUrl($wall->url, false);
+			$this->validateUrl($wall->url, $wallDataEntity->get("Url") != $wall->url);
 		} else {
 			$this->validateUrl($wall->url);
 		}
