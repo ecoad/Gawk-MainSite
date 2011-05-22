@@ -192,6 +192,11 @@ class WallControl extends DataControl {
 		}
 	}
 	
+	/**
+	 * Enter description here ...
+	 * @param Wall $wall
+	 * @param Member $member
+	 */
 	public function deleteWall(Wall $wall, Member $member) {
 		if ($this->isMemberAuthorizedToEditWall($wall->url, $member)) {
 			$this->deleteWhere("SecureId", $wall->secureId);
@@ -199,6 +204,7 @@ class WallControl extends DataControl {
 		}
 		
 		$this->application->errorControl->addError("Member does not own wall", "MemberNotWallAuthor");
+		return false;
 	}
 
 	/**

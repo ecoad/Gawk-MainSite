@@ -13,6 +13,7 @@ function WallControl (config, memberControl) {
 
 	function addEventListeners() {
 		$(document).bind("GawkModelSaveWall", onSaveWallRequest);
+		$(document).bind("GawkModelDeleteWall", onDeleteWallRequest);
 	}
 
 	function onSaveWallRequest(event, wall) {
@@ -23,5 +24,18 @@ function WallControl (config, memberControl) {
 
 	function onSaveWallResponse(response) {
 		$(document).trigger("GawkModelSaveWallResponse", [response]);
+	}
+	
+
+	function onDeleteWallRequest(event, wall) {
+		wall.memberSecureId = memberControl.getMember().secureId;
+		$.post(config.getApiLocation(), {
+			Action: "Wall.Delete", Token: memberControl.getMember().token, WallData: $.toJSON(wall)
+		},
+		onDeleteWallResponse, "json");
+	}
+
+	function onDeleteWallResponse(response) {
+		$(document).trigger("GawkModelDeleteWallResponse", [response]);
 	}
 }

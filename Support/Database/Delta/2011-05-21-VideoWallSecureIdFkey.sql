@@ -1,0 +1,4 @@
+ALTER TABLE "Video"
+  ADD CONSTRAINT "Video_WallSecureId_fkey" FOREIGN KEY ("WallSecureId")
+      REFERENCES "Wall" ("SecureId") MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE SET NULL;

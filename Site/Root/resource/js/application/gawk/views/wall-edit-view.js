@@ -22,6 +22,8 @@ function WallEditView() {
 		$(document).bind("GawkUIWallEditShow", onShowView);
 
 		element.find("form").submit(onFormSubmit);
+		console.debug(element.find("form").find("button[name=Delete]"));
+		element.find("input[name=Delete]").click(onDeleteClick);
 	}
 
 	function onFormSubmit(event) {
@@ -47,6 +49,25 @@ function WallEditView() {
 				formErrorsList.append(li);
 			};
 			formErrors.show();
+		}
+	}
+	
+	function onDeleteClick(event) {
+		event.preventDefault();
+		if (confirm("really delete this wall? there's no going back!")) {
+			var wall = {
+				url: urlFriendlyInput.val(),
+				secureId: secureIdInput.val()
+			};
+			$(document).trigger("GawkModelDeleteWall", [wall]);
+			$(document).unbind("GawkModelDeleteWallResponse", onDeleteWallResponse);
+			$(document).bind("GawkModelDeleteWallResponse", onDeleteWallResponse);
+		}
+	}
+	
+	function onDeleteWallResponse(event, response) {
+		if (response.success) {
+			window.location = "/wall/";
 		}
 	}
 

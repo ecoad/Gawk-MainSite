@@ -71,6 +71,8 @@ if ($wallCreate) {
 				<input type="hidden" name="SecureId" value="<?php echo $wall->secureId; ?>"/>
 				<input name="Submit" type="submit" tabindex="<?php echo $tabIndex++; ?>" class="button" value="save" 
 					accesskey="s" title="save this wall" />
+				<input name="Delete" type="button" tabindex="<?php echo $tabIndex++; ?>" class="button" value="delete wall" 
+					accesskey="d" title="delete this wall" />
 			</div>
 		</fieldset>
 	</form>
