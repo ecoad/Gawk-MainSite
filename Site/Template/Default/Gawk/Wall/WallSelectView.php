@@ -23,8 +23,13 @@
 		</div>
 	</div>
 	<div class="create-wall" style="float: left; width: 450px; min-height: 200px; padding: 10px;">
-		<h1>Create your own Wall</h1>
-		<p>These are some reasons why...</p>
+		<h1>create your own Wall</h1>
+		<p>why create a wall?</p>
+		<ul>
+			<li>share amongst a group of friends</li>
+			<li>commemorate a wedding or birthday by sending it to your guests</li>
+			<li>make a wall of your favourite town by recording local landmarks using the <a href="#">iPhone app</a></li>
+		</ul>
 		<form class="wall" method="post" action="">
 			<fieldset>
 				<label>

@@ -20,6 +20,9 @@
 	AliasMatch ^/booth/(.*) @ProjectPath@/Site/Root/booth/$1
 	AliasMatch ^/contact/thanks @ProjectPath@/Site/Root/contact/thanks.php
 	AliasMatch ^/contact(.*) @ProjectPath@/Site/Root/contact/index.php
+	AliasMatch ^/wall/create(.*) @ProjectPath@/Site/Root/wall/control.php
+	AliasMatch ^/wall/edit(.*) @ProjectPath@/Site/Root/wall/control.php
+	AliasMatch ^/wall(.*) @ProjectPath@/Site/Root/wall/select.php
 	AliasMatch ^/(.*) @ProjectPath@/Site/Root/index.php
 
 	php_admin_value include_path ".:@ProjectPath@:@ProjectPath@/Application:@ProjectPath@/Site/Root:/usr/share/php"

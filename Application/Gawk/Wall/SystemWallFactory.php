@@ -59,4 +59,20 @@ DESCR;
 		$wall->secureId = "profile-gawk";
 		return $wall;
 	}
+
+	/**
+	 * @param string $secureId
+	 * @return boolean
+	 */
+	public function isSystemWall($secureId) {
+		switch ($secureId) {
+			case "profile-gawk":
+			case "profile-recent":
+			case "favourite-gawks":
+			case "friends":
+			case "main-wall":
+				return true;
+		}
+		return false;		
+	}
 }

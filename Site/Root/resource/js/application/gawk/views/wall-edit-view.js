@@ -1,6 +1,6 @@
 function WallEditView() {
 	var global = this, element = $("#wall-edit-view"),
-	formErrors, formErrorsList, urlFriendlyInput, nameInput, descriptionInput;
+	formErrors, formErrorsList, urlFriendlyInput, nameInput, descriptionInput, secureIdInput;
 
 	function init() {
 		assignEventListeners();
@@ -8,6 +8,8 @@ function WallEditView() {
 		formErrorsList = formErrors.find("ul");
 		urlFriendlyInput = element.find("input[name=UrlFriendly]");
 		nameInput = element.find("input[name=Name]");
+		secureIdInput = element.find("input[name=SecureId]");
+		
 		descriptionInput = element.find("textarea[name=Description]");
 	}
 
@@ -27,7 +29,8 @@ function WallEditView() {
 		var wall = {
 				name: nameInput.val(),
 				description: descriptionInput.val(),
-				url: urlFriendlyInput.val()
+				url: urlFriendlyInput.val(),
+				secureId: secureIdInput.val()
 		};
 		$(document).trigger("GawkModelSaveWall", [wall]);
 		$(document).unbind("GawkModelSaveWallResponse", onSaveWallResponse);

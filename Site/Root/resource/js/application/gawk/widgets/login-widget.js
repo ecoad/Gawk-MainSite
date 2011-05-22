@@ -76,14 +76,17 @@ function LoginWidget() {
 	}
 
 	function onLoginOverlayShow() {
+		window.trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#login-overlay")});
 	};
 
 	function onLoggingInOverlayShow() {
+		window.trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#logging-in-overlay")});
 	}
 
 	function onLoggingOutOverlayShow() {
+		window.trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#logging-out-overlay")});
 	}
 

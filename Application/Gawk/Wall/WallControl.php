@@ -9,7 +9,7 @@ class WallControl extends DataControl {
 	public $defaultOrder = "Id";
 	public $searchFields = array("Id");
 	protected $reservedUrls = array("wall", "friends", "starred", "favourite-gawks", "favourited", "admin", "api", "u",
-		"booth", "favicon.ico", "deploy-info.json", "robots.txt", "contact", "account");
+		"booth", "favicon.ico", "deploy-info.json", "robots.txt", "contact", "account", "your-wall-name-here");
 
 	/**
 	 * @var SystemWallFactory
@@ -177,22 +177,38 @@ class WallControl extends DataControl {
 	 * @return WallDataEntity
 	 */
 	public function saveWall(CustomMemberDataEntity $memberDataEntity, Wall $wall) {
-		$wallDataEntity = $this->mapWallToWallDataEntity($memberDataEntity, $wall);
+		$wallDataEntity = null;
+		if (($wall->secureId != "") && $this->isMemberAuthorizedToEditWall($wall->url)) {
+			$wallDataEntity = $this->itemByField($wall->secureId, "SecureId");
+			$this->validateUrl($wall->url, false);
+		} else {
+			$this->validateUrl($wall->url);
+		}
+		
+		$wallDataEntity = $this->mapWallToWallDataEntity($wall, $memberDataEntity, $wallDataEntity);
 
-		$this->validateUrl($wall->url);
 		if ($wallDataEntity->save()) {
 			return $wallDataEntity;
 		}
 	}
+	
+	public function deleteWall(Wall $wall, Member $member) {
+		if ($this->isMemberAuthorizedToEditWall($wall->url, $member)) {
+			$this->deleteWhere("SecureId", $wall->secureId);
+			return true;
+		}
+		
+		$this->application->errorControl->addError("Member does not own wall", "MemberNotWallAuthor");
+	}
 
 	/**
 	 * Map a Wall to WallDataEntity
-	 * @param CustomMemberDataEntity $memberDataEntity
 	 * @param Wall $wall
+	 * @param CustomMemberDataEntity $memberDataEntity
 	 * @param WallDataEntity $wallDataEntity
 	 * @return WallDataEntity
 	 */
-	public function mapWallToWallDataEntity(CustomMemberDataEntity $memberDataEntity,	Wall $wall,
+	public function mapWallToWallDataEntity(Wall $wall, CustomMemberDataEntity $memberDataEntity, 
 		WallDataEntity $wallDataEntity = null) {
 
 		if (!$wallDataEntity) {
@@ -209,13 +225,13 @@ class WallControl extends DataControl {
 		return $wallDataEntity;
 	}
 
-	public function validateUrl($url) {
+	public function validateUrl($url, $checkExists = true) {
 		if (!preg_match('/^[\da-z-+]+$/', $url)) {
 			$this->errorControl->addError("'Url' must be only a-Z, 0-9, and hyphens e.g. 'ski-trip-2011', 'JohnsFriends'", "InvalidUrl");
 			return false;
 		}
 
-		if ($existingWallDataEntity = $this->getWallByUrlFriendlyName($url)) {
+		if ($checkExists && ($existingWall = $this->getWallByUrlFriendlyName($url))) {
 			$this->errorControl->addError("'Url' already exists, please choose another", "DuplicateUrl");
 			return false;
 		}
@@ -248,17 +264,45 @@ class WallControl extends DataControl {
 				break;
 		}
 
-		if ($wallDataEntity = $this->getWallByUrlFriendlyName($wallUrl)) {
-			return $wallDataEntity->toObject();
+		if ($wall = $this->getWallByUrlFriendlyName($wallUrl)) {
+			return $wall;
 		}
 	}
 
+	/**
+	 * @param string $url
+	 * @return Wall
+	 */
 	public function getWallByUrlFriendlyName($url) {
+		$this->reset();
 		$filter = CoreFactory::getFilter();
 		$filter->addConditional($this->table, "Url", $url, "ILIKE");
 		$this->setFilter($filter);
 
-		return $this->getNext();
+		if ($wallDataEntity = $this->getNext()) {
+			return $wallDataEntity->toObject();
+		}
+	}
+	
+	/**
+	 * @param string $wallUrlName
+	 * @param Member $member
+	 * @return boolean
+	 */
+	public function isMemberAuthorizedToEditWall($wallUrlName, Member $member = null) {
+		if ($wall = $this->getWallByUrlFriendlyName($wallUrlName)) {
+			if (!$member) {
+				$memberAuthentication = Factory::getMemberAuthentication();
+				if ($memberDataEntity = $memberAuthentication->getLoggedInMemberDataEntity()) {
+					$member = $memberDataEntity->toObject();
+				}
+			}
+			if ($member && ($wall->memberSecureId == $member->secureId)) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 	/**
