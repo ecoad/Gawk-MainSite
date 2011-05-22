@@ -26,6 +26,7 @@ class CoreFactory {
 		require_once("Application.php");
 		isset($singleton) || $singleton = new Application();
 		return $singleton;
+		
 	}
 
 	/**

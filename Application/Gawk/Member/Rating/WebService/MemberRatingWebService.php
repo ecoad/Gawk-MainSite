@@ -40,7 +40,9 @@ class MemberRatingWebService {
 		if ($memberDataEntity = TokenCheck::validateToken($postData["Token"], true)) {
 			switch($method) {
 				case self::SERVICE_GET_RATING:
-					if ($memberRatingDataEntity = $this->memberRatingControl->getMemberRating($memberDataEntity->get("SecureId"), $getData["VideoSecureId"])) {
+					if ($memberRatingDataEntity = $this->memberRatingControl->getMemberRating(
+						$memberDataEntity->get("SecureId"), $getData["VideoSecureId"])) {
+							
 						$response->success = true;
 						$response->positiveRating = $memberRatingDataEntity->isPositiveRating();
 					}
