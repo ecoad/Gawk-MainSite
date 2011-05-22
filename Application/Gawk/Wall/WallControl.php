@@ -178,7 +178,7 @@ class WallControl extends DataControl {
 	 */
 	public function saveWall(CustomMemberDataEntity $memberDataEntity, Wall $wall) {
 		$wallDataEntity = null;
-		if (($wall->secureId != "") && $this->isMemberAuthorizedToEditWall($wall->url)) {
+		if (($wall->secureId != "") && $this->isMemberAuthorizedToEditWallBySecureId($wall->secureId)) {
 			$wallDataEntity = $this->itemByField($wall->secureId, "SecureId");
 			$this->validateUrl($wall->url, false);
 		} else {
@@ -198,7 +198,7 @@ class WallControl extends DataControl {
 	 * @param Member $member
 	 */
 	public function deleteWall(Wall $wall, Member $member) {
-		if ($this->isMemberAuthorizedToEditWall($wall->url, $member)) {
+		if ($this->isMemberAuthorizedToEditWallBySecureId($wall->secureId, $member)) {
 			$this->deleteWhere("SecureId", $wall->secureId);
 			return true;
 		}
@@ -291,12 +291,12 @@ class WallControl extends DataControl {
 	}
 	
 	/**
-	 * @param string $wallUrlName
+	 * @param string $wallSecureId
 	 * @param Member $member
 	 * @return boolean
 	 */
-	public function isMemberAuthorizedToEditWall($wallUrlName, Member $member = null) {
-		if ($wall = $this->getWallByUrlFriendlyName($wallUrlName)) {
+	public function isMemberAuthorizedToEditWallBySecureId($wallSecureId, Member $member = null) {
+		if ($wall = $this->getWallWithSecureId($wallSecureId)) {
 			if (!$member) {
 				$memberAuthentication = Factory::getMemberAuthentication();
 				if ($memberDataEntity = $memberAuthentication->getLoggedInMemberDataEntity()) {

@@ -15,7 +15,7 @@ $systemWallFactory = Factory::getSystemWallFactory();
 </div>
 <div class="wall-select" style="float:right; padding: 5px; display: none;">
 <?php 
-	if ($wallControl->isMemberAuthorizedToEditWall($wall->url)) {
+	if ($wallControl->isMemberAuthorizedToEditWallBySecureId($wall->secureId)) {
 ?>
 	<a href="/wall/edit/<?php echo $wall->url; ?>">edit</a>
 <?php 

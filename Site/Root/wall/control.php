@@ -17,7 +17,7 @@ if ($wallCreate) {
 	$wall = Factory::getWall();
 	$wall->url = $urlName;
 } else {
-	if ((!$wall = $wallControl->getWallByUrlFriendlyName($urlName)) || !$wallControl->isMemberAuthorizedToEditWall($urlName)) {
+	if ((!$wall = $wallControl->getWallByUrlFriendlyName($urlName)) || !$wallControl->isMemberAuthorizedToEditWallBySecureId($wall->secureId)) {
 		$application->displayErrorPage("Site/Root/error/404.php", 404);
 	} 
 }
