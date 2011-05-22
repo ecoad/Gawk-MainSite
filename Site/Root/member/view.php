@@ -65,7 +65,7 @@ if ($memberIsOnOwnMemberPage) {
 ?>
 				</div>
 			</div>
-			<p class="website"><a href="<?php echo $profileMember->website; ?>"><?php echo $profileMember->website; ?></a></p>
+			<p class="website"><a href="http://<?php echo $profileMember->website; ?>"><?php echo $profileMember->website; ?></a></p>
 			<p class="description"><?php echo $profileMember->description; ?></p>
 		</div>
 		</div>
