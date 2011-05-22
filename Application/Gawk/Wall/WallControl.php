@@ -35,7 +35,7 @@ class WallControl extends DataControl {
 			"Name", "", FM_TYPE_STRING, 100, FM_STORE_ALWAYS, false);
 
 		$this->fieldMeta["Description"] = new FieldMeta(
-			"Description", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, false);
+			"Description", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, true);
 
 		$this->fieldMeta["DateCreated"] = new FieldMeta(
 			"DateCreated", "", FM_TYPE_DATE, null, FM_STORE_NEVER, false);
@@ -184,20 +184,20 @@ class WallControl extends DataControl {
 		} else {
 			$this->validateUrl($wall->url);
 		}
-		
+
 		$wallDataEntity = $this->mapWallToWallDataEntity($wall, $memberDataEntity, $wallDataEntity);
 
 		if ($wallDataEntity->save()) {
 			return $wallDataEntity;
 		}
 	}
-	
+
 	public function deleteWall(Wall $wall, Member $member) {
 		if ($this->isMemberAuthorizedToEditWall($wall->url, $member)) {
 			$this->deleteWhere("SecureId", $wall->secureId);
 			return true;
 		}
-		
+
 		$this->application->errorControl->addError("Member does not own wall", "MemberNotWallAuthor");
 	}
 
@@ -208,7 +208,7 @@ class WallControl extends DataControl {
 	 * @param WallDataEntity $wallDataEntity
 	 * @return WallDataEntity
 	 */
-	public function mapWallToWallDataEntity(Wall $wall, CustomMemberDataEntity $memberDataEntity, 
+	public function mapWallToWallDataEntity(Wall $wall, CustomMemberDataEntity $memberDataEntity,
 		WallDataEntity $wallDataEntity = null) {
 
 		if (!$wallDataEntity) {
@@ -283,7 +283,7 @@ class WallControl extends DataControl {
 			return $wallDataEntity->toObject();
 		}
 	}
-	
+
 	/**
 	 * @param string $wallUrlName
 	 * @param Member $member
@@ -301,7 +301,7 @@ class WallControl extends DataControl {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
