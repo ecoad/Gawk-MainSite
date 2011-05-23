@@ -3,6 +3,8 @@ function LoginWidget() {
 		loggedInElement = element.find(".logged-in"),
 		loggedOutElement = element.find(".logged-out"),
 		loginOverlayForm = $("#login-overlay form"),
+		loginOverlayErrorsElement = loginOverlayForm.find(".login-error"),
+		loginOverlayErrorsListElement = loginOverlayErrorsElement.find(".message"),
 		logOutLink = loggedInElement.find(".logout");
 
 	function assignEventListeners() {
@@ -21,6 +23,7 @@ function LoginWidget() {
 
 	function onLoginOverlayFormSubmit(event) {
 		event.preventDefault();
+		loginOverlayErrorsElement.hide();
 
 		$(document).bind("GawkMemberLoginInvalidCredentials", onLoginOverlayInvalidCredentials);
 		$(document).bind("GawkMemberLoggedIn", onLoginOverlaySuccess);
@@ -40,11 +43,10 @@ function LoginWidget() {
 
 	function onLoginOverlayInvalidCredentials(event, errors) {
 		$(document).unbind("GawkMemberLoginInvalidCredentials", onLoginOverlayInvalidCredentials);
+		$(document).unbind("GawkMemberLoggedIn", onLoginOverlaySuccess);
 
-		var loginErrorsElement = loginOverlayForm.find(".login-error"),
-			errorsListElement = loginErrorsElement.find(".message").html(errors.InvalidLoginCredentials);
-
-		loginErrorsElement.show();
+		loginOverlayErrorsListElement.html(errors.InvalidLoginCredentials);
+		loginOverlayErrorsElement.show();
 	}
 
 	function onLogOutClick(event) {

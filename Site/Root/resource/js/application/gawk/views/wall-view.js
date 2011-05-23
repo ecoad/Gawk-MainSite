@@ -158,7 +158,10 @@ function GawkView(config) {
 	function onLoggedIn() {
 		loggedIn = true;
 		if (wallLoaded) {
-			document.getElementById(swfObjectId).logInFromExternal();
+			try {
+				document.getElementById(swfObjectId).logInFromExternal();
+			} catch (error) {
+			} 
 		} else {
 			setTimeout(onLoggedIn, 500);
 		}
@@ -185,9 +188,8 @@ function GawkView(config) {
 		$(document).trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#gawk-main-wall-overlay")});
 		
-		var wallCreateSubmit = $("#gawk-main-wall-overlay").find("input[name=Submit]");
-		wallCreateSubmit.unbind("click");
-		wallCreateSubmit.click(function() {
+		$("#gawk-main-wall-overlay").find("form").submit(function(event) {
+			event.preventDefault();
 			var wallName = wallCreateName.val();
 			window.location = "/wall/create/" + wallName; 
 		});
