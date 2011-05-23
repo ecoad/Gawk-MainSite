@@ -25,12 +25,12 @@ class MemberWallBookmarkControl extends DataControl {
 
 	/**
 	 * Get Wall Bookmarks
-	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param Member $member
 	 * @param integer $limit
 	 */
-	public function getWallBookmarks(CustomMemberDataEntity $memberDataEntity, $limit = 10) {
+	public function getWallBookmarks(Member $member, $limit = 10) {
 		$filter = CoreFactory::getFilter();
-		$filter->addConditional($this->table, "MemberSecureId", $memberDataEntity->get("SecureId"));
+		$filter->addConditional($this->table, "MemberSecureId", $member->secureId);
 		$filter->addOrder("DateCreated", true);
 		$filter->addLimit($limit);
 		$this->setFilter($filter);
@@ -38,12 +38,12 @@ class MemberWallBookmarkControl extends DataControl {
 
 	/**
 	 * Get Wall Bookmarks as array
-	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param Member $member
 	 * @param integer $limit
 	 * @return array Wall bookmarks
 	 */
-	public function getWallBookmarksArray(CustomMemberDataEntity $memberDataEntity, $limit = 10) {
-		$this->getWallBookmarks($memberDataEntity, $limit);
+	public function getWallBookmarksArray(Member $member, $limit = 10) {
+		$this->getWallBookmarks($member, $limit);
 		$walls = array();
 
 		$wallControl = Factory::getWallControl();
@@ -57,12 +57,12 @@ class MemberWallBookmarkControl extends DataControl {
 	}
 
 	/**
-	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param Member $member
 	 * @param string $wallSecureId
 	 * @return boolean
 	 */
-	public function addWallBookmark(CustomMemberDataEntity $memberDataEntity, $wallSecureId) {
-		if ($this->isWallBookmarked($memberDataEntity, $wallSecureId)) {
+	public function addWallBookmark(Member $member, $wallSecureId) {
+		if ($this->isWallBookmarked($member, $wallSecureId)) {
 			$this->errorControl->addError("Already bookmarked", "BookmarkDuplicate");
 			return false;
 		}
@@ -74,7 +74,7 @@ class MemberWallBookmarkControl extends DataControl {
 		}
 
 		$memberWallBookmarkDataEntity = $this->makeNew();
-		$memberWallBookmarkDataEntity->set("MemberSecureId", $memberDataEntity->get("SecureId"));
+		$memberWallBookmarkDataEntity->set("MemberSecureId", $member->secureId);
 		$memberWallBookmarkDataEntity->set("WallSecureId", $wall->secureId);
 		if ($memberWallBookmarkDataEntity->save()) {
 			return true;
@@ -85,12 +85,12 @@ class MemberWallBookmarkControl extends DataControl {
 
 	/**
 	 * Has member already bookmarked a wall
-	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param Member $member
 	 * @param string $wallSecureId
 	 * @param boolean
 	 */
-	public function isWallBookmarked(CustomMemberDataEntity $memberDataEntity, $wallSecureId) {
-		if ($this->getWallBookmarked($memberDataEntity, $wallSecureId)) {
+	public function isWallBookmarked(Member $member, $wallSecureId) {
+		if ($this->getWallBookmarked($member, $wallSecureId)) {
 			return true;
 		}
 
@@ -99,11 +99,11 @@ class MemberWallBookmarkControl extends DataControl {
 
 	/**
 	 * Get bookmark
-	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param Member $member
 	 * @param string $wallSecureId
 	 * @param boolean
 	 */
-	public function getWallBookmarked(CustomMemberDataEntity $memberDataEntity, $wallSecureId) {
+	public function getWallBookmarked(Member $member, $wallSecureId) {
 		$wallControl = Factory::getWallControl();
 		if (!$wall = $wallControl->getWallWithSecureId($wallSecureId)) {
 			$this->errorControl->addError("Invalid Wall secure ID", "InvalidWallSecureId");
@@ -112,7 +112,7 @@ class MemberWallBookmarkControl extends DataControl {
 
 		$filter = CoreFactory::getFilter();
 		$filter->addConditional($this->table, "WallSecureId", $wall->secureId);
-		$filter->addConditional($this->table, "MemberSecureId", $memberDataEntity->get("SecureId"));
+		$filter->addConditional($this->table, "MemberSecureId", $member->secureId);
 		$this->setFilter($filter);
 
 		return $this->getNext();
@@ -120,12 +120,12 @@ class MemberWallBookmarkControl extends DataControl {
 
 	/**
 	 * Remove bookmark
-	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param Member $member
 	 * @param string $wallSecureId
 	 * @param boolean
 	 */
-	public function removeWallBookmark(CustomMemberDataEntity $memberDataEntity, $wallSecureId) {
-		if (!$wallBookmarkDataEntity = $this->getWallBookmarked($memberDataEntity, $wallSecureId)) {
+	public function removeWallBookmark(Member $member, $wallSecureId) {
+		if (!$wallBookmarkDataEntity = $this->getWallBookmarked($member, $wallSecureId)) {
 			$this->errorControl->addError("Unable to retrieve bookmark", "NoBookmark");
 			return false;
 		}
@@ -139,31 +139,31 @@ class MemberWallBookmarkControl extends DataControl {
 
 	/**
 	 * Return recent wall activity for a given member
-	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param Member $member
 	 * @return stdClass Activity
 	 */
-	public function getRecentWallActivity(CustomMemberDataEntity $memberDataEntity) {
+	public function getRecentWallActivity(Member $member) {
 		$activity = new stdClass();
-		$activity->bookmarks = $this->getWallBookmarksArray($memberDataEntity);
-		$activity->recentWallParticipation = $this->getRecentWallParticipation($memberDataEntity);
-		$activity->wallsCreatedByMember = $this->getWallsCreatedByMember($memberDataEntity);
+		$activity->bookmarks = $this->getWallBookmarksArray($member);
+		$activity->recentWallParticipation = $this->getRecentWallParticipation($member);
+		$activity->wallsCreatedByMember = $this->getWallsCreatedByMember($member);
 
 		return $activity;
 	}
 
 	/**
 	 * Get recent walls created by Member
-	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param Member $member
 	 * @param integer $limit
 	 * @return array Walls member has created
 	 */
-	public function getWallsCreatedByMember(CustomMemberDataEntity $memberDataEntity, $limit = 10) {
+	public function getWallsCreatedByMember(Member $member, $limit = 10) {
 		$recentWalls = array();
 
 		$wallControl = Factory::getWallControl();
 
 		$filter = CoreFactory::getFilter();
-		$filter->addConditional($wallControl->table, "MemberSecureId", $memberDataEntity->get("SecureId"));
+		$filter->addConditional($wallControl->table, "MemberSecureId", $member->secureId);
 		$filter->addOrder("DateCreated", true);
 		$filter->addLimit($limit);
 
@@ -179,18 +179,18 @@ class MemberWallBookmarkControl extends DataControl {
 
 	/**
 	 * Get recent participation
-	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param Member $member
 	 * @param integer $limit
 	 * @return array Walls member has featured on recently
 	 */
-	public function getRecentWallParticipation(CustomMemberDataEntity $memberDataEntity, $limit = 10) {
+	public function getRecentWallParticipation(Member $member, $limit = 10) {
 		//TODO: Finish
 
 		$recentActivity = array();
 		$sql = <<<SQL
 SELECT DISTINCT "Video"."WallSecureId"
 	FROM "Video"
-	WHERE "MemberSecureId" = '{$memberDataEntity->get("SecureId")}' AND
+	WHERE "MemberSecureId" = '{$member->secureId}' AND
 		"Approved" = 't'
 		GROUP BY "WallSecureId"
 		LIMIT {$limit};
