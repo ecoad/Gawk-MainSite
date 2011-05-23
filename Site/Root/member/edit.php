@@ -5,14 +5,14 @@ $memberUrlHelper = Factory::getMemberUrlHelper();
 
 $memberControl = Factory::getMemberControl();
 if (!$member = $memberControl->getMemberByRequestUrl($_SERVER["REQUEST_URI"])) {
-	include "Site/Root/error/404.php";
+	$application->displayErrorPage("Site/Root/error/404.php", 404);
 }
 
 $memberAuthentication = Factory::getMemberAuthentication();
-if ($loggedInMemberDataEntity = $memberAuthentication->getLoggedInMemberDataEntity()) {
-	if ($loggedInMemberDataEntity->get("SecureId") != $member->secureId) {
-		include "Site/Root/error/403.php";
-	}
+if ((!$loggedInMemberDataEntity = $memberAuthentication->getLoggedInMemberDataEntity()) ||
+	($loggedInMemberDataEntity->get("SecureId") != $member->secureId)) {
+
+	$application->displayErrorPage("Site/Root/error/403.php", 403);
 }
 
 $formWebsiteLabel = "Website";
