@@ -108,10 +108,15 @@ function MemberControl (config) {
 		}
 	}
 
-	function logOut() {
+	function logOut(event) {
 		$.getJSON(config.getApiLocation(), {Action: "Member.Logout"}, function () {
+			if (member.facebookId == "") {
+				$(document).trigger("GawkMemberLoggedOut");
+				return;
+			}
+			
 			FB.logout(function () {
-				window.location.reload();
+				$(document).trigger("GawkMemberLoggedOut");
 			});
 		});
 	}

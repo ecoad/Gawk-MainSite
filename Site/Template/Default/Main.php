@@ -90,19 +90,20 @@ include "Site/Template/Default/Widget/Footer.php";
 		</div>
 		<div style="display: none;">
 			<div class="overlay" id="login-overlay">
-				<h3>login</h3>
-				<p>login to continue or <a href="/member/register" title="register to the gawkwall">register</a></p>
+				<h3>login to continue</h3>
+				<p>login with facebook:  <fb:login-button></fb:login-button></p>
+				<hr />
+				<p>alternatively if you do not use facebook, log in with your gawkwall account, or 
+					<a href="/member/register" title="register to the gawkwall">register</a>
 				<form method="post">
 					<div class="login-error" style="display: none;">
 						<h4>login error</h4>
 						<p class="message"></p>
 					</div>
-					email address <input type="email" name="EmailAddress" /><br />
-					password <input type="password" name="Password" /><br />
-					<span class="note"><a href="/member/forgot-password">forgot password?</a></span>
+					<p>email address <input type="email" name="EmailAddress" /><br />
+					password <input type="password" name="Password" /></p>
 					<input type="submit" name="Login" />
 				</form>
-				<p>or <fb:login-button></fb:login-button></p>
 			</div>
 			<div class="overlay" id="logging-in-overlay">
 				<h3>logging in&hellip;</h3>

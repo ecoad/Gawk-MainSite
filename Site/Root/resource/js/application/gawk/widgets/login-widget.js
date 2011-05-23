@@ -6,7 +6,6 @@ function LoginWidget() {
 		logOutLink = loggedInElement.find(".logout");
 
 	function assignEventListeners() {
-		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
 		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
 		$(document).bind("GawkUILoginOverlayShow", onLoginOverlayShow);
 		$(document).bind("GawkUILoggingInOverlayShow", onLoggingInOverlayShow);
@@ -24,11 +23,19 @@ function LoginWidget() {
 		event.preventDefault();
 
 		$(document).bind("GawkMemberLoginInvalidCredentials", onLoginOverlayInvalidCredentials);
+		$(document).bind("GawkMemberLoggedIn", onLoginOverlaySuccess);
 
 		var emailAddress = loginOverlayForm.find("input[name=EmailAddress]").val(),
 			password = loginOverlayForm.find("input[name=Password]").val();
 
 		$(document).trigger("GawkUISiteLoginRequest", [emailAddress, password]);
+	}
+	
+	function onLoginOverlaySuccess() {
+		$(document).unbind("GawkMemberLoggedIn", onLoginOverlaySuccess);
+		$(document).trigger("GawkUILoggingInOverlayShow");
+		
+		window.location.reload();
 	}
 
 	function onLoginOverlayInvalidCredentials(event, errors) {
@@ -40,65 +47,44 @@ function LoginWidget() {
 		loginErrorsElement.show();
 	}
 
-	/*
-	function onSiteLoginClick(event) {
-		event.preventDefault;
-
-		$(document).trigger("GawkUIHideAll");
-		$(document).trigger("GawkUILoginShow", ["Login"]);
-	}
-
-	function onSiteRegisterClick(event) {
-		event.preventDefault;
-
-		$(document).trigger("GawkUIHideAll");
-		$(document).trigger("GawkUILoginShow", ["Register"]);
-	}
-	*/
-
 	function onLogOutClick(event) {
 		event.preventDefault;
 		$(document).trigger("GawkUILoggingOutOverlayShow");
 		$(document).trigger("GawkUILogoutRequest");
 	}
 
-	function onLoggedIn(event, response) {
-		showLoggedIn(response);
-	}
-
-	function showLoggedIn(response) {
-		if (response.success) {
-			var profileName = loggedInElement.find(".name");
-			profileName.html(response.member.firstName);
-			profileName.attr("href", "/u/" + response.member.alias);
-
-			loggedInElement.show();
-			loggedOutElement.hide();
-		}
-
-	}
+//	function onLoggedIn(event, response) {
+//		showLoggedIn(response);
+//	}
+//
+//	function showLoggedIn(response) {
+//		if (response.success) {
+//			var profileName = loggedInElement.find(".name");
+//			profileName.html(response.member.firstName);
+//			profileName.attr("href", "/u/" + response.member.alias);
+//
+//			loggedInElement.show();
+//			loggedOutElement.hide();
+//		}
+//
+//	}
 
 	function onLoggedOut() {
-		showLoggedOff();
-	}
-
-	function showLoggedOff() {
-		loggedOutElement.show();
-		loggedInElement.hide();
+		window.location.reload();
 	}
 
 	function onLoginOverlayShow() {
-		window.trigger("GawkUIOverlayShow");
+		$(document).trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#login-overlay")});
 	};
 
 	function onLoggingInOverlayShow() {
-		window.trigger("GawkUIOverlayShow");
+		$(document).trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#logging-in-overlay")});
 	}
 
 	function onLoggingOutOverlayShow() {
-		window.trigger("GawkUIOverlayShow");
+		$(document).trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#logging-out-overlay")});
 	}
 

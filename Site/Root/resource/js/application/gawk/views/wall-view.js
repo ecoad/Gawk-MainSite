@@ -35,7 +35,7 @@ function GawkView(config) {
 
 		element.find(".record").bind("click", function (event) {
 			if (loggedIn) {
-				if (config.isWallSecureIdSystem(wall.secureId)) {
+				if (config.isSystemWall()) {
 					$(document).trigger("GawkUIMainWallDenyOverlayShow");
 				} else {
 					document.getElementById(swfObjectId).recordNewFromExternal();
@@ -182,12 +182,22 @@ function GawkView(config) {
 	}
 
 	function onGawkMainWallDenyOverlay() {
-		window.trigger("GawkUIOverlayShow");
+		$(document).trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#gawk-main-wall-overlay")});
+		
+		var wallCreateSubmit = $("#gawk-main-wall-overlay").find("input[name=Submit]");
+		wallCreateSubmit.unbind("click");
+		wallCreateSubmit.click(function() {
+			var wallName = wallCreateName.val();
+			window.location = "/wall/create/" + wallName; 
+		});
+		
+		var wallCreateName = $("#gawk-main-wall-overlay").find("input[name=WallCreateName]"); 
+		wallCreateName.placeholder("your-wall-name-here");
 	}
 
 	function onNoWebcamOverlayShow() {
-		window.trigger("GawkUIOverlayShow");
+		$(document).trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#gawk-no-webcam-overlay")});
 	}
 

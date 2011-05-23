@@ -90,7 +90,7 @@ function Gawk(configData) {
 	}
 
 	function onWelcomeOverlayShow() {
-		window.trigger("GawkUIOverlayShow");
+		$(document).trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#welcome-overlay")});
 	}
 	
