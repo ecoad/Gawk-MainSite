@@ -9,7 +9,7 @@ function WallSelectView() {
 
 	function init() {
 		assignEventListeners();
-		newWallUrlFriendlyName.placeholder("your-wall-here");
+		newWallUrlFriendlyName.placeholder("your-wall-name-here");
 	}
 
 	function assignEventListeners() {
@@ -23,8 +23,7 @@ function WallSelectView() {
 	}
 
 	function onFormSubmit(event) {
-		$(document).trigger("GawkUIAllHide");
-		$(document).trigger("GawkUIWallEditShow", [newWallUrlFriendlyName.val()]);
+		window.location = "/wall/create/" + newWallUrlFriendlyName.val();
 		event.preventDefault();
 	}
 

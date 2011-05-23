@@ -10,6 +10,7 @@ class WallWebService {
 	const SERVICE_GET_VIDEOS_BY_WALL = "GetWallVideos";
 	const SERVICE_GET_VIDEOS_BY_MAIN_WALL = "GetMainWallVideos";
 	const SERVICE_SAVE = "Save";
+	const SERVICE_DELETE = "Delete";
 
 	public function __construct() {
 		$this->application = CoreFactory::getApplication();
@@ -53,6 +54,15 @@ class WallWebService {
 					if ($wallDataEntity = $wallControl->saveWall($memberDataEntity, $wall)) {
 						$response->success = true;
 						$response->wall = $wallDataEntity->toObject();
+					}
+				}
+				break;
+			case self::SERVICE_DELETE:
+				if ($memberDataEntity = TokenCheck::validateToken($postData["Token"], true)) {
+					$wallControl = Factory::getWallControl();
+					$wall = Factory::getWall(json_decode(stripslashes($postData["WallData"])));
+					if ($wallControl->deleteWall($wall, $memberDataEntity->toObject())) {
+						$response->success = true;
 					}
 				}
 				break;

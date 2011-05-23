@@ -24,6 +24,8 @@ $recentWallActivityResponse = $memberWallBookmarkWebService->handleRequest(
 	MemberWallBookmarkWebService::SERVICE_GET_RECENT_WALL_ACTIVITY, null, array("Token" => $profileMember->token));
 $recentWallActivity = $recentWallActivityResponse->recentActivity;
 
+$memberVideoCount = $videoControl->getVideoCountByMember($profileMember);
+
 $layout = CoreFactory::getLayout("Site/Template/Default/Main.php");
 $layout->set("Title", $profileMember->alias . " / " . $application->registry->get("Title"));
 $layout->set("Name", $application->registry->get("Title"));
@@ -42,13 +44,13 @@ $layout->start("Main");
 </div>
 <div id="public-profile-view">
 	<div class="profile-main">
-		<div class="profile-gawk">
+		<div class="profile-gawk" style="display: <?php echo $memberVideoCount > 0 ? "block": "none"; ?>;">
 			<div id="profile-swf-container">&nbsp;</div>
 		</div>
 		<div class="details">
 			<div class="name">
 				<h1><?php echo $profileMember->alias; ?></h1>
-				<span class="gawk-count"><?php echo $videoControl->getVideoCountByMember($profileMember); ?> gawks</span>
+				<span class="gawk-count"><?php echo $memberVideoCount; ?> gawks</span>
 				<div class="controls">
 <?php
 if ($memberIsOnOwnMemberPage) {
@@ -63,21 +65,24 @@ if ($memberIsOnOwnMemberPage) {
 ?>
 				</div>
 			</div>
-			<p class="website"><a href="<?php echo $profileMember->website; ?>"><?php echo $profileMember->website; ?></a></p>
+			<p class="website"><a href="http://<?php echo $profileMember->website; ?>"><?php echo $profileMember->website; ?></a></p>
 			<p class="description"><?php echo $profileMember->description; ?></p>
 		</div>
 		</div>
 	</div>
-	<div class="recent-gawks">
+	<div class="recent-gawks" style="display: <?php echo $memberVideoCount > 1 ? "block": "none"; ?>;">
 		<h2>most recent gawks</h2>
 		<div id="recent-swf-container">&nbsp;</div>
 	</div>
 	<div class="profile-other">
 		<div class="friends beancan">
 			<h2><?php echo $profileMember->alias; ?>'s friends</h2>
+<?php 
+if (count($profileMember->friends) > 0) {
+?>
 			<ul>
 <?php
-foreach ($profileMember->friends as $friend) {
+	foreach ($profileMember->friends as $friend) {
 ?>
 				<li class="friend">
 					<a href="<?php echo $memberUrlHelper->getProfileUrl($friend); ?>" title="View profile">
@@ -85,9 +90,16 @@ foreach ($profileMember->friends as $friend) {
 					</a>
 				</li>
 <?php
-}
+	}
 ?>
 			</ul>
+<?php 
+} else {
+?>
+			<p>this person is a loner</p>
+<?php 
+}
+?>
 		</div>
 		<div class="walls beancan">
 			<h2>walls</h2>

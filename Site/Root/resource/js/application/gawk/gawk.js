@@ -17,6 +17,8 @@ function Gawk(configData) {
 
 	function addEventListeners() {
 		$(document).bind("GawkUIWelcomeOverlayShow", onWelcomeOverlayShow);
+		$(document).bind("GawkUIOverlayShow", onOverlayShow);
+		$(".box-close-button").click(onOverlayClose);
 	}
 
 	function initModels() {
@@ -88,7 +90,16 @@ function Gawk(configData) {
 	}
 
 	function onWelcomeOverlayShow() {
+		window.trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#welcome-overlay")});
+	}
+	
+	function onOverlayShow() {
+		$("object").hide();
+	}
+	
+	function onOverlayClose() {
+		$("object").show();
 	}
 
 	init();

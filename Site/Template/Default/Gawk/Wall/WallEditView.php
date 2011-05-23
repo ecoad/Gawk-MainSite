@@ -1,36 +1,65 @@
 <?php
 $tabIndex = 1;
 ?>
-<div class="create-wall" style="padding: 30px;">
-	<h1>Create a Wall</h1>
-	<h2>Create your own wall to share to your friends</h2>
+<div class="breadcrumb">
+<?php 
+if ($wallCreate) {
+?>
+	<a href="/">home</a> / <a title="create wall" href="/wall/">wall</a> /
+		create	
+<?php 
+} else {
+?>
+	<a href="/">home</a> / <a title="view wall" href="<?php echo $wall->url; ?>"><?php echo $wall->name; ?></a> /
+		edit
+<?php 
+}
+?>
+	<hr />
+</div>
+<div class="create-wall">
+<?php 
+if ($wallCreate) {
+?>
+	<h1>create a Wall</h1>
 	<p>From here you can create your own custom wall with it's own link that you can share to your friends, family
 	and colleagues.</p>
 	<p>Some reasons:</p>
 	<ul>
-		<li>Custom URL</li>
-		<li>Public or invite only</li>
+		<li>custom URL</li>
+		<li>public or invite only</li>
 	</ul>
+<?php 
+} else {
+?>
+	<h1>edit wall</h1>
+	<p>make any changes to th wall here, and press save to continue</p>
+<?php 
+}
+?>
 	<form class="wall" method="post" action="">
 		<div class="form-errors" style="display:none;">
-			<h3>Errors</h3>
+			<h3>errors</h3>
 			<ul></ul>
 		</div>
 		<fieldset>
 			<label>
-				<strong class="required">Url</strong>
-				<?php echo $application->registry->get("Site/Address"); ?>/<input type="text" name="UrlFriendly" class="textbox" tabindex="<?php echo $tabIndex++; ?>"/>
+				<strong class="required">url</strong>
+				<?php echo $application->registry->get("Site/Address"); ?>/<input type="text" name="UrlFriendly" 
+					class="textbox" tabindex="<?php echo $tabIndex++; ?>" value="<?php echo $wall->url; ?>"/>
 			</label><br />
 			<label>
-				<strong class="required">Name</strong>
-				<input type="text" name="Name" class="textbox" tabindex="<?php echo $tabIndex++; ?>"/>
+				<strong class="required">name</strong>
+				<input type="text" name="Name" class="textbox" tabindex="<?php echo $tabIndex++; ?>" 
+					value="<?php echo $wall->name; ?>"/>
 			</label><br />
 			<label>
-				<strong class="required">Description</strong><br />
-				<textarea id="summary" name="Description" cols="40" rows="7" class="textbox wide" tabindex="<?php echo $tabIndex++; ?>"></textarea>
+				<strong class="required">description</strong><br />
+				<textarea id="summary" name="Description" cols="40" rows="7" class="textbox wide" 
+					tabindex="<?php echo $tabIndex++; ?>"><?php echo $wall->description; ?></textarea>
 			</label><br />
 			<label class="checkbox">
-				<strong>Publicness</strong>
+				<strong>publicness</strong>
 				<select name="Public" tabindex="<?php echo $tabIndex++; ?>">
 					<option>Public</option>
 					<option>Anyone can view it, only friends can Gawk on it</option>
@@ -39,7 +68,17 @@ $tabIndex = 1;
 				<span class="note">(You can change this at any time)</span><br />
 			</label>
 			<div class="controls">
-				<input name="Submit" type="submit" tabindex="<?php echo $tabIndex++; ?>" class="button" value="Create Wall" accesskey="s" title="Create a new Wall" />
+				<input type="hidden" name="SecureId" value="<?php echo $wall->secureId; ?>"/>
+				<input name="Submit" type="submit" tabindex="<?php echo $tabIndex++; ?>" class="button" value="save" 
+					accesskey="s" title="save this wall" />
+<?php 
+if (!$wallCreate) {
+?>
+				<input name="Delete" type="button" tabindex="<?php echo $tabIndex++; ?>" class="button" value="delete wall" 
+					accesskey="d" title="delete this wall" />
+<?php 
+}
+?>
 			</div>
 		</fieldset>
 	</form>

@@ -1,6 +1,6 @@
 function WallEditView() {
 	var global = this, element = $("#wall-edit-view"),
-	formErrors, formErrorsList, urlFriendlyInput, nameInput, descriptionInput;
+	formErrors, formErrorsList, urlFriendlyInput, nameInput, descriptionInput, secureIdInput;
 
 	function init() {
 		assignEventListeners();
@@ -8,6 +8,8 @@ function WallEditView() {
 		formErrorsList = formErrors.find("ul");
 		urlFriendlyInput = element.find("input[name=UrlFriendly]");
 		nameInput = element.find("input[name=Name]");
+		secureIdInput = element.find("input[name=SecureId]");
+		
 		descriptionInput = element.find("textarea[name=Description]");
 	}
 
@@ -20,6 +22,8 @@ function WallEditView() {
 		$(document).bind("GawkUIWallEditShow", onShowView);
 
 		element.find("form").submit(onFormSubmit);
+		console.debug(element.find("form").find("button[name=Delete]"));
+		element.find("input[name=Delete]").click(onDeleteClick);
 	}
 
 	function onFormSubmit(event) {
@@ -27,7 +31,8 @@ function WallEditView() {
 		var wall = {
 				name: nameInput.val(),
 				description: descriptionInput.val(),
-				url: urlFriendlyInput.val()
+				url: urlFriendlyInput.val(),
+				secureId: secureIdInput.val()
 		};
 		$(document).trigger("GawkModelSaveWall", [wall]);
 		$(document).unbind("GawkModelSaveWallResponse", onSaveWallResponse);
@@ -44,6 +49,25 @@ function WallEditView() {
 				formErrorsList.append(li);
 			};
 			formErrors.show();
+		}
+	}
+	
+	function onDeleteClick(event) {
+		event.preventDefault();
+		if (confirm("really delete this wall? there's no going back!")) {
+			var wall = {
+				url: urlFriendlyInput.val(),
+				secureId: secureIdInput.val()
+			};
+			$(document).trigger("GawkModelDeleteWall", [wall]);
+			$(document).unbind("GawkModelDeleteWallResponse", onDeleteWallResponse);
+			$(document).bind("GawkModelDeleteWallResponse", onDeleteWallResponse);
+		}
+	}
+	
+	function onDeleteWallResponse(event, response) {
+		if (response.success) {
+			window.location = "/wall/";
 		}
 	}
 

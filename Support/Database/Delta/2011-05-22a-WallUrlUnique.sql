@@ -1,0 +1,1 @@
+ALTER TABLE "Wall" ADD CONSTRAINT "Wall_Url_unique" UNIQUE ("Url");

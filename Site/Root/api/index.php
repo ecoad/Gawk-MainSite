@@ -11,6 +11,7 @@ $method = explode(".", $_REQUEST["Action"]);
 $memberWebService = Factory::getMemberWebService();
 $memberWallBookmarkWebService = Factory::getMemberWallBookmarkWebService();
 $memberFriendWebService = Factory::getMemberFriendWebService();
+$memberRatingWebService = Factory::getMemberRatingWebService();
 $wallWebService = Factory::getWallWebService();
 $videoWebService = Factory::getVideoWebService();
 $flashWebService = Factory::getFlashWebService();
@@ -24,6 +25,9 @@ switch ($method[0]) {
 		break;
 	case MemberWallBookmarkWebService::SERVICE_NAME_SPACE: //MemberWallBookmark
 		$response = $memberWallBookmarkWebService->handleRequest($method[1], $_POST, $_GET);
+		break;
+	case MemberRatingWebService::SERVICE_NAME_SPACE: //MemberRating
+		$response = $memberRatingWebService->handleRequest($method[1], $_POST, $_GET);
 		break;
 	case WallWebService::SERVICE_NAME_SPACE: //Wall
 		$response = $wallWebService->handleRequest($method[1], $_POST, $_GET);

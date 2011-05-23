@@ -167,7 +167,7 @@ class CustomMemberControl extends MemberControl {
 
 		if ($memberDataEntity->validate()) {
 			foreach ($textFields as $textField) {
-				$this->updateField($memberDataEntity, $textField, $profileData[$textField]);
+				$this->updateField($memberDataEntity, $textField, $memberDataEntity->get($textField));
 			}
 			if (isset($profileData["RemoveProfileGawk"])) {
 				$this->updateField($memberDataEntity, "ProfileVideoSecureId", null);
@@ -192,6 +192,7 @@ class CustomMemberControl extends MemberControl {
 				$memberDataEntity->set(ucfirst($key), $value);
 			}
 		}
+		
 		return $memberDataEntity;
 	}
 
@@ -233,6 +234,9 @@ class CustomMemberControl extends MemberControl {
 			$this->errorControl->addError("'Alias' must be only a-Z, 0-9, and hyphens e.g. 'joe-bloggs', 'Ben33'", "InvalidAlias");
 			$valid = false;
 		}
+		
+		$member->set("Website", 
+			str_replace("http://", "", $member->get("Website")));
 
 		return $valid;
 	}

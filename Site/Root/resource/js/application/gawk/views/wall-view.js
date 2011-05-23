@@ -13,18 +13,6 @@ function GawkView(config) {
 		$(document).bind("GawkUIFlashLoaded", onFlashLoaded);
 	}
 
-	function setupView() {
-		element.find(".wall-information").show();
-		element.find("h3").find("span.name").html(wall.name);
-		element.find("p.description").html(wall.description);
-
-		if (config.isWallSecureIdSystem(wall.secureId)) {
-			bookmarkLink.hide();
-		} else {
-			bookmarkLink.show();
-		}
-	}
-
 	function onModelInit() {
 		addView();
 		assignEventListeners();
@@ -58,6 +46,8 @@ function GawkView(config) {
 
 			event.preventDefault();
 		});
+		
+		
 		element.find("h3").find("span.bookmark").click(onBookmarkClick);
 		$("select[name=SelectWall]").change(onWallSelectChange);
 	}
@@ -73,7 +63,7 @@ function GawkView(config) {
 
 		var params = {};
 		params.allowscriptaccess = "always";
-		params.wmode = "transparent";
+		params.wmode = "window";
 
 		swfobject.embedSWF("/resource/flash/GawkFlash.swf?v=@VERSION-NUMBER@", gawkFlashContainerElement.attr("id"),
 			"1050", "655", "9.0.0", false, gawkFlashVars, params, {id: swfObjectId});
@@ -81,7 +71,6 @@ function GawkView(config) {
 
 	function onGetWallResponse(event, response) {
 		wall = response;
-		setupView();
 	}
 
 	function onRecentWallActivityResponse(event, response) {
@@ -185,7 +174,6 @@ function GawkView(config) {
 			wall = loadedWall;
 		}
 
-		setupView();
 		element.show();
 	}
 
@@ -194,10 +182,12 @@ function GawkView(config) {
 	}
 
 	function onGawkMainWallDenyOverlay() {
+		window.trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#gawk-main-wall-overlay")});
 	}
 
 	function onNoWebcamOverlayShow() {
+		window.trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#gawk-no-webcam-overlay")});
 	}
 
