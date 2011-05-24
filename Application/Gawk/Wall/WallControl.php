@@ -35,7 +35,7 @@ class WallControl extends DataControl {
 			"Name", "", FM_TYPE_STRING, 100, FM_STORE_ALWAYS, false);
 
 		$this->fieldMeta["Description"] = new FieldMeta(
-			"Description", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, false);
+			"Description", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, true);
 
 		$this->fieldMeta["DateCreated"] = new FieldMeta(
 			"DateCreated", "", FM_TYPE_DATE, null, FM_STORE_NEVER, false);
