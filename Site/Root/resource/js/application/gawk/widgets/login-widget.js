@@ -35,11 +35,13 @@ function LoginWidget() {
 		$(document).trigger("GawkUISiteLoginRequest", [emailAddress, password]);
 	}
 	
-	function onLoginSuccess() {
+	function onLoginSuccess(event, member) {
 		$(document).trigger("GawkUILoggingInOverlayShow");
 		
 		if (urlAfterLogin) {
-			alert(urlAfterLogin);
+			if (urlAfterLogin == "/profile") {
+				urlAfterLogin = "/u/" + member.alias
+			}
 			window.location = urlAfterLogin;
 		} else {
 			window.location.reload();

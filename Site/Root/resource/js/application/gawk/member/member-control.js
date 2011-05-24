@@ -53,8 +53,8 @@ function MemberControl (config) {
 		$.post(config.getApiLocation(), {
 			Action: "Member.Login",
 			FacebookId: facebookId
-		}, function() {
-			$(document).trigger("GawkMemberLoggedIn");
+		}, function(response) {
+			$(document).trigger("GawkMemberLoggedIn", [response.member]);
 		}, "json");
 	}
 
@@ -74,7 +74,8 @@ function MemberControl (config) {
 		if (response.success) {
 			member = response.member;
 			loggedIn = true;
-			$(document).trigger("GawkMemberLoggedIn");
+			a
+			$(document).trigger("GawkMemberLoggedIn", [response.member]);
 			$(document).trigger("GawkMemberGotLoggedInMember", [response]);
 			$(document).trigger("GawkModelGetRecentWallActivity");
 		} else {
