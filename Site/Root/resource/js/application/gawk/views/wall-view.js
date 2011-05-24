@@ -23,8 +23,7 @@ function GawkView(config) {
 	}
 
 	function assignEventListeners() {
-		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
-		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
+		$(document).bind("GawkMemberGotLoggedInMember", onGotLoggedInMember);
 
 		$(document).bind("GawkUIAllHide", onHideView);
 		$(document).bind("GawkUIWallShow", onShowView);
@@ -155,7 +154,7 @@ function GawkView(config) {
 		}
 	}
 
-	function onLoggedIn() {
+	function onGotLoggedInMember() {
 		loggedIn = true;
 		if (wallLoaded) {
 			try {
@@ -165,11 +164,6 @@ function GawkView(config) {
 		} else {
 			setTimeout(onLoggedIn, 500);
 		}
-	}
-
-	function onLoggedOut() {
-		loggedIn = false;
-		document.getElementById(swfObjectId).logOutFromExternal();
 	}
 
 	function onShowView(event, loadedWall) {

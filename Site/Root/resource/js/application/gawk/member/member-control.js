@@ -70,15 +70,12 @@ function MemberControl (config) {
 			}, onLoginResponse, "json");
 	}
 
-	function getLoggedInMember() {
-		$.get(config.getApiLocation(), {Action: "Member.GetLoggedInMember"}, onLoginResponse, "json");
-	}
-
 	function onLoginResponse(response) {
 		if (response.success) {
 			member = response.member;
 			loggedIn = true;
-			$(document).trigger("GawkMemberLoggedIn", [response]);
+			$(document).trigger("GawkMemberLoggedIn");
+			$(document).trigger("GawkMemberGotLoggedInMember", [response]);
 			$(document).trigger("GawkModelGetRecentWallActivity");
 		} else {
 			$(document).trigger("GawkMemberLoginInvalidCredentials", [response.errors]);
@@ -86,6 +83,20 @@ function MemberControl (config) {
 				logOut();
 			}
 		}
+	}
+	
+
+	function getLoggedInMember() {
+		$.get(config.getApiLocation(), {Action: "Member.GetLoggedInMember"}, onGetLoggedInMemberResponse, "json");
+	}
+	
+	function onGetLoggedInMemberResponse(response) {
+		if (response.success) {
+			member = response.member;
+			loggedIn = true;
+			$(document).trigger("GawkMemberGotLoggedInMember", [response]);
+			$(document).trigger("GawkModelGetRecentWallActivity");
+		}		
 	}
 
 	function onSiteRegisterRequest(event, memberData) {

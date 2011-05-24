@@ -59,10 +59,6 @@ function Gawk(configData) {
 		} catch (e) {}
 
 		try {
-			yoursView = new YoursView();
-		} catch (e) {}
-
-		try {
 			profileEditView = new ProfileEditView(config);
 		} catch (e) {}
 

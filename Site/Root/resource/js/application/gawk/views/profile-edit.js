@@ -12,7 +12,7 @@ function ProfileEditView(config) {
 	}
 
 	function assignEventListeners() {
-		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
+		$(document).bind("GawkMemberGotLoggedInMember", onGetLoggedInMember);
 		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
 
 		$(document).bind("GawkUIAllHide", onHideView);
@@ -29,7 +29,7 @@ function ProfileEditView(config) {
 		element.find(".logged-in").hide();
 	}
 
-	function onLoggedIn(event, response) {
+	function onGetLoggedInMember(event, response) {
 		member = response.member;
 		showLoggedInControls();
 	}

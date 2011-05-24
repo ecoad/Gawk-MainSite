@@ -16,8 +16,7 @@ function WallSelectView() {
 		$(document).bind("GawkUIAllHide", onHideView);
 		$(document).bind("GawkUIWallSelectShow", onShowView);
 		$(document).bind("GawkModelGetRecentWallActivityResponse", onRecentWallActivityResponse);
-		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
-		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
+		$(document).bind("GawkMemberGotLoggedInMember", onGotLoggedInMember);
 
 		element.find("form").submit(onFormSubmit);
 	}
@@ -61,14 +60,9 @@ function WallSelectView() {
 		showLoggedInView(response.recentActivity);
 	}
 
-	function onLoggedIn() {
+	function onGotLoggedInMember() {
 		loggedIn = true;
 		loadRecentWallActivity();
-	}
-
-	function onLoggedOut() {
-		loggedIn = false;
-		//TODO: Show logged out
 	}
 
 	function onShowView() {

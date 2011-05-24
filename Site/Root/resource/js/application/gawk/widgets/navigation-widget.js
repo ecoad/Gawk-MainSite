@@ -20,7 +20,7 @@ function NavigationWidget() {
 	}
 
 	function assignEventListeners() {
-		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
+		$(document).bind("GawkMemberGotLoggedInMember", onGotLoggedInMember);
 		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
 
 		newWallElement.click(function(event) {
@@ -38,7 +38,7 @@ function NavigationWidget() {
 		});
 	}
 
-	function onLoggedIn(event, logInResponse) {
+	function onGotLoggedInMember(event, logInResponse) {
 		loggedIn = true;
 	}
 
