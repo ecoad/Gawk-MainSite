@@ -11,7 +11,7 @@ if ($memberAuthentication->isRequestLogInOnly($_SERVER["REQUEST_URI"]) &&  !$mem
 $layout = CoreFactory::getLayout("Site/Template/Default/Main.php");
 $layout->set("Title", $application->registry->get("Title"));
 $layout->set("Name", $application->registry->get("Title"));
-$layout->set("Section", $_SERVER["REQUEST_URI"] == "/wall/" ? "wall-select" : "wall");
+$layout->set("Section", "wall-select");
 $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.

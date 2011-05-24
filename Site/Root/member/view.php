@@ -126,7 +126,7 @@ foreach ($recentWallActivity->bookmarks as $memberBookmark) {
 <?php
 if (count($recentWallActivity->wallsCreatedByMember) == 0) {
 ?>
-					<li>no walls<?php echo $memberIsOnOwnMemberPage ? " (<a href=\"/wall/\">create a wall</a>)" : ""; ?></li>
+					<li>no walls<?php echo $memberIsOnOwnMemberPage ? " (<a href=\"/wall/create\">create a wall</a>)" : ""; ?></li>
 <?php
 }
 foreach ($recentWallActivity->wallsCreatedByMember as $memberWall) {

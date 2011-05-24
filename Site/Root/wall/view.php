@@ -60,57 +60,6 @@ $layout->start("JavaScript");
 $(document).ready(function() {
 	var gawk = new Gawk({
 		initView: "Wall",
-		apiLocation: "<"
-			<"
-			<?php echo $application->registry->get("Site/Address"); ?>/<input 
-				type="text" name="WallCreateName"/> <input type="submit" name="Submit" value="create wall" /></li>
-			</ul>
-		</div>
-		<div class="overlay" id="gawk-no-webcam-overlay">
-			<h3>you don't seem to have a webcam!</h3>
-			<p>you need a webcam or the <a href="#">iPhone app</a> to record gawks</p>
-		</div>
-	</div>
-<?php
-$layout->start("JavaScript");
-?>
-	<script type="text/javascript" src="/resource/js/application/gawk/wall/wall-control.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/member/member-recent-walls-control.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/member/member-wall-bookmark-control.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/views/login-view.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/views/wall-select-view.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/views/wall-edit-view.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/views/wall-view.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript">
-//<![CDATA[
-$(document).ready(function() {
-	var gawk = new Gawk({
-		initView: "Wall",
-		apiLocation: "<"
-			<?php echo $application->registry->get("Site/Address"); ?>/<input 
-				type="text" name="WallCreateName"/>&nbsp;<input type="submit" name="Submit" value="create wall" /></li>
-			</ul>
-		</div>
-		<div class="overlay" id="gawk-no-webcam-overlay">
-			<h3>you don't seem to have a webcam!</h3>
-			<p>you need a webcam or the <a href="#">iPhone app</a> to record gawks</p>
-		</div>
-	</div>
-<?php
-$layout->start("JavaScript");
-?>
-	<script type="text/javascript" src="/resource/js/application/gawk/wall/wall-control.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/member/member-recent-walls-control.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/member/member-wall-bookmark-control.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/views/login-view.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/views/wall-select-view.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/views/wall-edit-view.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript" src="/resource/js/application/gawk/views/wall-view.js?v=@VERSION-NUMBER@"></script>
-	<script type="text/javascript">
-//<![CDATA[
-$(document).ready(function() {
-	var gawk = new Gawk({
-		initView: "Wall",
 		apiLocation: "<?php echo $application->registry->get("Site/Address"); ?>/api/",
 		currentWall: "<?php echo addslashes(json_encode($wall)); ?>",
 		systemWall: "<?php echo $systemWallFactory->isSystemWall($wall->secureId); ?>",

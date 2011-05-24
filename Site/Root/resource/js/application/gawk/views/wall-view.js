@@ -125,7 +125,7 @@ function GawkView(config) {
 			select.append(recentOptionGroup);
 		}
 
-		var createWallOption = $("<option>").attr("value", "/wall/").html("create a wall&hellip;");
+		var createWallOption = $("<option>").attr("value", "/wall/create").html("create a wall&hellip;");
 		select.append(createWallOption);
 
 		setWallBookmarkState(recentActivity.bookmarks);

@@ -5,9 +5,11 @@ function LoginWidget() {
 		loginOverlayForm = $("#login-overlay form"),
 		loginOverlayErrorsElement = loginOverlayForm.find(".login-error"),
 		loginOverlayErrorsListElement = loginOverlayErrorsElement.find(".message"),
-		logOutLink = loggedInElement.find(".logout");
+		logOutLink = loggedInElement.find(".logout"),
+		urlAfterLogin, urlAfterLogout;
 
 	function assignEventListeners() {
+		$(document).bind("GawkMemberLoggedIn", onLoginSuccess);
 		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
 		$(document).bind("GawkUILoginOverlayShow", onLoginOverlayShow);
 		$(document).bind("GawkUILoggingInOverlayShow", onLoggingInOverlayShow);
@@ -26,7 +28,6 @@ function LoginWidget() {
 		loginOverlayErrorsElement.hide();
 
 		$(document).bind("GawkMemberLoginInvalidCredentials", onLoginOverlayInvalidCredentials);
-		$(document).bind("GawkMemberLoggedIn", onLoginOverlaySuccess);
 
 		var emailAddress = loginOverlayForm.find("input[name=EmailAddress]").val(),
 			password = loginOverlayForm.find("input[name=Password]").val();
@@ -34,19 +35,31 @@ function LoginWidget() {
 		$(document).trigger("GawkUISiteLoginRequest", [emailAddress, password]);
 	}
 	
-	function onLoginOverlaySuccess() {
-		$(document).unbind("GawkMemberLoggedIn", onLoginOverlaySuccess);
+	function onLoginSuccess() {
 		$(document).trigger("GawkUILoggingInOverlayShow");
 		
-		window.location.reload();
+		if (urlAfterLogin) {
+			alert(urlAfterLogin);
+			window.location = urlAfterLogin;
+		} else {
+			window.location.reload();
+		}
 	}
 
 	function onLoginOverlayInvalidCredentials(event, errors) {
 		$(document).unbind("GawkMemberLoginInvalidCredentials", onLoginOverlayInvalidCredentials);
-		$(document).unbind("GawkMemberLoggedIn", onLoginOverlaySuccess);
 
 		loginOverlayErrorsListElement.html(errors.InvalidLoginCredentials);
 		loginOverlayErrorsElement.show();
+	}
+	
+
+	function onLoggedOut() {
+		if (urlAfterLogout) {
+			window.location = urlAfterLogout;
+		} else {
+			window.location.reload();
+		}
 	}
 
 	function onLogOutClick(event) {
@@ -55,27 +68,8 @@ function LoginWidget() {
 		$(document).trigger("GawkUILogoutRequest");
 	}
 
-//	function onLoggedIn(event, response) {
-//		showLoggedIn(response);
-//	}
-//
-//	function showLoggedIn(response) {
-//		if (response.success) {
-//			var profileName = loggedInElement.find(".name");
-//			profileName.html(response.member.firstName);
-//			profileName.attr("href", "/u/" + response.member.alias);
-//
-//			loggedInElement.show();
-//			loggedOutElement.hide();
-//		}
-//
-//	}
-
-	function onLoggedOut() {
-		window.location.reload();
-	}
-
-	function onLoginOverlayShow() {
+	function onLoginOverlayShow(event, returnUrl) {
+		urlAfterLogin = returnUrl;
 		$(document).trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#login-overlay")});
 	};
@@ -85,7 +79,8 @@ function LoginWidget() {
 		$.box.show({content: $("#logging-in-overlay")});
 	}
 
-	function onLoggingOutOverlayShow() {
+	function onLoggingOutOverlayShow(event, returnUrl) {
+		urlAfterLogout = returnUrl; 
 		$(document).trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#logging-out-overlay")});
 	}
