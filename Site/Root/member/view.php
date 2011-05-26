@@ -54,11 +54,11 @@ $layout->start("Main");
 <?php
 if ($memberIsOnOwnMemberPage) {
 ?>
-					<a class="button edit-profile" href="/u/<?php echo $profileMember->alias; ?>/edit">edit your profile</a>
+					<a class="edit-profile" href="/u/<?php echo $profileMember->alias; ?>/edit">edit your profile</a>
 <?php
 } else {
 ?>
-					<a class="button add-friend friend-control" href="#" style="display: none;">add friend</a>
+					<a class="add-friend friend-control" href="#" style="display: none;">add friend</a>
 <?php
 }
 ?>
@@ -126,13 +126,13 @@ foreach ($recentWallActivity->bookmarks as $memberBookmark) {
 <?php
 if (count($recentWallActivity->wallsCreatedByMember) == 0) {
 ?>
-					<li>no walls<?php echo $memberIsOnOwnMemberPage ? " (<a href=\"/wall/create\">create a wall</a>)" : ""; ?></li>
+					<li>no walls<?php echo $memberIsOnOwnMemberPage ? " (<a class=\"underline\" href=\"/wall/create\">create a wall</a>)" : ""; ?></li>
 <?php
 }
 foreach ($recentWallActivity->wallsCreatedByMember as $memberWall) {
 ?>
 					<li>
-						<a href="/<?php echo $memberWall->url; ?>"><?php echo $memberWall->name; ?></a>
+						<a class="underline" href="/<?php echo $memberWall->url; ?>"><?php echo $memberWall->name; ?></a>
 					</li>
 <?php
 }

@@ -10,7 +10,7 @@ function LoginWidget() {
 		registerOverlayErrorsListElement = registerOverlayForm.find("ul"),
 		logOutLink = loggedInElement.find("a.logout"),
 		logInLink = loggedOutElement.find("a.login"),
-		registerLink = loggedOutElement.find("a.register"),
+		registerLink = $("a.register"),
 		urlAfterLogin, urlAfterLogout;
 
 	function assignEventListeners() {

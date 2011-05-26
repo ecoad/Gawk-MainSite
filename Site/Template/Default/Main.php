@@ -91,37 +91,67 @@ include "Site/Template/Default/Widget/Footer.php";
 		<div style="display: none;">
 			<div class="overlay" id="login-overlay">
 				<h3>login to gawkwall</h3>
-				<p>have an account with Facebook? <br />
-				connect with Facebook: <fb:login-button></fb:login-button></p>
-				<hr style="display: block; background-color: #000; height: 3px; width: 500px;" />
-				<p>alternatively: log in with your gawkwall account, or
-					<a href="/member/register" title="register to the gawkwall">register</a>
-				<form method="post">
+				<p>have an account with Facebook?</p>
+				<form method="post" class="login">
+					<label>
+						<strong>login with Facebook</strong>
+						<fb:login-button></fb:login-button><br />
+					</label>
+				</form>
+				<hr/>
+				<p>alternatively, log in or <a href="#" title="register to the gawkwall"
+					class="register underline">register</a> with your gawkwall account</p>
+				<form method="post" class="login">
 					<div class="login-error" style="display: none;">
 						<h4>login error</h4>
 						<p class="message"></p>
 					</div>
-					<p>email address <input type="email" name="EmailAddress" /><br />
-					password <input type="password" name="Password" /></p>
-					<input type="submit" name="Login" value="login"/>
+					<label>
+						<strong>email address</strong>
+						<input class="textbox" type="email" name="EmailAddress" /><br />
+					</label><br />
+					<label>
+						<strong>password</strong>
+						<input class="textbox" type="password" name="Password" /> <a href="#">forgotten password?</a><br />
+					</label><br />
+					<label>
+						<strong>&nbsp;</strong>
+						<input type="submit" class="button right" name="Login" value="login"/>
+					</label><br />
 				</form>
 			</div>
 			<div class="overlay" id="register-overlay">
 				<h3>register to gawkwall</h3>
 				<p>have an account with Facebook? <br />
 				connect with Facebook: <fb:login-button></fb:login-button></p>
-				<hr style="display: block; background-color: #000; height: 3px; width: 500px;" />
+				<hr/>
 				<p>alternatively: register a new account with gawkwall
-				<form method="post">
+				<form method="post" class="register">
 					<div class="register-error" style="display: none;">
 						<h4>register error</h4>
 						<ul></ul>
 					</div>
-					email address <input type="email" name="EmailAddress" /><br />
-					username <input type="text" name="Alias" /><br />
-					password <input type="password" name="Password" /><br />
-					confirm password <input type="password" name="ConfirmPassword" />
-					<input type="submit" name="Register" value="register"/>
+					<label>
+						<strong>email address</strong>
+						<input type="email" name="EmailAddress" /><br />
+					</label><br />
+					<label>
+						<strong>username</strong>
+						<input type="text" name="Alias" /><br />
+					</label><br />
+					<label>
+						<strong>password</strong>
+						<input type="password" name="Password" /><br />
+					</label><br />
+					<label>
+						<strong>confirm password</strong>
+						<input type="password" name="ConfirmPassword" /><br />
+					</label><br />
+					<label>
+						<strong>&nbsp;</strong>
+						<input type="submit" class="button right" name="Register" value="register"/><br />
+					</label><br />
+
 				</form>
 			</div>
 			<div class="overlay" id="logging-in-overlay">
