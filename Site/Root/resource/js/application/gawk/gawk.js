@@ -59,10 +59,6 @@ function Gawk(configData) {
 		} catch (e) {}
 
 		try {
-			yoursView = new YoursView();
-		} catch (e) {}
-
-		try {
 			profileEditView = new ProfileEditView(config);
 		} catch (e) {}
 
@@ -90,7 +86,7 @@ function Gawk(configData) {
 	}
 
 	function onWelcomeOverlayShow() {
-		window.trigger("GawkUIOverlayShow");
+		$(document).trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#welcome-overlay")});
 	}
 	

@@ -4,13 +4,14 @@ $facebook = Factory::getFacebook($application);
 $memberUrlHelper = Factory::getMemberUrlHelper();
 $videoUrlHelper = Factory::getVideoUrlHelper();
 $videoControl = Factory::getVideoControl();
+$memberWallBookmarkControl = Factory::getMemberWallBookmarkControl();
+$memberAuthentication = Factory::getMemberAuthentication();
 
 $memberControl = Factory::getMemberControl();
 if (!$profileMember = $memberControl->getMemberByRequestUrl($_SERVER["REQUEST_URI"], true)) {
 	include "Site/Root/error/404.php";
 }
 
-$memberAuthentication = Factory::getMemberAuthentication();
 
 $memberIsOnOwnMemberPage = false;
 if ($loggedInMemberDataEntity = $memberAuthentication->getLoggedInMemberDataEntity()) {
@@ -19,10 +20,7 @@ if ($loggedInMemberDataEntity = $memberAuthentication->getLoggedInMemberDataEnti
 	}
 }
 
-$memberWallBookmarkWebService = Factory::getMemberWallBookmarkWebService();
-$recentWallActivityResponse = $memberWallBookmarkWebService->handleRequest(
-	MemberWallBookmarkWebService::SERVICE_GET_RECENT_WALL_ACTIVITY, null, array("Token" => $profileMember->token));
-$recentWallActivity = $recentWallActivityResponse->recentActivity;
+$recentWallActivity = $memberWallBookmarkControl->getRecentWallActivity($profileMember);
 
 $memberVideoCount = $videoControl->getVideoCountByMember($profileMember);
 
@@ -128,7 +126,7 @@ foreach ($recentWallActivity->bookmarks as $memberBookmark) {
 <?php
 if (count($recentWallActivity->wallsCreatedByMember) == 0) {
 ?>
-					<li>no walls<?php echo $memberIsOnOwnMemberPage ? " (<a href=\"/wall/\">create a wall</a>)" : ""; ?></li>
+					<li>no walls<?php echo $memberIsOnOwnMemberPage ? " (<a href=\"/wall/create\">create a wall</a>)" : ""; ?></li>
 <?php
 }
 foreach ($recentWallActivity->wallsCreatedByMember as $memberWall) {

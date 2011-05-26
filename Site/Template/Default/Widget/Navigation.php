@@ -1,3 +1,11 @@
+<?php 
+if ($memberAuthentication->isLoggedIn()) {
+	$member = $memberAuthentication->getLoggedInMember();
+	$profileUrl = "/u/" . $member->alias; 
+} else {
+	$profileUrl = "#";
+}
+?>
 <ul id="navigation-widget">
 	<li>
 		<a class="new-gawk navigation-item <?php echo $this->get("Section") == "wall" ? "selected" : ""; ?>" href="/">
@@ -10,7 +18,8 @@
 		</a>
 	</li>
 	<li>
-		<a class="yours navigation-item <?php echo $this->get("Section") == "profile" ? "selected" : ""; ?>" href="#">
+		<a class="yours navigation-item <?php echo $this->get("Section") == "profile" ? "selected" : ""; ?>" 
+			href="<?php echo $profileUrl; ?>">
 			<span>Profile</span>
 		</a>
 	</li>

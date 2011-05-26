@@ -36,22 +36,23 @@ class MemberWallBookmarkWebService {
 		}
 
 		if ($memberDataEntity = TokenCheck::validateToken($postData["Token"], true)) {
+			$member = $memberDataEntity->toObject();
 			switch($method) {
 				case self::SERVICE_GET_WALL_BOOKMARKS:
-					$walls = $this->memberWallBookmarkControl->getWallBookmarksArray($memberDataEntity);
+					$walls = $this->memberWallBookmarkControl->getWallBookmarksArray($member);
 					if (is_array($walls)) {
 						$response->walls = $walls;
 						$response->success = true;
 					}
 					break;
 				case self::SERVICE_ADD_WALL_BOOKMARK:
-					$response->success = $this->memberWallBookmarkControl->addWallBookmark($memberDataEntity, $postData["WallSecureId"]);
+					$response->success = $this->memberWallBookmarkControl->addWallBookmark($member, $postData["WallSecureId"]);
 					break;
 				case self::SERVICE_REMOVE_WALL_BOOKMARK:
-					$response->success = $this->memberWallBookmarkControl->removeWallBookmark($memberDataEntity, $postData["WallSecureId"]);
+					$response->success = $this->memberWallBookmarkControl->removeWallBookmark($member, $postData["WallSecureId"]);
 					break;
 				case self::SERVICE_IS_BOOKMARKED:
-					$response->success = $this->memberWallBookmarkControl->isWallBookmarked($memberDataEntity, $getData["WallSecureId"]);
+					$response->success = $this->memberWallBookmarkControl->isWallBookmarked($member, $getData["WallSecureId"]);
 					break;
 				case self::SERVICE_GET_RECENT_WALL_ACTIVITY:
 					$recentActivity = $this->memberWallBookmarkControl->getRecentWallActivity($memberDataEntity);

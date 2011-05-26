@@ -22,7 +22,6 @@ function WallEditView() {
 		$(document).bind("GawkUIWallEditShow", onShowView);
 
 		element.find("form").submit(onFormSubmit);
-		console.debug(element.find("form").find("button[name=Delete]"));
 		element.find("input[name=Delete]").click(onDeleteClick);
 	}
 

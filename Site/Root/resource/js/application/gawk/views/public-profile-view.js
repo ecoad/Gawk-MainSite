@@ -16,8 +16,7 @@ function PublicProfileView(config) {
 	}
 
 	function assignEventListeners() {
-		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
-		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
+		$(document).bind("GawkMemberGotLoggedInMember", onGetLoggedInMember);
 
 		$(document).bind("GawkUIAllHide", onHideView);
 		$(document).bind("GawkUIPublicProfileShow", onShowView);
@@ -95,14 +94,9 @@ function PublicProfileView(config) {
 		setFriendLink(false);
 	}
 
-	function onLoggedIn(event, response) {
+	function onGetLoggedInMember(event, response) {
 		member = response.member;
 		allowLoggedInControls();
-	}
-
-	function onLoggedOut() {
-		member = null;
-		disallowLoggedOutControls();
 	}
 
 	function onShowView() {

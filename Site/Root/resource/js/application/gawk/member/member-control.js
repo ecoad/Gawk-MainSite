@@ -53,9 +53,8 @@ function MemberControl (config) {
 		$.post(config.getApiLocation(), {
 			Action: "Member.Login",
 			FacebookId: facebookId
-		}, function() {
-			$(document).trigger("GawkUILoggingInOverlayShow");
-			window.location.reload();
+		}, function(response) {
+			$(document).trigger("GawkMemberLoggedIn", [response.member]);
 		}, "json");
 	}
 
@@ -71,15 +70,13 @@ function MemberControl (config) {
 			}, onLoginResponse, "json");
 	}
 
-	function getLoggedInMember() {
-		$.get(config.getApiLocation(), {Action: "Member.GetLoggedInMember"}, onLoginResponse, "json");
-	}
-
 	function onLoginResponse(response) {
 		if (response.success) {
 			member = response.member;
 			loggedIn = true;
-			$(document).trigger("GawkMemberLoggedIn", [response]);
+			a
+			$(document).trigger("GawkMemberLoggedIn", [response.member]);
+			$(document).trigger("GawkMemberGotLoggedInMember", [response]);
 			$(document).trigger("GawkModelGetRecentWallActivity");
 		} else {
 			$(document).trigger("GawkMemberLoginInvalidCredentials", [response.errors]);
@@ -87,6 +84,20 @@ function MemberControl (config) {
 				logOut();
 			}
 		}
+	}
+	
+
+	function getLoggedInMember() {
+		$.get(config.getApiLocation(), {Action: "Member.GetLoggedInMember"}, onGetLoggedInMemberResponse, "json");
+	}
+	
+	function onGetLoggedInMemberResponse(response) {
+		if (response.success) {
+			member = response.member;
+			loggedIn = true;
+			$(document).trigger("GawkMemberGotLoggedInMember", [response]);
+			$(document).trigger("GawkModelGetRecentWallActivity");
+		}		
 	}
 
 	function onSiteRegisterRequest(event, memberData) {
@@ -108,10 +119,15 @@ function MemberControl (config) {
 		}
 	}
 
-	function logOut() {
+	function logOut(event) {
 		$.getJSON(config.getApiLocation(), {Action: "Member.Logout"}, function () {
+			if (member.facebookId == "") {
+				$(document).trigger("GawkMemberLoggedOut");
+				return;
+			}
+			
 			FB.logout(function () {
-				window.location.reload();
+				$(document).trigger("GawkMemberLoggedOut");
 			});
 		});
 	}

@@ -10,12 +10,22 @@
 		<div class="upper">
 			<div class="login-widget">
 				<div id="fb-root"></div>
-				<div class="logged-in" style="display:none;">
-					hello <a class="name" href="#"></a> | <a class="logout" href="#">logout</a>
+<?php 
+$memberAuthentication = Factory::getMemberAuthentication();
+if ($memberAuthentication->isLoggedIn() && ($member = $memberAuthentication->getLoggedInMember())) {
+?>
+				<div class="logged-in">
+					hello <a class="name" href="/u/<?php echo $member->alias; ?>"><?php echo $member->alias; ?></a> | <a class="logout" href="#">logout</a>
 				</div>
-				<div class="logged-out" style="display:none;">
+<?php 
+} else {
+?>
+				<div class="logged-out">
 					login or register <fb:login-button></fb:login-button>
 				</div>
+<?php 
+}
+?>
 			</div>
 			<div class="share">
 				<iframe class="twitter" frameborder="no" scrolling="no" class="twitter-share" style="height: 20px;"

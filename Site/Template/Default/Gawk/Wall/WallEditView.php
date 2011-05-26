@@ -47,11 +47,13 @@ if ($wallCreate) {
 				<strong class="required">url</strong>
 				<?php echo $application->registry->get("Site/Address"); ?>/<input type="text" name="UrlFriendly" 
 					class="textbox" tabindex="<?php echo $tabIndex++; ?>" value="<?php echo $wall->url; ?>"/>
+				<span class="note">e.g. gawkwall-friends, johns-family, kettle-fish</span>
 			</label><br />
 			<label>
-				<strong class="required">name</strong>
+				<strong class="required">wall name</strong>
 				<input type="text" name="Name" class="textbox" tabindex="<?php echo $tabIndex++; ?>" 
 					value="<?php echo $wall->name; ?>"/>
+				<span class="note">e.g. Friends of Gawkwall, John's Family, Kettle Fish</span>
 			</label><br />
 			<label>
 				<strong class="required">description</strong><br />

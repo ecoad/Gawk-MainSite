@@ -1,7 +1,6 @@
 function NavigationWidget() {
 	var global = this;
 	var loggedIn = false;
-	var member;
 
 	var element = $("#navigation-widget");
 	var newGawkElement = element.find(".new-gawk");
@@ -21,57 +20,26 @@ function NavigationWidget() {
 	}
 
 	function assignEventListeners() {
-		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
+		$(document).bind("GawkMemberGotLoggedInMember", onGotLoggedInMember);
 		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
-
-		/*
-		$(viewEventNames).each(function(index, eventName) {
-			$(document).bind(eventName, onViewChangeUpdateNavigation);
-		});
-		*/
 
 		newWallElement.click(function(event) {
 			if (!loggedIn) {
-				$(document).trigger("GawkUILoginOverlayShow");
+				$(document).trigger("GawkUILoginOverlayShow", ["/wall"]);
 				event.preventDefault();
 			}
 		});
 
 		yoursElement.click(function(event) {
 			if (!loggedIn) {
-				$(document).trigger("GawkUILoginOverlayShow");
+				$(document).trigger("GawkUILoginOverlayShow", ["/profile"]);
 				event.preventDefault();
 			}
 		});
 	}
 
-	/*
-	function onViewChangeUpdateNavigation(event) {
-		$(".navigation-item").removeClass("selected");
-
-		switch (event.type) {
-			case "GawkUIWallShow":
-				newGawkElement.addClass("selected");
-				break;
-			case "GawkUIPublicProfileShow":
-			case "GawkUIProfileEditShow":
-			case "GawkUILoginShow":
-			case "GawkUIYoursShow":
-				yoursElement.addClass("selected");
-				break;
-			case "GawkUIWallEditShow":
-			case "GawkUIWallSelectShow":
-				newWallElement.addClass("selected");
-				break;
-		}
-	}
-	*/
-
-	function onLoggedIn(event, logInResponse) {
+	function onGotLoggedInMember(event, logInResponse) {
 		loggedIn = true;
-		member = logInResponse.member;
-
-		yoursElement.attr("href", "/u/" + member.alias);
 	}
 
 	function onLoggedOut() {

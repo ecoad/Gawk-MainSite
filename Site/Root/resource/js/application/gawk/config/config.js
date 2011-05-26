@@ -4,6 +4,7 @@ function Config(configData) {
 	initView = configData.initView,
 	fbAppId = configData.fbAppId,
 	fbSession = configData.fbSession;
+	systemWall = configData.systemWall;
 
 	try {
 		wall = $.parseJSON(configData.currentWall);
@@ -35,5 +36,9 @@ function Config(configData) {
 
 	Config.prototype.getInitView = function() {
 		return initView;
+	};
+	
+	Config.prototype.isSystemWall = function() {
+		return systemWall;
 	};
 }

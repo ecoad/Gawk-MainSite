@@ -171,11 +171,21 @@ class MemberAuthentication {
 			return $memberDataEntity;
 		}
 	}
+	
+	/**
+	 * @param string $token
+	 * @return Member
+	 */
+	public function getLoggedInMember($token = null) {
+		if ($memberDataEntity = $this->getLoggedInMemberDataEntity($token)) {
+			return $memberDataEntity->toObject();
+		}
+	} 
 
 	protected function getLoggedInFacebookId() {
 		$facebook = Factory::getFacebook(CoreFactory::getApplication());
 		if ($facebook->getSession()) {
-			return $facebookId = $facebook->getUser();
+			return $facebook->getUser();
 		}
 	}
 

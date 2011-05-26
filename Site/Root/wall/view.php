@@ -3,6 +3,8 @@ require_once("Application/Bootstrap.php");
 
 $facebook = Factory::getFacebook($application);
 $wallControl = Factory::getWallControl();
+$systemWallFactory = Factory::getSystemWallFactory();
+
 if (!$wall = $wallControl->getWallByRequestUrl($_SERVER["REQUEST_URI"])) {
 	include "Site/Root/error/404.php";
 }
@@ -28,7 +30,15 @@ $layout->start("Main");
 		<div class="overlay" id="gawk-main-wall-overlay">
 			<h3>you can't gawk on this wall</h3>
 			<p>the main wall is a collection of the best and latest gawks from other walls</p>
-			<p>gawk on <a href="/wall/">another wall</a> or <a href="/wall/">create one</a>
+			<ul>
+				<li>pick <a href="/wall/">another wall</a></li>
+				<li>create one<br />
+					<form method="post" action="">
+						<?php echo $application->registry->get("Site/Address"); ?>/<input 
+							type="text" name="WallCreateName"/> <input type="submit" name="Submit" value="create wall" />
+					</form>
+				</li>
+			</ul>
 		</div>
 		<div class="overlay" id="gawk-no-webcam-overlay">
 			<h3>you don't seem to have a webcam!</h3>
@@ -52,6 +62,7 @@ $(document).ready(function() {
 		initView: "Wall",
 		apiLocation: "<?php echo $application->registry->get("Site/Address"); ?>/api/",
 		currentWall: "<?php echo addslashes(json_encode($wall)); ?>",
+		systemWall: "<?php echo $systemWallFactory->isSystemWall($wall->secureId); ?>",
 		fbAppId: "<?php echo $facebook->getAppId(); ?>",
 		fbSession: <?php echo json_encode($facebook->getSession()); ?>
 	});

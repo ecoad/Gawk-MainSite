@@ -23,8 +23,7 @@ function GawkView(config) {
 	}
 
 	function assignEventListeners() {
-		$(document).bind("GawkMemberLoggedIn", onLoggedIn);
-		$(document).bind("GawkMemberLoggedOut", onLoggedOut);
+		$(document).bind("GawkMemberGotLoggedInMember", onGotLoggedInMember);
 
 		$(document).bind("GawkUIAllHide", onHideView);
 		$(document).bind("GawkUIWallShow", onShowView);
@@ -35,7 +34,7 @@ function GawkView(config) {
 
 		element.find(".record").bind("click", function (event) {
 			if (loggedIn) {
-				if (config.isWallSecureIdSystem(wall.secureId)) {
+				if (config.isSystemWall()) {
 					$(document).trigger("GawkUIMainWallDenyOverlayShow");
 				} else {
 					document.getElementById(swfObjectId).recordNewFromExternal();
@@ -125,7 +124,7 @@ function GawkView(config) {
 			select.append(recentOptionGroup);
 		}
 
-		var createWallOption = $("<option>").attr("value", "/wall/").html("create a wall&hellip;");
+		var createWallOption = $("<option>").attr("value", "/wall/create").html("create a wall&hellip;");
 		select.append(createWallOption);
 
 		setWallBookmarkState(recentActivity.bookmarks);
@@ -155,18 +154,16 @@ function GawkView(config) {
 		}
 	}
 
-	function onLoggedIn() {
+	function onGotLoggedInMember() {
 		loggedIn = true;
 		if (wallLoaded) {
-			document.getElementById(swfObjectId).logInFromExternal();
+			try {
+				document.getElementById(swfObjectId).logInFromExternal();
+			} catch (error) {
+			} 
 		} else {
 			setTimeout(onLoggedIn, 500);
 		}
-	}
-
-	function onLoggedOut() {
-		loggedIn = false;
-		document.getElementById(swfObjectId).logOutFromExternal();
 	}
 
 	function onShowView(event, loadedWall) {
@@ -182,12 +179,21 @@ function GawkView(config) {
 	}
 
 	function onGawkMainWallDenyOverlay() {
-		window.trigger("GawkUIOverlayShow");
+		$(document).trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#gawk-main-wall-overlay")});
+		
+		$("#gawk-main-wall-overlay").find("form").submit(function(event) {
+			event.preventDefault();
+			var wallName = wallCreateName.val();
+			window.location = "/wall/create/" + wallName; 
+		});
+		
+		var wallCreateName = $("#gawk-main-wall-overlay").find("input[name=WallCreateName]"); 
+		wallCreateName.placeholder("your-wall-name-here");
 	}
 
 	function onNoWebcamOverlayShow() {
-		window.trigger("GawkUIOverlayShow");
+		$(document).trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#gawk-no-webcam-overlay")});
 	}
 
