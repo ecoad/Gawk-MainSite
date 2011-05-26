@@ -51,13 +51,13 @@ class MemberWebService {
 				$getData["Token"] = $this->application->defaultValue($getData["Token"], "");
 				if ($memberDataEntity = $this->memberAuthentication->getLoggedInMemberDataEntity($getData["Token"])) {
 					$response->success = true;
-					$response->member = $memberDataEntity->toObject(false, true);
+					$response->member = $memberDataEntity->toObject();
 				}
 				break;
 			case self::SERVICE_REGISTER_MEMBER:
 				$member = Factory::getMember(json_decode(stripslashes($postData["MemberData"])));
 				if ($memberDataEntity = $this->memberControl->registerMember($member)) {
-					$response->member = $memberDataEntity->toObject(true);
+					$response->member = $memberDataEntity->toObject();
 					$response->success = true;
 				}
 				break;
@@ -66,7 +66,7 @@ class MemberWebService {
 				if ($memberDataEntity = $this->memberAuthentication->getLoggedInMemberDataEntity($postData["Token"])) {
 					if ($memberDataEntity = $this->memberControl->updateProfile($memberDataEntity, $postData["ProfileData"])) {
 						$response->success = !$this->application->errorControl->hasErrors();
-						$response->member = $memberDataEntity->toObject(false, true);
+						$response->member = $memberDataEntity->toObject();
 					}
 				}
 				break;

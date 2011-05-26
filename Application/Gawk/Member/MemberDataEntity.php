@@ -17,8 +17,9 @@ class CustomMemberDataEntity extends MemberDataEntity {
 			$array[lcfirst($k)] = $v;
 		}
 
+		unset($array["confirmPassword"]);
 		if (!$includePassword) {
-			unset($array["Password"]);
+			unset($array["password"]);
 		}
 
 		$member = Factory::getMember((object)$array);

@@ -5,7 +5,6 @@ class Member {
 	public $alias = "";
 	public $facebookId = "";
 	public $friends = "";
-	public $wallBookmarks = "";
 	public $password = "";
 	public $confirmPassword = "";
 	public $emailAddress = "";
