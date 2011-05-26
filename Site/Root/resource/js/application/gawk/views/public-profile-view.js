@@ -6,8 +6,6 @@ function PublicProfileView(config) {
 		aliasElement = element.find("h1"),
 		friendLink = $(element.find("a.friend-control"));
 
-	console.debug(profileMember);
-
 	function init() {
 		$(document).bind("GawkModelInit", onModelInit);
 	}

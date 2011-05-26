@@ -48,7 +48,8 @@ $layout->start("Main");
 		<div class="details">
 			<div class="name">
 				<h1><?php echo $profileMember->alias; ?></h1>
-				<span class="gawk-count"><?php echo $memberVideoCount; ?> gawks</span>
+				<span class="gawk-count"><?php echo $memberVideoCount; ?> gawk<?php
+					echo ($memberVideoCount != 1) ? "s" : ""; ?></span>
 				<div class="controls">
 <?php
 if ($memberIsOnOwnMemberPage) {
