@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- Version 0.4.3 -->
-<project name="Clock Common Build Targets" default="" basedir=".">
+<project name="Clock Common Build Targets!" default="" basedir=".">
 
 	<taskdef name="dependency" classname="phing.clock.tasks.DependencyTask" />
 

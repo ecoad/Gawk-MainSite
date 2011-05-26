@@ -97,7 +97,7 @@ class MemberWebService {
 				break;
 		}
 
-		$response->errors = $this->application->errorControl->getErrors();
+		$response->errors = array_values($this->application->errorControl->getErrors());
 
 		return $response;
 	}

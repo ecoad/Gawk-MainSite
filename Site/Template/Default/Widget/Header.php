@@ -10,20 +10,21 @@
 		<div class="upper">
 			<div class="login-widget">
 				<div id="fb-root"></div>
-<?php 
+<?php
 $memberAuthentication = Factory::getMemberAuthentication();
 if ($memberAuthentication->isLoggedIn() && ($member = $memberAuthentication->getLoggedInMember())) {
 ?>
 				<div class="logged-in">
 					hello <a class="name" href="/u/<?php echo $member->alias; ?>"><?php echo $member->alias; ?></a> | <a class="logout" href="#">logout</a>
 				</div>
-<?php 
+<?php
 } else {
 ?>
 				<div class="logged-out">
-					login or register <fb:login-button></fb:login-button>
+					<a href="#" class="login" title="login to gawkwall">login</a> |
+						<a href="#" class="register" title="register to gawkwall">register</a>
 				</div>
-<?php 
+<?php
 }
 ?>
 			</div>

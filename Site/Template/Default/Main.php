@@ -90,10 +90,11 @@ include "Site/Template/Default/Widget/Footer.php";
 		</div>
 		<div style="display: none;">
 			<div class="overlay" id="login-overlay">
-				<h3>login to continue</h3>
-				<p>login with facebook:  <fb:login-button></fb:login-button></p>
-				<hr />
-				<p>alternatively if you do not use facebook, log in with your gawkwall account, or 
+				<h3>login to gawkwall</h3>
+				<p>have an account with Facebook? <br />
+				connect with Facebook: <fb:login-button></fb:login-button></p>
+				<hr style="display: block; background-color: #000; height: 3px; width: 500px;" />
+				<p>alternatively: log in with your gawkwall account, or
 					<a href="/member/register" title="register to the gawkwall">register</a>
 				<form method="post">
 					<div class="login-error" style="display: none;">
@@ -102,7 +103,25 @@ include "Site/Template/Default/Widget/Footer.php";
 					</div>
 					<p>email address <input type="email" name="EmailAddress" /><br />
 					password <input type="password" name="Password" /></p>
-					<input type="submit" name="Login" />
+					<input type="submit" name="Login" value="login"/>
+				</form>
+			</div>
+			<div class="overlay" id="register-overlay">
+				<h3>register to gawkwall</h3>
+				<p>have an account with Facebook? <br />
+				connect with Facebook: <fb:login-button></fb:login-button></p>
+				<hr style="display: block; background-color: #000; height: 3px; width: 500px;" />
+				<p>alternatively: register a new account with gawkwall
+				<form method="post">
+					<div class="register-error" style="display: none;">
+						<h4>register error</h4>
+						<ul></ul>
+					</div>
+					email address <input type="email" name="EmailAddress" /><br />
+					username <input type="text" name="Alias" /><br />
+					password <input type="password" name="Password" /><br />
+					confirm password <input type="password" name="ConfirmPassword" />
+					<input type="submit" name="Register" value="register"/>
 				</form>
 			</div>
 			<div class="overlay" id="logging-in-overlay">

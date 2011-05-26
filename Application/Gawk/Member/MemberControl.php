@@ -29,25 +29,25 @@ class CustomMemberControl extends MemberControl {
 		parent::init();
 
 		$this->fieldMeta["EmailAddress"] = new FieldMeta(
-			"E-mail Address", "", FM_TYPE_EMAILADDRESS, 255, FM_STORE_ALWAYS, true,	FM_OPTIONS_UNIQUE);
+			"email", "", FM_TYPE_EMAILADDRESS, 255, FM_STORE_ALWAYS, true,	FM_OPTIONS_UNIQUE);
 
 		$this->fieldMeta["SecureId"] = new FieldMeta(
 			"Secure ID", "", FM_TYPE_STRING, 50, FM_STORE_ALWAYS, false,	FM_OPTIONS_UNIQUE);
 
 		$this->fieldMeta["Alias"] = new FieldMeta(
-			"alias", "", FM_TYPE_STRING, 20, FM_STORE_ALWAYS, false, FM_OPTIONS_UNIQUE);
+			"username", "", FM_TYPE_STRING, 20, FM_STORE_ALWAYS, false, FM_OPTIONS_UNIQUE);
 
 		$this->fieldMeta["Password"] = new FieldMeta(
-			"Password", "", FM_TYPE_PASSWORD, 20, FM_STORE_ADD, true);
+			"password", "", FM_TYPE_PASSWORD, 20, FM_STORE_ADD, true);
 
 		$this->fieldMeta["FirstName"] = new FieldMeta(
-			"First Name", "", FM_TYPE_STRING, 50, FM_STORE_ALWAYS, true);
+			"first name", "", FM_TYPE_STRING, 50, FM_STORE_ALWAYS, true);
 
 		$this->fieldMeta["LastName"] = new FieldMeta(
-			"Last Name", "", FM_TYPE_STRING, 50, FM_STORE_ALWAYS, true);
+			"last name", "", FM_TYPE_STRING, 50, FM_STORE_ALWAYS, true);
 
 		$this->fieldMeta["TermsAgreed"] = new FieldMeta(
-			"Terms Agreed", "t", FM_TYPE_BOOLEAN, null, FM_STORE_ALWAYS, true);
+			"terms", "t", FM_TYPE_BOOLEAN, null, FM_STORE_ALWAYS, true);
 
 		$this->fieldMeta["ReceiveEmailUpdates"] = new FieldMeta(
 			"Receive Email Updates", "f", FM_TYPE_BOOLEAN, 1, FM_STORE_ALWAYS, true);
@@ -62,19 +62,19 @@ class CustomMemberControl extends MemberControl {
 			"Favourite Gawks are Public", 0, FM_TYPE_INTEGER, null, FM_STORE_ALWAYS, false);
 
 		$this->fieldMeta["Twitter"] = new FieldMeta(
-			"Twitter", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, true);
+			"twitter", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, true);
 
 		$this->fieldMeta["Website"] = new FieldMeta(
-			"Website", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, true);
+			"website", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, true);
 
 		$this->fieldMeta["Description"] = new FieldMeta(
-			"Description", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, true);
+			"description", "", FM_TYPE_STRING, null, FM_STORE_ALWAYS, true);
 
 		$this->fieldMeta["Token"] = new FieldMeta(
-			"Token", "", FM_TYPE_STRING, null, FM_STORE_NEVER, true);
+			"token", "", FM_TYPE_STRING, null, FM_STORE_NEVER, true);
 
 		$this->fieldMeta["ProfileVideoSecureId"] = new FieldMeta(
-			"Token", "", FM_TYPE_STRING, null, FM_STORE_NEVER, true);
+			"Profile Video SecureId", "", FM_TYPE_STRING, null, FM_STORE_NEVER, true);
 	}
 
 	/**
@@ -87,7 +87,12 @@ class CustomMemberControl extends MemberControl {
 		if ($memberDataEntity->get("FacebookId") !== "") {
 			$memberDataEntity->setFacebookRegisteredFieldMeta();
 		} else {
-			$memberDataEntity->setSiteRegisterdFieldMeta();
+			$memberDataEntity->setSiteRegisteredFieldMeta();
+		}
+
+		$memberDataEntity->validate();
+		if (!isset($member->confirmPassword) || ($member->confirmPassword == "")) {
+			$this->application->errorControl->addError("'confirm password' must not be empty");
 		}
 
 		if ($memberDataEntity->save()) {
@@ -189,10 +194,13 @@ class CustomMemberControl extends MemberControl {
 		}
 		foreach ((array)$member as $key => $value) {
 			if (($value !== null) && ($value !== "")) {
-				$memberDataEntity->set(ucfirst($key), $value);
+				$fieldMetaKey = ucfirst($key);
+				if (isset($this->fieldMeta[$fieldMetaKey])) {
+					$memberDataEntity->set($fieldMetaKey, $value);
+				}
 			}
 		}
-		
+
 		return $memberDataEntity;
 	}
 
@@ -230,12 +238,12 @@ class CustomMemberControl extends MemberControl {
 	public function validate(CustomMemberDataEntity $member) {
 		$valid = parent::validate($member);
 
-		if (!preg_match('/^[\da-z-+]+$/', $member->get("Alias"))) {
-			$this->errorControl->addError("'Alias' must be only a-Z, 0-9, and hyphens e.g. 'joe-bloggs', 'Ben33'", "InvalidAlias");
+		if (($member->get("Alias") != "") && !preg_match('/^[\da-z-+]+$/', $member->get("Alias"))) {
+			$this->errorControl->addError("'username' must be only a-Z, 0-9, and hyphens e.g. 'joe-bloggs', 'Ben33'", "InvalidAlias");
 			$valid = false;
 		}
-		
-		$member->set("Website", 
+
+		$member->set("Website",
 			str_replace("http://", "", $member->get("Website")));
 
 		return $valid;

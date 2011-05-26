@@ -20,6 +20,7 @@ function GawkView(config) {
 
 	function onFlashLoaded() {
 		wallLoaded = true;
+		checkFirstWallVisit();
 	}
 
 	function assignEventListeners() {
@@ -31,6 +32,8 @@ function GawkView(config) {
 		$(document).bind("GawkModelGetRecentWallActivityResponse", onRecentWallActivityResponse);
 		$(document).bind("GawkUIMainWallDenyOverlayShow", onGawkMainWallDenyOverlay);
 		$(document).bind("GawkUINoWebcamOverlayShow", onNoWebcamOverlayShow);
+		$(document).bind("GawkUIOverlayShow", onOverlayShow);
+		$(".box-close-button").click(onOverlayClose);
 
 		element.find(".record").bind("click", function (event) {
 			if (loggedIn) {
@@ -45,8 +48,8 @@ function GawkView(config) {
 
 			event.preventDefault();
 		});
-		
-		
+
+
 		element.find("h3").find("span.bookmark").click(onBookmarkClick);
 		$("select[name=SelectWall]").change(onWallSelectChange);
 	}
@@ -160,9 +163,9 @@ function GawkView(config) {
 			try {
 				document.getElementById(swfObjectId).logInFromExternal();
 			} catch (error) {
-			} 
+			}
 		} else {
-			setTimeout(onLoggedIn, 500);
+			setTimeout(onGotLoggedInMember, 500);
 		}
 	}
 
@@ -181,14 +184,14 @@ function GawkView(config) {
 	function onGawkMainWallDenyOverlay() {
 		$(document).trigger("GawkUIOverlayShow");
 		$.box.show({content: $("#gawk-main-wall-overlay")});
-		
+
 		$("#gawk-main-wall-overlay").find("form").submit(function(event) {
 			event.preventDefault();
 			var wallName = wallCreateName.val();
-			window.location = "/wall/create/" + wallName; 
+			window.location = "/wall/create/" + wallName;
 		});
-		
-		var wallCreateName = $("#gawk-main-wall-overlay").find("input[name=WallCreateName]"); 
+
+		var wallCreateName = $("#gawk-main-wall-overlay").find("input[name=WallCreateName]");
 		wallCreateName.placeholder("your-wall-name-here");
 	}
 
@@ -199,6 +202,22 @@ function GawkView(config) {
 
 	function onWallSelectChange() {
 		window.location = $('select[name=SelectWall]').val();
+	}
+
+	function checkFirstWallVisit() {
+		if ($.cookie("Rt") == null) {
+			$(document).trigger("GawkUIOverlayShow");
+			$.box.show({content: $("#welcome-overlay")});
+			$.cookie("Rt", "true", {expires: 3650});
+		}
+	}
+
+	function onOverlayShow() {
+		$("object").hide();
+	}
+
+	function onOverlayClose() {
+		$("object").show();
 	}
 
 	init();

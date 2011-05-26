@@ -9,7 +9,6 @@ function MemberControl (config) {
 
 	function init() {
 		$(document).bind("GawkModelInit", onModelInit);
-		checkFirstVisit();
 	}
 
 	function onModelInit() {
@@ -74,7 +73,6 @@ function MemberControl (config) {
 		if (response.success) {
 			member = response.member;
 			loggedIn = true;
-			a
 			$(document).trigger("GawkMemberLoggedIn", [response.member]);
 			$(document).trigger("GawkMemberGotLoggedInMember", [response]);
 			$(document).trigger("GawkModelGetRecentWallActivity");
@@ -85,19 +83,18 @@ function MemberControl (config) {
 			}
 		}
 	}
-	
 
 	function getLoggedInMember() {
 		$.get(config.getApiLocation(), {Action: "Member.GetLoggedInMember"}, onGetLoggedInMemberResponse, "json");
 	}
-	
+
 	function onGetLoggedInMemberResponse(response) {
 		if (response.success) {
 			member = response.member;
 			loggedIn = true;
 			$(document).trigger("GawkMemberGotLoggedInMember", [response]);
 			$(document).trigger("GawkModelGetRecentWallActivity");
-		}		
+		}
 	}
 
 	function onSiteRegisterRequest(event, memberData) {
@@ -105,6 +102,7 @@ function MemberControl (config) {
 	}
 
 	function registerSiteRegisteredMember(memberData) {
+		console.debug(memberData);
 		$.post(config.getApiLocation(), {
 			Action: "Member.RegisterMember",
 			MemberData: $.toJSON(memberData)
@@ -113,7 +111,11 @@ function MemberControl (config) {
 
 	function onSiteRegisterResponse(response) {
 		if (response.success) {
-			window.location.reload();
+			member = response.member;
+			loggedIn = true;
+			$(document).trigger("GawkMemberLoggedIn", [response.member]);
+			$(document).trigger("GawkMemberGotLoggedInMember", [response]);
+			$(document).trigger("GawkModelGetRecentWallActivity");
 		} else {
 			$(document).trigger("GawkMemberRegisterInvalidCredentials", [response.errors]);
 		}
@@ -125,7 +127,7 @@ function MemberControl (config) {
 				$(document).trigger("GawkMemberLoggedOut");
 				return;
 			}
-			
+
 			FB.logout(function () {
 				$(document).trigger("GawkMemberLoggedOut");
 			});
@@ -135,14 +137,6 @@ function MemberControl (config) {
 	function onProfileUpdate() {
 		$.post(config.getApiLocation(), {Action: "Member.UpdateProfile", Member: $.toJSON(getSkinnyMember())});
 	}
-
-	function checkFirstVisit() {
-		if ($.cookie("FirstVisit") == null) {
-			$(document).trigger("GawkUIWelcomeOverlayShow");
-			$.cookie("FirstVisit", "true", {expires: 3650});
-		}
-	}
-
 
 	this.getMember = function() {
 		return member;

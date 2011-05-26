@@ -7,6 +7,7 @@ class Member {
 	public $friends = "";
 	public $wallBookmarks = "";
 	public $password = "";
+	public $confirmPassword = "";
 	public $emailAddress = "";
 	public $token = "";
 	public $secureId = "";
