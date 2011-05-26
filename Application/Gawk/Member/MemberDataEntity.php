@@ -50,9 +50,10 @@ class CustomMemberDataEntity extends MemberDataEntity {
 	/**
 	 * Set the Field Meta for a Site registered member
 	 */
-	public function setSiteRegisterdFieldMeta() {
+	public function setSiteRegisteredFieldMeta() {
 		$this->control->init();
 		$this->control->fieldMeta["EmailAddress"]->allowNull = false;
+		$this->control->fieldMeta["Password"]->required = FM_STORE_ALWAYS;
 		$this->control->fieldMeta["Password"]->allowNull = false;
 	}
 
