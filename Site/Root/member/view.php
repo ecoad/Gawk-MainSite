@@ -66,7 +66,6 @@ if ($memberIsOnOwnMemberPage) {
 			<p class="website"><a href="http://<?php echo $profileMember->website; ?>"><?php echo $profileMember->website; ?></a></p>
 			<p class="description"><?php echo $profileMember->description; ?></p>
 		</div>
-		</div>
 	</div>
 	<div class="recent-gawks" style="display: <?php echo $memberVideoCount > 1 ? "block": "none"; ?>;">
 		<h2>most recent gawks</h2>
@@ -75,7 +74,7 @@ if ($memberIsOnOwnMemberPage) {
 	<div class="profile-other">
 		<div class="friends beancan">
 			<h2><?php echo $profileMember->alias; ?>'s friends</h2>
-<?php 
+<?php
 if (count($profileMember->friends) > 0) {
 ?>
 			<ul>
@@ -91,11 +90,11 @@ if (count($profileMember->friends) > 0) {
 	}
 ?>
 			</ul>
-<?php 
+<?php
 } else {
 ?>
 			<p>this person is a loner</p>
-<?php 
+<?php
 }
 ?>
 		</div>

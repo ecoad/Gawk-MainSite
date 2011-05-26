@@ -6,6 +6,8 @@ function PublicProfileView(config) {
 		aliasElement = element.find("h1"),
 		friendLink = $(element.find("a.friend-control"));
 
+	console.debug(profileMember);
+
 	function init() {
 		$(document).bind("GawkModelInit", onModelInit);
 	}
@@ -67,12 +69,14 @@ function PublicProfileView(config) {
 
 	function setFriendLink(isFriend) {
 		friendLink.unbind("click");
-		friendLink.toggleClass("add-friend");
-		friendLink.toggleClass("remove-friend");
 		if (isFriend) {
+			friendLink.removeClass("add-friend");
+			friendLink.addClass("remove-friend");
 			friendLink.html("Unfriend");
 			friendLink.click(onUnfriendClick);
 		} else {
+			friendLink.addClass("add-friend");
+			friendLink.removeClass("remove-friend");
 			friendLink.html("Befriend");
 			friendLink.click(onBefriendClick);
 		}
