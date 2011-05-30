@@ -5,7 +5,7 @@ class VideoDataEntity extends DataEntity {
 	/**
 	 * @return Video
 	 **/
-	public function toObject($newVideoAfterInit = false) {
+	public function toObject() {
 		$array = array();
 		foreach ($this->data as $k => $v) {
 			switch($this->control->fieldMeta[$k]->type) {
@@ -23,7 +23,6 @@ class VideoDataEntity extends DataEntity {
 			$video->member = $memberDataEntity->toObject();
 		}
 
-		$video->newVideoAfterInit = $newVideoAfterInit;
 		return $video;
 	}
 }

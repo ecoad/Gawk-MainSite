@@ -19,6 +19,7 @@ class WallControl extends DataControl {
 	public function __construct() {
 		parent::DataControl();
 		$this->systemWallFactory = Factory::getSystemWallFactory();
+		$this->videoAdministration = Factory::getVideoAdministrationFactory();
 	}
 
 	public function init() {
@@ -58,6 +59,7 @@ class WallControl extends DataControl {
 	 * @param stdClass $currentPageObject
 	 */
 	protected function getVideosByWall(Wall $wall, $memberSecureId = null, $previousRunTime = null, $currentPageObject = null) {
+		$videos = array();
 		$this->reset();
 		if (!$currentPageObject) {
 			$pageLength = $this->application->registry->get("Wall/DefaultLength");
@@ -87,9 +89,12 @@ class WallControl extends DataControl {
 
 		$filter->addLimit($this->application->registry->get("Wall/DefaultLength"));
 		$videoControl->setFilter($filter);
-		$videos = array();
+
 		while ($videoDataEntity = $videoControl->getPage($currentPage, $pageLength)) {
-			$videos[] = $videoDataEntity->toObject($previousRunTime !== null ? true : false);
+			$video = $videoDataEntity->toObject();
+			$video->newVideoAfterInit = ($previousRunTime !== null);
+			$video->videoControlAuthorised = $this->videoAdministration->isMemberAuthorisedForVideoAdmin($video, $wall);
+			$videos[] = $video;
 		}
 
 		return $videos;
@@ -184,14 +189,14 @@ class WallControl extends DataControl {
 		} else {
 			$this->validateUrl($wall->url);
 		}
-		
+
 		$wallDataEntity = $this->mapWallToWallDataEntity($wall, $memberDataEntity, $wallDataEntity);
 
 		if ($wallDataEntity->save()) {
 			return $wallDataEntity;
 		}
 	}
-	
+
 	/**
 	 * Enter description here ...
 	 * @param Wall $wall
@@ -202,7 +207,7 @@ class WallControl extends DataControl {
 			$this->deleteWhere("SecureId", $wall->secureId);
 			return true;
 		}
-		
+
 		$this->application->errorControl->addError("Member does not own wall", "MemberNotWallAuthor");
 		return false;
 	}
@@ -214,7 +219,7 @@ class WallControl extends DataControl {
 	 * @param WallDataEntity $wallDataEntity
 	 * @return WallDataEntity
 	 */
-	public function mapWallToWallDataEntity(Wall $wall, CustomMemberDataEntity $memberDataEntity, 
+	public function mapWallToWallDataEntity(Wall $wall, CustomMemberDataEntity $memberDataEntity,
 		WallDataEntity $wallDataEntity = null) {
 
 		if (!$wallDataEntity) {
@@ -289,7 +294,7 @@ class WallControl extends DataControl {
 			return $wallDataEntity->toObject();
 		}
 	}
-	
+
 	/**
 	 * @param string $wallSecureId
 	 * @param Member $member
@@ -307,7 +312,7 @@ class WallControl extends DataControl {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 

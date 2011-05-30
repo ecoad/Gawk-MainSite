@@ -198,6 +198,11 @@ class Factory {
 		return new SystemWallFactory();
 	}
 
-
-
+	/**
+	 * @return VideoAdministration
+	 */
+	static function getVideoAdministrationFactory() {
+		require_once "Gawk/Video/VideoAdministration.php";
+		return new VideoAdministration();
+	}
 }
