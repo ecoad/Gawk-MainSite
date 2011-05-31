@@ -159,6 +159,7 @@ class VideoControl extends DataControl {
 	 * @return VideoDataEntity
 	 */
 	public function getVideoDataEntityBySecureId($secureId, $allowCaseInsensitive = false) {
+		$this->reset();
 		$filter = CoreFactory::getFilter();
 		$filter->addConditional($this->table, "SecureId", $secureId, $allowCaseInsensitive ? "ILIKE" : "=");
 		$this->setFilter($filter);
@@ -167,21 +168,17 @@ class VideoControl extends DataControl {
 	}
 
 	public function deleteBySecureId($secureId) {
-		if ($video = $this->getVideoDataEntityBySecureId($secureId)) {
-			$this->delete($video->get("Id"));
-			return true;
+		if (!$video = $this->getVideoDataEntityBySecureId($secureId)) {
+			$this->errorControl->addError("Unable to retrieve video: $secureId");
+			return false;
 		}
-
-		return false;
+		$this->delete($video->get("Id"));
+		return true;
 	}
 
 	public function getNext() {
 		if ($video = parent::getNext()) {
-			if ($this->isVideoFilePresent($video->get("Filename"))) {
-				return $video;
-			} else {
-				$this->updateField($video, "Approved", "f");
-			}
+			return $video;
 		}
 	}
 

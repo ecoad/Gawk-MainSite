@@ -3,6 +3,7 @@ class VideoWebService {
 
 	const SERVICE_NAME_SPACE = "Video";
 	const SERVICE_SAVE = "Save";
+	const SERVICE_DELETE = "Delete";
 	const SERVICE_SAVE_MEDIA_SERVER_UPLOAD = "SaveMediaServerUpload";
 
 
@@ -28,6 +29,7 @@ class VideoWebService {
 		}
 
 		if ($memberDataEntity = TokenCheck::validateToken($postData["Token"], true)) {
+			$member = $memberDataEntity->toObject();
 			switch ($method) {
 				case self::SERVICE_SAVE:
 					$video = Factory::getVideo(json_decode(stripslashes($postData["Video"])));
@@ -36,10 +38,22 @@ class VideoWebService {
 						$response->video = $videoDataEntity->toObject();
 					}
 					break;
+				case self::SERVICE_DELETE:
+					if ($videoDataEntity = $videoControl->getVideoDataEntityBySecureId($postData["VideoSecureId"])) {
+						$video = $videoDataEntity->toObject();
+						$videoAdministration = Factory::getVideoAdministrationFactory();
+
+						if ($videoAdministration->deleteVideo($video, $member)) {
+							$response->success = true;
+						}
+					} else {
+						$this->application->errorControl->addError("Could not find video");
+					}
+					break;
 			}
 		}
 
-		$response->errors = $this->application->errorControl->getErrors();
+		$response->errors = array_values($this->application->errorControl->getErrors());
 
 		return $response;
 	}

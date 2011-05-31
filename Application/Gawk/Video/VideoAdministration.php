@@ -13,11 +13,11 @@ class VideoAdministration {
 	 * @param Member $member
 	 * @return boolean
 	 */
-	public function isMemberAuthorisedForVideoAdmin(Video $video, Wall $wall, Member $member = null) {
+	public function isMemberAuthorisedForVideoAdmin(Video $video, Wall $wall = null, Member $member = null) {
+		$application = CoreFactory::getApplication();
 		if ($member === null) {
 			$memberAuthentication = Factory::getMemberAuthentication();
 			if (!$member = $memberAuthentication->getLoggedInMember()) {
-				$application = CoreFactory::getApplication();
 				$application->errorControl->addError("No member provided");
 				return false;
 			}
@@ -27,13 +27,32 @@ class VideoAdministration {
 			return true;
 		}
 
-		if ($member->secureId == $wall->memberSecureId) {
+		if (($wall !== null) && ($member->secureId == $wall->memberSecureId)) {
 			return true;
 		}
 
-		if ($application->securityControl->isAllowed("Admin")) {
+		if ($application->securityControl->isAllowed("Admin", false)) {
 			return true;
 		}
+		return false;
+	}
+
+	/**
+	 * @param Video $video
+	 * @param Member $member
+	 * @return boolean
+	 */
+	public function deleteVideo(Video $video, Member $member) {
+		$videoControl = Factory::getVideoControl();
+		if ($this->isMemberAuthorisedForVideoAdmin($video, null, $member)) {
+			if ($videoControl->deleteBySecureId($video->secureId)) {
+				return true;
+			}
+		} else {
+			$application = CoreFactory::getApplication();
+			$application->errorControl->addError("Member unauthorised to delete video");
+		}
+
 		return false;
 	}
 }
