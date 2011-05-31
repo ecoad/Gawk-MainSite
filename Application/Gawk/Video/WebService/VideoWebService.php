@@ -33,6 +33,7 @@ class VideoWebService {
 			switch ($method) {
 				case self::SERVICE_SAVE:
 					$video = Factory::getVideo(json_decode(stripslashes($postData["Video"])));
+					$video->memberSecureId = $member->secureId;
 					if ($videoDataEntity = $videoControl->saveVideo($video, $filesData)) {
 						$response->success = true;
 						$response->video = $videoDataEntity->toObject();
