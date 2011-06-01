@@ -55,7 +55,7 @@ class MemberWallBookmarkWebService {
 					$response->success = $this->memberWallBookmarkControl->isWallBookmarked($member, $getData["WallSecureId"]);
 					break;
 				case self::SERVICE_GET_RECENT_WALL_ACTIVITY:
-					$recentActivity = $this->memberWallBookmarkControl->getRecentWallActivity($memberDataEntity);
+					$recentActivity = $this->memberWallBookmarkControl->getRecentWallActivity($member);
 					if (is_object($recentActivity)) {
 						$response->success = true;
 						$response->recentActivity = $recentActivity;

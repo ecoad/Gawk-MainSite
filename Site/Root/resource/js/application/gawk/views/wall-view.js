@@ -76,8 +76,6 @@ function GawkView(config) {
 	}
 
 	function onRecentWallActivityResponse(event, response) {
-		//TODO: Refactor
-
 		var recentActivity = response.recentActivity;
 		element.find("div.wall-select").show();
 		var select = element.find("div.wall-select").find("select[name=SelectWall]");
