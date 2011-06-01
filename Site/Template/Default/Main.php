@@ -9,10 +9,10 @@ $application = CoreFactory::getApplication();
 		<meta name="description" content="<?php echo $application->registry->get("Description"); ?>" />
 		<meta name="keywords" content="" />
 		<meta charset="utf-8" />
-		<meta property="og:title" content="Gawk Wall"/>
-		<meta property="og:description" content=""/>
+		<meta property="og:title" content="<?php echo $application->registry->get("Name"); ?>"/>
+		<meta property="og:description" content="<?php echo $application->registry->get("Description"); ?>"/>
 		<meta property="og:site_name" content="Gawk Wall"/>
-		<meta property="og:image" content=""/>
+		<meta property="og:image" content="<?php echo $application->registry->get("Name"); ?>"/>
 
 		<link rel="shortcut icon" href="/favicon.ico?v=@VERSION-NUMBER@" />
 <?php
@@ -168,10 +168,13 @@ include "Site/Template/Default/Widget/Footer.php";
 				<img src="http://dummyimage.com/800x400/abc/123" />
 			</div>
 		</div>
+		<div id="fb-root"></div>
 		<script type="text/javascript" src="/resource/js/jquery/jquery.js?v=@VERSION-NUMBER@"></script>
 		<script type="text/javascript" src="/resource/js/jquery/jquery.json-2.2.js?v=@VERSION-NUMBER@"></script>
 		<script type="text/javascript" src="/resource/js/jquery/jquery.cookie.js?v=@VERSION-NUMBER@"></script>
-		<script type="text/javascript" src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+		<!-- <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script> -->
+		<!-- <script type="text/javascript" src="http://static.ak.fbcdn.net/connect/en_US/core.debug.js"></script> -->
+
 		<script type="text/javascript" src="/resource/js/application/gawk/config/config.js?v=@VERSION-NUMBER@"></script>
 		<script type="text/javascript" src="/resource/js/application/gawk/widgets/login-widget.js?v=@VERSION-NUMBER@"></script>
 		<script type="text/javascript" src="/resource/js/application/gawk/widgets/navigation-widget.js?v=@VERSION-NUMBER@"></script>

@@ -9,7 +9,6 @@
 	<div class="utility">
 		<div class="upper">
 			<div class="login-widget">
-				<div id="fb-root"></div>
 <?php
 $memberAuthentication = Factory::getMemberAuthentication();
 if ($memberAuthentication->isLoggedIn() && ($member = $memberAuthentication->getLoggedInMember())) {

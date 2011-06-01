@@ -12,9 +12,11 @@ class TokenCheck {
 			$token = $_SESSION["Token"];
 		}
 		$errorControl = CoreFactory::getErrorControl();
+		$memberAuthentication = Factory::getMemberAuthentication();
 
 		if (!$token) {
 			$errorControl->addError("Could not log in without token", "InvalidToken");
+			$memberAuthentication->revokeFacebookSession();
 			return false;
 		}
 
@@ -28,6 +30,7 @@ class TokenCheck {
 		}
 
 		$errorControl->addError("Invalid token", "InvalidToken");
+		$memberAuthentication->revokeFacebookSession();
 		return false;
 	}
 }

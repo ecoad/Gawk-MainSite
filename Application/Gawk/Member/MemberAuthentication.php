@@ -156,14 +156,14 @@ class MemberAuthentication {
 	/**
 	 * Remove Facebook cookie set locally
 	 */
-	protected function revokeFacebookSession() {
+	public function revokeFacebookSession() {
 		if ($this->isFacebookSessionSet()) {
 			setcookie($this->getFacebookCookieName(), "", time() - 300, "/", $this->application->registry->get("Site/CommonDomain"));
 		}
 		return true;
 	}
 
-	protected function isFacebookSessionSet() {
+	public function isFacebookSessionSet() {
 		return isset($_COOKIE[$this->getFacebookCookieName()]);
 	}
 

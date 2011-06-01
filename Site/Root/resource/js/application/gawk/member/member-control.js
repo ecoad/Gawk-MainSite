@@ -12,6 +12,7 @@ function MemberControl (config) {
 	}
 
 	function onModelInit() {
+		console.debug("on model init");
 		initFacebook();
 
 		addEventListeners();
@@ -26,7 +27,7 @@ function MemberControl (config) {
 	}
 
 	function initFacebook() {
-		//window.fbAsyncInit = function() {
+		window.fbAsyncInit = function() {
 			FB.init({
 				appId: config.getFacebookAppId(),
 				/*session: config.getFacebookSession(),*/
@@ -38,15 +39,14 @@ function MemberControl (config) {
 			FB.Event.subscribe("auth.login", function() {
 				logInFacebookRegisteredMember(-1);
 			});
-		//};
+		};
 
-			/*
 		(function() {
 			var e = document.createElement('script');
 			e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
 			e.async = true;
 			document.getElementById('fb-root').appendChild(e);
-		}()); */
+		}());
 	}
 
 	function logInFacebookRegisteredMember(facebookId) {
