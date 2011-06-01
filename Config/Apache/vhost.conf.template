@@ -16,6 +16,7 @@
 	AliasMatch ^/resource(.*) @ProjectPath@/Site/Root/resource$1
 	AliasMatch ^/member/register(.*) @ProjectPath@/Site/Root/member/register.php
 	AliasMatch ^/member/forgot-password(.*) @ProjectPath@/Site/Root/member/forgot-password.php
+	AliasMatch ^/u/(.*)/profile/img/(.*) @ProjectPath@/Site/Root/member/profile/image.php
 	AliasMatch ^/u/(.*)/gawk/(.*) @ProjectPath@/Site/Root/gawk/view.php
 	AliasMatch ^/u/(.*)/edit @ProjectPath@/Site/Root/member/edit.php
 	AliasMatch ^/u/(.*) @ProjectPath@/Site/Root/member/view.php

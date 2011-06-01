@@ -23,12 +23,6 @@ class CustomMemberDataEntity extends MemberDataEntity {
 		}
 
 		$member = Factory::getMember((object)$array);
-		if ($member->profileVideoSecureId != "") {
-			$videoControl = Factory::getVideoControl();
-			if ($videoDataEntity = $videoControl->itemByField($member->profileVideoSecureId, "SecureId")) {
-				$member->profileVideoLocation = $videoDataEntity->get("Filename");
-			}
-		}
 
 		if ($includeFriends) {
 			$memberFriendControl = Factory::getMemberFriendControl();

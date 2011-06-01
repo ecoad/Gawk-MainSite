@@ -4,7 +4,7 @@ require_once("Application/Bootstrap.php");
 $facebook = Factory::getFacebook($application);
 $wallControl = Factory::getWallControl();
 $memberAuthentication = Factory::getMemberAuthentication();
-if ($memberAuthentication->isRequestLogInOnly($_SERVER["REQUEST_URI"]) &&  !$memberAuthentication->isLoggedIn()) {
+if (!$memberAuthentication->isLoggedIn()) {
 	$application->redirect("/?Login&ReturnUrl=" . $application->getCurrentUrl());
 }
 
@@ -19,7 +19,7 @@ if ($wallCreate) {
 } else {
 	if ((!$wall = $wallControl->getWallByUrlFriendlyName($urlName)) || !$wallControl->isMemberAuthorizedToEditWallBySecureId($wall->secureId)) {
 		$application->displayErrorPage("Site/Root/error/404.php", 404);
-	} 
+	}
 }
 
 $layout = CoreFactory::getLayout("Site/Template/Default/Main.php");

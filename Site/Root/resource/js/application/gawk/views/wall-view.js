@@ -2,6 +2,7 @@ function GawkView(config) {
 	var element = $("#wall-view");
 	var swfObjectId = "gawk-swf";
 	var gawkFlashContainerElement = $("<div>").attr("id", "Gawk");
+	var recordButton = element.find(".record");
 	var loggedIn = false;
 	var wallLoaded = false;
 	var wall = config.getWall();
@@ -35,20 +36,7 @@ function GawkView(config) {
 		$(document).bind("GawkUIOverlayShow", onOverlayShow);
 		$(".box-close-button").click(onOverlayClose);
 
-		element.find(".record").bind("click", function (event) {
-			if (loggedIn) {
-				if (config.isSystemWall()) {
-					$(document).trigger("GawkUIMainWallDenyOverlayShow");
-				} else {
-					document.getElementById(swfObjectId).recordNewFromExternal();
-				}
-			} else {
-				$(document).trigger("GawkUILoginOverlayShow");
-			}
-
-			event.preventDefault();
-		});
-
+		recordButton.bind("click", onRecordClick);
 
 		element.find("h3").find("span.bookmark").click(onBookmarkClick);
 		$("select[name=SelectWall]").change(onWallSelectChange);
@@ -69,6 +57,20 @@ function GawkView(config) {
 
 		swfobject.embedSWF("/resource/flash/GawkFlash.swf?v=@VERSION-NUMBER@", gawkFlashContainerElement.attr("id"),
 			"1050", "655", "9.0.0", false, gawkFlashVars, params, {id: swfObjectId});
+	}
+	
+	function onRecordClick(event) {
+		if (loggedIn) {
+			if (config.isSystemWall()) {
+				$(document).trigger("GawkUIMainWallDenyOverlayShow");
+			} else {
+				document.getElementById(swfObjectId).recordNewFromExternal();
+			}
+		} else {
+			$(document).trigger("GawkUILoginOverlayShow");
+		}
+
+		event.preventDefault();
 	}
 
 	function onGetWallResponse(event, response) {
@@ -125,7 +127,7 @@ function GawkView(config) {
 			select.append(recentOptionGroup);
 		}
 
-		var createWallOption = $("<option>").attr("value", "/wall/create").html("create a wall&hellip;");
+		var createWallOption = $("<option />").attr("value", "/wall/create").html("create a wall&hellip;");
 		select.append(createWallOption);
 
 		setWallBookmarkState(recentActivity.bookmarks);

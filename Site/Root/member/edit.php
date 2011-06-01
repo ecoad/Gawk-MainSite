@@ -83,17 +83,6 @@ if ($application->errorControl->hasErrors()) {
 				<textarea tabindex="<?php echo $tabIndex++; ?>" class="textbox wide" rows="7" cols="40"
 					name="ProfileData[<?php echo $formDescriptionLabel; ?>]"><?php echo $member->description; ?></textarea>
 			</label><br />
-<?php
-if ($member->profileVideoSecureId != "") {
-?>
-			<label>
-				<strong>profile gawk</strong><br>
-				<img src="http://dummyimage.com/200x174/<?php echo $member->profileVideoSecureId; ?>/789" /><br />
-				remove <input type="checkbox" name="ProfileData[<?php echo $formRemoveProfileGawkLabel; ?>]" />
-			</label>
-<?php
-}
-?>
 			<div class="controls">
 				<input name="Submit" type="submit" tabindex="<?php echo $tabIndex++; ?>" class="button" value="<?php echo $formSubmitLabel; ?>" accesskey="s" title="Save all changes and return to the last page" />
 			</div>

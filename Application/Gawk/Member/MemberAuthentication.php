@@ -157,9 +157,21 @@ class MemberAuthentication {
 	 * Remove Facebook cookie set locally
 	 */
 	protected function revokeFacebookSession() {
-		$facebookCookieId = "fbs_" . $this->application->registry->get("Facebook/AppId");
-		setcookie($facebookCookieId, "", time() - 300, "/", $this->application->registry->get("Site/CommonDomain"));
+		if ($this->isFacebookSessionSet()) {
+			setcookie($this->getFacebookCookieName(), "", time() - 300, "/", $this->application->registry->get("Site/CommonDomain"));
+		}
 		return true;
+	}
+
+	protected function isFacebookSessionSet() {
+		return isset($_COOKIE[$this->getFacebookCookieName()]);
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function getFacebookCookieName() {
+		return "fbs_" . $this->application->registry->get("Facebook/AppId");
 	}
 
 	/**
@@ -171,7 +183,7 @@ class MemberAuthentication {
 			return $memberDataEntity;
 		}
 	}
-	
+
 	/**
 	 * @param string $token
 	 * @return Member
@@ -180,7 +192,7 @@ class MemberAuthentication {
 		if ($memberDataEntity = $this->getLoggedInMemberDataEntity($token)) {
 			return $memberDataEntity->toObject();
 		}
-	} 
+	}
 
 	protected function getLoggedInFacebookId() {
 		$facebook = Factory::getFacebook(CoreFactory::getApplication());
@@ -240,27 +252,22 @@ class MemberAuthentication {
 	 * @return boolean
 	 */
 	public function isLoggedIn() {
-		return isset($_SESSION["Token"]);
+		$loggedIn = isset($_SESSION["Token"]);
+
+		if (!$loggedIn && $this->isFacebookSessionSet()) {
+			$this->revokeFacebookSession();
+		}
+		return $loggedIn;
 	}
 
 	public function isRequestLogInOnly($requestUri) {
 		switch (true) {
-			case ($requestUri == "/wall/"):
 			case ($requestUri == "/starred"):
 			case ($requestUri == "/friends"):
-			case ($requestUri == "/profile/edit"):
 				return true;
 				break;
 		}
 
 		return false;
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public function loginTestMember() {
-		//TODO: Remove
-		return $this->memberControl->item(486);
 	}
 }

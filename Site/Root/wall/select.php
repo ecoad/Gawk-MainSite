@@ -4,7 +4,7 @@ require_once("Application/Bootstrap.php");
 $facebook = Factory::getFacebook($application);
 $wallControl = Factory::getWallControl();
 $memberAuthentication = Factory::getMemberAuthentication();
-if ($memberAuthentication->isRequestLogInOnly($_SERVER["REQUEST_URI"]) &&  !$memberAuthentication->isLoggedIn()) {
+if (!$memberAuthentication->isLoggedIn()) {
 	$application->redirect("/?Login&ReturnUrl=" . $application->getCurrentUrl());
 }
 
