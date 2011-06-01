@@ -171,6 +171,7 @@ include "Site/Template/Default/Widget/Footer.php";
 		<script type="text/javascript" src="/resource/js/jquery/jquery.js?v=@VERSION-NUMBER@"></script>
 		<script type="text/javascript" src="/resource/js/jquery/jquery.json-2.2.js?v=@VERSION-NUMBER@"></script>
 		<script type="text/javascript" src="/resource/js/jquery/jquery.cookie.js?v=@VERSION-NUMBER@"></script>
+		<script type="text/javascript" src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
 		<script type="text/javascript" src="/resource/js/application/gawk/config/config.js?v=@VERSION-NUMBER@"></script>
 		<script type="text/javascript" src="/resource/js/application/gawk/widgets/login-widget.js?v=@VERSION-NUMBER@"></script>
 		<script type="text/javascript" src="/resource/js/application/gawk/widgets/navigation-widget.js?v=@VERSION-NUMBER@"></script>

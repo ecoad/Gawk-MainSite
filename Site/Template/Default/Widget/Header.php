@@ -31,7 +31,7 @@ if ($memberAuthentication->isLoggedIn() && ($member = $memberAuthentication->get
 			<div class="share">
 				<iframe class="twitter" frameborder="no" scrolling="no" class="twitter-share" style="height: 20px;"
 					src="http://platform.twitter.com/widgets/tweet_button.html?text=Gawk+Wall&amp;url=http%3A%2F%2Fwww.gawkwall.com"></iframe>
-				<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="" send="false" layout="button_count" width="50" show_faces="false" font="arial"></fb:like>
+				<fb:like href="" send="false" layout="button_count" width="50" show_faces="false" font="arial"></fb:like>
 			</div>
 		</div>
 		<div class="lower">

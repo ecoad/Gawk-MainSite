@@ -1,7 +1,6 @@
-<?php 
-if ($memberAuthentication->isLoggedIn()) {
-	$member = $memberAuthentication->getLoggedInMember();
-	$profileUrl = "/u/" . $member->alias; 
+<?php
+if ($member = $memberAuthentication->getLoggedInMember()) {
+	$profileUrl = "/u/" . $member->alias;
 } else {
 	$profileUrl = "#";
 }
@@ -18,7 +17,7 @@ if ($memberAuthentication->isLoggedIn()) {
 		</a>
 	</li>
 	<li>
-		<a class="yours navigation-item <?php echo $this->get("Section") == "profile" ? "selected" : ""; ?>" 
+		<a class="yours navigation-item <?php echo $this->get("Section") == "profile" ? "selected" : ""; ?>"
 			href="<?php echo $profileUrl; ?>">
 			<span>Profile</span>
 		</a>
