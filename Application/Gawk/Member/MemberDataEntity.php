@@ -1,4 +1,3 @@
-
 <?php
 require_once "Application/Atrox/Base/Member/Member.php";
 class CustomMemberDataEntity extends MemberDataEntity {
