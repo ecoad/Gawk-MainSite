@@ -84,7 +84,7 @@ if (count($profileMember->friends) > 0) {
 ?>
 				<li class="friend">
 					<a href="<?php echo $memberUrlHelper->getProfileUrl($friend); ?>" title="View profile">
-						<img src="http://dummyimage.com/109x82/000/fff.png&text=<?php echo $friend->alias; ?>" />
+						<img width="100px" height="100px" src="<?php echo $memberUrlHelper->getProfilePictureUrl($friend, "100x100")?>" />
 					</a>
 				</li>
 <?php

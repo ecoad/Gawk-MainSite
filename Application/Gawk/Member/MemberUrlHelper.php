@@ -21,4 +21,10 @@ class MemberUrlHelper {
 	public function getProfileUrl(Member $member) {
 		return "/u/" . $member->alias;
 	}
+
+	public function getProfilePictureUrl(Member $member, $size) {
+		$application = CoreFactory::getApplication();
+
+		return $application->registry->get("Site/Address") . "/u/" . $member->secureId . "/profile/img/$size";
+	}
 }
