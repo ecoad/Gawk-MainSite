@@ -63,7 +63,6 @@ class MemberControlTest extends PHPUnit_Framework_TestCase {
 
 		$memberWebService = Factory::getMemberWebService();
 		$apiResponse = $memberWebService->handleRequest("RegisterMember", $apiData, null);
-		var_dump($apiResponse); exit;
 
 		$this->assertTrue($apiResponse->success);
 		$this->assertTrue($apiResponse->member->firstName == $this->memberDataSiteRegisteredSuccess->firstName);
@@ -78,6 +77,7 @@ class MemberControlTest extends PHPUnit_Framework_TestCase {
 		$member->alias = uniqid();
 		$member->emailAddress = MemberProvider::$emailPrefix . uniqid() . "@gawkwall.com";
 		$member->password = "timbosdf9";
+		$member->confirmPassword = $member->password;
 
 		$apiData = array(
 			"Action" => "Member.RegisterMember",
