@@ -31,6 +31,7 @@ class MemberAuthenticationTest extends PHPUnit_Framework_TestCase {
 
 		$this->memberDataFacebookSuccess = MemberProvider::getTestMember();
 		$this->memberDataFacebookSuccess->password = "";
+		$this->memberDataFacebookSuccess->confirmPassword = "";
 
 		$this->memberDataSiteRegisteredSuccess = MemberProvider::getTestMember();
 
@@ -42,6 +43,7 @@ class MemberAuthenticationTest extends PHPUnit_Framework_TestCase {
 
 		$this->testFacebookRegisteredMember = MemberProvider::getTestMember();
 		unset($this->testFacebookRegisteredMember->password);
+		unset($this->testFacebookRegisteredMember->confirmPassword);
 		$this->testFacebookRegisteredMember = MemberProvider::saveMember($this->testFacebookRegisteredMember);
 
 		if (isset($_SESSION["Token"])) {

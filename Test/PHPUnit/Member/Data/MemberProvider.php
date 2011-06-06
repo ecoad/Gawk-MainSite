@@ -11,6 +11,7 @@ class MemberProvider {
 		$member->emailAddress = self::$emailPrefix . uniqid() . "@gawkwall.com";
 		$member->facebookId = rand(1, 100000000);
 		$member->password = uniqid("pass-");
+		$member->confirmPassword = $member->password;
 		$member->alias = uniqid("alias-");
 		$member->firstName = uniqid("first-name");
 		$member->lastName = uniqid("last-name");
@@ -30,7 +31,7 @@ class MemberProvider {
 		$apiResponse = $memberWebService->handleRequest("RegisterMember", $apiData, null);
 
 		if(!isset($apiResponse->member)) {
-			var_dump($response);
+			var_dump($apiResponse); exit;
 		}
 		$member = Factory::getMember($apiResponse->member);
 

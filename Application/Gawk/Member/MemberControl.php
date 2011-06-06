@@ -91,8 +91,16 @@ class CustomMemberControl extends MemberControl {
 		}
 
 		$memberDataEntity->validate();
-		if (!isset($member->confirmPassword) || ($member->confirmPassword == "")) {
-			$this->application->errorControl->addError("'confirm password' must not be empty");
+		$memberDataEntity->set("Password", $member->password); //validate sha1 the password
+
+		if ($member->facebookId == "") {
+			if (!isset($member->confirmPassword) || ($member->confirmPassword == "")) {
+				$this->application->errorControl->addError("'confirm password' must not be empty");
+			} else {
+				if ($member->password != $member->confirmPassword) {
+					$this->application->errorControl->addError("passwords do no match");
+				}
+			}
 		}
 
 		if ($memberDataEntity->save()) {

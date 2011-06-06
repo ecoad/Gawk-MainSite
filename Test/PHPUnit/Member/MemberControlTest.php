@@ -56,21 +56,20 @@ class MemberControlTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testRegisterSiteRegisteredSuccess() {
+		$this->memberDataSiteRegisteredSuccess->confirmPassword = $this->memberDataSiteRegisteredSuccess->password;
 		$apiData = array(
 			"Action" => "Member.RegisterMember",
 			"MemberData" => json_encode($this->memberDataSiteRegisteredSuccess));
 
 		$memberWebService = Factory::getMemberWebService();
 		$apiResponse = $memberWebService->handleRequest("RegisterMember", $apiData, null);
+		var_dump($apiResponse); exit;
 
 		$this->assertTrue($apiResponse->success);
 		$this->assertTrue($apiResponse->member->firstName == $this->memberDataSiteRegisteredSuccess->firstName);
 		$this->assertTrue($apiResponse->member->emailAddress == $this->memberDataSiteRegisteredSuccess->emailAddress);
 		$this->assertTrue($apiResponse->member->alias == $this->memberDataSiteRegisteredSuccess->alias);
 		$this->assertTrue(count($apiResponse->errors) == 0);
-
-		$memberControl = Factory::getMemberControl();
-		$memberControl->deleteWhere("EmailAddress", $this->memberDataFacebookSuccess->emailAddress);
 	}
 
 	public function testRegisterSiteRegisteredBasicDataSuccess() {
