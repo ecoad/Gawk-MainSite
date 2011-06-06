@@ -1,7 +1,7 @@
 function GawkView(config) {
 	var element = $("#wall-view");
 	var swfObjectId = "gawk-swf";
-	var gawkFlashContainerElement = $("<div>").attr("id", "Gawk");
+	var gawkFlashContainerElement = $("#Gawk");
 	var recordButton = element.find(".record");
 	var loggedIn = false;
 	var wallLoaded = false;
@@ -9,7 +9,6 @@ function GawkView(config) {
 	var bookmarkLink = element.find("h3").find("span.bookmark");
 
 	function init() {
-		element.append(gawkFlashContainerElement);
 		$(document).bind("GawkModelInit", onModelInit);
 		$(document).bind("GawkUIFlashLoaded", onFlashLoaded);
 	}
@@ -56,9 +55,9 @@ function GawkView(config) {
 		params.wmode = "window";
 
 		swfobject.embedSWF("/resource/flash/GawkFlash.swf?v=@VERSION-NUMBER@", gawkFlashContainerElement.attr("id"),
-			"1050", "655", "9.0.0", false, gawkFlashVars, params, {id: swfObjectId});
+			"1050", "655", "10.0.0", false, gawkFlashVars, params, {id: swfObjectId});
 	}
-	
+
 	function onRecordClick(event) {
 		if (loggedIn) {
 			if (config.isSystemWall()) {

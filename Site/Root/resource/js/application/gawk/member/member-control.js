@@ -12,7 +12,6 @@ function MemberControl (config) {
 	}
 
 	function onModelInit() {
-		console.debug("on model init");
 		initFacebook();
 
 		addEventListeners();
@@ -103,7 +102,6 @@ function MemberControl (config) {
 	}
 
 	function registerSiteRegisteredMember(memberData) {
-		console.debug(memberData);
 		$.post(config.getApiLocation(), {
 			Action: "Member.RegisterMember",
 			MemberData: $.toJSON(memberData)

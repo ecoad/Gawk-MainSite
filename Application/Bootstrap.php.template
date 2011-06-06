@@ -67,6 +67,7 @@ $application->registry->set("Site/CommonDomain", "gawkwall.com");
 $application->registry->set("Site/Api", $application->registry->get("Site/Address") . "/api/");
 $application->registry->set("MediaServer/Address", "@MediaServerProtocol@://@MediaServerLocation@:@MediaServerPort@/Gawk");
 $application->registry->set("MediaServer/BinaryAddress", "http://@MediaServerLocation@/resource/binary/");
+$application->registry->set("MediaServer/Location", "@MediaServerLocation@");
 $application->registry->set("EmailAddress/Support", "@EmailSupport@");
 $application->registry->set("EmailAddress/Developer", "@EmailDeveloper@");
 
@@ -78,6 +79,8 @@ $application->registry->set("Facebook/Secret", "@FacebookSecret@");
 $application->registry->set("Wall/DefaultLength", 30);
 $application->registry->set("Wall/MainWallMinimumRating", 0);
 $application->registry->set("Wall/DefaultWallPollLength", 15000); //in milliseconds for checking for new Gawks
+
+$application->registry->set("Video/Dimensions", array(160, 120));
 
 if (!isset($_SESSION["Style"])) {
 	$_SESSION["Style"] = "default";

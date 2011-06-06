@@ -1,5 +1,6 @@
 <?php
 require_once("Application/Bootstrap.php");
+echo "hi";
 $facebook = Factory::getFacebook($application);
 $wallControl = Factory::getWallControl();
 $systemWallFactory = Factory::getSystemWallFactory();
