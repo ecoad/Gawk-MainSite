@@ -7,43 +7,12 @@
  */
 
 form {
-	background-color: rgba(255,255,255,0.25);
-	
-	-webkit-border-radius: 10px 10px 10px 10px;
-	   -moz-border-radius: 10px 10px 10px 10px;
-	     -o-border-radius: 10px 10px 10px 10px;
-	        border-radius: 10px 10px 10px 10px;
-}
-
-form small {
-	clear: both;
 }
 
 fieldset {
-	position: relative;
-	float: left;
-	width: 100%;
 }
 
 fieldset legend {
-}
-
-
-/**
- * Portal Styles
- */
-
-.portal {
-	position: relative;
-	top: -6px;
-	
-	float: left;
-	width: 90%;
-	padding: 4% 5% 4% 5%;
-}
-
-.portal fieldset {
-	margin-bottom: 25px;
 }
 
 
@@ -52,18 +21,28 @@ fieldset legend {
  */
 
 form label,
-form .label {
+form .label,
+.form-content label {
 	float: left;
 	clear: both;
 	width: 100%;
-	height: 0px;
-	margin: 0px 0px 0px 0px;
+	margin: 6px 0px 6px 0px;
 	position: relative;
-	text-indent: -9999px;
+	color: #606163;
 }
 
 form label strong,
-form .label strong {
+form .label strong,
+.form-content label strong {
+	display: block;
+	padding-right: 20px;
+	float: left;
+	display: inline;
+	font-weight: normal;
+	text-align: right;
+	line-height: 2.2em;
+	width: 150px;
+	position: relative;
 }
 
 
@@ -74,25 +53,25 @@ form .label strong {
 /* .button */
 
 .button {
-	float: left;
-  width: auto; /* prevents ie6/7 from adding too much left and right padding */
-	padding: 0px 12px 0px 12px;
-	
-	height: 34px;
-	border: none;
-  overflow: visible; /* prevents ie6/7 from adding too much left and right padding */
-
-	font-family: "FranklinGothicDemiCondRegular", Arial, Helvetica, sans-serif;
-	color: #FFFFFF;
-	text-transform: uppercase;
-	background-color: #00ADEE;
-	
+	font-style: italic;
 	cursor: pointer;
-	
-	-webkit-border-radius: 5px 5px 5px 5px;
-	   -moz-border-radius: 5px 5px 5px 5px;
-	     -o-border-radius: 5px 5px 5px 5px;
-	        border-radius: 5px 5px 5px 5px;
+	padding: 5px 8px 5px 8px;
+	border: 1px solid #666666;
+  width: auto; /* prevents ie6/7 from adding too much left and right padding */
+  overflow: visible; /* prevents ie6/7 from adding too much left and right padding */
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+	background-color: #F2F2F2;
+}
+
+input.button {
+	float: left;
+	height: auto;
+	margin: 0px 8px 0px 0px;
 }
 
 .button:hover {
@@ -103,37 +82,27 @@ form .label strong {
 /* .textbox, select */
 
 .textbox, select {
-	height: 24px;
-	margin: 0px 12px 0px 0px;
-	border: none;
-	outline: none;
-	
-	-webkit-box-shadow: 0px 0px 0px 1px rgba(182,213,234,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
-	   -moz-box-shadow: 0px 0px 0px 1px rgba(182,213,234,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
-	     -o-box-shadow: 0px 0px 0px 1px rgba(182,213,234,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
-	        box-shadow: 0px 0px 0px 1px rgba(182,213,234,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
-	
-	-webkit-border-radius: 5px 5px 5px 5px;
-	   -moz-border-radius: 5px 5px 5px 5px;
-	     -o-border-radius: 5px 5px 5px 5px;
-	        border-radius: 5px 5px 5px 5px;
+	color: #696969;
+	border: 1px solid #CCCCCC;
+	background-color: #FFFFFF !important; /* sorts out iIE6/7 google toolbar overwriting the background colour issue  */
 }
 
 .textbox {
-	float: left;
-	padding: 5px 10px 5px 10px;
+	padding: 6px 6px 6px 6px;
 }
 
 select {
 	padding: 5px 6px 5px 6px;
 }
 
-.textbox:hover, select:hover,
+.textbox:hover, select:hover {
+	border: 1px solid #7BC3E2;
+	background-color: #FFFFFF !important; /* sorts out iIE6/7 google toolbar overwriting the background colour issue  */
+}
+
 .textbox:focus, select:focus {
-	-webkit-box-shadow: 0px 0px 0px 1px rgba(110,181,229,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
-	   -moz-box-shadow: 0px 0px 0px 1px rgba(110,181,229,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
-	     -o-box-shadow: 0px 0px 0px 1px rgba(110,181,229,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
-	        box-shadow: 0px 0px 0px 1px rgba(110,181,229,1), 0px 0px 0px 3px rgba(255,255,255,0.3);
+	border: 1px solid #D0D1D2;
+	background-color: #EFEFEF !important; /* sorts out iIE6/7 google toolbar overwriting the background colour issue  */
 }
 
 /* .textbox widths */
@@ -155,12 +124,13 @@ form .medium {
 }
 
 form .wide {
-	width: 416px;
+	width: 375px;
 }
 
 form .max {
 	width: 98%;
 }
+
 
 /* .textbox heights */
 
@@ -184,6 +154,11 @@ form .extra-tall {
 	height: 350px;
 }
 
+form .last {
+	padding: 0px 0px 14px 0px;
+	border-bottom: 2px dotted #EFEFEF;
+}
+
 /* label.checkbox */
 
 label.checkbox {
@@ -202,6 +177,42 @@ label.checkbox input {
 	margin: 5px 0px 0px 170px;
 }
 
+/* label.image-holder */
+
+label.image-holder img {
+	float: left;
+	margin: 0px 10px 0px 0px;
+}
+
+label.image-holder p {
+	clear: none;
+	float: left;
+	width: 163px;
+	font-size: 13px;
+	font-style: italic;
+	line-height: 1.3em;
+}
+
+/* label.radio */
+
+form .radio,
+.form-content .radio {
+	padding: 0px 0px 7px 0px;
+	margin: 4px 0px 4px 0px;
+	border-bottom: 1px dotted #EFEFEF;
+}
+
+form .radio strong,
+.form-content .radio strong {
+	line-height: 1.4em;
+	text-align: left;
+}
+
+.radio input {
+	float: left;
+	margin: 3px 10px 0px 0px;
+}
+
 /* Additional form content styling */
 
 .required span {
@@ -216,6 +227,11 @@ label.checkbox input {
 	display: block;
 	margin: 4px 0px 0px 170px;
 	line-height: 1.3em;
+}
+
+#comment-form .note {
+	width: 390px;
+	margin-left: 174px;
 }
 
 .side-note {
@@ -255,7 +271,6 @@ form h3 {
 /* p.download / icon */
 
 .download {
-	margin: 0px 0px 0px 193px;
 }
 
 /* .controls */
@@ -275,35 +290,30 @@ form h3 {
  * .form-errors
  */
 
-.error {
-	position: absolute;
-	top: 46px;
-	
-	width: 406px;
-	padding: 10px 15px 0px 15px;
-	
-	color: #FFFFFF;
-	background-color: #000000;
-	
-	-webkit-border-radius: 5px 5px 5px 5px;
-	   -moz-border-radius: 5px 5px 5px 5px;
-	     -o-border-radius: 5px 5px 5px 5px;
-	        border-radius: 5px 5px 5px 5px;
+.form-errors {
+	background-color: #FFC0C0;
+	padding: 20px 20px 20px 20px;
+	margin: 0px 0px 40px 0px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
 }
 
-.error:before {
-	content: '';
-	position: absolute;
-	top: -11px;
-	left: 15px;
-	
-	display: block;
-	width: 15px;
-	height: 11px;
-	
-	background-image: url("/resource/image/booth/tooltip.png");
-	background-position: 0px 0px;
-	background-repeat: no-repeat;
+.form-errors h2,
+.form-errors h3 {
+	color: #FF0000;
+	font-size: 15px;
+	font-style: italic;
+	text-transform: none;
+	font-family: Georgia, Times, 'Times New Roman', serif;
+}
+
+.form-content .form-errors {
+	padding: 6px 10px 6px 10px;
+	margin-bottom: 14px;
 }
 
 /**
@@ -316,4 +326,369 @@ form h3 {
 
 .contact #utility {
 	width: 300px;
+}
+
+/* Bot Prevention */
+
+#bot-prevent {
+	float: left;
+	width: 100%;
+	clear: both;
+	border-top: 1px solid #CCCCCC;
+	padding: 20px 0px 0px 0px;
+	margin: 15px 0px 0px 0px;
+}
+
+#bot-prevent h3,
+#bot-prevent p {
+	padding-left: 170px;
+}
+
+/**
+ * Account Relevant Styles
+ */
+
+.account h2 {
+	height: 0px;
+	text-indent: -9999px;
+	margin-bottom: 0px;
+}
+
+.account #main-content fieldset,
+.account #main-content .fieldset {
+	border: 1px solid #CCCCCC;
+	margin: 10px;
+	padding: 20px 20px 20px 20px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	-moz-box-shadow: 0px 0px 5px #CDCDCD;
+	-webkit-box-shadow: 0px 0px 5px #999999;
+	box-shadow: 0px 0px 5px #999999;
+	text-align: left;
+}
+
+.log-on #main-content,
+.password-request #main-content {
+	width: 100%;
+	text-align: center;
+	border-right: none;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 20px 0px;
+}
+
+.account .fieldset {
+	width: 590px;
+	margin: 10px auto 10px auto;
+}
+
+.log-on #main-content form,
+.password-request #main-content form {
+	width: 650px;
+	margin: 0px auto 0px auto;
+}
+
+
+/**
+ * Fancybox / The Box Forms
+ */
+
+/* Form Controls */
+
+#fancybox-inner form {
+	float: left;
+}
+
+.box-container .large {
+	float: left;
+	display: inline;
+}
+
+.box-container .form-content {
+	float: right;
+}
+
+#fancybox-inner form,
+.box-container .form-content {
+	width: 379px;
+}
+
+#fancybox-inner form label strong,
+.box-container .form-content label strong {
+	width: 103px;
+}
+
+.box-container .questions .form-content label strong {
+	width: 250px;
+}
+
+#fancybox-inner form .medium,
+.box-container .form-content .medium {
+	width: 240px;
+}
+
+#fancybox-inner fieldset,
+.box-container fieldset {
+	min-height: 140px;
+	_height: 140px;
+}
+
+#fancybox-inner .controls,
+.box-container .controls {
+	padding: 10px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+}
+
+#fancybox-inner .controls a,
+.box-container .controls a {
+	margin: 0px 10px 0px 0px;
+}
+
+/* Small Forms */
+
+#fancybox-inner form.small label strong,
+.box-container .small label strong {
+	width: 125px;
+}
+
+#fancybox-inner form.small .controls,
+.box-container .small .controls {
+	padding: 0px 0px 0px 0px;
+}
+
+/* Form Elements */
+
+.form-content h2 {
+	font-size: 24px;
+	line-height: 1.1em;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #696969;
+}
+
+#fancybox-inner h4,
+.box-container h4 {
+	font-weight: bold;
+}
+
+
+/**
+ * Comment Specific Styles
+ */
+#comments-title {
+	margin-bottom: 9px;
+}
+
+.comments {
+	clear: both;
+}
+
+.comments form label strong {
+	width: 120px;
+	padding-right: 55px;
+}
+
+.comments .controls {
+	margin: 0px 0px 0px 0px;
+	padding: 10px 50px 58px 170px;
+	background-image: url("/resource/image/horizontal-separator.gif?v=@VERSION-NUMBER@");
+	background-repeat: repeat-x;
+	background-position: left bottom;
+	margin-bottom: 14px;
+}
+
+.comments button {
+	float: right;
+	width: auto;
+	height: auto;
+	text-indent: 0px;
+	margin: 0px 0px 0px 14px;
+	background-image: none;
+	font-family: Georgia, Times, Times New Roman, serif;
+}
+
+.comment {
+	clear: left;
+	float: left;
+	width: 615px;
+	margin-bottom: 14px;
+	border-bottom: 2px dotted #D0D1D2;
+}
+
+.comment p {
+	line-height: 1.4em;
+}
+
+.author-details,
+.comment-details {
+	float: left;
+}
+
+.author-details {
+	font-style: italic;
+	width: 162px;
+	margin-right: 14px;
+}
+
+.comment-details {
+	width: 439px;
+}
+
+.comment-details p {
+	font-size: 14px;
+}
+
+.author-details p {
+	font-size: 12px;
+	color: #0091CE;
+	margin-bottom: 5px;
+}
+
+.author-details .date {
+	color: #BFBFBF;
+	display: block;
+}
+
+.author-details img {
+	margin-bottom: 14px;
+}
+
+.comments .form-errors {
+	margin: 0px 50px 14px 0px;
+}
+
+.comments .form-errors p,
+.comments .form-errors li {
+	color: #000000;
+}
+
+#add-a-comment {
+	padding: 3px 8px 3px 8px;
+	background-color: #009EE0;;
+	-moz-box-shadow: inset 0px 0px 2px #777, 1px 1px 0px #DDD;
+	-moz-border-radius: 2px;
+	-webkit-box-shadow: inset 0px 0px 2px #777, 1px 1px 0px #DDD;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	color: #FFFFFF;
+	border: none;
+	cursor: pointer;
+	-webkit-transition: all ease-out 0.2s;
+	float: right;
+	font-size: 13px;
+	text-decoration: none;
+	margin-top: -2px;
+}
+
+#add-a-comment:hover {
+	background-color: #007BAE;
+	-moz-box-shadow: inset 0px 0px 2px #777, 1px 1px 1px #DDD;
+	-webkit-box-shadow: inset 0px 0px 2px #777, 1px 1px 1px #DDD;
+	-webkit-transition: none;
+}
+
+.locked {
+	background: #F3F3F3;
+	color: #999999;
+	clear: both;
+	padding: 10px 20px 10px 20px;
+}
+
+.live-message p {
+	background-color: #F3F3F3;
+	color: #999999;
+	margin: 0 0px 14px 0;
+	padding: 10px 5px 10px 10px;
+	position: relative;
+	font-size: 12px;
+}
+
+.live-message {
+	border-bottom: 2px dotted #CCCCCC;
+	margin-bottom: 14px;
+}
+
+.report-comment {
+	color: #AAAAAA;
+	clear: both;
+	display: block;
+	font-size: 11px;
+	margin-bottom: 14px;
+}
+
+.admin p {
+	background: #F3F3F3;
+	padding: 5px 8px;
+	color: #999999;
+	float: left;
+}
+
+.admin a {
+	color: #888888;
+}
+
+.toolbar-toolbar {
+	position: absolute;
+	width: 375px;
+	top: 0px;
+	left: 175px;
+	border: 1px solid #CCC;
+	background-color: #EEE;
+	padding: 6px 6px 0px 6px
+}
+
+.toolbar-toolbar span strong {
+	padding-right: 0px;
+	text-align: left;
+	line-height: 1em;
+}
+
+#comment {
+	margin-top: 83px;
+}
+
+/*
+ *	Live chat
+ */
+.live-chat .author-details p {
+	font-size: 12px;
+	color: #0091CE;
+	margin-bottom: 5px;
+}
+
+
+/**
+ * Gallery Voting Form
+ */
+
+#vote-submit {
+	clear: both;
+	padding: 15px 15px 15px 15px;
+	margin-bottom: 14px;
+	background-color: #EFEFEF;
+
+	-webkit-border-radius: 5px 5px 5px 5px;
+	   -moz-border-radius: 5px 5px 5px 5px;
+	     -o-border-radius: 5px 5px 5px 5px;
+	        border-radius: 5px 5px 5px 5px;
+}
+
+#vote-submit label.checkbox {
+	margin-bottom: 0px;
+	font-size: 11px;
+	font-style: italic;
+}
+
+#vote-submit label.checkbox input {
+	margin-right: 5px;
+}
+
+#vote-submit .last {
+	border-bottom: none;
+}
+
+#vote-submit .controls {
+	margin-left: 373px;
 }

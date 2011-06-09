@@ -55,7 +55,7 @@ function GawkView(config) {
 		params.wmode = "window";
 
 		swfobject.embedSWF("/resource/flash/GawkFlash.swf?v=@VERSION-NUMBER@", gawkFlashContainerElement.attr("id"),
-			"1050", "655", "10.0.0", false, gawkFlashVars, params, {id: swfObjectId});
+			"1050", "655", "9.0.0", false, gawkFlashVars, params, {id: swfObjectId});
 	}
 
 	function onRecordClick(event) {

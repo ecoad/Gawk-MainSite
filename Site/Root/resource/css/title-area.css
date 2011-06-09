@@ -1,0 +1,52 @@
+#title-area {
+	height: 47px;
+	background: url("/resource/image/background-title-area.png?v=@VERSION-NUMBER@");
+	padding: 7px 11px 11px 11px;
+}
+
+#title-area .sock {
+}
+
+h2 {
+	font-family: "BreeLight", "Serif";
+	color: #434444;
+	font-size: 16px;
+}
+
+p.description {
+	color: #434444;
+	font-family: "Arial", "Sans-serif";
+	color: #868585;
+	font-size: 13px;
+	margin-top: 3px;
+}
+
+a.record {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat 0px -50px;
+	display: block;
+	height: 34px;
+	width: 96px;
+}
+
+a.record:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -96px -50px;
+	display: block;
+	height: 34px;
+	width: 96px;
+}
+
+a.record span {
+	display: none;
+	height: 100%;
+}
+
+div.wall-controls {
+	float: right;
+	margin-top: 2px;
+	width:  300px;
+}
+
+div.wall-container {
+	padding: 0px 11px 11px 11px;
+	background-color: #fff;
+}

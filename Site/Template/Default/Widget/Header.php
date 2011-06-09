@@ -1,40 +1,47 @@
+<?php
+$memberAuthentication = Factory::getMemberAuthentication();
+if ($member = $memberAuthentication->getLoggedInMember()) {
+	$profileUrl = "/u/" . $member->alias;
+} else {
+	$profileUrl = "#";
+}
+?>
 <div class="container">
-	<hgroup>
-		<h1>
-			<a href="/" title="Back to the <?php echo $this->get("Name"); ?> home page">
-				<span><?php echo $this->get("Name"); ?></span>
-			</a>
-		</h1>
-	</hgroup>
+	<h1>
+		<a href="/" title="Back to the <?php echo $this->get("Name"); ?> home page">
+			<span><?php echo $this->get("Name"); ?></span>
+		</a>
+	</h1>
 	<div class="utility">
-		<div class="upper">
-			<div class="login-widget">
+		<ul>
+			<li class="<?php echo $this->get("Section") == "wall" ? "selected" : ""; ?>">
+				<a class="new-gawk navigation-item" href="/">
+					<span>gawk</span>
+				</a>
+			</li>
+			<li class="wide <?php echo $this->get("Section") == "wall-select" ? "selected" : ""; ?>">
+				<a class="wall-select navigation-item" href="/wall/">
+					<span>create wall</span>
+				</a>
+			</li>
+			<li class="<?php echo $this->get("Section") == "profile" ? "selected" : ""; ?>">
+				<a class="yours navigation-item"
+					href="<?php echo $profileUrl; ?>">
+					<span>profile</span>
+				</a>
+			</li>
 <?php
 $memberAuthentication = Factory::getMemberAuthentication();
 if ($memberAuthentication->isLoggedIn() && ($member = $memberAuthentication->getLoggedInMember())) {
 ?>
-				<div class="logged-in">
-					hello <a class="name" href="/u/<?php echo $member->alias; ?>"><?php echo $member->alias; ?></a> | <a class="logout" href="#">logout</a>
-				</div>
+			<li class="logged-in"><a class="name" href="/u/<?php echo $member->alias; ?>"><?php echo $member->alias; ?></a> | <a class="logout" href="#">logout</a></li>
 <?php
 } else {
 ?>
-				<div class="logged-out">
-					<a href="#" class="login" title="login to gawkwall">login</a> |
-						<a href="#" class="register" title="register to gawkwall">register</a>
-				</div>
+			<li class="logged-out"><a href="#" class="login" title="login to gawkwall">login</a></li>
 <?php
 }
 ?>
-			</div>
-			<div class="share">
-				<iframe class="twitter" frameborder="no" scrolling="no" class="twitter-share" style="height: 20px;"
-					src="http://platform.twitter.com/widgets/tweet_button.html?text=Gawk+Wall&amp;url=http%3A%2F%2Fwww.gawkwall.com"></iframe>
-				<fb:like href="" send="false" layout="button_count" width="50" show_faces="false" font="arial"></fb:like>
-			</div>
-		</div>
-		<div class="lower">
-			<a href="#" class="app-store">Get the iPhone app on the App Store</a>
-		</div>
+		</ul>
 	</div>
 </div>

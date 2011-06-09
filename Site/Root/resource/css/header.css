@@ -1,0 +1,71 @@
+#main-header {
+	height: 50px;
+	background: url("/resource/image/background.png?v=@VERSION-NUMBER@") repeat-x;
+}
+
+#main-header .container {
+	width: 1072px;
+	margin: 0 auto;
+	min-height: 100%;
+}
+
+#main-header .container h1 {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -169px 0;
+	display: block;
+	height: 50px;
+	width: 161px;
+	float: left;
+}
+
+#main-header .container h1 span {
+	display: block;
+	height: 100%;
+}
+
+#main-header .container h1 a {
+	display: block;
+	height: 100%;
+}
+
+#main-header .container h1 span {
+	display: none;
+}
+
+#main-header .utility {
+	float: right; 
+	display: block;
+	width: 450px;
+}
+
+#main-header li {
+	float: left;
+	margin: 0px 15px 0px 15px;
+	width: 75px;
+	height: 50px;
+	font-family: "BreeRegular", "Serif";
+	font-size: 16px;
+	color: #ffffff;
+	align: center;
+	display: block;
+}
+
+#main-header li.wide {
+	width: 95px;
+}
+
+#main-header li.selected, #main-header li a:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat 0px 0;
+}
+
+#main-header li.selected.wide, #main-header li.wide a:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -75px 0;
+	width: 95px;
+}
+
+#main-header li a {
+	color: #ffffff;
+	text-align: center;
+	padding-top: 14px;
+	display: block;		
+	height: 36px;
+}

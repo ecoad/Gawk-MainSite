@@ -1,295 +1,75 @@
-/******************************************/
-/* CSS powered by clock - www.clock.co.uk */
-/******************************************/
-
-
-/**
- * Global Styles
- */
-
 @font-face {
-  font-family: "FranklinGothicDemiCondRegular";
-  src: url("/resource/font/franklingothicdemicondensed-webfont.eot");
-  src: url("/resource/font/franklingothicdemicondensed-webfont.eot?#iefix") format("embedded-opentype"),
-       url("/resource/font/franklingothicdemicondensed-webfont.woff") format("woff"),
-       url("/resource/font/franklingothicdemicondensed-webfont.ttf") format("truetype"),
-       url("/resource/font/franklingothicdemicondensed-webfont.svg#FranklinGothicDemiCondRegular") format("svg");
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'BreeRegular';
+    src: url('/resource/font/breeregular-webfont.eot');
+    src: url('/resource/font/breeregular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/resource/font/breeregular-webfont.woff') format('woff'),
+         url('/resource/font/breeregular-webfont.ttf') format('truetype'),
+         url('/resource/font/breeregular-webfont.svg#BreeRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
-/**
- * Global Styles
- */
+@font-face {
+    font-family: 'BreeLight';
+    src: url('/resource/font/breelight-webfont.eot');
+    src: url('/resource/font/breelight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/resource/font/breelight-webfont.woff') format('woff'),
+         url('/resource/font/breelight-webfont.ttf') format('truetype'),
+         url('/resource/font/breelight-webfont.svg#BreeRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
 body {
-	background-color: #AEE0E8;
 }
 
 #container {
 }
 
 #wrapper {
+	background: url("/resource/image/background-noise.png?v=@VERSION-NUMBER@");
 }
-
-
-/**
- * Header
- */
-
-#main-header {
-}
-
-
-/**
- * Main Navigation
- */
-
-#navigation {
-}
-
-
-/**
- * Main Content
- */
 
 #main-content {
+	border: 1px #e5e3e2 solid;
+	width: 1072px;
+	margin: 27px auto;
 }
-
-#main-content:after {
-	content: '';
-	position: fixed;
-	right: 0px;
-	bottom: 25px;
-	
-	clear: both;
-	display: block;
-	width: 229px;
-	height: 229px;
-	
-	background-image: url("/resource/image/booth/illustration.png");
-	background-position: right bottom;
-	background-repeat: no-repeat;
-}
-
-
-/**
- * Footer
- */
 
 #footer {
-	background-color: #000000;
+	border-top: 1px #c0bfb9 solid;
+	background: #fff;
 }
 
-#footer ul {
-	position: relative;
-	width: 940px;
-	height: 21px;
-	padding: 0px 0px 0px 0px;
-	margin: 0px auto 0px auto;
+#footer .footer-container {
+	width: 1072px;
+	margin: 10px auto;
 }
 
-#footer li {
-	position: absolute;
-	height: 24px;
-	line-height: 27px;
-	font-size: 11px;
-	color: #FFFFFF;
-	
-	background-position: right top;
-	background-repeat: no-repeat;
-}
-
-#footer .clock {
-	left: 0px;
-	padding-right: 67px;
-	background-image: url("/resource/image/booth/clock.gif");
-}
-
-#footer li span {
-	display: block;
-	text-indent: -9999px;
-}
-
-#footer .gawkwall {
-	right: 0px;
-	padding-right: 100px;
-	background-image: url("/resource/image/booth/gawkwall.gif");
-}
-
-
-/**
- * Styles for generic HTML elements
- */
-
-em {
-	text-transform: uppercase;
-}
-
-h1, h2, h3, h4, h5 {
-	color: #000000;
-	letter-spacing: -1px;
-	font-family: "FranklinGothicDemiCondRegular", Arial, Helvetica, sans-serif;
-}
-
-h1 {
-	width: 282px;
-	font-size: 36px;
-	line-height: 38px;
-	letter-spacing: -2px;
-	text-transform: uppercase;
-	margin-bottom: 30px;
-}
-
-h2 {
-	font-size: 22px;
-	margin-bottom: 20px;
-}
-
-
-/**
- * Main Content
- */
-
-/* p, ul, li,  */
-
-#main-content p {
-	margin-bottom: 10px;
-	line-height: 1.4em;
-}
-
-#main-content ul {
-	margin-bottom: 15px;
-}
-
-#main-content li {
-	margin-bottom: 3px;
-	line-height: 1.4em;
-	list-style: disc;
-	list-style-position: inside;
-}
-
-
-/**
- * General Classes
- */
-
-.column {
+#footer .copyright {
 	float: left;
+	display: inline;
+	width: 150px;
+	color: #747474;
+	font-size: 13px;
 }
 
-.primary {
-	width: 30%;
-	
-	padding-top: 10px;
-	margin: 0px 5% 30px 0px;
-	
-	border-top: 8px solid #000000;
-}
-
-.secondary {
-	width: 65%;
-}
-
-
-/**
- * Sprinkles of niceness
- */
-
-*::selection {
-	color: #FFFFFF;
-	background-color: #00ADEE;
-}
-
-*::-moz-selection {
-	color: #FFFFFF;
- 	background-color: #00ADEE;
-}
-
-
-/**
- * Record Page
- */
-
-#container.record {
-	background-image: url("/resource/image/booth/illustration-record.gif");
-	background-position: center 0px;
-	background-repeat: no-repeat;
-}
-
-.record .secondary {
-	position: relative;
-	top: -18px;
-}
-
-
-/**
- * Thanks Page
- */
-
-.thanks .secondary {
-	position: relative;
-	top: -65px;
-	text-align: center;
-}
-
-.thanks #main-content:after,
-.wall #main-content:after {
-	background-image: none;
-}
-
-
-/**
- * Wall Page
- */
-
-#container.wall {
-	padding: 0px 0px 0px 0px;
-	margin: 0px 0px 0px 0px;
-	overflow: hidden;
-	
-	background-image: url("/resource/image/booth/wall-item.gif");
-}
-
-.wall #main-content {
-	width: 100%;
-}
-
-.wall #footer ul {
-	width: 96%;
-	margin: 0px 2% 0px 2%;
-}
-
-
-/**
- * Overlays
- */
-
-.overlay {
-	position: absolute;
-	top: 75px;
-	clear: both;
-	width: 900px;
-	height: 500px;
-	padding: 20px 20px 20px 20px;
-	background-color: rgba(255,255,255,0.95);
-	
-	-webkit-border-radius: 10px 10px 10px 10px;
-	   -moz-border-radius: 10px 10px 10px 10px;
-	     -o-border-radius: 10px 10px 10px 10px;
-	        border-radius: 10px 10px 10px 10px;
-}
-
-.overlay ol {
-	width: 900px;
-	height: 430px;
-	overflow: auto;
-}
-
-.overlay .close {
+#footer .links {
 	float: right;
-	font-size: 14px;
-	font-family: "FranklinGothicDemiCondRegular", Arial, Helvetica, sans-serif;
-	color: #000000;
-	text-transform: uppercase;
+	display: inline;
+	width: 230px;
+	font-size: 13px;
+	color: #747474;
+}
+
+#footer .links span {
+	padding-left: 4px;
+}
+
+#footer .links a, #footer .copyright a {
+	color: #747474;
+}
+
+#footer .links a:hover, #footer .copyright a:hover {
+	color: #000;
 }
