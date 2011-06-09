@@ -33,7 +33,12 @@ body {
 #main-content {
 	border: 1px #e5e3e2 solid;
 	width: 1072px;
-	margin: 27px auto;
+	margin: 27px auto 20px auto;
+}
+
+div.wall-container {
+	padding: 0px 11px 11px 11px;
+	background-color: #fff;
 }
 
 #footer {
@@ -72,4 +77,14 @@ body {
 
 #footer .links a:hover, #footer .copyright a:hover {
 	color: #000;
+}
+
+.share {
+	margin-top: 10px;
+	height: 20px;
+}
+
+.share .twitter, .share .facebook {
+	float: right;
+	display: block;
 }

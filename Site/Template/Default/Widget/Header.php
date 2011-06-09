@@ -13,7 +13,21 @@ if ($member = $memberAuthentication->getLoggedInMember()) {
 		</a>
 	</h1>
 	<div class="utility">
-		<ul>
+		<ul class="member-navigation">
+<?php
+$memberAuthentication = Factory::getMemberAuthentication();
+if ($memberAuthentication->isLoggedIn() && ($member = $memberAuthentication->getLoggedInMember())) {
+?>
+			<li class="member logged-in"><a class="name" href="/u/<?php echo $member->alias; ?>"><?php echo $member->alias; ?></a> | <a class="logout" href="#">logout</a></li>
+<?php
+} else {
+?>
+			<li class="member logged-out"><a href="#" class="login" title="login to gawkwall">login</a></li>
+<?php
+}
+?>
+		</ul>
+		<ul class="navigation">
 			<li class="<?php echo $this->get("Section") == "wall" ? "selected" : ""; ?>">
 				<a class="new-gawk navigation-item" href="/">
 					<span>gawk</span>
@@ -30,18 +44,6 @@ if ($member = $memberAuthentication->getLoggedInMember()) {
 					<span>profile</span>
 				</a>
 			</li>
-<?php
-$memberAuthentication = Factory::getMemberAuthentication();
-if ($memberAuthentication->isLoggedIn() && ($member = $memberAuthentication->getLoggedInMember())) {
-?>
-			<li class="logged-in"><a class="name" href="/u/<?php echo $member->alias; ?>"><?php echo $member->alias; ?></a> | <a class="logout" href="#">logout</a></li>
-<?php
-} else {
-?>
-			<li class="logged-out"><a href="#" class="login" title="login to gawkwall">login</a></li>
-<?php
-}
-?>
 		</ul>
 	</div>
 </div>

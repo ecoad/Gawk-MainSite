@@ -34,10 +34,16 @@
 #main-header .utility {
 	float: right; 
 	display: block;
-	width: 450px;
+	width: 750px;
 }
 
-#main-header li {
+#main-header ul.navigation {
+	width: 335px;
+	float: right;
+	display: inline; 
+}
+
+#main-header ul.navigation li {
 	float: left;
 	margin: 0px 15px 0px 15px;
 	width: 75px;
@@ -45,12 +51,45 @@
 	font-family: "BreeRegular", "Serif";
 	font-size: 16px;
 	color: #ffffff;
-	align: center;
 	display: block;
 }
 
+
+#main-header li a {
+	color: #ffffff;
+	text-align: center;
+	padding-top: 14px;
+	height: 36px;
+}
+
+#main-header ul.navigation li a {
+	display: block;		
+}
+
 #main-header li.wide {
-	width: 95px;
+	width: 95px !important;
+}
+
+#main-header ul.member-navigation {
+	float: right;
+	display: inline; 
+	margin: 16px 0px 0px 15px
+}
+
+#main-header ul.member-navigation li {
+	float: left;
+	margin: 0px;
+	font-family: "BreeRegular", "Serif";
+	font-size: 15px;
+	color: #ffffff;
+}
+
+#main-header ul.member-navigation li a:hover {
+	text-decoration: underline;
+}
+
+li.member a:hover {
+	background: none !important;
 }
 
 #main-header li.selected, #main-header li a:hover {
@@ -60,12 +99,4 @@
 #main-header li.selected.wide, #main-header li.wide a:hover {
 	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -75px 0;
 	width: 95px;
-}
-
-#main-header li a {
-	color: #ffffff;
-	text-align: center;
-	padding-top: 14px;
-	display: block;		
-	height: 36px;
 }
