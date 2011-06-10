@@ -12,7 +12,6 @@ if (!$profileMember = $memberControl->getMemberByRequestUrl($_SERVER["REQUEST_UR
 	include "Site/Root/error/404.php";
 }
 
-
 $memberIsOnOwnMemberPage = false;
 if ($loggedInMemberDataEntity = $memberAuthentication->getLoggedInMemberDataEntity()) {
 	if ($loggedInMemberDataEntity->get("SecureId") == $profileMember->secureId) {
@@ -35,128 +34,129 @@ $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.
 ?>
-<div class="breadcrumb">
-	<a href="/">home</a> / <a title="View profile" href="<?php echo $memberUrlHelper->getProfileUrl($profileMember); ?>">profile</a> /
-		<?php echo $profileMember->alias; ?>
-	<hr />
-</div>
 <div id="public-profile-view">
-	<div class="profile-main">
-		<div class="profile-gawk" style="display: <?php echo $memberVideoCount > 0 ? "block": "none"; ?>;">
-			<div id="profile-swf-container">&nbsp;</div>
-		</div>
-		<div class="details">
-			<div class="name">
-				<h1><?php echo $profileMember->alias; ?></h1>
-				<span class="gawk-count"><?php echo $memberVideoCount; ?> gawk<?php
-					echo ($memberVideoCount != 1) ? "s" : ""; ?></span>
-				<div class="controls">
+	<div id="title-area">
+		<a href="/">home</a> / <a title="View profile" href="<?php
+			echo $memberUrlHelper->getProfileUrl($profileMember); ?>">profile</a> / <?php echo $profileMember->alias; ?>
+	</div>
+	<div class="view-container">
+		<div class="profile-main">
+			<div class="profile-gawk" style="display: <?php echo $memberVideoCount > 0 ? "block": "none"; ?>;">
+				<div id="profile-swf-container">&nbsp;</div>
+			</div>
+			<div class="details">
+				<div class="name">
+					<h1><?php echo $profileMember->alias; ?></h1>
+					<span class="gawk-count"><?php echo $memberVideoCount; ?> gawk<?php
+						echo ($memberVideoCount != 1) ? "s" : ""; ?></span>
+					<div class="controls">
 <?php
 if ($memberIsOnOwnMemberPage) {
 ?>
-					<a class="edit-profile" href="/u/<?php echo $profileMember->alias; ?>/edit">edit your profile</a>
+						<a class="edit-profile" href="/u/<?php echo $profileMember->alias; ?>/edit">edit your profile</a>
 <?php
 } else {
 ?>
-					<a class="add-friend friend-control" href="#" style="display: none;">add friend</a>
+						<a class="add-friend friend-control" href="#" style="display: none;">add friend</a>
 <?php
 }
 ?>
+					</div>
 				</div>
+				<p class="website"><a href="http://<?php echo $profileMember->website; ?>"><?php echo $profileMember->website; ?></a></p>
+				<p class="description"><?php echo $profileMember->description; ?></p>
 			</div>
-			<p class="website"><a href="http://<?php echo $profileMember->website; ?>"><?php echo $profileMember->website; ?></a></p>
-			<p class="description"><?php echo $profileMember->description; ?></p>
 		</div>
-	</div>
-	<div class="recent-gawks" style="display: <?php echo $memberVideoCount > 1 ? "block": "none"; ?>;">
-		<h2>most recent gawks</h2>
-		<div id="recent-swf-container">&nbsp;</div>
-	</div>
-	<div class="profile-other">
-		<div class="friends beancan">
-			<h2><?php echo $profileMember->alias; ?>'s friends</h2>
+		<div class="recent-gawks" style="display: <?php echo $memberVideoCount > 1 ? "block": "none"; ?>;">
+			<h2>most recent gawks</h2>
+			<div id="recent-swf-container">&nbsp;</div>
+		</div>
+		<div class="profile-other">
+			<div class="friends beancan">
+				<h2><?php echo $profileMember->alias; ?>'s friends</h2>
 <?php
 if (count($profileMember->friends) > 0) {
 ?>
-			<ul>
+				<ul>
 <?php
 	foreach ($profileMember->friends as $friend) {
 ?>
-				<li class="friend">
-					<a href="<?php echo $memberUrlHelper->getProfileUrl($friend); ?>" title="View profile">
-						<img width="100px" height="100px" src="<?php echo $memberUrlHelper->getProfilePictureUrl($friend, "100x100")?>" />
-					</a>
-				</li>
+					<li class="friend">
+						<a href="<?php echo $memberUrlHelper->getProfileUrl($friend); ?>" title="View profile">
+							<img width="100px" height="100px" src="<?php echo $memberUrlHelper->getProfilePictureUrl($friend, "100x100")?>" />
+						</a>
+					</li>
 <?php
 	}
 ?>
-			</ul>
+				</ul>
 <?php
 } else {
 ?>
-			<p>this person is a loner</p>
+				<p>this person is a loner</p>
 <?php
 }
 ?>
-		</div>
-		<div class="walls beancan">
-			<h2>walls</h2>
-			<div class="wall-list">
-				<h3>bookmarks</h3>
-				<ul>
+			</div>
+			<div class="walls beancan">
+				<h2>walls</h2>
+				<div class="wall-list">
+					<h3>bookmarks</h3>
+					<ul>
 <?php
 if (count($recentWallActivity->bookmarks) == 0) {
 ?>
-					<li>no bookmarks</li>
+						<li>no bookmarks</li>
 <?php
 }
 foreach ($recentWallActivity->bookmarks as $memberBookmark) {
 ?>
-					<li>
-						<a href="/<?php echo $memberBookmark->url; ?>"><?php echo $memberBookmark->name; ?></a>
-					</li>
+						<li>
+							<a href="/<?php echo $memberBookmark->url; ?>"><?php echo $memberBookmark->name; ?></a>
+						</li>
 <?php
 }
 ?>
-				</ul>
-			</div>
-			<div class="wall-list">
-				<h3>walls created</h3>
-				<ul>
+					</ul>
+				</div>
+				<div class="wall-list">
+					<h3>walls created</h3>
+					<ul>
 <?php
 if (count($recentWallActivity->wallsCreatedByMember) == 0) {
 ?>
-					<li>no walls<?php echo $memberIsOnOwnMemberPage ? " (<a class=\"underline\" href=\"/wall/create\">create a wall</a>)" : ""; ?></li>
+						<li>no walls<?php echo $memberIsOnOwnMemberPage ? " (<a class=\"underline\" href=\"/wall/create\">create a wall</a>)" : ""; ?></li>
 <?php
 }
 foreach ($recentWallActivity->wallsCreatedByMember as $memberWall) {
 ?>
-					<li>
-						<a class="underline" href="/<?php echo $memberWall->url; ?>"><?php echo $memberWall->name; ?></a>
-					</li>
+						<li>
+							<a class="underline" href="/<?php echo $memberWall->url; ?>"><?php echo $memberWall->name; ?></a>
+						</li>
 <?php
 }
 ?>
-				</ul>
-			</div>
-			<div class="wall-list">
-				<h3>recent walls</h3>
-				<ul>
+					</ul>
+				</div>
+				<div class="wall-list">
+					<h3>recent walls</h3>
+					<ul>
 <?php
 if (count($recentWallActivity->recentWallParticipation) == 0) {
 ?>
-					<li>no walls</li>
+						<li>no walls</li>
 <?php
 }
 foreach ($recentWallActivity->recentWallParticipation as $memberWallParticipation) {
 ?>
-					<li>
-						<a href="/<?php echo $memberWallParticipation->url; ?>"><?php echo $memberWallParticipation->name; ?></a>
-					</li>
+						<li>
+							<a href="/<?php echo $memberWallParticipation->url; ?>"><?php echo $memberWallParticipation->name; ?></a>
+						</li>
 <?php
 }
 ?>
-				</ul>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

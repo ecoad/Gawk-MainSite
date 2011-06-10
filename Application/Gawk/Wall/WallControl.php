@@ -177,11 +177,11 @@ class WallControl extends DataControl {
 	}
 
 	/**
-	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param Member $member
 	 * @param Wall $wall
 	 * @return WallDataEntity
 	 */
-	public function saveWall(CustomMemberDataEntity $memberDataEntity, Wall $wall) {
+	public function saveWall(Member $member, Wall $wall) {
 		$wallDataEntity = null;
 		if (($wall->secureId != "") && $this->isMemberAuthorizedToEditWallBySecureId($wall->secureId)) {
 			$wallDataEntity = $this->itemByField($wall->secureId, "SecureId");
@@ -190,7 +190,7 @@ class WallControl extends DataControl {
 			$this->validateUrl($wall->url);
 		}
 
-		$wallDataEntity = $this->mapWallToWallDataEntity($wall, $memberDataEntity, $wallDataEntity);
+		$wallDataEntity = $this->mapWallToWallDataEntity($wall, $member, $wallDataEntity);
 
 		if ($wallDataEntity->save()) {
 			return $wallDataEntity;
@@ -215,12 +215,11 @@ class WallControl extends DataControl {
 	/**
 	 * Map a Wall to WallDataEntity
 	 * @param Wall $wall
-	 * @param CustomMemberDataEntity $memberDataEntity
+	 * @param Member $member
 	 * @param WallDataEntity $wallDataEntity
 	 * @return WallDataEntity
 	 */
-	public function mapWallToWallDataEntity(Wall $wall, CustomMemberDataEntity $memberDataEntity,
-		WallDataEntity $wallDataEntity = null) {
+	public function mapWallToWallDataEntity(Wall $wall, Member $member, WallDataEntity $wallDataEntity = null) {
 
 		if (!$wallDataEntity) {
 			$wallDataEntity = $this->makeNew();
@@ -231,7 +230,7 @@ class WallControl extends DataControl {
 				$wallDataEntity->set(ucfirst($key), $value);
 			}
 		}
-		$wall->memberSecureId  = $memberDataEntity->get("SecureId");
+		$wall->memberSecureId  = $member->secureId;
 
 		return $wallDataEntity;
 	}

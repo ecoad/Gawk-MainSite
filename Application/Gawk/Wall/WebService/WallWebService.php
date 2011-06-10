@@ -49,9 +49,10 @@ class WallWebService {
 			*/
 			case self::SERVICE_SAVE:
 				if ($memberDataEntity = TokenCheck::validateToken($postData["Token"], true)) {
+					$member = $memberDataEntity->getObject();
 					$wallControl = Factory::getWallControl();
 					$wall = Factory::getWall(json_decode(stripslashes($postData["WallData"])));
-					if ($wallDataEntity = $wallControl->saveWall($memberDataEntity, $wall)) {
+					if ($wallDataEntity = $wallControl->saveWall($member, $wall)) {
 						$response->success = true;
 						$response->wall = $wallDataEntity->toObject();
 					}

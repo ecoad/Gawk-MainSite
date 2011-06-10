@@ -1,0 +1,16 @@
+div.profile-main {
+	height: 155px;
+}
+
+.profile-main .profile-gawk {
+	float: left;
+	display: inline;
+	width: 175px;
+	margin-right: 20px;
+}
+
+.profile-main .details {
+	float: left;
+	display: inline;
+	width: 855px;
+}

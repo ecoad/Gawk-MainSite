@@ -25,7 +25,7 @@ $systemWallFactory = Factory::getSystemWallFactory();
 		</div>
 	</div>
 </div>
-<div class="wall-container">
+<div class="view-container">
 	<div id="Gawk">You don't have Flash! <a href="http://get.adobe.com/flashplayer/">Please download Flash</a> or use a browser that supports Flash.</div>
 	<div class="share">
 		<span class="twitter">

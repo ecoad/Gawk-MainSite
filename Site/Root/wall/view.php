@@ -17,6 +17,9 @@ $layout->set("Title", $application->registry->get("Title"));
 $layout->set("Name", $application->registry->get("Title"));
 $layout->set("Section", $_SERVER["REQUEST_URI"] == "/wall/" ? "wall-select" : "wall");
 $layout->start("Style");
+?>
+	<link rel="stylesheet" type="text/css" href="/resource/css/wall-view.css?v=@VERSION-NUMBER@" media="all" />
+<?php
 $layout->start("Main");
 // The main page content goes here.
 ?>

@@ -1,0 +1,84 @@
+h2 {
+	font-family: "BreeLight", "Serif";
+	color: #434444;
+	font-size: 16px;
+}
+
+p.description {
+	color: #434444;
+	font-family: "Arial", "Sans-serif";
+	color: #868585;
+	font-size: 13px;
+	margin-top: 5px;
+}
+
+a.record {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat 0px -51px;
+	display: block;
+	height: 34px;
+	width: 96px;
+}
+
+a.record:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -96px -51px;
+	display: block;
+	height: 34px;
+	width: 96px;
+}
+
+a.record span {
+	display: none;
+	height: 100%;
+}
+
+div.wall-information {
+	float: left;
+	display: inline;
+	width: 650px;
+}
+
+div.wall-controls {
+	float: right;
+	margin-top: 5px;
+	width: 325px;
+}
+
+div.wall-controls .record-gawk {
+	float: right;
+	display: inline;
+	width: 96px;
+}
+
+div.wall-controls .wall-select {
+	float: right;
+	display: inline;
+}
+
+div.wall-controls .wall-select select {
+	width: 200px;
+	height: 33px;
+	margin: 1px 0px 0px 10px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;  
+	border-radius: 5px;
+	border-color: #DEDDDD;
+	border-top-color: #DEDDDD;
+	border-left-color: #DEDDDD;
+	border-bottom-color: #DEDDDD;
+	border-right-color: #DEDDDD;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-bottom-width: 1px;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-bottom-style: solid;
+	border-right-style: solid;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	color: #7D7979;
+	font-size: 13px;
+	padding: 5px 6px 5px 5px;
+}
