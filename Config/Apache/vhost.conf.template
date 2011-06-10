@@ -26,7 +26,7 @@
 	AliasMatch ^/wall/create(.*) @ProjectPath@/Site/Root/wall/control.php
 	AliasMatch ^/wall/edit(.*) @ProjectPath@/Site/Root/wall/control.php
 	AliasMatch ^/wall(.*) @ProjectPath@/Site/Root/wall/select.php
-	AliasMatch ^/flashdebug(.*) /var/application/Gawk/Flash/bin-debug$1
+	AliasMatch ^/flashdebug(.*) /var/application/Gawk/Gawk-Flash/bin-debug$1
 	AliasMatch ^/(.*) @ProjectPath@/Site/Root/wall/view.php
 
 	php_admin_value include_path ".:@ProjectPath@:@ProjectPath@/Application:@ProjectPath@/Site/Root:/usr/share/php"

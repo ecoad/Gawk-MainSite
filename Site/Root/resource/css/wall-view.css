@@ -1,3 +1,7 @@
+.view-container {
+	min-height: 638px;
+}
+
 h2 {
 	font-family: "BreeLight", "Serif";
 	color: #434444;
