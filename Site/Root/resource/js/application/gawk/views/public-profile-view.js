@@ -70,12 +70,12 @@ function PublicProfileView(config) {
 		if (isFriend) {
 			friendLink.removeClass("add-friend");
 			friendLink.addClass("remove-friend");
-			friendLink.html("Unfriend");
+			friendLink.children("span").html("Unfriend");
 			friendLink.click(onUnfriendClick);
 		} else {
 			friendLink.addClass("add-friend");
 			friendLink.removeClass("remove-friend");
-			friendLink.html("Befriend");
+			friendLink.children("span").html("Befriend");
 			friendLink.click(onBefriendClick);
 		}
 		friendLink.show();

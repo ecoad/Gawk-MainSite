@@ -42,6 +42,20 @@ body {
 	padding: 7px 11px 11px 11px;
 }
 
+#title-area .breadcrumb {
+	padding-top: 12px;
+	color: #434444;
+	float: left;
+}
+
+#title-area .breadcrumb a {
+	color: #434444;
+}
+
+#title-area .breadcrumb a:hover {
+	text-decoration: underline;
+}
+
 div.view-container {
 	padding: 0px 11px 11px 11px;
 	background-color: #fff;

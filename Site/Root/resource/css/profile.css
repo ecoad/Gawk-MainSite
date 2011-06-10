@@ -1,5 +1,58 @@
+@font-face {
+    font-family: 'BreeBold';
+    src: url('/resource/font/breebold-webfont.eot');
+    src: url('/resource/font/breebold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/resource/font/breebold-webfont.woff') format('woff'),
+         url('/resource/font/breebold-webfont.ttf') format('truetype'),
+         url('/resource/font/breebold-webfont.svg#BreeBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#title-area .controls {
+	float: right;
+	height: 35px;
+	margin-top: 3px;
+}
+
+#title-area .controls a.add-friend {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -192px -50px;
+	display: block;
+	width: 108px;
+	height: 35px;
+}
+#title-area .controls a.add-friend:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -300px -50px;
+}
+
+#title-area .controls a.remove-friend {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -192px -85px;
+	display: block;
+	width: 108px;
+	height: 35px;
+}
+#title-area .controls a.remove-friend:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -300px -85px;
+}
+
+#title-area .controls a.edit-profile {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -192px -120px;
+	display: block;
+	width: 108px;
+	height: 35px;
+}
+#title-area .controls a.edit-profile:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -300px -120px;
+}
+
+#title-area .controls span {
+	display: none;
+}
+
 div.profile-main {
 	height: 155px;
+	padding-top: 30px;
+	padding-bottom: 20px;
 }
 
 .profile-main .profile-gawk {
@@ -13,4 +66,136 @@ div.profile-main {
 	float: left;
 	display: inline;
 	width: 855px;
+}
+
+.profile-main .details .name {
+	height: 50px;
+	margin-top: 20px;
+}
+
+.profile-main .details h1 {
+	font-family: "BreeBold";
+	font-size: 24px;
+	float: left;
+	display: inline;
+	color: #575555;
+	margin-right: 10px;
+}
+
+.profile-main .details .gawk-count {
+	font-size: 13px;
+	float: left;
+	display: inline;
+	color: #7d7979;
+	margin-top: 10px;
+}
+
+.profile-main .details .description {
+	font-size: 13px;
+	color: #7d7979;
+	margin-bottom: 6px;
+}
+
+.profile-main .details a.website {
+	font-size: 13px;
+	color: #2cb7a3;
+}
+
+.profile-main .details a.website:hover {
+	text-decoration: underline;
+}
+
+.recent-gawks {
+	margin-bottom: 30px;
+}
+
+#public-profile-view h2 {
+	font-family: "BreeLight";
+	font-size: 20px;
+	color: #575555;
+	margin-bottom: 17px;
+}
+
+.clear-fix:after {
+	clear: both;
+	content: ".";
+	display:block;
+	height:0;
+	clear:both;
+	visibility:hidden;
+}
+
+.profile-other .friends {
+	float: left;
+	width: 450px;
+	display: inline;
+}
+
+.profile-other li.friend { 
+	float: left;
+	width: 70px;
+	display: inline;
+	margin-right: 21px;
+	margin-bottom: 21px;
+}
+
+.profile-other li.friend:last-child { 
+	margin-right: 0px !important;
+}
+
+.profile-other li.friend img {
+	width: 70px;
+	height: 70px;
+}
+
+.profile-other .friends a.see-all {
+	color: #2cb7a3;
+}
+
+.profile-other .friends a.see-all:hover {
+	text-decoration: underline;
+}
+
+.profile-other .walls {
+	float: right;
+	width: 500px;
+	display: inline;
+}
+
+.profile-other .wall-list {
+	float: left;
+	width: 240px;
+	margin-right: 20px;
+	margin-bottom: 30px;
+}
+
+.profile-other .wall-list:last-child {
+	margin-right: 0px !important;
+}
+
+.profile-other .wall-list li {
+	width: 223px;
+	height: 28px;
+	background-color: #f6f5f5;
+	padding: 9px 0px 0px 17px;
+	margin-bottom: 2px;
+}
+
+.profile-other .wall-list li a {
+	color: #7d7979;
+}
+
+.profile-other .wall-list li a:hover {
+	color: #000;
+}
+
+.profile-other .wall-list li.title {
+	background-color: #d0cbcb !important;
+}
+
+.profile-other .wall-list li.title h3 {
+	font-family: "BreeLight";
+	font-size: 18px;
+	height: 31px;
+	color: #575555;
 }

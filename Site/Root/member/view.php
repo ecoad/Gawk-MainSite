@@ -36,8 +36,23 @@ $layout->start("Main");
 ?>
 <div id="public-profile-view">
 	<div id="title-area">
-		<a href="/">home</a> / <a title="View profile" href="<?php
-			echo $memberUrlHelper->getProfileUrl($profileMember); ?>">profile</a> / <?php echo $profileMember->alias; ?>
+		<div class="breadcrumb">
+			<a href="/">home</a> / <a title="View profile" href="<?php
+				echo $memberUrlHelper->getProfileUrl($profileMember); ?>">profile</a> / <?php echo $profileMember->alias; ?>
+		</div>
+		<div class="controls">
+<?php
+if ($memberIsOnOwnMemberPage) {
+?>
+			<a class="edit-profile" href="/u/<?php echo $profileMember->alias; ?>/edit"><span>edit profile</span></a>
+<?php
+} else {
+?>
+			<a class="add-friend friend-control" href="#" style="display: none;"><span>add friend</span></a>
+<?php
+}
+?>
+		</div>
 	</div>
 	<div class="view-container">
 		<div class="profile-main">
@@ -49,29 +64,26 @@ $layout->start("Main");
 					<h1><?php echo $profileMember->alias; ?></h1>
 					<span class="gawk-count"><?php echo $memberVideoCount; ?> gawk<?php
 						echo ($memberVideoCount != 1) ? "s" : ""; ?></span>
-					<div class="controls">
+				</div>
 <?php
-if ($memberIsOnOwnMemberPage) {
+if ($profileMember->description != "") {
 ?>
-						<a class="edit-profile" href="/u/<?php echo $profileMember->alias; ?>/edit">edit your profile</a>
+				<p class="description"><?php echo $profileMember->description; ?></p>
 <?php
-} else {
+}
+if ($profileMember->website != "") {
 ?>
-						<a class="add-friend friend-control" href="#" style="display: none;">add friend</a>
+				<a class="website" href="http://<?php echo $profileMember->website; ?>"><?php echo $profileMember->website; ?></a>
 <?php
 }
 ?>
-					</div>
-				</div>
-				<p class="website"><a href="http://<?php echo $profileMember->website; ?>"><?php echo $profileMember->website; ?></a></p>
-				<p class="description"><?php echo $profileMember->description; ?></p>
 			</div>
 		</div>
 		<div class="recent-gawks" style="display: <?php echo $memberVideoCount > 1 ? "block": "none"; ?>;">
 			<h2>most recent gawks</h2>
 			<div id="recent-swf-container">&nbsp;</div>
 		</div>
-		<div class="profile-other">
+		<div class="profile-other clear-fix">
 			<div class="friends beancan">
 				<h2><?php echo $profileMember->alias; ?>'s friends</h2>
 <?php
@@ -82,14 +94,18 @@ if (count($profileMember->friends) > 0) {
 	foreach ($profileMember->friends as $friend) {
 ?>
 					<li class="friend">
-						<a href="<?php echo $memberUrlHelper->getProfileUrl($friend); ?>" title="View profile">
-							<img width="100px" height="100px" src="<?php echo $memberUrlHelper->getProfilePictureUrl($friend, "100x100")?>" />
+						<a href="<?php echo $memberUrlHelper->getProfileUrl($friend); ?>"
+							title="View <?php echo $friend->alias; ?>'s profile">
+							<img src="<?php echo $memberUrlHelper->getProfilePictureUrl($friend, "70x70")?>" alt="<?php echo
+								$friend->alias; ?>'s profile image"/>
 						</a>
 					</li>
 <?php
 	}
 ?>
 				</ul>
+				<a class="see-all" title="view a list of all <?php echo $profileMember->alias; ?>'s friends" href="#"
+					onclick="return false;">see all friends</a>
 <?php
 } else {
 ?>
@@ -100,28 +116,12 @@ if (count($profileMember->friends) > 0) {
 			</div>
 			<div class="walls beancan">
 				<h2>walls</h2>
-				<div class="wall-list">
-					<h3>bookmarks</h3>
+				<div class="wall-list clear-fix">
+
 					<ul>
-<?php
-if (count($recentWallActivity->bookmarks) == 0) {
-?>
-						<li>no bookmarks</li>
-<?php
-}
-foreach ($recentWallActivity->bookmarks as $memberBookmark) {
-?>
-						<li>
-							<a href="/<?php echo $memberBookmark->url; ?>"><?php echo $memberBookmark->name; ?></a>
+						<li class="title">
+							<h3>walls created</h3>
 						</li>
-<?php
-}
-?>
-					</ul>
-				</div>
-				<div class="wall-list">
-					<h3>walls created</h3>
-					<ul>
 <?php
 if (count($recentWallActivity->wallsCreatedByMember) == 0) {
 ?>
@@ -131,7 +131,8 @@ if (count($recentWallActivity->wallsCreatedByMember) == 0) {
 foreach ($recentWallActivity->wallsCreatedByMember as $memberWall) {
 ?>
 						<li>
-							<a class="underline" href="/<?php echo $memberWall->url; ?>"><?php echo $memberWall->name; ?></a>
+							<a title="<?php echo $memberWall->description; ?>"
+								class="underline" href="/<?php echo $memberWall->url; ?>"><?php echo $memberWall->name; ?></a>
 						</li>
 <?php
 }
@@ -139,18 +140,21 @@ foreach ($recentWallActivity->wallsCreatedByMember as $memberWall) {
 					</ul>
 				</div>
 				<div class="wall-list">
-					<h3>recent walls</h3>
 					<ul>
+						<li class="title">
+							<h3>bookmarked</h3>
+						</li>
 <?php
-if (count($recentWallActivity->recentWallParticipation) == 0) {
+if (count($recentWallActivity->bookmarks) == 0) {
 ?>
-						<li>no walls</li>
+						<li>no bookmarks</li>
 <?php
 }
-foreach ($recentWallActivity->recentWallParticipation as $memberWallParticipation) {
+foreach ($recentWallActivity->bookmarks as $memberBookmark) {
 ?>
 						<li>
-							<a href="/<?php echo $memberWallParticipation->url; ?>"><?php echo $memberWallParticipation->name; ?></a>
+							<a title="<?php echo $memberBookmark->description; ?>"
+								href="/<?php echo $memberBookmark->url; ?>"><?php echo $memberBookmark->name; ?></a>
 						</li>
 <?php
 }

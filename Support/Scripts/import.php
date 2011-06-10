@@ -24,7 +24,7 @@ $member = $memberDataEntity->toObject();
 
 foreach ($johnBits as $ls) {
 
-	$fileName = substr($ls, 59);
+	$fileName = substr($ls, 52);
 	if ((strlen($fileName) > 5) && (strpos($fileName, ".") != false)) {
 
 		if (($i % 30) == 0) {
