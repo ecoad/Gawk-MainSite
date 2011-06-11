@@ -97,9 +97,8 @@ class VideoFileUpload {
 
 		$stillsLocation = $application->registry->get("Binary/Path") . "/frames/" . $filename;
 
-		$mkdirCommand = "ssh -p 17510 " . $application->registry->get("MediaServer/Location") .
-			" ' mkdir -p $stillsLocation '";
-		$exitCode = shell_exec($mkdirCommand .  " > /dev/null; $?");
+		$mkdirCommand = "mkdir -p $stillsLocation ";
+		$exitCode = shell_exec("$mkdirCommand > /dev/null; $?");
 
 		if ($exitCode != 0) {
 			throw new Exception("Unable to mkdir: " . $mkdirCommand);
@@ -108,10 +107,7 @@ class VideoFileUpload {
 		$videoLocation = $application->registry->get("Binary/Path") . "/" . $filename;
 		$dimensions = $application->registry->get("Video/Dimensions");
 
-		$splitVideoCommand = "ssh -p 17510 " . $application->registry->get("MediaServer/Location") .
-			" 'ffmpeg -i $videoLocation -r 15 -s {$dimensions[0]}x{$dimensions[1]} -f image2 {$stillsLocation}/frames-%d.jpg'";
-
-		//echo $mkdirCommand, " ... ", $splitVideoCommand; exit;
+		$splitVideoCommand = "ffmpeg -i $videoLocation -r 15 -s {$dimensions[0]}x{$dimensions[1]} -f image2 {$stillsLocation}/frames-%d.jpg";
 
 		$exitCode = shell_exec($splitVideoCommand . " > /dev/null; $?");
 

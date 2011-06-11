@@ -86,35 +86,31 @@ include "Site/Template/Default/Widget/Footer.php";
 		</div>
 		<div style="display: none;">
 			<div class="overlay" id="login-overlay">
-				<h3>login to gawkwall</h3>
-				<p>have an account with Facebook?</p>
-				<form method="post" class="login">
-					<label>
-						<strong>login with Facebook</strong>
-						<fb:login-button></fb:login-button><br />
-					</label>
-				</form>
-				<hr/>
-				<p>alternatively, log in or <a href="#" title="register to the gawkwall"
-					class="register underline">register</a> with your gawkwall account</p>
-				<form method="post" class="login">
-					<div class="login-error" style="display: none;">
-						<h4>login error</h4>
-						<p class="message"></p>
-					</div>
-					<label>
-						<strong>email address</strong>
-						<input class="textbox" type="email" name="EmailAddress" /><br />
-					</label><br />
-					<label>
-						<strong>password</strong>
-						<input class="textbox" type="password" name="Password" /> <a href="#">forgotten password?</a><br />
-					</label><br />
-					<label>
-						<strong>&nbsp;</strong>
-						<input type="submit" class="button right" name="Login" value="login"/>
-					</label><br />
-				</form>
+				<div class="site-registered">
+					<form method="post" class="login">
+						<div class="login-error" style="display: none;">
+							<h4>login error</h4>
+							<p class="message"></p>
+						</div>
+						<label>
+							<strong>email address</strong>
+							<input class="textbox" type="email" name="EmailAddress" /><br />
+						</label>
+						<label>
+							<strong>password</strong>
+							<input class="textbox" type="password" name="Password" />
+						</label>
+						<a href="#" class="login-button"><span>login</span></a>
+					</form>
+				</div>
+				<div class="facebook-registered">
+					<fb:login-button></fb:login-button>
+					<p class="note">easy, fast and simple login with facebook.</p>
+				</div>
+				<div class="register">
+					<p>not a member yet?</p>
+					<a href="#" class="register-button" title="register to gawkwall"><span>register</span></a>
+				</div>
 			</div>
 			<div class="overlay" id="register-overlay">
 				<h3>register to gawkwall</h3>

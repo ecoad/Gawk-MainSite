@@ -108,3 +108,121 @@ div.view-container {
 	float: right;
 	display: block;
 }
+
+#login-overlay {
+	background: url("/resource/image/login-overlay-background.png?v=@VERSION-NUMBER@");
+	width: 605px;
+	height: 460px;
+}
+
+#login-overlay .site-registered {
+	position: absolute;
+	top: 160px;
+	left: 87px;
+	width: 185px;
+}
+
+#login-overlay .site-registered label {
+	margin-bottom: 12px;
+	display: block;
+}
+
+#login-overlay .site-registered input.textbox {
+	width: 157px;
+	height: 20px;
+	margin: 1px 0px 0px 0px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;  
+	border-radius: 5px;
+	border-color: #DEDDDD;
+	border-top-color: #DEDDDD;
+	border-left-color: #DEDDDD;
+	border-bottom-color: #DEDDDD;
+	border-right-color: #DEDDDD;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-bottom-width: 1px;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-bottom-style: solid;
+	border-right-style: solid;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	color: #7D7979;
+	font-size: 13px;
+	padding: 5px 6px 5px 5px;
+}
+
+#login-overlay .site-registered strong {
+	font-family: "BreeLight", "Arial", "Sans-Serif";
+	color: #ffffff;
+	margin-bottom: 6px;
+	display: block;
+	font-weight: normal;
+}
+
+#login-overlay .facebook-registered {
+	position: absolute;
+	top: 183px;
+	left: 362px;
+	width: 185px;
+	margin-top: 4px;
+}
+
+#login-overlay .facebook-registered p {
+	color: #ffffff;
+	margin-top: 10px;
+	display: block;
+	width: 150px;
+}
+
+#login-overlay a.login-button {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -0px -86px;
+	display: block;
+	height: 34px;
+	width: 96px;
+	margin: 25px auto;
+}
+
+#login-overlay a.login-button:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -96px -86px;
+}
+
+#login-overlay a.login-button span {
+	display: none;
+}
+
+#login-overlay .register {
+	position: absolute;
+	top: 383px;
+	left: 178px;
+	width: 250px;
+}
+
+#login-overlay .register p {
+	float: left;
+	font-family: "BreeLight", "Arial", "Sans-Serif";
+	color: #ffffff;
+	margin: 8px 15px 0px 0px;
+	font-size: 16px;
+	line-height: 17px;
+}
+
+#login-overlay a.register-button {
+	float: left;
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -0px -120px;
+	display: block;
+	height: 34px;
+	width: 96px;
+}
+
+#login-overlay a.register-button:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -96px -120px;
+}
+
+#login-overlay a.register-button span {
+	display: none;
+}

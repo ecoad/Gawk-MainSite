@@ -93,7 +93,13 @@ class WallControl extends DataControl {
 		while ($videoDataEntity = $videoControl->getPage($currentPage, $pageLength)) {
 			$video = $videoDataEntity->toObject();
 			$video->newVideoAfterInit = ($previousRunTime !== null);
-			$video->videoControlAuthorised = $this->videoAdministration->isMemberAuthorisedForVideoAdmin($video, $wall);
+			$video->member->videoControlAuthorised  = $this->videoAdministration->isMemberAuthorisedForVideoAdmin($video, $wall);
+			$video->member->videoPositiveRated = false;
+
+			$memberRatingControl = Factory::getMemberRatingControl();
+			if ($memberRatingDataEntity = $memberRatingControl->getMemberRating($video->member->secureId, $video->secureId)) {
+				$video->member->videoPositiveRated = $memberRatingDataEntity->isPositiveRating();
+			}
 			$videos[] = $video;
 		}
 

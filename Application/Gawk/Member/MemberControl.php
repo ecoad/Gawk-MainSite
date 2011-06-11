@@ -161,6 +161,16 @@ class CustomMemberControl extends MemberControl {
 	}
 
 	/**
+	 * @param string $secureId
+	 * @return Member
+	 */
+	public function getMemberBySecureId($secureId) {
+		if ($memberDataEntity = $this->getMemberDataEntityBySecureId($secureId)) {
+			return $memberDataEntity->toObject();
+		}
+	}
+
+	/**
 	 * Update a member's profile
 	 * @param CustomMemberDataEntity $memberDataEntity
 	 * @param Member $updatedMemberData
@@ -237,6 +247,16 @@ class CustomMemberControl extends MemberControl {
 		$this->setFilter($filter);
 
 		return $this->getNext();
+	}
+
+	/**
+	 * @param string $alias
+	 * @return Member
+	 */
+	public function getMemberByAlias($alias) {
+		if ($member = $this->getMemberDataEntityByAlias($alias)) {
+			return $member->toObject();
+		}
 	}
 
 	/**

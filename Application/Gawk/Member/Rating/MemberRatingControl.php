@@ -29,41 +29,39 @@ class MemberRatingControl extends DataControl {
 			"IP Address", "", FM_TYPE_IP, null, FM_STORE_ALWAYS, false);
 	}
 
-	/**
-	 * @param CustomMemberDataEntity $memberDataEntity
-	 * @param string $videoSecureId
-	 * @param string $positiveRating i.e. "t" or "f"
-	 * @return boolean True if saved
-	 */
-	public function addRating(CustomMemberDataEntity $memberDataEntity, $videoSecureId, $positiveRating) {
-		$positiveRatingFormatted = $positiveRating ? "t" : "f";
-		$videoControl = Factory::getVideoControl();
-		if ($video = $videoControl->itemByField($videoSecureId, "SecureId")) {
-			$rating = null;
-			if ($rating = $this->getMemberRating($memberDataEntity->get("SecureId"), $videoSecureId)) {
-				$newRating = false;
-				if ($rating->get("PositiveRating") == $positiveRatingFormatted) {
-					$this->errorControl->addError("MemberRating for this video aleady is set", "DuplicateRating");
-					return false;
-				}
-			} else {
-				$newRating = true;
-				$rating = $this->makeNew();
-				$rating->set("VideoSecureId", $video->get("SecureId"));
-				$rating->set("MemberSecureId", $memberDataEntity->get("SecureId"));
-			}
-			$rating->set("PositiveRating", $positiveRating);
-
-			if ($rating->save()) {
-				$modificationValue = $newRating ? 1 : 2;
-				$sql = "UPDATE \"{$videoControl->table}\" SET \"Rating\" = \"Rating\" " . ($positiveRating ? "+" : "-") . "$modificationValue WHERE \"SecureId\" = '{$video->get("SecureId")}'";
-				$videoControl->runQuery($sql);
-				return true;
-			}
-		} else {
-			$this->errorControl->addError("Cannot find video: $videoSecureId", "InvalidVideoSecureId");
+	public function addFavouriteRating(CustomMemberDataEntity $memberDataEntity, $videoSecureId) {
+		if ($rating = $this->getMemberRating($memberDataEntity->get("SecureId"), $videoSecureId)) {
+			$this->errorControl->addError("MemberRating for this video aleady is set", "DuplicateRating");
 			return false;
 		}
+
+		$videoControl = Factory::getVideoControl();
+
+		$rating = $this->makeNew();
+		$rating->set("VideoSecureId", $videoSecureId);
+		$rating->set("MemberSecureId", $memberDataEntity->get("SecureId"));
+		$rating->set("PositiveRating", "t");
+
+		if ($rating->save()) {
+			$sql = "UPDATE \"{$videoControl->table}\" SET \"Rating\" = \"Rating\" + 1 WHERE \"SecureId\" = '{$videoSecureId}'";
+			$videoControl->runQuery($sql);
+			return true;
+		}
+	}
+
+	public function removeFavouriteRating(CustomMemberDataEntity $memberDataEntity, $videoSecureId) {
+		if (!$rating = $this->getMemberRating($memberDataEntity->get("SecureId"), $videoSecureId)) {
+			$this->errorControl->addError("MemberRating is not set", "NoCurrentRating");
+			return false;
+		}
+
+		$videoControl = Factory::getVideoControl();
+
+		$this->delete($rating->get("Id"));
+
+		$sql = "UPDATE \"{$videoControl->table}\" SET \"Rating\" = \"Rating\" - 1 WHERE \"SecureId\" = '{$videoSecureId}'";
+		$videoControl->runQuery($sql);
+		return true;
 	}
 
 	/**

@@ -42,15 +42,22 @@ class MemberRatingWebService {
 				case self::SERVICE_GET_RATING:
 					if ($memberRatingDataEntity = $this->memberRatingControl->getMemberRating(
 						$memberDataEntity->get("SecureId"), $getData["VideoSecureId"])) {
-							
+
 						$response->success = true;
 						$response->positiveRating = $memberRatingDataEntity->isPositiveRating();
 					}
 					break;
 				case self::SERVICE_ADD_RATING:
-					if ($this->memberRatingControl->addRating($memberDataEntity, $postData["VideoSecureId"], $postData["PositiveRating"])) {
-						$response->success = true;
+					if ($postData["PositiveRating"] == "true") {
+						if ($this->memberRatingControl->addFavouriteRating($memberDataEntity, $postData["VideoSecureId"])) {
+							$response->success = true;
+						}
+					} else {
+						if ($this->memberRatingControl->removeFavouriteRating($memberDataEntity, $postData["VideoSecureId"])) {
+							$response->success = true;
+						}
 					}
+
 					break;
 				default;
 					$this->application->errorControl->addError("Member method \"$method\" unknown");
