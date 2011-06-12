@@ -52,7 +52,7 @@ function GawkView(config) {
 
 		var params = {};
 		params.allowscriptaccess = "always";
-		params.wmode = "window";
+		params.wmode = "transparent";
 
 		swfobject.embedSWF("/resource/flash/GawkFlash.swf?v=@VERSION-NUMBER@", gawkFlashContainerElement.attr("id"),
 			"1050", "655", "9.0.0", false, gawkFlashVars, params, {id: swfObjectId});
@@ -212,11 +212,11 @@ function GawkView(config) {
 	}
 
 	function onOverlayShow() {
-		$("object").hide();
+		//$("object").hide(); //TODO: not needed any more
 	}
 
 	function onOverlayClose() {
-		$("object").show();
+		//$("object").show();
 	}
 
 	init();

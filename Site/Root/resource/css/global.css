@@ -109,6 +109,28 @@ div.view-container {
 	display: block;
 }
 
+.box-close-button {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -0px -155px;	
+	display: block;
+	width: 65px;
+	height: 28px;
+	
+	position: absolute;
+	top: 15px;
+	right: 12px;
+	display: block;
+	cursor: pointer;
+	z-index: 1103;
+}
+
+.box-close-button:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -65px -155px;
+}
+
+.box-close-button span {
+	display: none;
+}
+
 #login-overlay {
 	background: url("/resource/image/login-overlay-background.png?v=@VERSION-NUMBER@");
 	width: 605px;
@@ -155,6 +177,52 @@ div.view-container {
 	font-size: 13px;
 	padding: 5px 6px 5px 5px;
 }
+
+#login-overlay .site-registered input.textbox.error {
+	border-color: red;
+	border-top-color: red;
+	border-left-color: red;
+	border-bottom-color: red;
+	border-right-color: red;
+	border-top-width: 2px;
+	border-left-width: 2px;
+	border-bottom-width: 2px;
+	border-right-width: 2px;
+}
+
+#login-overlay .login-error {
+	display: block; 
+	top: -32px; 
+	position: absolute; 
+	color: red; 
+	background-color: white; 
+	width: 79px; 
+	text-align: center; 
+	padding: 3px; 
+	left: 44px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;  
+	border-radius: 5px;
+	border-color: red;
+	border-top-color: red;
+	border-left-color: red;
+	border-bottom-color: red;
+	border-right-color: red;
+	border-top-width: 2px;
+	border-left-width: 2px;
+	border-bottom-width: 2px;
+	border-right-width: 2px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-bottom-style: solid;
+	border-right-style: solid;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	height: 19px;
+}
+
 
 #login-overlay .site-registered strong {
 	font-family: "BreeLight", "Arial", "Sans-Serif";

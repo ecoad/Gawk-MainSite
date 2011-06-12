@@ -8,10 +8,10 @@ if (!$member = $memberControl->getMemberByAlias($memberAlias)) {
 	$application->displayErrorPage("/error/404.php", 404);
 }
 
-if ($member->facebookId != "") {
-	header("Location: http://graph.facebook.com/elliot.coad/picture");
-	exit;
-}
+//if ($member->facebookId != "") {
+//	header("Location: http://graph.facebook.com/elliot.coad/picture");
+//	exit;
+//}
 
 $profileImagePath = "http://capa.clockhosting.com/resource/binary/frames/gk-fMUQgzDNI1.flv/frames-30.jpg";
 

@@ -14,6 +14,9 @@
 	bottom: 0px;
 	right: 0px;
 	z-index: 11;
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+	background-color: #000000;	
 }
 
 .box-container {
@@ -27,22 +30,6 @@
 
 .box-element {
 	position: absolute;
-}
-
-.box-close-button {
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	display: block;
-	padding: 3px 5px 8px 10px;
-	font-size: 12px;
-	color: #FFFFFF;
-	background-color: #000000;
-	cursor: pointer;
-	z-index: 1103;
-	font-style: italic;
-	font-weight: bold;
-	text-decoration: none;
 }
 
 .box-close-button:hover {

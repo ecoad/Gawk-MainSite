@@ -47,7 +47,7 @@ $.box = new function() {
 
 		contentPlaceholder = $("<div>").html("jim");
 
-		closeButton.html("close").addClass("box-close-button");
+		closeButton.addClass("box-close-button").append($("<span/>").html("close"));
 		closeButton.click(onClose);
 		$(window).resize(onResize);
 		close();

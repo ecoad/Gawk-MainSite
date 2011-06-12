@@ -5,7 +5,7 @@ $facebook = Factory::getFacebook($application);
 $wallControl = Factory::getWallControl();
 $memberAuthentication = Factory::getMemberAuthentication();
 if (!$memberAuthentication->isLoggedIn()) {
-	$application->redirect("/?Login&ReturnUrl=" . $application->getCurrentUrl());
+	$application->redirect("/?Login&ReturnUrl=" . $_SERVER["SCRIPT_NAME"]);
 }
 
 $createRequestUrl = "/wall/create";
