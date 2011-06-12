@@ -1,0 +1,58 @@
+form.basic-form {
+	background-color: #ededed;
+	width: 307px;
+	padding: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;  
+	border-radius: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	position: relative;
+}
+
+form.basic-form label {
+	margin-bottom: 17px;
+	display: block;
+}
+
+form.basic-form strong {
+	font-family: "BreeLight", "Arial", "Sans-Serif";
+	color: #575555;
+	font-size: 15px;
+	margin-bottom: 6px;
+	display: block;
+	font-weight: normal;
+}
+
+form.basic-form a.submit {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -192px -155px;
+	display: block;
+	width: 108px;
+	height: 35px;
+}
+
+form.basic-form a.submit:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -300px -155px;
+}
+
+form.basic-form a.submit span {
+	display: none;
+}
+
+form.basic-form .contact-graphic {
+	position: absolute;
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat 0px -191px;
+	display: block;
+	width: 236px;
+	height: 65px;
+	right: -129px;
+	top: 10px;
+}
+
+p.white-normal {
+	color: #7d7979;
+}

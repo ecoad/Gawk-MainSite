@@ -294,3 +294,12 @@ div.view-container {
 #login-overlay a.register-button span {
 	display: none;
 }
+
+h1.page-title {
+	font-family: "BreeLight", "Arial", "Sans-Serif";
+	color: #575555;
+	margin-bottom: 6px;
+	display: block;
+	font-weight: normal;
+	font-size: 23px;
+}
