@@ -84,7 +84,8 @@ class VideoFileUpload {
 			$fileName = $this->videoControl->getRandomSecureId() . "." . $this->videoControl->getFileExtensionByMimeType($fileMimeType);
 			$fileLocation = $this->videoControl->application->registry->get("Binary/Path") . "/" .	$fileName;
 
-			move_uploaded_file($temporaryName, $fileLocation);
+			//move_uploaded_file($temporaryName, $fileLocation);
+			shell_exec("mv /tmp/$temporaryName $fileLocation");
 
 			return $fileName;
 		} else {
