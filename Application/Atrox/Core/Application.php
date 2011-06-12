@@ -100,7 +100,7 @@ class Application {
 
 	function Application() {
 
-		//set_error_handler(array("Application", "customErrorHandler"));
+		set_error_handler(array("Application", "customErrorHandler"));
 		@session_start();
 		$this->registry = CoreFactory::getRegistry();
 		$this->errorControl = CoreFactory::getErrorControl();

@@ -80,17 +80,16 @@ class VideoFileUpload {
 	}
 
 	protected function moveTemporaryFile($temporaryName, $fileMimeType) {
-		if (file_exists($temporaryName)) {
-			$fileName = $this->videoControl->getRandomSecureId() . "." . $this->videoControl->getFileExtensionByMimeType($fileMimeType);
-			$fileLocation = $this->videoControl->application->registry->get("Binary/Path") . "/" .	$fileName;
-
-			//move_uploaded_file($temporaryName, $fileLocation);
-			shell_exec("mv /tmp/$temporaryName $fileLocation");
-
-			return $fileName;
-		} else {
-			$this->videoControl->errorControl->addError("Cannot find temporary file: " . $temporaryName);
+		if (!file_exists($temporaryName)) {
+			trigger_error("Temporary file does not exist: $temporaryName");
 		}
+		$fileName = $this->videoControl->getRandomSecureId() . "." . $this->videoControl->getFileExtensionByMimeType($fileMimeType);
+		$fileLocation = $this->videoControl->application->registry->get("Binary/Path") . "/" .	$fileName;
+
+		//move_uploaded_file($temporaryName, $fileLocation);
+		shell_exec("mv $temporaryName $fileLocation");
+
+		return $fileName;
 	}
 
 	protected function createVideoStills($filename) {
