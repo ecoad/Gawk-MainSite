@@ -8,10 +8,6 @@ if (!$member = $memberControl->getMemberByAlias($memberAlias)) {
 	$application->displayErrorPage("/error/404.php", 404);
 }
 
-//if ($member->facebookId != "") {
-//	header("Location: http://graph.facebook.com/elliot.coad/picture");
-//	exit;
-//}
 
 $videoControl = Factory::getVideoControl();
 if ($video = $videoControl->getLastVideoForMember($member)) {

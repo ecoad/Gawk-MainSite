@@ -51,6 +51,7 @@ class FlashWebService {
 					$response->updatePollLength = $this->application->registry->get("Wall/DefaultWallPollLength");
 
 					$response->mediaServerLocation = $this->application->registry->get("MediaServer/Address");
+					$response->webServerLocation = $this->application->registry->get("Site/Address");
 					$response->binaryLocation = $this->application->registry->get("MediaServer/BinaryAddress");
 				}
 				break;
