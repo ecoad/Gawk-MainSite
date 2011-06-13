@@ -116,15 +116,6 @@ div.profile-main {
 	margin-bottom: 17px;
 }
 
-.clear-fix:after {
-	clear: both;
-	content: ".";
-	display:block;
-	height:0;
-	clear:both;
-	visibility:hidden;
-}
-
 .profile-other .friends {
 	float: left;
 	width: 450px;

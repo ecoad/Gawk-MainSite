@@ -171,12 +171,6 @@ class VideoControl extends DataControl {
 		return true;
 	}
 
-	public function getNext() {
-		if ($video = parent::getNext()) {
-			return $video;
-		}
-	}
-
 	public function getDataEntity() {
 		return new VideoDataEntity($this);
 	}

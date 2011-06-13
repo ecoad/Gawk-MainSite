@@ -15,7 +15,8 @@ class VideoControlTest extends PHPUnit_Framework_TestCase {
 
 	public function testMoveFileFromTmpToBinarySuccess() {
 		$fileFrom = "/tmp/testfile";
-		shell_exec("touch $fileFrom");
+
+		echo shell_exec("touch $fileFrom");
 		$fileLocation = $this->application->registry->get("Binary/Path") . "/" .	"test-file-" . uniqid();
 		shell_exec("mv $fileFrom $fileLocation");
 

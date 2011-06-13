@@ -2,10 +2,15 @@
 	min-height: 638px;
 }
 
+.view-container {
+	width: 1050px;
+}
+
 h2 {
 	font-family: "BreeLight", "Serif";
 	color: #434444;
 	font-size: 16px;
+	float: left;
 }
 
 p.description {
@@ -14,6 +19,21 @@ p.description {
 	color: #868585;
 	font-size: 13px;
 	margin-top: 5px;
+}
+
+span.bookmark {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -156px -156px;
+	display: block;
+	width: 13px; 
+	height: 13px;
+	float: left;
+	cursor: pointer;
+	margin-top: 3px;
+	margin-left: 5px;
+}
+
+span.bookmark.selected {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -143px -156px;
 }
 
 a.record {

@@ -7,6 +7,7 @@
 
 	AliasMatch ^/resource/binary(.*) @DataPath@/Binary$1
 	AliasMatch ^/favicon.ico @ProjectPath@/Site/Root/favicon.ico
+	AliasMatch ^/crossdomain.xml @ProjectPath@/Site/Root/crossdomain.xml
 	AliasMatch ^/robots.txt @ProjectPath@/Site/Root/robots.txt
 	AliasMatch ^/deploy-info.json @ProjectPath@/Site/Root/deploy-info.json
 	AliasMatch ^/account(.*) @ProjectPath@/Site/Root/account$1

@@ -303,3 +303,12 @@ h1.page-title {
 	font-weight: normal;
 	font-size: 23px;
 }
+
+.clear-fix:after {
+	clear: both;
+	content: ".";
+	display:block;
+	height:0;
+	clear:both;
+	visibility:hidden;
+}

@@ -76,6 +76,7 @@ class WallControl extends DataControl {
 				break;
 			case $this->systemWallFactory->getProfileRecentWall()->secureId:
 				$filter->addConditional($videoControl->table, "MemberSecureId", $memberSecureId);
+				$filter->addOrder("DateCreated", true);
 				break;
 			default:
 				$filter->addConditional($videoControl->table, "WallSecureId", $wall->secureId);

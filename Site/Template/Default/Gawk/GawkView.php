@@ -3,7 +3,16 @@ $systemWallFactory = Factory::getSystemWallFactory();
 ?>
 <div id="title-area">
 	<div class="wall-information">
-		<h2><?php echo $wall->name; ?></h2>
+		<div class="upper clear-fix">
+			<h2><?php echo $wall->name; ?></h2>
+<?php
+if (!$systemWallFactory->isSystemWall($wall->secureId)) {
+?>
+			<span class="bookmark"></span>
+<?php
+}
+?>
+		</div>
 		<p class="description"><?php echo $wall->description; ?></p>
 	</div>
 	<div class="wall-controls">

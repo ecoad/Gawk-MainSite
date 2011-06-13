@@ -6,7 +6,8 @@ function GawkView(config) {
 	var loggedIn = false;
 	var wallLoaded = false;
 	var wall = config.getWall();
-	var bookmarkLink = element.find("h3").find("span.bookmark");
+	var bookmarkLink = element.find("span.bookmark"), bookmarkLabelAdd = "add bookmark",
+		bookmarkLabelRemove = "remove bookmark";
 
 	function init() {
 		$(document).bind("GawkModelInit", onModelInit);
@@ -36,8 +37,8 @@ function GawkView(config) {
 		$(".box-close-button").click(onOverlayClose);
 
 		recordButton.bind("click", onRecordClick);
+		bookmarkLink.click(onBookmarkClick);
 
-		element.find("h3").find("span.bookmark").click(onBookmarkClick);
 		$("select[name=SelectWall]").change(onWallSelectChange);
 	}
 
@@ -133,10 +134,11 @@ function GawkView(config) {
 	}
 
 	function setWallBookmarkState(memberBookmarks) {
-		element.find("h3").find("span.bookmark").removeClass("selected");
+		bookmarkLink.attr("title", bookmarkLabelAdd);
 		$(memberBookmarks).each(function(index, bookmark) {
 			if (bookmark.secureId == wall.secureId) {
-				element.find("h3").find("span.bookmark").addClass("selected");
+				bookmarkLink.addClass("selected");
+				bookmarkLink.attr("title", bookmarkLabelRemove);
 				return false;
 			}
 		});
@@ -145,13 +147,20 @@ function GawkView(config) {
 	function onBookmarkClick(event) {
 		event.preventDefault();
 
-		var isAlreadyBookmarked = element.find("h3").find("span.bookmark").hasClass("selected");
+		if (!loggedIn) {
+			$(document).trigger("GawkUILoginOverlayShow");
+			return;
+		}
+
+		var isAlreadyBookmarked = bookmarkLink.hasClass("selected");
 
 		if (isAlreadyBookmarked) {
-			element.find("h3").find("span.bookmark").removeClass("selected");
+			bookmarkLink.removeClass("selected");
+			bookmarkLink.attr("title", bookmarkLabelAdd);
 			$(document).trigger("GawkUIMemberWallBookmarkRemoveRequest", wall.secureId);
 		} else {
-			element.find("h3").find("span.bookmark").addClass("selected");
+			bookmarkLink.addClass("selected");
+			bookmarkLink.attr("title", bookmarkLabelRemove);
 			$(document).trigger("GawkUIMemberWallBookmarkAddRequest", wall.secureId);
 		}
 	}
@@ -177,7 +186,7 @@ function GawkView(config) {
 	}
 
 	function onHideView() {
-		element.hide();
+		//element.hide();
 	}
 
 	function onGawkMainWallDenyOverlay() {
