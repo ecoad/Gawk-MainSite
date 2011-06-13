@@ -189,4 +189,22 @@ SQL;
 		$row = $this->databaseControl->fetchRow($result);
 		return $row[0];
 	}
+
+	/**
+	 * @param Member $member
+	 * @return Video
+	 */
+	public function getLastVideoForMember(Member $member) {
+		$this->reset();
+		$filter = CoreFactory::getFilter();
+		$filter->addConditional($this->table, "MemberSecureId", $member->secureId);
+		$filter->addOrder("DateCreated", true);
+		$filter->addLimit(1);
+
+		$this->setFilter($filter);
+
+		if ($videoDataEntity = $this->getNext()) {
+			return $videoDataEntity->toObject();
+		}
+	}
 }

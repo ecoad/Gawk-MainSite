@@ -13,6 +13,11 @@ if (!$member = $memberControl->getMemberByAlias($memberAlias)) {
 //	exit;
 //}
 
-$profileImagePath = "http://capa.clockhosting.com/resource/binary/frames/gk-fMUQgzDNI1.flv/frames-30.jpg";
+$videoControl = Factory::getVideoControl();
+if ($video = $videoControl->getLastVideoForMember($member)) {
+	$profileImagePath = "http://capa.clockhosting.com/resource/binary/frames/{$video->filename}/frames-30.jpg";
+} else {
+	$profileImagePath = "http://capa.clockhosting.com/resource/binary/frames/gk-fMUQgzDNI1.flv/frames-30.jpg";
+}
 
 header("Location: $profileImagePath");
