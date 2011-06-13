@@ -19,20 +19,19 @@ $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.
 ?>
-
-<div class="panel">
-	<div class="inner-panel">
-		<h2><span>Error 404: Page Not Found</span></h2>
-		<p>Don't worry &ndash; it's not serious, but it looks like the page you've requested isn't available.</p>
-		<p><strong>Here's what you can try:</strong></p>
-		<ul class="list-items">
-			<li>If you typed the page address in the address bar, make sure that it is spelt correctly.</li>
-			<li>Click the <a href="#" onclick="history.go(-1)">back button</a> to try another link.</li>
-			<li>Make your way back to the <a href="/"><?php echo $application->registry->get("Title"); ?> homepage</a> and look for links to the information you want.</li>
-		</ul>
+<div id="title-area">
+	<div class="breadcrumb">
+		<a href="/">home</a> / error 404
 	</div>
 </div>
-
+<div class="view-container">
+	<div class="panel">
+		<div class="inner-panel">
+			<h1 class="page-title">Error 404: Page Not Found</h1>
+			<p>Unfortunately this page is unavailable.</p>
+		</div>
+	</div>
+</div>
 <?php
 $layout->start("Utility");
 ?>

@@ -78,17 +78,17 @@ if ($application->errorControl->hasErrors()) {
 					<strong>alias</strong>
 					<input name="ProfileData[<?php echo $formAliasLabel; ?>]" type="text" class="textbox wide"
 						tabindex="<?php echo $tabIndex++; ?>" value="<?php echo $member->alias; ?>"/>
-				</label><br />
+				</label>
 				<label>
 					<strong>website</strong>
 					<input name="ProfileData[<?php echo $formWebsiteLabel; ?>]" type="text" class="textbox wide"
 						tabindex="<?php echo $tabIndex++; ?>" value="<?php echo $member->website; ?>"/>
-				</label><br />
+				</label>
 				<label>
-					<strong>about</strong><br>
+					<strong>about</strong>
 					<textarea tabindex="<?php echo $tabIndex++; ?>" class="textbox wide" rows="7" cols="40"
 						name="ProfileData[<?php echo $formDescriptionLabel; ?>]"><?php echo $member->description; ?></textarea>
-				</label><br />
+				</label>
 				<div class="controls">
 					<a href="#" onclick="$(this).parents('form').submit();" class="submit" title="submit the form">
 						<span><?php echo $formSubmitLabel; ?></span>

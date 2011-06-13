@@ -11,41 +11,11 @@
 
 		<link rel="shortcut icon" href="/favicon.ico?v=@VERSION-NUMBER@" />
 
-<?php
-$application = CoreFactory::getApplication();
-$cssAggregator = CoreFactory::getCssAggregator(
-	$application->registry->get("Path") . "/Site/Root",
-	$application->registry->get("Cache/Resource/Path"),
-	"/resource/cache/resource");
-
-if ($_SESSION["Style"] != "high-contrast") {
-	// If you need to add stylesheets add them below.
-	$cssAggregator->collect(
-		array(
-			"/resource/css/reset.css",
-			"/resource/css/structure.css",
-			"/resource/css/global.css"
-		)
-	);
-} else {
-	$cssAggregator->collect(
-		array(
-			"/resource/css/accessibility/high-contrast.css"
-		)
-	);
-}
-if ($_SESSION["Style"] == "large") {
-	$cssAggregator->collect(
-		array(
-			"/resource/css/accessibility/large.css"
-		)
-	);
-}
-?>
-<?php
-echo $cssAggregator->output();
-?>
-
+		<link rel="stylesheet" type="text/css" href="/resource/css/reset.css?v=@VERSION-NUMBER@" media="all" />
+		<link rel="stylesheet" type="text/css" href="/resource/css/base.css?v=@VERSION-NUMBER@" media="all" />
+  	<link rel="stylesheet" type="text/css" href="/resource/css/global.css?v=@VERSION-NUMBER@" media="all" />
+  	<link rel="stylesheet" type="text/css" href="/resource/css/header.css?v=@VERSION-NUMBER@" media="all" />
+		<link rel="stylesheet" type="text/css" href="/resource/css/box.css?v=@VERSION-NUMBER@" media="all" />
 		<!--[if lt IE 7]>
 			<script src="/resource/js/browser/internet-explorer/DD_roundies/DD_roundies.js?v=@VERSION-NUMBER@" type="text/javascript"></script>
 		<![endif]-->
@@ -65,19 +35,6 @@ echo $cssAggregator->output();
 include("Site/Template/Default/Widget/Header.php");
 ?>
 				</div>
-
-				<div id="accessibility-options">
-<?php
-include("Site/Template/Default/Widget/AccessibilityOptions.php");
-?>
-				</div>
-
-				<div id="navigation">
-<?php
-include("Site/Template/Default/Widget/Navigation.php");
-?>
-				</div>
-
 				<div id="main-content">
 <?php echo $this->get("Main"); ?>
 				</div>
