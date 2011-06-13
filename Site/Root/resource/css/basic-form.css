@@ -1,6 +1,6 @@
 form.basic-form {
 	background-color: #ededed;
-	width: 307px;
+	width: 312px;
 	padding: 20px;
 	margin-top: 20px;
 	margin-bottom: 20px;
@@ -12,6 +12,10 @@ form.basic-form {
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	position: relative;
+}
+
+form.basic-form.wide {
+	width: 400px;
 }
 
 form.basic-form label {
@@ -26,6 +30,10 @@ form.basic-form strong {
 	margin-bottom: 6px;
 	display: block;
 	font-weight: normal;
+}
+
+form.basic-form input, form.basic-form textarea {
+	padding:5px;
 }
 
 form.basic-form a.submit {
@@ -50,6 +58,16 @@ form.basic-form .contact-graphic {
 	width: 236px;
 	height: 65px;
 	right: -129px;
+	top: 10px;
+}
+
+form.basic-form .edit-profile-graphic {
+	position: absolute;
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -1px -258px;
+	display: block;
+	width: 133px;
+	height: 134px;
+	right: -23px;
 	top: 10px;
 }
 

@@ -18,7 +18,7 @@ if (!$systemWallFactory->isSystemWall($wall->secureId)) {
 	<div class="wall-controls">
 		<div class="wall-select" style="display: none;">
 <?php
-	if ($wallControl->isMemberAuthorizedToEditWallBySecureId($wall->secureId)) {
+	if (false && ($wallControl->isMemberAuthorizedToEditWallBySecureId($wall->secureId))) {
 ?>
 			<a href="/wall/edit/<?php echo $wall->url; ?>">edit</a>
 <?php

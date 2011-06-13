@@ -64,6 +64,7 @@ div.view-container {
 #footer {
 	border-top: 1px #c0bfb9 solid;
 	background: #fff;
+	min-height: 25px;
 }
 
 #footer .footer-container {
