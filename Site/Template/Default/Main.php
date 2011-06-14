@@ -86,6 +86,7 @@ include "Site/Template/Default/Widget/Footer.php";
 		</div>
 		<div style="display: none;">
 			<div class="overlay" id="login-overlay">
+				<h2><span>sign in</span></h2>
 				<div class="site-registered">
 					<form method="post" class="login">
 						<div class="login-error" style="display: none;">

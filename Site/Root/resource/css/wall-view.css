@@ -106,3 +106,9 @@ div.wall-controls .wall-select select {
 	font-size: 13px;
 	padding: 5px 6px 5px 5px;
 }
+
+#gawk-main-wall-overlay {
+	background: url("/resource/image/default-overlay-background.png?v=@VERSION-NUMBER@");
+	width: 605px;
+	height: 460px;
+}

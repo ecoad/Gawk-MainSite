@@ -138,6 +138,20 @@ div.view-container {
 	height: 460px;
 }
 
+#login-overlay h2 {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -140px -256px;	
+	display: block;
+	width: 259px;
+	height: 90px;
+	position: absolute;
+	left: 174px;
+	top: 32px;
+}
+
+#login-overlay h2 span {
+	display: none;
+}
+
 #login-overlay .site-registered {
 	position: absolute;
 	top: 160px;
