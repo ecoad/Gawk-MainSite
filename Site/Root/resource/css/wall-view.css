@@ -108,7 +108,72 @@ div.wall-controls .wall-select select {
 }
 
 #gawk-main-wall-overlay {
-	background: url("/resource/image/default-overlay-background.png?v=@VERSION-NUMBER@");
-	width: 605px;
-	height: 460px;
+	background: url("/resource/image/no-gawking-overlay-background.png?v=@VERSION-NUMBER@");
+	width: 599px;
+	height: 452px;
+}
+
+#gawk-main-wall-overlay .graphic {
+	background: url("/resource/image/no-gawking-sprite.png?v=@VERSION-NUMBER@") no-repeat 0px 0px;
+	display: block;
+	position: absolute;
+	width: 272px;
+	height: 146px;
+	left: 153px;
+}
+
+#gawk-main-wall-overlay h3 {
+	font-family: "BreeRegular";
+	color: white;
+	font-size: 20px;
+	position: absolute;
+	display: block;
+	top: 159px;
+	left: 184px;
+}
+
+#gawk-main-wall-overlay p {
+	font-family: "BreeLight", "Arial";
+	color: white;
+	font-size: 15px;
+	position: absolute;
+	display: block;
+	top: 215px;
+	left: 96px;
+	width: 417px;
+	text-align: center;
+}
+
+#gawk-main-wall-overlay p strong {
+	font-family: "BreeLight", "Arial";
+	font-weight: normal;
+	font-size: 16px;
+}
+
+#gawk-main-wall-overlay .options {
+	width: 350px;
+	height: 100px;
+	position: absolute;
+	left: 130px;
+	top: 305px;
+}
+
+#gawk-main-wall-overlay a span {
+	display: none;
+}
+
+#gawk-main-wall-overlay a.pick-another {
+	background: url("/resource/image/no-gawking-sprite.png?v=@VERSION-NUMBER@") no-repeat -1px -147px;
+	width: 170px;
+	height: 63px;
+	display: block;
+	float: left;
+}
+
+#gawk-main-wall-overlay a.create-wall {
+	background: url("/resource/image/no-gawking-sprite.png?v=@VERSION-NUMBER@") no-repeat -169px -147px;
+	width: 170px;
+	height: 63px;
+	display: block;
+	float: left;
 }

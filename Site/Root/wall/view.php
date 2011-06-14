@@ -30,21 +30,13 @@ $layout->start("Main");
 	</div>
 	<div style="display: none;">
 		<div class="overlay wall-select" id="gawk-main-wall-overlay">
+			<div class="graphic"></div>
 			<h3>you can't gawk on this wall</h3>
-			<p>the main wall is a collection of the best and latest gawks from other walls</p>
-			<p>either:</p>
-			<ul>
-				<li>pick <a href="/wall/" title="gawk on another wall">another wall</a></li>
-			</ul>
-			<p>or</p>
-			<ul>
-				<li>create a wall
-					<form method="post" action="">
-						<?php echo $application->registry->get("Site/Address"); ?>/<input
-							type="text" name="WallCreateName"/> <input class="button" type="submit" name="Submit" value="create wall" />
-					</form>
-				</li>
-			</ul>
+			<p>the main wall is a collection of the best and latest gawks from other walls, <strong>you can either:</strong></p>
+			<div class="options">
+				<a class="pick-another" href="/wall/" title="gawk on another wall"><span>another wall</span></a>
+				<a class="create-wall" href="/wall/" title="create a new wall"><span>create a wall</span></a>
+			</div>
 		</div>
 		<div class="overlay" id="gawk-no-webcam-overlay">
 			<h3>you don't seem to have a webcam!</h3>
