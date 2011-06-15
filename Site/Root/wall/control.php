@@ -25,7 +25,7 @@ if ($wallCreate) {
 $layout = CoreFactory::getLayout("Site/Template/Default/Main.php");
 $layout->set("Title", "wall " . ($wallCreate ? "create" : "edit") . " / " . $application->registry->get("Title"));
 $layout->set("Name", $application->registry->get("Title"));
-$layout->set("Section", "wall-edit");
+$layout->set("Section", "wall-select");
 $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.

@@ -1,9 +1,4 @@
 <?php
-//$facebook = Factory::getFacebookContentSharing();
-//$twitter = Factory::getTwitterContentSharing();
-//$email = Factory::getEmailContentSharing();
-//$digg = Factory::getDiggContentSharing();
-//$delicious = Factory::getDeliciousContentSharing();
 $shareTitle = "Gawk on this wall";
 ?>
 <div class="footer-container" id="social">

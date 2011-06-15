@@ -47,7 +47,7 @@ $layout->start("Main");
 				</ul>
 				<form class="url-select" method="post" action="">
 						<input type="text" name="UrlFriendly"
-							class="textbox"/><a href="#" class="button" title="Create a new Wall"><span>create wall</span></a>
+							class="textbox"/><a href="#" class="button" title="create a new wall"><span>create wall</span></a>
 					</label>
 				</form>
 			</div>
