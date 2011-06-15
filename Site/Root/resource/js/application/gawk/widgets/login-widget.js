@@ -163,13 +163,13 @@ function LoginWidget() {
 
 	function onLoggingInOverlayShow() {
 		$(document).trigger("GawkUIOverlayShow");
-		$.box.show({content: $("#logging-in-overlay")});
+		$.box.show({content: $("#logging-in-overlay"), allowClose: false});
 	}
 
 	function onLoggingOutOverlayShow(event, returnUrl) {
 		urlAfterLogout = returnUrl;
 		$(document).trigger("GawkUIOverlayShow");
-		$.box.show({content: $("#logging-out-overlay")});
+		$.box.show({content: $("#logging-out-overlay"), allowClose: false});
 	}
 
 	assignEventListeners();

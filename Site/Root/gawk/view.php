@@ -4,6 +4,7 @@ $facebook = Factory::getFacebook($application);
 $memberControl = Factory::getMemberControl();
 $videoControl = Factory::getVideoControl();
 $wallControl = Factory::getWallControl();
+$memberRatingControl = Factory::getMemberRatingControl();
 
 if (!$member = $memberControl->getMemberByRequestUrl($_SERVER["REQUEST_URI"])) {
 	include "Site/Root/error/404.php";
@@ -37,20 +38,27 @@ $layout->start("Style");
 $layout->start("Main");
 // The main page content goes here.
 ?>
-<div class="breadcrumb">
-	<a href="/">home</a> / <a title="View profile" href="<?php echo $memberUrlHelper->getProfileUrl($member); ?>">
-		<?php echo $member->alias; ?></a> / <a href="<?php echo $videoUrlHelper->getVideoUrl($video, $member); ?>">view gawk</a> /
-		<?php echo $video->secureId; ?>
+<div id="title-area">
+	<div class="breadcrumb">
+		<a href="/">home</a> / <a title="View profile" href="<?php echo $memberUrlHelper->getProfileUrl($member); ?>">
+			<?php echo $member->alias; ?></a> / <a href="<?php echo $videoUrlHelper->getVideoUrl($video, $member); ?>">view gawk</a> /
+			<?php echo $video->secureId; ?>
+	</div>
 </div>
 <div id="gawk-view">
-	<div><img src="http://dummyimage.com/175x131/000/fff.png&text=video+here" /></div>
-	<ul>
-		<li>
-			by: <a title="View profile" href="<?php echo $memberUrlHelper->getProfileUrl($member); ?>">
-			<?php echo $member->alias; ?></a> on <?php echo $video->dateCreatedFormatted; ?>
-		</li>
-		<li>from: <a href="/<?php echo $wall->url; ?>"><?php echo $wall->name; ?></a></li>
-	</ul>
+	<div class="view-container">
+		<h1 class="page-title"><?php echo $member->alias; ?></h1>
+		<div><img src="http://dummyimage.com/175x131/000/fff.png&text=video+here" /></div>
+		<ul>
+			<li>
+				by: <a title="View profile" href="<?php echo $memberUrlHelper->getProfileUrl($member); ?>">
+				<?php echo $member->alias; ?></a> on <?php echo $video->dateCreatedFormatted; ?>
+			</li>
+			<li>wall: <a href="/<?php echo $wall->url; ?>"><?php echo $wall->name; ?></a></li>
+			<li>Favourited: <?php echo $video->rating; ?></li>
+			<li>People who love this: carlos-capslock, benz, james-carnell, faultybastard</li>
+		</ul>
+	</div>
 </div>
 <?php
 $layout->start("JavaScript");

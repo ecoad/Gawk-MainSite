@@ -24,6 +24,7 @@ $.box = new function() {
 		content: null,
 		width: null,
 		height: null,
+		allowClose: true,
 		afterOpen: function() {},
 		afterClose: function() {}
 	};
@@ -96,8 +97,13 @@ $.box = new function() {
 			currentContent.before(contentPlaceholder);
 			contentPlaceholder.hide();
 			boxContent.append(currentContent);
+
+			if (!currentOptions.allowClose) {
+				closeButton.hide();
+			}
 		}
 		updatePosition();
+
 		show();
 		this.resize(currentOptions.width, currentOptions.height);
 		currentOptions.afterOpen();

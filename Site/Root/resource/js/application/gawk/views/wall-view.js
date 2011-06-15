@@ -214,9 +214,9 @@ function GawkView(config) {
 
 	function checkFirstWallVisit() {
 		if ($.cookie("Rt") == null) {
-			$(document).trigger("GawkUIOverlayShow");
-			$.box.show({content: $("#welcome-overlay")});
-			$.cookie("Rt", "true", {expires: 3650});
+//			$(document).trigger("GawkUIOverlayShow");
+//			$.box.show({content: $("#welcome-overlay")});
+//			$.cookie("Rt", "true", {expires: 3650});
 		}
 	}
 

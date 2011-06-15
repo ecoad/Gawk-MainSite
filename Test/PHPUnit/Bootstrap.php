@@ -1,6 +1,6 @@
 <?php
 
-$fileLocation = "/var/application/Gawk/MainSite/";
+$fileLocation = "../../";
 
 ini_set("include_path",
 	// Site specific includes

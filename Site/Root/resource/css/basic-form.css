@@ -63,10 +63,10 @@ form.basic-form .contact-graphic {
 
 form.basic-form .edit-profile-graphic {
 	position: absolute;
-	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -1px -258px;
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -650px -1px ;
 	display: block;
 	width: 133px;
-	height: 134px;
+	height: 140px;
 	right: -23px;
 	top: 10px;
 }

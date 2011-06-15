@@ -327,3 +327,27 @@ h1.page-title {
 	clear:both;
 	visibility:hidden;
 }
+
+#logging-in-overlay, #logging-out-overlay {
+	background: url("/resource/image/logging-in-background.png?v=@VERSION-NUMBER@") no-repeat;
+	width: 389px;
+	height: 131px;
+}
+
+#logging-in-overlay .message {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -411px 0px;
+	width: 231px;
+	height: 57px;
+	top: 33px;
+	left: 79px;
+	position: absolute;
+}
+
+#logging-out-overlay .message {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -411px -57px;
+	width: 231px;
+	height: 57px;
+	top: 33px;
+	left: 79px;
+	position: absolute;
+}

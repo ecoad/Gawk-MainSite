@@ -148,12 +148,10 @@ include "Site/Template/Default/Widget/Footer.php";
 				</form>
 			</div>
 			<div class="overlay" id="logging-in-overlay">
-				<h3>logging in&hellip;</h3>
-				<p>please wait a moment while we log you in</p>
+				<div class="message"></div>
 			</div>
 			<div class="overlay" id="logging-out-overlay">
-				<h3>logging out&hellip;</h3>
-				<p>please wait a moment while we log you out</p>
+				<div class="message"></div>
 			</div>
 			<div class="overlay" id="welcome-overlay">
 				<h3>welcome to gawkwall</h3>
