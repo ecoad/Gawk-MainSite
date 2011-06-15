@@ -15,7 +15,7 @@
     src: url('/resource/font/breelight-webfont.eot?#iefix') format('embedded-opentype'),
          url('/resource/font/breelight-webfont.woff') format('woff'),
          url('/resource/font/breelight-webfont.ttf') format('truetype'),
-         url('/resource/font/breelight-webfont.svg#BreeRegular') format('svg');
+         url('/resource/font/breelight-webfont.svg#BreeLight') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -350,4 +350,42 @@ h1.page-title {
 	top: 33px;
 	left: 79px;
 	position: absolute;
+}
+
+.wall-list {
+	float: left;
+	width: 240px;
+	margin-right: 20px;
+	margin-bottom: 30px;
+}
+
+.wall-list:last-child {
+	margin-right: 0px !important;
+}
+
+.wall-list li {
+	width: 223px;
+	height: 28px;
+	background-color: #f6f5f5;
+	padding: 9px 0px 0px 17px;
+	margin-bottom: 2px;
+}
+
+.wall-list li a {
+	color: #7d7979;
+}
+
+.wall-list li a:hover {
+	color: #000;
+}
+
+.wall-list li.title {
+	background-color: #d0cbcb !important;
+}
+
+.wall-list li.title h3 {
+	font-family: "BreeLight";
+	font-size: 18px;
+	height: 31px;
+	color: #575555;
 }

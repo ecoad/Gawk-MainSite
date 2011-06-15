@@ -1,0 +1,100 @@
+.view-container {
+	min-height: 417px;
+}
+
+#wall-select-view .create-wall {
+	float: left; 
+	width: 500px;
+	display: block;
+}
+
+#wall-select-view .select-walls {
+	float: right; 
+	width: 500px;
+	display: block;
+}
+
+#wall-select-view h2 {
+	font-family: "BreeRegular", "Arial";
+	color: #4c4c4c;
+	margin-bottom: 6px;
+	margin-bottom: 16px;
+	display: block;
+	font-weight: normal;
+	font-size: 15px;
+}
+
+#wall-select-view  .create-wall ul {
+	list-style-type: disc;
+	list-style-position: inside;
+}
+
+#wall-select-view  .create-wall li {
+	color: #3ca999;
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+#wall-select-view .create-wall li span {
+	color: #7a7a7a;
+	font-size: 13px;
+}
+
+#wall-select-view .create-wall form.url-select {
+	background: url("/resource/image/create-wall.png?v=@VERSION-NUMBER@");
+	width: 497px;
+	height: 149px;
+	position: relative;
+	margin-top: 25px;
+}
+
+#wall-select-view .create-wall form.url-select .textbox {
+	position: absolute;
+	display: block;
+	top: 65px;
+	left: 164px;
+	width: 157px;
+	height: 20px;
+	margin: 1px 0px 0px 0px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;  
+	border-radius: 5px;
+	border-color: #DEDDDD;
+	border-top-color: #DEDDDD;
+	border-left-color: #DEDDDD;
+	border-bottom-color: #DEDDDD;
+	border-right-color: #DEDDDD;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-bottom-width: 1px;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-bottom-style: solid;
+	border-right-style: solid;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	color: #7D7979;
+	font-size: 13px;
+	padding: 5px 6px 5px 5px;
+}
+
+#wall-select-view .create-wall form.url-select .button {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -408px -120px;
+	position: absolute;
+	display: block;
+	top: 65px;
+	left: 342px;
+	width: 108px;
+	height: 35px;
+}
+
+#wall-select-view .create-wall form.url-select .button:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -408px -155px;
+}
+
+#wall-select-view .create-wall form.url-select .button span {
+	display: none;
+}

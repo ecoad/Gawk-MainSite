@@ -3,23 +3,105 @@ require_once("Application/Bootstrap.php");
 $facebook = Factory::getFacebook($application);
 $wallControl = Factory::getWallControl();
 $memberAuthentication = Factory::getMemberAuthentication();
+$memberWallBookmarkControl = Factory::getMemberWallBookmarkControl();
+
 if (!$memberAuthentication->isLoggedIn()) {
-	$application->redirect("/?Login&ReturnUrl=" . $_SERVER["SCRIPT_NAME"]);
+	$application->redirect("/?Login=1&ReturnUrl=" . $_SERVER["SCRIPT_NAME"]);
 }
+
+if (!$loggedInMemberDataEntity = $memberAuthentication->getLoggedInMemberDataEntity()) {
+	throw new Exception("Cannot retrieve logged in member");
+}
+
+$loggedInMember = $loggedInMemberDataEntity->toObject();
+
+$recentWallActivity = $memberWallBookmarkControl->getRecentWallActivity($loggedInMember);
 
 $layout = CoreFactory::getLayout("Site/Template/Default/Main.php");
 $layout->set("Title", $application->registry->get("Title"));
 $layout->set("Name", $application->registry->get("Title"));
 $layout->set("Section", "wall-select");
 $layout->start("Style");
+?>
+<link rel="stylesheet" type="text/css" href="/resource/css/wall-select.css?v=@VERSION-NUMBER@" media="all" />
+<?php
 $layout->start("Main");
 // The main page content goes here.
 ?>
-	<div id="gawk-framework">
-		<div id="wall-select-view">
-<?php include "Site/Template/Default/Gawk/Wall/WallSelectView.php"; ?>
+<div id="wall-select-view">
+	<div id="title-area">
+		<div class="breadcrumb">
+			<a href="/">home</a> / <a href="/wall/">wall</a> / create wall
 		</div>
 	</div>
+	<div class="view-container" >
+		<div class="clear-fix">
+			<div class="create-wall">
+				<h1 class="page-title">create a wall</h1>
+				<h2>why create a wall?</h2>
+				<ul>
+					<li><span>share amongst a group of friends</span></li>
+					<li><span>remember a wedding or birthday by sending your wall to your guests</span></li>
+					<li><span>make a wall of your home town by recording local landmarks using the <a href="#">iPhone app</a></li>
+					<li><span>choose between public and private walls</li>
+				</ul>
+				<form class="url-select" method="post" action="">
+						<input type="text" name="UrlFriendly"
+							class="textbox"/><a href="#" class="button" title="Create a new Wall"><span>create wall</span></a>
+					</label>
+				</form>
+			</div>
+			<div class="select-walls">
+				<h1 class="page-title">select a wall</h1>
+				<h2>your walls and bookmarks</h2>
+				<div class="wall-list clear-fix">
+					<ul>
+						<li class="title">
+							<h3>walls created</h3>
+						</li>
+<?php
+if (count($recentWallActivity->wallsCreatedByMember) == 0) {
+?>
+						<li>no walls<?php echo $memberIsOnOwnMemberPage ? " (<a class=\"underline\" href=\"/wall/create\">create a wall</a>)" : ""; ?></li>
+<?php
+}
+foreach ($recentWallActivity->wallsCreatedByMember as $memberWall) {
+?>
+						<li>
+							<a title="<?php echo $memberWall->description; ?>"
+								class="underline" href="/<?php echo $memberWall->url; ?>"><?php echo $memberWall->name; ?></a>
+						</li>
+<?php
+}
+?>
+					</ul>
+				</div>
+				<div class="wall-list">
+					<ul>
+						<li class="title">
+							<h3>bookmarked</h3>
+						</li>
+<?php
+if (count($recentWallActivity->bookmarks) == 0) {
+?>
+						<li>no bookmarks</li>
+<?php
+}
+foreach ($recentWallActivity->bookmarks as $memberBookmark) {
+?>
+						<li>
+							<a title="<?php echo $memberBookmark->description; ?>"
+								href="/<?php echo $memberBookmark->url; ?>"><?php echo $memberBookmark->name; ?></a>
+						</li>
+<?php
+}
+?>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <?php
 $layout->start("JavaScript");
 ?>

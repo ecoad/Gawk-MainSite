@@ -9,7 +9,7 @@ if (!$wall = $wallControl->getWallByRequestUrl($_SERVER["REQUEST_URI"])) {
 }
 $memberAuthentication = Factory::getMemberAuthentication();
 if ($memberAuthentication->isRequestLogInOnly($_SERVER["REQUEST_URI"]) &&  !$memberAuthentication->isLoggedIn()) {
-	$application->redirect("/?Login");
+	$application->redirect("/?Login=1");
 }
 
 $layout = CoreFactory::getLayout("Site/Template/Default/Main.php");
