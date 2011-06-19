@@ -67,7 +67,17 @@ echo $cssAggregator->output();
 	</head>
 	<body>
 		<div id="container" class="<?php echo $this->get("Section"); ?>">
+<?php
+if (isset($this->wallPainter)) {
+?>
+			<div id="wrapper" style="<?php echo $this->wallPainter->getBackgroundStyle(); ?>">
+<?php
+} else {
+?>
 			<div id="wrapper">
+<?php
+}
+?>
 
 				<div id="main-header">
 <?php

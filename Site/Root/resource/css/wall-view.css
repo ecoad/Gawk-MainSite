@@ -55,6 +55,12 @@ a.record span {
 	height: 100%;
 }
 
+div.wall-logo {
+	float: left;
+	padding-right: 15px;
+	padding-top: 3px;
+}
+
 div.wall-information {
 	float: left;
 	display: inline;
@@ -62,9 +68,10 @@ div.wall-information {
 }
 
 div.wall-controls {
-	float: right;
+	position: absolute;
 	margin-top: 5px;
 	width: 325px;
+	right: 12px;
 }
 
 div.wall-controls .record-gawk {

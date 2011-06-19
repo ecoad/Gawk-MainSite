@@ -16,6 +16,7 @@ $layout = CoreFactory::getLayout("Site/Template/Default/Main.php");
 $layout->set("Title", $wall->name . " / " . $application->registry->get("Title"));
 $layout->set("Name", $application->registry->get("Title"));
 $layout->set("Section", $_SERVER["REQUEST_URI"] == "/wall/" ? "wall-select" : "wall");
+$layout->wallPainter = Factory::getWallPainter($wall);
 $layout->start("Style");
 ?>
 	<link rel="stylesheet" type="text/css" href="/resource/css/wall-view.css?v=@VERSION-NUMBER@" media="all" />
@@ -25,7 +26,66 @@ $layout->start("Main");
 ?>
 	<div id="gawk-framework">
 		<div id="wall-view">
-<?php include "Site/Template/Default/Gawk/GawkView.php"; ?>
+			<div id="title-area">
+<?php
+if ($layout->wallPainter->hasLogo()) {
+?>
+				<div class="wall-logo">
+					<?php echo $layout->wallPainter->getLogo(); ?>
+				</div>
+<?php
+}
+?>
+				<div class="wall-information">
+					<div class="upper clear-fix">
+						<h2><?php echo $wall->name; ?></h2>
+<?php
+if (!$systemWallFactory->isSystemWall($wall->secureId)) {
+?>
+						<span class="bookmark"></span>
+<?php
+}
+?>
+					</div>
+					<p class="description"><?php echo $wall->description; ?></p>
+				</div>
+				<div class="wall-controls">
+					<div class="wall-select" style="display: none;">
+<?php
+	if (false && ($wallControl->isMemberAuthorizedToEditWallBySecureId($wall->secureId))) {
+?>
+						<a href="/wall/edit/<?php echo $wall->url; ?>">edit</a>
+<?php
+	}
+?>
+						<form class="select-wall" method="get" action="">
+							<select name="SelectWall">
+							</select>
+						</form>
+					</div>
+					<div class="record-gawk">
+						<a href="#" class="record"><span>record</span></a>
+					</div>
+				</div>
+			</div>
+			<div class="view-container">
+				<div id="Gawk">You don't have Flash! <a href="http://get.adobe.com/flashplayer/">Please download Flash</a> or use a browser that supports Flash.</div>
+				<div class="share">
+					<span class="twitter">
+						<iframe allowtransparency="true" frameborder="0" scrolling="no"
+							src="http://platform.twitter.com/widgets/tweet_button.html"
+							style="width:97px; height:20px;"></iframe>
+					</span>
+					<span class="facebook">
+						<fb:like href="www.gawkwall.com" send="false" layout="button_count" width="83" show_faces="false" font="arial"></fb:like>
+					</span>
+				</div>
+			</div>
+
+
+
+
+
 		</div>
 	</div>
 	<div style="display: none;">

@@ -205,4 +205,13 @@ class Factory {
 		require_once "Gawk/Video/VideoAdministration.php";
 		return new VideoAdministration();
 	}
+
+	/**
+	 * @param Wall
+	 * @return WallPainter
+	 */
+	static function getWallPainter(Wall $wall) {
+		require_once "Gawk/Wall/WallPainter.php";
+		return new WallPainter($wall);
+	}
 }
