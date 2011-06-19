@@ -31,7 +31,20 @@ $layout->start("Main");
 if ($layout->wallPainter->hasLogo()) {
 ?>
 				<div class="wall-logo">
+<?php
+	if ($layout->wallPainter->hasLink()) {
+?>
+					<a title="Visit <?php echo $layout->wallPainter->getLink(); ?>"
+						href="<?php echo $layout->wallPainter->getLink(); ?>">
+						<?php echo $layout->wallPainter->getLogo(); ?>
+					</a>
+<?php
+	} else {
+?>
 					<?php echo $layout->wallPainter->getLogo(); ?>
+<?php
+	}
+?>
 				</div>
 <?php
 }
