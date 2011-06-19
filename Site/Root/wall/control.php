@@ -12,7 +12,7 @@ $createRequestUrl = "/wall/create";
 $wallCreate = substr($_SERVER["REQUEST_URI"], 0, strlen($createRequestUrl)) == $createRequestUrl;
 
 $urlParts = explode("/", $_SERVER["REQUEST_URI"]);
-$urlName = $urlParts[3];
+$urlName = isset($urlParts[3]) ? $urlParts[3] : "";
 if ($wallCreate) {
 	$wall = Factory::getWall();
 	$wall->url = $urlName;

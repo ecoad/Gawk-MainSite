@@ -42,10 +42,11 @@ $layout->start("Main");
 				<ul>
 					<li><span>share amongst a group of friends</span></li>
 					<li><span>remember a wedding or birthday by sending your wall to your guests</span></li>
-					<li><span>make a wall of your home town by recording local landmarks using the <a href="#">iPhone app</a></li>
-					<li><span>choose between public and private walls</li>
+					<li><span>get out and about with the <a href="#">iPhone app</a></span></li>
+					<li><span>choose between public and private walls</span></li>
 				</ul>
 				<form class="url-select" method="post" action="">
+					<label>
 						<input type="text" name="UrlFriendly"
 							class="textbox"/><a href="#" class="button" title="create a new wall"><span>create wall</span></a>
 					</label>
@@ -62,7 +63,7 @@ $layout->start("Main");
 <?php
 if (count($recentWallActivity->wallsCreatedByMember) == 0) {
 ?>
-						<li>no walls<?php echo $memberIsOnOwnMemberPage ? " (<a class=\"underline\" href=\"/wall/create\">create a wall</a>)" : ""; ?></li>
+						<li>no walls (<a class="underline" href="/wall/create">create a wall</a>)</li>
 <?php
 }
 foreach ($recentWallActivity->wallsCreatedByMember as $memberWall) {
