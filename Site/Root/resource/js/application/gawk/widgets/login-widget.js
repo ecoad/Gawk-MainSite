@@ -7,8 +7,8 @@ function LoginWidget() {
 		loginOverlayErrorsElement = loginOverlayForm.find(".login-error"),
 		loginOverlayRegisterButton = $("#login-overlay .register-button"),
 		registerOverlayForm = $("#register-overlay form"),
+		registerOverlaySubmitButton = $("#register-overlay form a.register-button"),
 		registerOverlayErrorsElement = registerOverlayForm.find(".register-error"),
-		registerOverlayErrorsListElement = registerOverlayForm.find("ul"),
 		logOutLink = loggedInElement.find("a.logout"),
 		logInLink = loggedOutElement.find("a.login"),
 		registerLink = $("a.register"),
@@ -28,13 +28,12 @@ function LoginWidget() {
 		loginOverlayFormSubmitButton.click(onLoginOverlayFormSubmit);
 		loginOverlayRegisterButton.click(onRegisterClick);
 		registerOverlayForm.submit(onRegisterOverlayFormSubmit);
+		registerOverlaySubmitButton.click(onRegisterOverlayFormSubmit);
 
 		checkForLoginPrompt();
 	}
 
 	function checkForLoginPrompt() {
-		console.debug(getUrlVars());
-		console.debug(getUrlVars()["Login"]);
 		if (getUrlVars()["Login"] !== undefined) {
 			$(document).trigger("GawkUILoginOverlayShow");
 		}
@@ -101,7 +100,6 @@ function LoginWidget() {
 
 		loginOverlayForm.find("input.textbox").addClass("error");
 		loginOverlayErrorsElement.show();
-
 	}
 
 	function onRegisterOverlayFormSubmit(event) {
@@ -126,11 +124,12 @@ function LoginWidget() {
 
 	function onRegisterOverlayInvalidCredentials(event, errors) {
 		$(document).unbind("GawkMemberRegisterInvalidCredentials", onRegisterOverlayInvalidCredentials);
+		console.debug(errors);
 
-		registerOverlayErrorsListElement.html("");
-		$(errors).each(function(index, item){
-			registerOverlayErrorsListElement.append($("<li />").html(item));
-		});
+		if (errors[0] == undefined) {
+			errors[0] = "Unknown error";
+		}
+		registerOverlayErrorsElement.html(errors[0]);
 		registerOverlayErrorsElement.show();
 	}
 

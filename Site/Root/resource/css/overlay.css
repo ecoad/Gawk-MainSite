@@ -1,0 +1,275 @@
+.box-close-button {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -0px -155px;	
+	display: block;
+	width: 65px;
+	height: 28px;
+	
+	position: absolute;
+	top: 15px;
+	right: 12px;
+	display: block;
+	cursor: pointer;
+	z-index: 1103;
+}
+
+.box-close-button:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -65px -155px;
+}
+
+.box-close-button span {
+	display: none;
+}
+
+#login-overlay {
+	background: url("/resource/image/login-overlay-background.png?v=@VERSION-NUMBER@");
+	width: 605px;
+	height: 460px;
+}
+
+#login-overlay h2 {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -140px -256px;	
+	display: block;
+	width: 259px;
+	height: 90px;
+	position: absolute;
+	left: 174px;
+	top: 32px;
+}
+
+#login-overlay h2 span {
+	display: none;
+}
+
+#login-overlay .site-registered {
+	position: absolute;
+	top: 160px;
+	left: 87px;
+	width: 185px;
+}
+
+.overlay.form label {
+	margin-bottom: 12px;
+	display: block;
+}
+
+.overlay.form input.textbox {
+	width: 157px;
+	height: 20px;
+	margin: 1px 0px 0px 0px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;  
+	border-radius: 5px;
+	border-color: #DEDDDD;
+	border-top-color: #DEDDDD;
+	border-left-color: #DEDDDD;
+	border-bottom-color: #DEDDDD;
+	border-right-color: #DEDDDD;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-bottom-width: 1px;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-bottom-style: solid;
+	border-right-style: solid;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	color: #7D7979;
+	font-size: 13px;
+	padding: 5px 6px 5px 5px;
+}
+
+.overlay.form input.textbox.error {
+	border-color: red;
+	border-top-color: red;
+	border-left-color: red;
+	border-bottom-color: red;
+	border-right-color: red;
+	border-top-width: 2px;
+	border-left-width: 2px;
+	border-bottom-width: 2px;
+	border-right-width: 2px;
+}
+
+.overlay.form .login-error {
+	display: block; 
+	top: -32px; 
+	position: absolute; 
+	color: red; 
+	background-color: white; 
+	width: 79px; 
+	text-align: center; 
+	padding: 3px; 
+	left: 44px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;  
+	border-radius: 5px;
+	border-color: red;
+	border-top-color: red;
+	border-left-color: red;
+	border-bottom-color: red;
+	border-right-color: red;
+	border-top-width: 2px;
+	border-left-width: 2px;
+	border-bottom-width: 2px;
+	border-right-width: 2px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-bottom-style: solid;
+	border-right-style: solid;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	height: 19px;
+}
+
+
+.overlay.form strong {
+	font-family: "BreeLight", "Arial", "Sans-Serif";
+	color: #ffffff;
+	margin-bottom: 6px;
+	display: block;
+	font-weight: normal;
+}
+
+#login-overlay .facebook-registered {
+	position: absolute;
+	top: 183px;
+	left: 362px;
+	width: 185px;
+	margin-top: 4px;
+}
+
+#login-overlay .facebook-registered p {
+	color: #ffffff;
+	margin-top: 10px;
+	display: block;
+	width: 150px;
+}
+
+#login-overlay a.login-button {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -0px -86px;
+	display: block;
+	width: 96px;
+	height: 34px;
+	margin: 25px auto;
+}
+
+#login-overlay a.login-button:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -96px -86px;
+}
+
+#login-overlay a.login-button span {
+	display: none;
+}
+
+#login-overlay .register {
+	position: absolute;
+	top: 383px;
+	left: 178px;
+	width: 250px;
+}
+
+#login-overlay .register p {
+	float: left;
+	font-family: "BreeLight", "Arial", "Sans-Serif";
+	color: #ffffff;
+	margin: 8px 15px 0px 0px;
+	font-size: 16px;
+	line-height: 17px;
+}
+
+#login-overlay a.register-button {
+	float: left;
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -0px -120px;
+	display: block;
+	height: 34px;
+	width: 96px;
+}
+
+#login-overlay a.register-button:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -96px -120px;
+}
+
+#login-overlay a.register-button span {
+	display: none;
+}
+
+#logging-in-overlay, #logging-out-overlay {
+	background: url("/resource/image/logging-in-background.png?v=@VERSION-NUMBER@") no-repeat;
+	width: 389px;
+	height: 131px;
+}
+
+#logging-in-overlay .message {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -411px 0px;
+	width: 231px;
+	height: 57px;
+	top: 33px;
+	left: 79px;
+	position: absolute;
+}
+
+#logging-out-overlay .message {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -411px -57px;
+	width: 231px;
+	height: 57px;
+	top: 33px;
+	left: 79px;
+	position: absolute;
+}
+
+#register-overlay {
+	background: url("/resource/image/register-overlay-background.png?v=@VERSION-NUMBER@");
+	width: 397px;
+	height: 511px;
+}
+
+#register-overlay h2 {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -516px -142px;	
+	display: block;
+	width: 172px;
+	height: 67px;
+	position: absolute;
+	left: 114px;
+	top: 27px;
+}
+
+#register-overlay h2 span {
+	display: none;
+}
+
+#register-overlay form {
+	width: 209px;
+	padding-left: 100px;
+	padding-top: 113px;
+}
+
+#register-overlay input.textbox {
+	width: 186px;
+}
+
+#register-overlay a.register-button {
+	float: left;
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -239px -190px;
+	display: block;
+	width: 137px;
+	height: 51px;
+	margin-left: 33px;
+	margin-top: 6px;
+}
+
+#register-overlay a.register-button:hover {
+	background: url("/resource/image/sprite.png?v=@VERSION-NUMBER@") no-repeat -375px -190px;
+}
+
+#register-overlay a.register-button span {
+	display: none;
+}
+
+#register-overlay .register-error {
+	color: #fff;
+}

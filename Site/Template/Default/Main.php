@@ -53,6 +53,7 @@ echo $cssAggregator->output();
 		<link rel="stylesheet" type="text/css" href="/resource/css/reset.css?v=@VERSION-NUMBER@" media="all" />
 		<link rel="stylesheet" type="text/css" href="/resource/css/base.css?v=@VERSION-NUMBER@" media="all" />
   	<link rel="stylesheet" type="text/css" href="/resource/css/global.css?v=@VERSION-NUMBER@" media="all" />
+  	<link rel="stylesheet" type="text/css" href="/resource/css/overlay.css?v=@VERSION-NUMBER@" media="all" />
   	<link rel="stylesheet" type="text/css" href="/resource/css/header.css?v=@VERSION-NUMBER@" media="all" />
 		<link rel="stylesheet" type="text/css" href="/resource/css/box.css?v=@VERSION-NUMBER@" media="all" />
 		<!--[if lt IE 7]>
@@ -85,7 +86,7 @@ include "Site/Template/Default/Widget/Footer.php";
 			</div>
 		</div>
 		<div style="display: none;">
-			<div class="overlay" id="login-overlay">
+			<div class="overlay form" id="login-overlay">
 				<h2><span>sign in</span></h2>
 				<div class="site-registered">
 					<form method="post" class="login">
@@ -113,38 +114,30 @@ include "Site/Template/Default/Widget/Footer.php";
 					<a href="#" class="register-button" title="register to gawkwall"><span>register</span></a>
 				</div>
 			</div>
-			<div class="overlay" id="register-overlay">
-				<h3>register to gawkwall</h3>
-				<p>have an account with Facebook? <br />
-				connect with Facebook: <fb:login-button></fb:login-button></p>
-				<hr/>
-				<p>alternatively: register a new account with gawkwall
+			<div class="overlay form" id="register-overlay">
+				<h2><span>register to gawkwall</span></h2>
 				<form method="post" class="register">
-					<div class="register-error" style="display: none;">
-						<h4>register error</h4>
-						<ul></ul>
-					</div>
-					<label>
-						<strong>email address</strong>
-						<input type="email" name="EmailAddress" /><br />
-					</label><br />
 					<label>
 						<strong>username</strong>
-						<input type="text" name="Alias" /><br />
-					</label><br />
+						<input type="text" class="textbox" name="Alias" />
+					</label>
+					<label>
+						<strong>email address</strong>
+						<input type="email" class="textbox" name="EmailAddress" />
+					</label>
 					<label>
 						<strong>password</strong>
-						<input type="password" name="Password" /><br />
-					</label><br />
+						<input type="password" class="textbox" name="Password" />
+					</label>
 					<label>
 						<strong>confirm password</strong>
-						<input type="password" name="ConfirmPassword" /><br />
-					</label><br />
+						<input type="password" class="textbox" name="ConfirmPassword" />
+					</label>
+					<div class="register-error" style="display: none;">
+					</div>
 					<label>
-						<strong>&nbsp;</strong>
-						<input type="submit" class="button right" name="Register" value="register"/><br />
-					</label><br />
-
+						<a href="#" class="register-button"><span>register</span></a>
+					</label>
 				</form>
 			</div>
 			<div class="overlay" id="logging-in-overlay">
