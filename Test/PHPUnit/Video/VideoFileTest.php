@@ -3,7 +3,7 @@ require_once "Video/Data/VideoProvider.php";
 require_once "Member/Data/MemberProvider.php";
 require_once "Wall/Data/WallProvider.php";
 
-class VideoControlTest extends PHPUnit_Framework_TestCase {
+class VideoFileTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @var Application
 	 */

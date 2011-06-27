@@ -144,10 +144,7 @@ class MemberAuthentication {
 			}
 		}
 
-		try {
-			session_destroy();
-		} catch (Exception $exception) {
-		}
+		@session_destroy();
 		$this->revokeFacebookSession();
 
 		return true;

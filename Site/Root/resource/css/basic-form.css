@@ -71,6 +71,11 @@ form.basic-form .edit-profile-graphic {
 	top: 10px;
 }
 
+form.basic-form span.note {
+	font-size: 12px;
+	color: grey;
+}
+
 p.white-normal {
 	color: #7d7979;
 }
