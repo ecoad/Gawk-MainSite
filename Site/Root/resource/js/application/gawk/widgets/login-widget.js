@@ -124,7 +124,6 @@ function LoginWidget() {
 
 	function onRegisterOverlayInvalidCredentials(event, errors) {
 		$(document).unbind("GawkMemberRegisterInvalidCredentials", onRegisterOverlayInvalidCredentials);
-		console.debug(errors);
 
 		if (errors[0] == undefined) {
 			errors[0] = "Unknown error";

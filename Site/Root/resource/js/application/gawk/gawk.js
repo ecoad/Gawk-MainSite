@@ -1,4 +1,3 @@
-console.log("inc");
 function Gawk(configData) {
 	var global = this;
 	var config = new Config(configData);
@@ -7,7 +6,6 @@ function Gawk(configData) {
 		loginWidget, navigationWidget, memberControl, memberRecentWallsControl;
 
 	function init() {
-		console.log("gk init");
 		initModels();
 		initControllers();
 
